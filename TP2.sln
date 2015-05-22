@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Desktop", "UI.Desktop\UI.Desktop.csproj", "{14F65D86-7D77-4BAB-8961-D0A7510F0F2D}"
 EndProject
@@ -11,10 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{3D309BD0-2780-4DEF-A209-899A7737E039}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "UI.Web", "http://localhost:1401", "{AC7D72B4-D8E6-479F-BF84-C3E1F253280C}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "UI.Web(1)", "http://localhost:1401", "{AC7D72B4-D8E6-479F-BF84-C3E1F253280C}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_1401"
 		Debug.AspNetCompiler.PhysicalPath = "UI.Web\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_1401\"

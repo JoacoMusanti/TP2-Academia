@@ -14,6 +14,7 @@ namespace Negocio
       string Apellido { get; set; }
       string Email { get; set; }
       bool Habilitado { get; set; }
+      // comentario
       
     }
 }
