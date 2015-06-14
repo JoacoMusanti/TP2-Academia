@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Negocio
+namespace Business.Logic
 {
-    public class Modulo : EntidadNegocio
+    public class BusinessLogic
     {
-        string Descripcion { get; set; }
     }
 }
