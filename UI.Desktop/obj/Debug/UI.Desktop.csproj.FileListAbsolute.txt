@@ -1,1 +1,2 @@
 C:\Users\ANDRES\Source\Repos\TP2-Academia\UI.Desktop\bin\Debug\UI.Desktop.exe.config
+C:\Users\Joaquin\Source\Repos\TP2-Academia\UI.Desktop\bin\Debug\UI.Desktop.exe.config

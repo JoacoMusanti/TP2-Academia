@@ -7,7 +7,7 @@ using Business.Entities;
 
 namespace Business.Logic
 {
-    class UsuarioLogic:BusinessLogic
+    public class UsuarioLogic:BusinessLogic
     {
         Data.Database.UsuarioAdapter UsuarioData {get;set;}
 
