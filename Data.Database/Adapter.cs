@@ -8,15 +8,27 @@ namespace Data.Database
     public class Adapter
     {
         //private SqlConnection sqlConnection = new SqlConnection("ConnectionString;");
+        private const string consKeyDefaultCnnString = "ConnStringExpress";
+        protected SqlConnection _conn;
+
+        protected SqlConnection SqlCon
+        {
+            get { return _conn; }
+            set { _conn = value; }
+        }
 
         protected void OpenConnection()
         {
-            throw new Exception("Metodo no implementado");
+            string conString = System.Configuration.ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
+
+            SqlCon = new SqlConnection(conString);
+            SqlCon.Open();
         }
 
         protected void CloseConnection()
         {
-            throw new Exception("Metodo no implementado");
+            SqlCon.Close();
+            SqlCon = null;
         }
 
         protected SqlDataReader ExecuteReader(String commandText)

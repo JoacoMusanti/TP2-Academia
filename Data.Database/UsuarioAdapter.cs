@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Business.Entities;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Data.Database
 {
@@ -59,35 +61,153 @@ namespace Data.Database
         }
         #endregion
 
+        protected SqlDataAdapter _daUsuarios;
+
         public List<Usuario> GetAll()
         {
-            return new List<Usuario>(Usuarios);
+            List<Usuario> usuarios = new List<Usuario>();
+
+
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdUsuarios = new SqlCommand("select * from dbo.usuarios", SqlCon);
+
+                SqlDataReader drUsuarios = cmdUsuarios.ExecuteReader();
+
+                while (drUsuarios.Read())
+                {
+                    Usuario usr = new Usuario();
+
+                    usr.ID = (int)drUsuarios["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
+                    usr.Clave = (string)drUsuarios["clave"];
+                    usr.Habilitado = (bool)drUsuarios["habilitado"];
+                    usr.Nombre = (string)drUsuarios["nombre"];
+                    usr.Apellido = (string)drUsuarios["apellido"];
+                    usr.EMail = (string)drUsuarios["email"];
+
+                    usuarios.Add(usr);
+                }
+
+                drUsuarios.Close();
+            }
+            catch (Exception e)
+            {
+                usuarios = null;
+                Exception manejada = new Exception("Error al intentar recuperar los usuarios de la base de datos", e);
+                throw manejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+                
+            }
+            
+
+            return usuarios;
         }
 
         public Business.Entities.Usuario GetOne(int ID)
         {
-            return Usuarios.Find(delegate(Usuario u) { return u.ID == ID; });
+            Usuario usr = new Usuario();
+
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdUsuario = new SqlCommand("select * from dbo.usuarios where id_usuario = @id", SqlCon);
+                cmdUsuario.Parameters.AddWithValue("@id", ID);
+
+                SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
+
+                if (drUsuario.Read())
+                {
+                    usr.ID = (int)drUsuario["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
+                    usr.Clave = (string)drUsuario["clave"];
+                    usr.Habilitado = (bool)drUsuario["habilitado"];
+                    usr.Nombre = (string)drUsuario["nombre"];
+                    usr.Apellido = (string)drUsuario["apellido"];
+                    usr.EMail = (string)drUsuario["email"];
+                }
+
+                drUsuario.Close();
+            }
+            catch (Exception e)
+            {
+                usr = null;
+                Exception manejada = new Exception("Error al intentar recuperar el usuario de la base de datos", e);
+                throw manejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+                
+            }
+
+            return usr;
         }
 
         public void Delete(int ID)
         {
-            Usuarios.Remove(this.GetOne(ID));
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdDelete = new SqlCommand("delete dbo.usuarios where id_usuario=@id", SqlCon);
+
+                cmdDelete.Parameters.AddWithValue("@id", ID);
+
+                cmdDelete.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error al intentar eliminar usuario", e);
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+        }
+
+        protected void Insert(Usuario usuario)
+        {
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand com = new SqlCommand("insert into dbo.usuarios (nombre, apellido, nombre_usuario, "
+                    + "clave, habilitado, email, cambia_clave) values (@nombre, @apellido, @nombre_usuario, "
+                    + "@clave, @habilitado, @email, @cambia_clave) select @@identity", SqlCon);
+
+                com.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                com.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                com.Parameters.AddWithValue("@nombre_usuario", usuario.NombreUsuario);
+                com.Parameters.AddWithValue("@clave", usuario.Clave);
+                com.Parameters.AddWithValue("@habilitado", usuario.Habilitado);
+                com.Parameters.AddWithValue("@email", usuario.EMail);
+                com.Parameters.AddWithValue("@cambia_clave", usuario.CambiaClave);
+                usuario.ID = (int) com.ExecuteScalar();
+
+                this.CloseConnection();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al intentar insertar usuario", e);
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
         }
 
         public void Save(Usuario usuario)
         {
             if (usuario.State == BusinessEntity.States.New)
             {
-                int NextID = 0;
-                foreach (Usuario usr in Usuarios)
-                {
-                    if (usr.ID > NextID)
-                    {
-                        NextID = usr.ID;
-                    }
-                }
-                usuario.ID = NextID + 1;
-                Usuarios.Add(usuario);
+                this.Insert(usuario);
             }
             else if (usuario.State == BusinessEntity.States.Deleted)
             {
