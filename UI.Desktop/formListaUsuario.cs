@@ -12,9 +12,13 @@ namespace UI.Desktop
 {
     public partial class formListaUsuario : Form
     {
+        private Business.Logic.UsuarioLogic UsuarioNegocio { get; set; }
+
         public formListaUsuario()
         {
             InitializeComponent();
+            UsuarioNegocio = new Business.Logic.UsuarioLogic();
+            dgvUsuarios.DataSource = UsuarioNegocio.GetAll();
         }
     }
 }
