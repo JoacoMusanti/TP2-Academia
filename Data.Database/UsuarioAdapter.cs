@@ -10,8 +10,8 @@ namespace Data.Database
     public class UsuarioAdapter:Adapter
     {
         #region DatosEnMemoria
-        // Esta región solo se usa en esta etapa donde los datos se mantienen en memoria.
-        // Al modificar este proyecto para que acceda a la base de datos esta será eliminada
+        // Esta regiï¿½n solo se usa en esta etapa donde los datos se mantienen en memoria.
+        // Al modificar este proyecto para que acceda a la base de datos esta serï¿½ eliminada
         private static List<Usuario> _Usuarios;
 
         private static List<Usuario> Usuarios
@@ -203,6 +203,37 @@ namespace Data.Database
             }
         }
 
+        protected void Update(Usuario usuario)
+        {
+            try
+            {
+                this.OpenConnection();
+                
+                SqlCommand updateCom = new SqlCommand("update dbo.usuarios set "
+                    + "nombre_usuario = @nombre_usuario, clave = @clave, nombre = @nombre, "
+                    + "apellido = @apellido, email = @email, habilitado = @habilitado where "
+                    + "id_usuario = @id", SqlCon);
+                    
+                    updateCom.Parameters.AddWithValue("@id", usuario.ID);
+                    updateCom.Parameters.AddWithValue("@nombre_usuario", usuario.NombreUsuario);
+                    updateCom.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                    updateCom.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                    updateCom.Parameters.AddWithValue("@email", usuario.EMail);
+                    updateCom.Parameters.AddWithValue("@clave", usuario.Clave);
+                    updateCom.Parameters.AddWithValue("@habilitado", usuario.Habilitado);
+                    
+                    updateCom.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al intentar modificar datos del usuario", e);
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+        }
+        
         public void Save(Usuario usuario)
         {
             if (usuario.State == BusinessEntity.States.New)
@@ -215,7 +246,7 @@ namespace Data.Database
             }
             else if (usuario.State == BusinessEntity.States.Modified)
             {
-                Usuarios[Usuarios.FindIndex(delegate(Usuario u) { return u.ID == usuario.ID; })]=usuario;
+                this.Update(usuario);
             }
             usuario.State = BusinessEntity.States.Unmodified;            
         }
