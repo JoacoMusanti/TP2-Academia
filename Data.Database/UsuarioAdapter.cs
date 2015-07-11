@@ -11,6 +11,10 @@ namespace Data.Database
     {
         protected SqlDataAdapter _daUsuarios;
 
+        /// <summary>
+        /// Devuelve una lista con todos los usuarios en la base de datos
+        /// </summary>
+        /// <returns></returns>
         public List<Usuario> GetAll()
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -57,7 +61,12 @@ namespace Data.Database
             return usuarios;
         }
 
-        public Business.Entities.Usuario GetOne(int ID)
+        /// <summary>
+        /// Devuelve el usuario que tenga la id indicada
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public Usuario GetOne(int ID)
         {
             Usuario usr = new Usuario();
 
@@ -98,6 +107,10 @@ namespace Data.Database
             return usr;
         }
 
+        /// <summary>
+        /// Elimina el usuario que tenga la id indicada
+        /// </summary>
+        /// <param name="ID"></param>
         public void Delete(int ID)
         {
             try
@@ -120,6 +133,10 @@ namespace Data.Database
             }
         }
 
+        /// <summary>
+        /// Inserta un nuevo usuario en la base de datos
+        /// </summary>
+        /// <param name="usuario"></param>
         protected void Insert(Usuario usuario)
         {
             try
@@ -149,6 +166,10 @@ namespace Data.Database
             }
         }
 
+        /// <summary>
+        /// Actualiza el usuario dado con los nuevos datos en la base de datos
+        /// </summary>
+        /// <param name="usuario"></param>
         protected void Update(Usuario usuario)
         {
             try
@@ -180,6 +201,10 @@ namespace Data.Database
             }
         }
         
+        /// <summary>
+        /// Guarda los cambios realizados al usuario
+        /// </summary>
+        /// <param name="usuario"></param>
         public void Save(Usuario usuario)
         {
             if (usuario.State == BusinessEntity.States.New)

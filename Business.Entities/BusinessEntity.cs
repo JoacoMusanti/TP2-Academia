@@ -23,17 +23,17 @@ namespace Business.Entities
             get { return _ID; }
             set { _ID = value; }
         }
-        private States _Estado;
+        private States _state;
 
-        public States Estado
+        public States State
         {
-            get { return _Estado; }
-            set { _Estado = value; }
+            get { return _state; }
+            set { _state = value; }
         }
 
         public BusinessEntity()
         {
-            this._Estado = States.New;
+            this._state = States.New;
         }
 
     }
