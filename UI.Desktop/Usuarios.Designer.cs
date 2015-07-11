@@ -108,7 +108,6 @@
             this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.Size = new System.Drawing.Size(619, 335);
             this.dgvUsuarios.TabIndex = 0;
-            
             // 
             // id
             // 
@@ -163,6 +162,7 @@
             this.btnActualizar.TabIndex = 1;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // btnSalir
             // 

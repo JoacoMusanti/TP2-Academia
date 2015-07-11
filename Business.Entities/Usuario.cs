@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Entities
 {
-  public  class Usuario : BusinessEntity
+    public class Usuario : BusinessEntity
     {
       public string NombreUsuario { get; set; }
       public string Clave { get; set; }

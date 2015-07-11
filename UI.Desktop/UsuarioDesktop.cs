@@ -29,7 +29,15 @@ namespace UI.Desktop
             Modo = modo;
             UsuarioLogic usr = new UsuarioLogic();
 
-            UsuarioActual = usr.GetOne(ID);
+            try
+            {
+                UsuarioActual = usr.GetOne(ID);
+            }
+            catch (Exception e)
+            {
+                Notificar("Error inesperado", e.Message + "\nIntente realizar la operacion nuevamente",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             MapearDeDatos();
         }
@@ -96,7 +104,15 @@ namespace UI.Desktop
 
             UsuarioLogic usr = new UsuarioLogic();
 
-            usr.Save(UsuarioActual);
+            try
+            {
+                usr.Save(UsuarioActual);
+            }
+            catch (Exception e)
+            {
+                Notificar("Error inesperado", e.Message, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         public override bool Validar() 

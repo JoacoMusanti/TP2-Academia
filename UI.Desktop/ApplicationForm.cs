@@ -27,29 +27,45 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
-       
-        /*MapearDeDatos va a ser utilizado en cada formulario para copiar la
-        información de las entidades a los controles del formulario (TextBox,
-         ComboBox, etc) para mostrar la infromación de cada entidad          */
+
+        /// <summary>
+        /// Utilizado en cada formulario para copiar la
+        /// información de las entidades a los controles del formulario(TextBox,
+        /// ComboBox, etc) para mostrar la infromación de cada entidad
+        /// </summary>
         public virtual void MapearDeDatos() { }
 
-        /*MapearADatos se va a utilizar para pasar la información de los
-         controles a una entidad para luego enviarla a las capas inferiores        */
+        /// <summary>
+        /// Utilizado para pasar la información de los
+        /// controles a una entidad para luego enviarla a las capas inferiores
+        /// </summary>
         public virtual void MapearADatos(){}
 
-        /*GuardarCambios es el método que se encargará de invocar al método
-        correspondiente de la capa de negocio según sea el ModoForm en que se
-        encuentre el formulario        */
+        /// <summary>
+        /// Utilizado para invocar al método
+        /// correspondiente de la capa de negocio según sea el ModoForm en que se
+        /// encuentre el formulario
+        /// </summary>
         public virtual void GuardarCambios() { }
 
-        /*Validar será el método que devuelva si los datos son válidos para poder
-        registrar los cambios realizados.        */
+
+        /// <summary>
+        /// Devuelve si los datos son válidos para poder
+        /// registrar los cambios realizados.
+        /// </summary>
+        /// <returns></returns>
         public virtual bool Validar() { return false; }
 
-        /*Notificar es el método que utilizaremos para unificar el mecanismo de
-          avisos al usuario y en caso de tener que modificar la forma en que se
-          realizan los avisos al usuario sólo se debe modificar este método, en
-          lugar de tener que reemplazarlo en toda la aplicación.        */
+        /// <summary>
+        /// Utilizado para unificar el mecanismo de
+        /// avisos al usuario y en caso de tener que modificar la forma en que se
+        /// realizan los avisos al usuario sólo se debe modificar este método, en
+        /// lugar de tener que reemplazarlo en toda la aplicación.
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <param name="mensaje"></param>
+        /// <param name="botones"></param>
+        /// <param name="icono"></param>
         public void Notificar (string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
             MessageBox.Show(mensaje, titulo, botones, icono);

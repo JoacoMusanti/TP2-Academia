@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Business.Entities
 {
-    class Especialidad : BusinessEntity
+    public class Especialidad : BusinessEntity
     {
         public int IdEspecialidad { get; set; }
         public string Descripcion { get; set; }

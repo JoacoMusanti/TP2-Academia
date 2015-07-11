@@ -26,9 +26,18 @@ namespace UI.Desktop
         public void Listar()
         {
             UsuarioLogic ul = new UsuarioLogic();
-            dgvUsuarios.DataSource = ul.GetAll();
-            
-           
+
+            try
+            {
+                dgvUsuarios.DataSource = ul.GetAll();
+            }
+            catch (Exception e)
+            {
+                // se debe realizar un log de la excepcion
+                MessageBox.Show(e.Message + "\nIntente la operacion nuevamente", "Error inesperado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void Usuarios_Load(object sender, EventArgs e)
@@ -75,6 +84,11 @@ namespace UI.Desktop
             }
 
             this.Listar();
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            Listar();
         }
     }
 }

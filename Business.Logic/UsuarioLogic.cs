@@ -9,7 +9,7 @@ namespace Business.Logic
 {
     public class UsuarioLogic:BusinessLogic
     {
-        Data.Database.UsuarioAdapter UsuarioData {get;set;}
+        Data.Database.UsuarioAdapter UsuarioData {get; set; }
 
         public UsuarioLogic()
         {
@@ -18,22 +18,54 @@ namespace Business.Logic
 
         public Usuario GetOne(int ID)
         {
-            return UsuarioData.GetOne(ID);
+            try
+            {
+                return UsuarioData.GetOne(ID);
+            }
+            catch (Exception e)
+            {
+                // debe realizarse un log de la excepcion
+                throw;
+            }
         }
 
         public List<Usuario> GetAll()
         {
-            return UsuarioData.GetAll();
+            try
+            {
+                return UsuarioData.GetAll();
+            }
+            catch (Exception e)
+            {
+                // debe realizarse un log de la excepcion
+                throw;
+            }
         }
 
         public void Save(Usuario usuario)
         {
-            UsuarioData.Save(usuario);
+            try
+            {
+                UsuarioData.Save(usuario);
+            }
+            catch (Exception e)
+            {
+                // debe realizarse un log de la excepcion
+                throw;
+            }
         }
 
         public void Delete(int ID)
         {
-            UsuarioData.Delete(ID);
+            try
+            {
+                UsuarioData.Delete(ID);
+            }
+            catch (Exception e)
+            {
+                // debe realizarse un log de la excepcion
+                throw;
+            }
         }
     }
 }
