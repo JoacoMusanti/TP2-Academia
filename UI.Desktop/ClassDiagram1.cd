@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="UI.Desktop.ApplicationForm">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="UI.Desktop.ApplicationForm.ModoForm" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ApplicationForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACIAAAAAAACAAAACAAAEAQAAAgAAAAAAAEA=</HashCode>
+      <FileName>ApplicationForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Desktop.EspecialidadDesktop" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAICAAAJAABBCAAAACAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>EspecialidadDesktop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Desktop.MenuPrincipal" Collapsed="true">
+    <Position X="6.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAIAAAAAAAAAAAAACA=</HashCode>
+      <FileName>MenuPrincipal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Desktop.UsuarioDesktop" Collapsed="true">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAIGAABJgABACAAAACAKBAAcAAAgAAAAAAAGA=</HashCode>
+      <FileName>UsuarioDesktop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI.Desktop.Usuarios" Collapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQQAAAAAGAABCCkAQjAAAACBAAgABQKCAAAAAAAAgA=</HashCode>
+      <FileName>Usuarios.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

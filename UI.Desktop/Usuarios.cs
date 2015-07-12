@@ -12,7 +12,7 @@ using Business.Logic;
 
 namespace UI.Desktop
 {
-    public partial class Usuarios : Form
+    public partial class Usuarios : ApplicationForm
     {
         public Usuarios()
         {
@@ -34,9 +34,11 @@ namespace UI.Desktop
             catch (Exception e)
             {
                 // se debe realizar un log de la excepcion
-                MessageBox.Show(e.Message + "\nIntente la operacion nuevamente", "Error inesperado",
-                    MessageBoxButtons.OK,
+                Notificar("Error inesperado", e.Message + "\nIntente la operacion nuevamente", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                //MessageBox.Show(e.Message + "\nIntente la operacion nuevamente", "Error inesperado",
+                //    MessageBoxButtons.OK,
+                //    MessageBoxIcon.Error);
             }
         }
 
