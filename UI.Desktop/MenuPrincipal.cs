@@ -16,5 +16,17 @@ namespace UI.Desktop
         {
             InitializeComponent();
         }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            Usuarios usr = new Usuarios();
+            usr.ShowDialog();
+        }
+
+        private void btnEspecialidades_Click(object sender, EventArgs e)
+        {
+            Especialidades esp = new Especialidades();
+            esp.ShowDialog();
+        }
     }
 }

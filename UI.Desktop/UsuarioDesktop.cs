@@ -42,10 +42,11 @@ namespace UI.Desktop
             MapearDeDatos();
         }
 
-        public Usuario UsuarioActual { get; set; }
+        private Usuario UsuarioActual { get; set; }
 
-        public override void MapearDeDatos() 
+        protected override void MapearDeDatos() 
         {
+            // Se copian los datos del usuario actual en los textboxes
             this.txtID.Text = this.UsuarioActual.ID.ToString();
             this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
             this.txtApellido.Text = this.UsuarioActual.Apellido;
@@ -55,27 +56,31 @@ namespace UI.Desktop
             this.txtClave.Text = this.UsuarioActual.Clave;
             this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
 
+            // Cambiamos el texto del boton aceptar segun corresponda
+            // Si el formulario es para eliminar el usuario desactiva los textboxes
             if (this.Modo == ModoForm.Alta || this.Modo == ModoForm.Modificacion)
             {
                 this.btnAceptar.Text = "Guardar";
             }
             else if (this.Modo == ModoForm.Baja)
             {
-                this.txtID.ReadOnly = true;
+                this.txtID.Enabled = false;
                 this.chkHabilitado.Enabled = false;
-                this.txtApellido.ReadOnly = true;
-                this.txtNombre.ReadOnly = true;
-                this.txtUsuario.ReadOnly = true;
-                this.txtEmail.ReadOnly = true;
-                this.txtClave.ReadOnly = true;
-                this.txtConfirmarClave.ReadOnly = true;
+                this.txtApellido.Enabled = false;
+                this.txtNombre.Enabled = false;
+                this.txtUsuario.Enabled = false;
+                this.txtEmail.Enabled = false;
+                this.txtClave.Enabled = false;
+                this.txtConfirmarClave.Enabled = false;
                 this.btnAceptar.Text = "Eliminar";
             }
          
         }
 
-        public override void MapearADatos()
+        protected override void MapearADatos()
         {
+            // Si el modo del form es Alta, creamos un nuevo usuario con estado New
+            // Si es una modificacion usamos el usuarioactual y cambiamos su estado a modified
             if (this.Modo == ModoForm.Alta)
             {
                 Usuario usr = new Usuario();
@@ -98,7 +103,7 @@ namespace UI.Desktop
             UsuarioActual.Habilitado = this.chkHabilitado.Checked;
         }
 
-        public override void GuardarCambios()
+        protected override void GuardarCambios()
         {
             MapearADatos();
 
@@ -110,12 +115,13 @@ namespace UI.Desktop
             }
             catch (Exception e)
             {
-                Notificar("Error inesperado", e.Message, MessageBoxButtons.OK,
+                Notificar("Error inesperado", e.Message + "\nIntente realizar la operacion nuevamente",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
 
-        public override bool Validar() 
+        protected override bool Validar() 
         { 
             string msgError = "";
             bool retorno = true;

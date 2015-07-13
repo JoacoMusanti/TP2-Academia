@@ -59,6 +59,12 @@
     <Compile Include="EspecialidadDesktop.Designer.cs">
       <DependentUpon>EspecialidadDesktop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Especialidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Especialidades.Designer.cs">
+      <DependentUpon>Especialidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="EspecialidadDesktop.resx">
       <DependentUpon>EspecialidadDesktop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Especialidades.resx">
+      <DependentUpon>Especialidades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
@@ -124,6 +133,15 @@
       <Project>{7e00fc9e-248b-4c05-bee4-2375c14162fd}</Project>
       <Name>Business.Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cruz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lapiz.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

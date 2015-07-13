@@ -36,9 +36,6 @@ namespace UI.Desktop
                 // se debe realizar un log de la excepcion
                 Notificar("Error inesperado", e.Message + "\nIntente la operacion nuevamente", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                //MessageBox.Show(e.Message + "\nIntente la operacion nuevamente", "Error inesperado",
-                //    MessageBoxButtons.OK,
-                //    MessageBoxIcon.Error);
             }
         }
 
@@ -52,6 +49,11 @@ namespace UI.Desktop
             Close();
         }
 
+        /// <summary>
+        /// Abre un form donde se solicita el ingreso de los datos de un nuevo usuario y permite agregarlo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
             UsuarioDesktop formUsuario = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
@@ -60,6 +62,11 @@ namespace UI.Desktop
             this.Listar();
         }
 
+        /// <summary>
+        /// Abre un form en donde se muestran los datos del usuario seleccionado y permite modificarlo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsbEditar_Click(object sender, EventArgs e)
         {
             if (dgvUsuarios.SelectedRows.Count == 1)
@@ -74,6 +81,11 @@ namespace UI.Desktop
             this.Listar();
         }
 
+        /// <summary>
+        /// Abre un form en donde se muestran los datos del usuario seleccionado y permite eliminarlo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (dgvUsuarios.SelectedRows.Count == 1)

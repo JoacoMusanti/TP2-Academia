@@ -8,7 +8,7 @@ using Business.Entities;
 
 namespace Data.Database
 {
-    class EspecialidadAdapter : Adapter
+    public class EspecialidadAdapter : Adapter
     {
         protected SqlDataAdapter _daEspecialidades;
 

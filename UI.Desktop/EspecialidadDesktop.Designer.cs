@@ -44,7 +44,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.51007F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.48993F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 2, 2);
@@ -58,14 +58,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.22581F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(383, 127);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(386, 127);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(58, 8);
+            this.label1.Location = new System.Drawing.Point(57, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 0;
@@ -75,7 +75,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 39);
+            this.label2.Location = new System.Drawing.Point(8, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 1;
@@ -84,17 +84,18 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAceptar.Location = new System.Drawing.Point(300, 101);
+            this.btnAceptar.Location = new System.Drawing.Point(299, 101);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(74, 23);
             this.btnAceptar.TabIndex = 19;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // btnCancelar
             // 
             this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar.Location = new System.Drawing.Point(220, 101);
+            this.btnCancelar.Location = new System.Drawing.Point(219, 101);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(74, 23);
             this.btnCancelar.TabIndex = 20;
@@ -106,19 +107,19 @@
             this.tableLayoutPanel1.SetColumnSpan(this.txtID, 2);
             this.txtID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(82, 3);
+            this.txtID.Location = new System.Drawing.Point(81, 3);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(298, 20);
+            this.txtID.Size = new System.Drawing.Size(302, 20);
             this.txtID.TabIndex = 21;
             // 
             // txtDescripcion
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.txtDescripcion, 2);
             this.txtDescripcion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDescripcion.Location = new System.Drawing.Point(82, 32);
+            this.txtDescripcion.Location = new System.Drawing.Point(81, 32);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(298, 20);
+            this.txtDescripcion.Size = new System.Drawing.Size(302, 20);
             this.txtDescripcion.TabIndex = 22;
             // 
             // EspecialidadDesktop

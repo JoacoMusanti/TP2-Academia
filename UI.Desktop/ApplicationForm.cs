@@ -33,20 +33,20 @@ namespace UI.Desktop
         /// información de las entidades a los controles del formulario(TextBox,
         /// ComboBox, etc) para mostrar la infromación de cada entidad
         /// </summary>
-        public virtual void MapearDeDatos() { }
+        protected virtual void MapearDeDatos() { }
 
         /// <summary>
         /// Utilizado para pasar la información de los
         /// controles a una entidad para luego enviarla a las capas inferiores
         /// </summary>
-        public virtual void MapearADatos(){}
+        protected virtual void MapearADatos(){}
 
         /// <summary>
         /// Utilizado para invocar al método
         /// correspondiente de la capa de negocio según sea el ModoForm en que se
         /// encuentre el formulario
         /// </summary>
-        public virtual void GuardarCambios() { }
+        protected virtual void GuardarCambios() { }
 
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace UI.Desktop
         /// registrar los cambios realizados.
         /// </summary>
         /// <returns></returns>
-        public virtual bool Validar() { return false; }
+        protected virtual bool Validar() { return false; }
 
         /// <summary>
         /// Utilizado para unificar el mecanismo de
