@@ -29,6 +29,18 @@ namespace Business.Logic
             }
         }
 
+        public Usuario GetOneUser(string nameuser)
+        {
+            try
+            {
+                return UsuarioData.GetOneUser(nameuser);
+            }
+            catch (Exception e)
+            {
+                // debe realizarse un log de la excepcion
+                throw;
+            }
+        }
         public List<Usuario> GetAll()
         {
             try

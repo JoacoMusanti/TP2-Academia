@@ -221,5 +221,51 @@ namespace Data.Database
             }
             usuario.State = BusinessEntity.States.Unmodified;            
         }
+
+        /// <summary>
+        /// Devuelve el usuario que tenga el nombre de usuario indicado
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public Usuario GetOneUser(string nameuser)
+        {
+            Usuario usr = new Usuario();
+
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdUsuario = new SqlCommand("select * from dbo.usuarios where nombre_usuario = @nombreusuario", SqlCon);
+                cmdUsuario.Parameters.AddWithValue("@nombreusuario", nameuser);
+
+                SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
+
+                if (drUsuario.Read())
+                {
+                    usr.ID = (int)drUsuario["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
+                    usr.Clave = (string)drUsuario["clave"];
+                    usr.Habilitado = (bool)drUsuario["habilitado"];
+                    usr.Nombre = (string)drUsuario["nombre"];
+                    usr.Apellido = (string)drUsuario["apellido"];
+                    usr.EMail = (string)drUsuario["email"];
+                }
+
+                drUsuario.Close();
+            }
+            catch (Exception e)
+            {
+                usr = null;
+                Exception manejada = new Exception("Error al intentar recuperar el usuario de la base de datos", e);
+                throw manejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+
+            }
+
+            return usr;
+        }
     }
 }

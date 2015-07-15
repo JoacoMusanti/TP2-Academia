@@ -15,8 +15,15 @@ namespace UI.Desktop
         public MenuPrincipal()
         {
             InitializeComponent();
+            FormLogin appLogin = new FormLogin();
+            if (appLogin.ShowDialog() != DialogResult.OK)
+            {
+                this.Dispose();
+            }
+                   
         }
 
+      
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
             Usuarios usr = new Usuarios();
@@ -28,5 +35,7 @@ namespace UI.Desktop
             Especialidades esp = new Especialidades();
             esp.ShowDialog();
         }
+
+       
     }
 }
