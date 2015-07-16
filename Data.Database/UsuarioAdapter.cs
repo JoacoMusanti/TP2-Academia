@@ -47,6 +47,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 usuarios = null;
                 Exception manejada = new Exception("Error al intentar recuperar los usuarios de la base de datos", e);
                 throw manejada;
@@ -94,6 +95,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 usr = null;
                 Exception manejada = new Exception("Error al intentar recuperar el usuario de la base de datos", e);
                 throw manejada;
@@ -125,6 +127,7 @@ namespace Data.Database
             }
             catch(Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar eliminar usuario", e);
             }
             finally
@@ -158,6 +161,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar insertar usuario", e);
             }
             finally
@@ -193,6 +197,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar modificar datos del usuario", e);
             }
             finally
@@ -256,6 +261,7 @@ namespace Data.Database
             catch (Exception e)
             {
                 usr = null;
+                Util.Logger.Log(e);
                 Exception manejada = new Exception("Error al intentar recuperar el usuario de la base de datos", e);
                 throw manejada;
             }

@@ -14,15 +14,17 @@ namespace UI.Desktop
     {
         public MenuPrincipal()
         {
-            InitializeComponent();
+            InitializeComponent();       
+        }
+
+        private void MenuPrincipal_OnLoad(object sender, EventArgs e)
+        {
             FormLogin appLogin = new FormLogin();
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
-                this.Dispose();
+                this.Close();
             }
-                   
         }
-
       
         private void btnUsuarios_Click(object sender, EventArgs e)
         {

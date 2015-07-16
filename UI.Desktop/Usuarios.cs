@@ -33,7 +33,6 @@ namespace UI.Desktop
             }
             catch (Exception e)
             {
-                // se debe realizar un log de la excepcion
                 Notificar("Error inesperado", e.Message + "\nIntente la operacion nuevamente", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

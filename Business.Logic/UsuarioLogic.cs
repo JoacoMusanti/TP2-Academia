@@ -24,7 +24,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -37,7 +37,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -49,7 +49,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -62,7 +62,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -75,7 +75,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }

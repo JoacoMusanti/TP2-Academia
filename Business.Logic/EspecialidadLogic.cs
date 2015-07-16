@@ -25,7 +25,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // log
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -38,7 +38,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // log
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -49,9 +49,9 @@ namespace Business.Logic
             {
                 EspecialidadData.Save(esp);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // log
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -62,9 +62,9 @@ namespace Business.Logic
             {
                 EspecialidadData.Delete(id);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // log
+                Util.Logger.Log(e);
                 throw;
             }
         }

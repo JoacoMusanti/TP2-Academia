@@ -12,7 +12,7 @@ using Business.Logic;
 
 namespace UI.Desktop
 {
-    public partial class FormLogin : Form
+    public partial class FormLogin : ApplicationForm
     {
         private Usuario UsuarioActual { get; set; }
         public FormLogin()
@@ -27,28 +27,26 @@ namespace UI.Desktop
             try
             {
                 UsuarioActual = usr.GetOneUser(this.txtUsuario.Text);
+                if (this.txtPass.Text == UsuarioActual.Clave)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    Notificar("Usuario y/o contraseña incorrectos", "Login",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception a)
             {
-                MessageBox.Show("Error inesperado", a.Message + "\nIntente realizar la operacion nuevamente",
+                Notificar("Error inesperado", a.Message + "\nIntente realizar la operacion nuevamente",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-            if (this.txtPass.Text == UsuarioActual.Clave)
-            {
-                this.DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                MessageBox.Show("Usuario y/o contraseña incorrectos", "Login"
-                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
 
         private void lnkOlvidaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("Es Ud. un usuario muy descuidado, haga memoria", "Olvidé mi contraseña",
+            Notificar("Olvidé mi contraseña", "Es Ud. un usuario muy descuidado, haga memoria",
                  MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }

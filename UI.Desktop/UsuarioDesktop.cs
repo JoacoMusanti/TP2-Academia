@@ -32,14 +32,13 @@ namespace UI.Desktop
             try
             {
                 UsuarioActual = usr.GetOne(ID);
+                MapearDeDatos();
             }
             catch (Exception e)
             {
                 Notificar("Error inesperado", e.Message + "\nIntente realizar la operacion nuevamente",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            MapearDeDatos();
         }
 
         private Usuario UsuarioActual { get; set; }
