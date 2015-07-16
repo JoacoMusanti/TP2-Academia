@@ -44,7 +44,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.51007F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.48993F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 2, 2);
@@ -58,7 +58,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.22581F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(386, 127);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(391, 127);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -110,7 +110,7 @@
             this.txtID.Location = new System.Drawing.Point(81, 3);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(302, 20);
+            this.txtID.Size = new System.Drawing.Size(307, 20);
             this.txtID.TabIndex = 21;
             // 
             // txtDescripcion
@@ -119,7 +119,7 @@
             this.txtDescripcion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDescripcion.Location = new System.Drawing.Point(81, 32);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(302, 20);
+            this.txtDescripcion.Size = new System.Drawing.Size(307, 20);
             this.txtDescripcion.TabIndex = 22;
             // 
             // EspecialidadDesktop

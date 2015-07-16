@@ -24,11 +24,23 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }
 
+        public Usuario GetOne(string nameuser)
+        {
+            try
+            {
+                return UsuarioData.GetOne(nameuser);
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
         public List<Usuario> GetAll()
         {
             try
@@ -37,7 +49,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -50,7 +62,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }
@@ -63,7 +75,7 @@ namespace Business.Logic
             }
             catch (Exception e)
             {
-                // debe realizarse un log de la excepcion
+                Util.Logger.Log(e);
                 throw;
             }
         }

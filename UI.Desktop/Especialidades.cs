@@ -31,9 +31,7 @@ namespace UI.Desktop
             }
             catch (Exception e)
             {
-                // log
                 Notificar("Error inesperado", e.Message + "\nIntente la operacion nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
         }
 
@@ -58,6 +56,32 @@ namespace UI.Desktop
             formEspecialidadDesktop.Text = "Agregar Especialidad";
             formEspecialidadDesktop.ShowDialog();
             Listar();
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvEspecialidades.SelectedRows.Count == 1)
+            {
+                int id = ((Business.Entities.Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+
+                EspecialidadDesktop formEspecialidadDesktop = new EspecialidadDesktop(id, ApplicationForm.ModoForm.Modificacion);
+                formEspecialidadDesktop.Text = "Editar especialidad";
+                formEspecialidadDesktop.ShowDialog();
+                Listar();
+            }
+        }
+
+        private void tsbEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvEspecialidades.SelectedRows.Count == 1)
+            {
+                int id = ((Business.Entities.Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+
+                EspecialidadDesktop formEspecialidadDesktop = new EspecialidadDesktop(id, ApplicationForm.ModoForm.Baja);
+                formEspecialidadDesktop.Text = "Eliminar especialidad";
+                formEspecialidadDesktop.ShowDialog();
+                Listar(); 
+            }
         }
     }
 }

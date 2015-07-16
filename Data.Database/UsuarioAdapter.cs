@@ -47,6 +47,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 usuarios = null;
                 Exception manejada = new Exception("Error al intentar recuperar los usuarios de la base de datos", e);
                 throw manejada;
@@ -94,6 +95,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 usr = null;
                 Exception manejada = new Exception("Error al intentar recuperar el usuario de la base de datos", e);
                 throw manejada;
@@ -125,6 +127,7 @@ namespace Data.Database
             }
             catch(Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar eliminar usuario", e);
             }
             finally
@@ -158,6 +161,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar insertar usuario", e);
             }
             finally
@@ -193,6 +197,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar modificar datos del usuario", e);
             }
             finally
@@ -220,6 +225,53 @@ namespace Data.Database
                 this.Update(usuario);
             }
             usuario.State = BusinessEntity.States.Unmodified;            
+        }
+
+        /// <summary>
+        /// Devuelve el usuario que tenga el nombre de usuario indicado
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public Usuario GetOne(string nameuser)
+        {
+            Usuario usr = new Usuario();
+
+            try
+            {
+                this.OpenConnection();
+
+                SqlCommand cmdUsuario = new SqlCommand("select * from dbo.usuarios where nombre_usuario = @nombreusuario", SqlCon);
+                cmdUsuario.Parameters.AddWithValue("@nombreusuario", nameuser);
+
+                SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
+
+                if (drUsuario.Read())
+                {
+                    usr.ID = (int)drUsuario["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
+                    usr.Clave = (string)drUsuario["clave"];
+                    usr.Habilitado = (bool)drUsuario["habilitado"];
+                    usr.Nombre = (string)drUsuario["nombre"];
+                    usr.Apellido = (string)drUsuario["apellido"];
+                    usr.EMail = (string)drUsuario["email"];
+                }
+
+                drUsuario.Close();
+            }
+            catch (Exception e)
+            {
+                usr = null;
+                Util.Logger.Log(e);
+                Exception manejada = new Exception("Error al intentar recuperar el usuario de la base de datos", e);
+                throw manejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+
+            }
+
+            return usr;
         }
     }
 }

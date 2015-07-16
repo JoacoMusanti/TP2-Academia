@@ -77,6 +77,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MenuPrincipal";
             this.Text = "MenuPrincipal";
+            this.Load += new System.EventHandler(this.MenuPrincipal_OnLoad);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

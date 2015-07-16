@@ -42,6 +42,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar recuperar las especialidades de la base de datos", e);
             }
             finally
@@ -81,7 +82,8 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                throw new Exception("Error al intentar recuperar el usuario de la base de datos", e);
+                Util.Logger.Log(e);
+                throw new Exception("Error al intentar recuperar la especialidad de la base de datos", e);
             }
             finally
             {
@@ -109,6 +111,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar eliminar especialidad", e);
             }
             finally
@@ -137,7 +140,8 @@ namespace Data.Database
             }
             catch (Exception e)
             {
-                throw new Exception("Error al intentar agregar usuario", e);
+                Util.Logger.Log(e);
+                throw new Exception("Error al intentar agregar la especialidad", e);
             }
             finally
             {
@@ -155,7 +159,7 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion " +
+                SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion where " +
                                                       "id_especialidad = @id", SqlCon);
 
                 updateCom.Parameters.AddWithValue("@id", especialidad.ID);
@@ -165,6 +169,7 @@ namespace Data.Database
             }
             catch (Exception e)
             {
+                Util.Logger.Log(e);
                 throw new Exception("Error al intentar modificar los datos de la especialidad", e);
             }
             finally

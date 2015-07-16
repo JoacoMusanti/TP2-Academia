@@ -10,5 +10,7 @@ namespace Business.Entities
         private List<Plan> _planes = new List<Plan>(); 
 
         public string Descripcion { get; set; }
+
+        new public States State { get; set; }
     }
 }
