@@ -159,7 +159,7 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion " +
+                SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion where " +
                                                       "id_especialidad = @id", SqlCon);
 
                 updateCom.Parameters.AddWithValue("@id", especialidad.ID);

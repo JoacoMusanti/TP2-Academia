@@ -232,7 +232,7 @@ namespace Data.Database
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public Usuario GetOneUser(string nameuser)
+        public Usuario GetOne(string nameuser)
         {
             Usuario usr = new Usuario();
 

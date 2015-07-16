@@ -84,6 +84,7 @@
             this.lknOlvidaPass.TabIndex = 4;
             this.lknOlvidaPass.TabStop = true;
             this.lknOlvidaPass.Text = "Olvidé mi contraseña";
+            this.lknOlvidaPass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkOlvidaPass_LinkClicked);
             // 
             // txtUsuario
             // 

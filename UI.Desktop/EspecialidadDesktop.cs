@@ -24,6 +24,23 @@ namespace UI.Desktop
             Modo = modo;
         }
 
+        public EspecialidadDesktop(int ID, ModoForm modo): this()
+        {
+            Modo = modo;
+            EspecialidadLogic esp = new EspecialidadLogic();
+
+            try
+            {
+                EspecialidadActual = esp.GetOne(ID);
+                MapearDeDatos();
+            }
+            catch (Exception e)
+            {
+                Notificar("Error inesperado", e.Message + "\nIntente realizar la operacion nuevamente",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private Especialidad EspecialidadActual { get; set; }
 
         protected override void MapearDeDatos()

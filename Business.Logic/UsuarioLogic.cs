@@ -29,11 +29,11 @@ namespace Business.Logic
             }
         }
 
-        public Usuario GetOneUser(string nameuser)
+        public Usuario GetOne(string nameuser)
         {
             try
             {
-                return UsuarioData.GetOneUser(nameuser);
+                return UsuarioData.GetOne(nameuser);
             }
             catch (Exception e)
             {

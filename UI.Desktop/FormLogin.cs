@@ -26,14 +26,14 @@ namespace UI.Desktop
 
             try
             {
-                UsuarioActual = usr.GetOneUser(this.txtUsuario.Text);
+                UsuarioActual = usr.GetOne(this.txtUsuario.Text);
                 if (this.txtPass.Text == UsuarioActual.Clave)
                 {
                     this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
-                    Notificar("Usuario y/o contraseña incorrectos", "Login",
+                    Notificar("Login", "Usuario y/o contraseña incorrectos",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -46,9 +46,8 @@ namespace UI.Desktop
 
         private void lnkOlvidaPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Notificar("Olvidé mi contraseña", "Es Ud. un usuario muy descuidado, haga memoria",
-                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+            OlvidoContrasenia formContrasenia = new OlvidoContrasenia();
+            formContrasenia.ShowDialog();
         }
                
     }
