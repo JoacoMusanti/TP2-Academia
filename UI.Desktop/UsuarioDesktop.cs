@@ -52,14 +52,15 @@ namespace UI.Desktop
             this.txtNombre.Text = this.UsuarioActual.Nombre;
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
             this.txtEmail.Text = this.UsuarioActual.EMail;
-            this.txtClave.Text = "";
-            this.txtConfirmarClave.Text = "";
+            
 
             // Cambiamos el texto del boton aceptar segun corresponda
             // Si el formulario es para eliminar el usuario desactiva los textboxes
             if (this.Modo == ModoForm.Alta || this.Modo == ModoForm.Modificacion)
             {
                 this.btnAceptar.Text = "Guardar";
+                this.txtClave.Enabled = false;
+                this.txtConfirmarClave.Enabled = false;
             }
             else if (this.Modo == ModoForm.Baja)
             {
@@ -135,16 +136,6 @@ namespace UI.Desktop
                 msgError += "El campo \"Apellido\" no puede estar vacio\n";
                 retorno = false;
             }
-            if (this.txtClave.TextLength == 0)
-            {
-                msgError += "El campo \"Clave\" no puede estar vacio\n";
-                retorno = false;
-            }
-            if (this.txtConfirmarClave.TextLength == 0)
-            {
-                msgError += "El campo \"Confirmar Clave\" no puede estar vacio\n";
-                retorno = false;
-            }
             if (this.txtEmail.TextLength == 0)
             {
                 msgError += "El campo \"Email\" no puede estar vacio\n";
@@ -155,15 +146,18 @@ namespace UI.Desktop
                 msgError += "El campo \"Usuario\" no puede estar vacio\n";
                 retorno = false;
             }
-            if (this.txtClave.Text != this.txtConfirmarClave.Text)
+            if (Modo == ModoForm.Alta)
             {
-                msgError += "Las claves no coinciden\n";
-                retorno = false;
-            }
-            if (this.txtClave.TextLength < 8)
-            {
-                msgError += "La clave no puede tener menos de 8 caracteres\n";
-                retorno = false;
+                if (this.txtClave.Text != this.txtConfirmarClave.Text)
+                {
+                    msgError += "Las claves no coinciden\n";
+                    retorno = false;
+                }
+                if (this.txtClave.TextLength < 8)
+                {
+                    msgError += "La clave no puede tener menos de 8 caracteres\n";
+                    retorno = false;
+                } 
             }
 
             if (retorno == false)

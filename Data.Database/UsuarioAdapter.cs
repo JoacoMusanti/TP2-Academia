@@ -181,7 +181,7 @@ namespace Data.Database
                 this.OpenConnection();
                 
                 SqlCommand updateCom = new SqlCommand("update dbo.usuarios set "
-                    + "nombre_usuario = @nombre_usuario, clave = @clave, nombre = @nombre, "
+                    + "nombre_usuario = @nombre_usuario, nombre = @nombre, "
                     + "apellido = @apellido, email = @email, habilitado = @habilitado where "
                     + "id_usuario = @id", SqlCon);
                     
@@ -190,7 +190,6 @@ namespace Data.Database
                     updateCom.Parameters.AddWithValue("@nombre", usuario.Nombre);
                     updateCom.Parameters.AddWithValue("@apellido", usuario.Apellido);
                     updateCom.Parameters.AddWithValue("@email", usuario.EMail);
-                    updateCom.Parameters.AddWithValue("@clave", usuario.Clave);
                     updateCom.Parameters.AddWithValue("@habilitado", usuario.Habilitado);
                     
                     updateCom.ExecuteNonQuery();
