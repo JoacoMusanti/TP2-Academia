@@ -52,8 +52,8 @@ namespace UI.Desktop
             this.txtNombre.Text = this.UsuarioActual.Nombre;
             this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
             this.txtEmail.Text = this.UsuarioActual.EMail;
-            this.txtClave.Text = this.UsuarioActual.Clave;
-            this.txtConfirmarClave.Text = this.UsuarioActual.Clave;
+            this.txtClave.Text = "";
+            this.txtConfirmarClave.Text = "";
 
             // Cambiamos el texto del boton aceptar segun corresponda
             // Si el formulario es para eliminar el usuario desactiva los textboxes
@@ -97,7 +97,7 @@ namespace UI.Desktop
             UsuarioActual.Apellido = this.txtApellido.Text;
             UsuarioActual.NombreUsuario = this.txtUsuario.Text;
             UsuarioActual.EMail = this.txtEmail.Text;
-            UsuarioActual.Clave = this.txtClave.Text;
+            UsuarioActual.Clave = Util.Hash.SHA256ConSal(this.txtClave.Text, null);
 
             UsuarioActual.Habilitado = this.chkHabilitado.Checked;
         }

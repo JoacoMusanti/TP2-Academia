@@ -129,7 +129,7 @@ namespace UI.Consola
                 Console.Write("\nIngrese nombre de usuario: ");
                 usuario.NombreUsuario = Console.ReadLine();
                 Console.Write("\nIngrese clave: ");
-                usuario.Clave = Console.ReadLine();
+                //usuario.Clave = Console.ReadLine();
                 Console.Write("\nIngrese email: ");
                 usuario.EMail = Console.ReadLine();
                 Console.Write("\nIngrese habilitacion de usuario (1-Si/otro-No): ");
@@ -166,7 +166,7 @@ namespace UI.Consola
             Console.Write("\nIngrese nombre de usuario: ");
             usuario.NombreUsuario = Console.ReadLine();
             Console.Write("\nIngrese clave: ");
-            usuario.Clave = Console.ReadLine();
+            //usuario.Clave = Console.ReadLine();
             Console.Write("\nIngrese email: ");
             usuario.EMail = Console.ReadLine();
             Console.Write("\nIngrese habilitacion de usuario (1-Si/otro-No): ");

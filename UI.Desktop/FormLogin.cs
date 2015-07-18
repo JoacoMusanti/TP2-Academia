@@ -27,7 +27,7 @@ namespace UI.Desktop
             try
             {
                 UsuarioActual = usr.GetOne(this.txtUsuario.Text);
-                if (this.txtPass.Text == UsuarioActual.Clave)
+                if (Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text))
                 {
                     this.DialogResult = DialogResult.OK;
                 }

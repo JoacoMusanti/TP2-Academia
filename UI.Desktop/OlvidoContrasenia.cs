@@ -34,7 +34,7 @@ namespace UI.Desktop
 
                 if (usr.NombreUsuario == txtUsuario.Text)
                 {
-                    EnviarMail(usr.EMail, usr.Clave);
+                    EnviarMail(usr.EMail, "1234");
                     this.Close();
                 }
             }

@@ -34,7 +34,7 @@ namespace Data.Database
 
                     usr.ID = (int)drUsuarios["id_usuario"];
                     usr.NombreUsuario = (string)drUsuarios["nombre_usuario"];
-                    usr.Clave = (string)drUsuarios["clave"];
+                    usr.Clave = (byte[])drUsuarios["clave"];
                     usr.Habilitado = (bool)drUsuarios["habilitado"];
                     usr.Nombre = (string)drUsuarios["nombre"];
                     usr.Apellido = (string)drUsuarios["apellido"];
@@ -84,7 +84,7 @@ namespace Data.Database
                 {
                     usr.ID = (int)drUsuario["id_usuario"];
                     usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
-                    usr.Clave = (string)drUsuario["clave"];
+                    usr.Clave = (byte[]) drUsuario["clave"];
                     usr.Habilitado = (bool)drUsuario["habilitado"];
                     usr.Nombre = (string)drUsuario["nombre"];
                     usr.Apellido = (string)drUsuario["apellido"];
@@ -249,7 +249,7 @@ namespace Data.Database
                 {
                     usr.ID = (int)drUsuario["id_usuario"];
                     usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
-                    usr.Clave = (string)drUsuario["clave"];
+                    usr.Clave = (byte[])drUsuario["clave"];
                     usr.Habilitado = (bool)drUsuario["habilitado"];
                     usr.Nombre = (string)drUsuario["nombre"];
                     usr.Apellido = (string)drUsuario["apellido"];
