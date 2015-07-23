@@ -12,11 +12,18 @@ namespace Util
         private const int _tamSal = 16;
 
         /// <summary>
-        /// Aplica la funcion hash a una cadena utilizando el algoritmo SHA256 agregando una sal
+        /// Aplica la funcion hash a una cadena utilizando el algoritmo SHA256
         /// </summary>
-        /// <param name="cadena"></param>
+        /// <param name="cadena">cadena a la que se le aplica el hash</param>
+        /// <param name="sal">cadena de bytes que constituyen la sal, puede ser null</param>
+        /// <returns>una cadena de bytes que consta del hash calculado con sha256 + sal</returns>
         public static byte[] SHA256ConSal(string cadena, byte[] sal)
         {
+            if (cadena == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             // Entrada es una cadena de bytes correspondiente con la cadena ingresada
             // la sal es una cadena generada de manera aleatoria que se concatena con la entrada
             // para evitar los ataques por diccionario
@@ -27,9 +34,11 @@ namespace Util
             {
                 sal = new byte[_tamSal];
                 // generamos la sal
-                RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+                using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                {
 
-                rng.GetNonZeroBytes(sal);
+                    rng.GetNonZeroBytes(sal);
+                }
             }
 
             byte[] entrada = Encoding.UTF8.GetBytes(cadena);
@@ -72,9 +81,9 @@ namespace Util
         /// <summary>
         /// Dado un hash y una cadena, determina si el hash puede ser obtenido utilizando la cadena dada
         /// </summary>
-        /// <param name="hash"></param>
-        /// <param name="cadena"></param>
-        /// <returns></returns>
+        /// <param name="hash">cadena de bytes a comparar</param>
+        /// <param name="cadena">cadena a la cual se le aplicara el hash para comparar</param>
+        /// <returns>true si la se puede obtener el hash con la cadena ingresada</returns>
         public static bool VerificarHash(byte[] hash, string cadena)
         {
             byte[] sal = new byte[_tamSal];
@@ -83,7 +92,7 @@ namespace Util
             // obtenemos la sal del hash (el hash consta del hash calculado con sha256 + sal)
             for (int i = 0; i < sal.Length; ++i)
             {
-                sal[i] = hash[SHA256Managed.Create().HashSize / 8 + i];
+                sal[i] = hash[SHA256.Create().HashSize / 8 + i];
             }
 
             // calculamos el hash con la cadena y la sal obtenida

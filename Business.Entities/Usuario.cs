@@ -15,6 +15,5 @@ namespace Business.Entities
       public string EMail { get; set; }
       public bool Habilitado { get; set; }
       public int CambiaClave { get; set; }
-      new public States State { get; set; }
     }
 }

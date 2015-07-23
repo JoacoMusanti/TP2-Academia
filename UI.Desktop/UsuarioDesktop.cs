@@ -93,6 +93,11 @@ namespace UI.Desktop
                 UsuarioActual.ID = int.Parse(this.txtID.Text);
                 UsuarioActual.State = BusinessEntity.States.Modified;
             }
+            if (Modo == ModoForm.Baja)
+            {
+                UsuarioActual.ID = int.Parse(txtID.Text);
+                UsuarioActual.State = BusinessEntity.States.Deleted;
+            }
 
             UsuarioActual.Nombre = this.txtNombre.Text;
             UsuarioActual.Apellido = this.txtApellido.Text;
@@ -146,6 +151,8 @@ namespace UI.Desktop
                 msgError += "El campo \"Usuario\" no puede estar vacio\n";
                 retorno = false;
             }
+            // las contraseñas se validan solo si estamos en modo Alta, ya que no se pueden modificar en modo Modificacion
+            // ni en modo Baja
             if (Modo == ModoForm.Alta)
             {
                 if (this.txtClave.Text != this.txtConfirmarClave.Text)

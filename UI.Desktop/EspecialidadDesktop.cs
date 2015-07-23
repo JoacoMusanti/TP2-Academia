@@ -73,6 +73,11 @@ namespace UI.Desktop
                 EspecialidadActual.ID = int.Parse(txtID.Text);
                 EspecialidadActual.State = BusinessEntity.States.Modified;
             }
+            if (Modo == ModoForm.Baja)
+            {
+                EspecialidadActual.ID = int.Parse(txtID.Text);
+                EspecialidadActual.State = BusinessEntity.States.Deleted;
+            }
 
             EspecialidadActual.Descripcion = txtDescripcion.Text;
         }

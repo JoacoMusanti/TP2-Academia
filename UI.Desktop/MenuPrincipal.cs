@@ -19,6 +19,8 @@ namespace UI.Desktop
 
         private void MenuPrincipal_OnLoad(object sender, EventArgs e)
         {
+            // mostramos el form de login, si los datos de login son correctos continua la ejecucion
+            // si no, se vuelve a mostrar el form de login
             FormLogin appLogin = new FormLogin();
             if (appLogin.ShowDialog() != DialogResult.OK)
             {

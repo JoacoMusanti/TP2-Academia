@@ -117,7 +117,7 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand cmdDelete = new SqlCommand("delete dbo.usuarios where id_usuario=@id", SqlCon);
 
@@ -132,7 +132,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
