@@ -6,51 +6,12 @@ using System.Threading.Tasks;
 
 namespace Business.Entities
 {
-    class Comision : BusinessEntity
-    {
+    public class Comision : BusinessEntity
+    { 
+        public string Descripcion { get; set; }
 
-        public int IdComision
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+        public int AnioEspecialidad { get; set; }
 
-        public string Descripcion
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int AnioEspecialidad
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Plan
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+        public int IdPlan { get; set; }
     }
 }
