@@ -10,11 +10,11 @@ namespace UI.Consola
 {
     public class Usuarios
     {
-        Business.Logic.UsuarioLogic UsuarioNegocio { get; set; }
+        Business.Logic.PersonaLogic UsuarioNegocio { get; set; }
 
         public Usuarios()
         {
-            UsuarioNegocio = new Business.Logic.UsuarioLogic();
+            UsuarioNegocio = new Business.Logic.PersonaLogic();
         }
 
         public void Menu()

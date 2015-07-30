@@ -4,24 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Entities;
-using Data.Database;
 
 namespace Business.Logic
 {
-    public class EspecialidadLogic : BusinessLogic
+    public class PersonaLogic:BusinessLogic
     {
-        private EspecialidadAdapter EspecialidadData { get; set; }
+        Data.Database.PersonaAdapter PersonaData {get; set; }
 
-        public EspecialidadLogic()
+        public PersonaLogic()
         {
-            EspecialidadData = new EspecialidadAdapter();
+            PersonaData = new Data.Database.PersonaAdapter();
         }
 
-        public Especialidad GetOne(int id)
+        public Persona GetOne(int ID)
         {
             try
             {
-                return EspecialidadData.GetOne(id);
+                return PersonaData.GetOne(ID);
             }
             catch (Exception e)
             {
@@ -30,11 +29,23 @@ namespace Business.Logic
             }
         }
 
-        public List<Especialidad> GetAll()
+        public Persona GetOne(string nameuser)
         {
             try
             {
-                return EspecialidadData.GetAll();
+                return PersonaData.GetOne(nameuser);
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
+        public List<Persona> GetAll()
+        {
+            try
+            {
+                return PersonaData.GetAll();
             }
             catch (Exception e)
             {
@@ -43,11 +54,11 @@ namespace Business.Logic
             }
         }
 
-        public void Save(Especialidad esp)
+        public void Save(Persona persona)
         {
             try
             {
-                EspecialidadData.Save(esp);
+                PersonaData.Save(persona);
             }
             catch (Exception e)
             {
@@ -56,11 +67,11 @@ namespace Business.Logic
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int ID)
         {
             try
             {
-                EspecialidadData.Delete(id);
+                PersonaData.Delete(ID);
             }
             catch (Exception e)
             {

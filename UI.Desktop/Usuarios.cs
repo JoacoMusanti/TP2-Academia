@@ -25,7 +25,7 @@ namespace UI.Desktop
 
         public void Listar()
         {
-            UsuarioLogic ul = new UsuarioLogic();
+            PersonaLogic ul = new PersonaLogic();
 
             try
             {
@@ -70,7 +70,7 @@ namespace UI.Desktop
         {
             if (dgvUsuarios.SelectedRows.Count == 1)
             {
-                int ID = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
 
                 UsuarioDesktop formUsuario = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 formUsuario.Text = "Modificar Usuario";
@@ -89,7 +89,7 @@ namespace UI.Desktop
         {
             if (dgvUsuarios.SelectedRows.Count == 1)
             {
-                int ID = ((Business.Entities.Usuario)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
 
                 UsuarioDesktop formUsuario = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
                 formUsuario.Text = "Eliminar Usuario";

@@ -27,11 +27,11 @@ namespace UI.Desktop
         public UsuarioDesktop(int ID, ModoForm modo): this()
         {
             Modo = modo;
-            UsuarioLogic usr = new UsuarioLogic();
+            PersonaLogic per = new PersonaLogic();
 
             try
             {
-                UsuarioActual = usr.GetOne(ID);
+                PersonaActual = per.GetOne(ID);
                 MapearDeDatos();
             }
             catch (Exception e)
@@ -41,17 +41,17 @@ namespace UI.Desktop
             }
         }
 
-        private Usuario UsuarioActual { get; set; }
+        private Persona PersonaActual { get; set; }
 
         protected override void MapearDeDatos() 
         {
             // Se copian los datos del usuario actual en los textboxes
-            this.txtID.Text = this.UsuarioActual.ID.ToString();
-            this.chkHabilitado.Checked = this.UsuarioActual.Habilitado;
-            this.txtApellido.Text = this.UsuarioActual.Apellido;
-            this.txtNombre.Text = this.UsuarioActual.Nombre;
-            this.txtUsuario.Text = this.UsuarioActual.NombreUsuario;
-            this.txtEmail.Text = this.UsuarioActual.EMail;
+            this.chkHabilitado.Checked = this.PersonaActual.UsuarioPersona.Habilitado;
+            this.txtUsuario.Text = this.PersonaActual.UsuarioPersona.NombreUsuario;
+            txtApellido.Text = PersonaActual.Apellido;
+            txtNombre.Text = PersonaActual.Nombre;
+            txtID.Text = PersonaActual.ID.ToString();
+            txtEmail.Text = PersonaActual.Email;
             
 
             // Cambiamos el texto del boton aceptar segun corresponda
@@ -83,40 +83,40 @@ namespace UI.Desktop
             // Si es una modificacion usamos el usuarioactual y cambiamos su estado a modified
             if (this.Modo == ModoForm.Alta)
             {
-                Usuario usr = new Usuario();
-                UsuarioActual = usr;
-                UsuarioActual.State = BusinessEntity.States.New;
+                Persona per = new Persona();
+                PersonaActual = per;
+                PersonaActual.State = BusinessEntity.States.New;
                 
             }
             if (this.Modo == ModoForm.Modificacion)
             {
-                UsuarioActual.ID = int.Parse(this.txtID.Text);
-                UsuarioActual.State = BusinessEntity.States.Modified;
+                PersonaActual.ID = int.Parse(this.txtID.Text);
+                PersonaActual.State = BusinessEntity.States.Modified;
             }
             if (Modo == ModoForm.Baja)
             {
-                UsuarioActual.ID = int.Parse(txtID.Text);
-                UsuarioActual.State = BusinessEntity.States.Deleted;
+                PersonaActual.ID = int.Parse(txtID.Text);
+                PersonaActual.State = BusinessEntity.States.Deleted;
             }
 
-            UsuarioActual.Nombre = this.txtNombre.Text;
-            UsuarioActual.Apellido = this.txtApellido.Text;
-            UsuarioActual.NombreUsuario = this.txtUsuario.Text;
-            UsuarioActual.EMail = this.txtEmail.Text;
-            UsuarioActual.Clave = Util.Hash.SHA256ConSal(this.txtClave.Text, null);
+            PersonaActual.Nombre = this.txtNombre.Text;
+            PersonaActual.Apellido = this.txtApellido.Text;
+            PersonaActual.UsuarioPersona.NombreUsuario = this.txtUsuario.Text;
+            PersonaActual.Email = this.txtEmail.Text;
+            PersonaActual.UsuarioPersona.Clave = Util.Hash.SHA256ConSal(this.txtClave.Text, null);
 
-            UsuarioActual.Habilitado = this.chkHabilitado.Checked;
+            PersonaActual.UsuarioPersona.Habilitado = this.chkHabilitado.Checked;
         }
 
         protected override void GuardarCambios()
         {
             MapearADatos();
 
-            UsuarioLogic usr = new UsuarioLogic();
+            PersonaLogic usr = new PersonaLogic();
 
             try
             {
-                usr.Save(UsuarioActual);
+                usr.Save(PersonaActual);
             }
             catch (Exception e)
             {

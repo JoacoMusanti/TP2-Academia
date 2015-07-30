@@ -30,11 +30,11 @@ namespace UI.Desktop
         {
             try
             {
-                Usuario usr = new UsuarioLogic().GetOne(txtUsuario.Text);
+                Persona per = new PersonaLogic().GetOne(txtUsuario.Text);
 
-                if (usr.NombreUsuario == txtUsuario.Text)
+                if (per.UsuarioPersona.NombreUsuario == txtUsuario.Text)
                 {
-                    EnviarMail(usr.EMail, "1234");
+                    EnviarMail(per.Email, "1234");
                     this.Close();
                 }
             }

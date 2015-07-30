@@ -14,7 +14,7 @@ namespace UI.Desktop
 {
     public partial class FormLogin : ApplicationForm
     {
-        private Usuario UsuarioActual { get; set; }
+        private Persona UsuarioActual { get; set; }
         public FormLogin()
         {
             InitializeComponent();
@@ -22,12 +22,12 @@ namespace UI.Desktop
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            UsuarioLogic usr = new UsuarioLogic();
+            PersonaLogic usr = new PersonaLogic();
 
             try
             {
                 UsuarioActual = usr.GetOne(this.txtUsuario.Text);
-                if (UsuarioActual.Clave != null && Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text))
+                if (UsuarioActual.UsuarioPersona.Clave != null && Util.Hash.VerificarHash(UsuarioActual.UsuarioPersona.Clave, txtPass.Text))
                 {
                     this.DialogResult = DialogResult.OK;
                 }
