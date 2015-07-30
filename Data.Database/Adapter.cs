@@ -19,8 +19,7 @@ namespace Data.Database
 
         protected void OpenConnection()
         {
-            //string conString = System.Configuration.ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;
-            string conString = "Data Source=ANDRÉS;Initial Catalog=Academia;Integrated Security=True";
+            string conString = System.Configuration.ConfigurationManager.ConnectionStrings[consKeyDefaultCnnString].ConnectionString;          
             SqlCon = new SqlConnection(conString);
             SqlCon.Open();
         }
