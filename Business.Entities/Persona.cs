@@ -7,7 +7,7 @@ namespace Business.Entities
 {
     
 
-    class Persona : BusinessEntity
+   public class Persona : BusinessEntity
     {
         public string Apellido { get; set; }
         public string Direccion { get; set; }
@@ -18,7 +18,7 @@ namespace Business.Entities
         public string Nombre { get; set; }
         public string Telefono { get; set; }
         public TipoPersonas TipoPersona { get; set; }
-
+        public Usuario UsuarioPersona { get; set; }
         public enum TipoPersonas
         {
             Administrativo,

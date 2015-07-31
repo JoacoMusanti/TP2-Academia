@@ -31,6 +31,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnEspecialidades = new System.Windows.Forms.Button();
+            this.btnComisiones = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,6 +42,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.btnUsuarios, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnEspecialidades, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnComisiones, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -69,6 +71,16 @@
             this.btnEspecialidades.UseVisualStyleBackColor = true;
             this.btnEspecialidades.Click += new System.EventHandler(this.btnEspecialidades_Click);
             // 
+            // btnComisiones
+            // 
+            this.btnComisiones.Location = new System.Drawing.Point(3, 150);
+            this.btnComisiones.Name = "btnComisiones";
+            this.btnComisiones.Size = new System.Drawing.Size(145, 23);
+            this.btnComisiones.TabIndex = 2;
+            this.btnComisiones.Text = "Administar comisiones";
+            this.btnComisiones.UseVisualStyleBackColor = true;
+            this.btnComisiones.Click += new System.EventHandler(this.btnComisiones_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -88,5 +100,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnEspecialidades;
+        private System.Windows.Forms.Button btnComisiones;
     }
 }
