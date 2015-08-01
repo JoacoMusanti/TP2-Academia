@@ -42,10 +42,10 @@ namespace Data.Database
                     per.Legajo = (int)drPersona["legajo"];
                     per.Telefono = (string)drPersona["telefono"];
                     per.TipoPersona = (Persona.TipoPersonas)drPersona["tipo_persona"];
-                    per.UsuarioPersona.Clave = (byte[])drPersona["clave"];
-                    per.UsuarioPersona.Habilitado = (bool)drPersona["habilitado"];
-                    per.UsuarioPersona.NombreUsuario = (string)drPersona["nombre_usuario"];
-                    per.UsuarioPersona.CambiaClave = (int)drPersona["cambia_clave"];
+                    per.Clave = (byte[])drPersona["clave"];
+                    per.Habilitado = (bool)drPersona["habilitado"];
+                    per.NombreUsuario = (string)drPersona["nombre_usuario"];
+                    per.CambiaClave = (int)drPersona["cambia_clave"];
                     
 
                     personas.Add(per);
@@ -100,10 +100,10 @@ namespace Data.Database
                     per.Legajo = (int)drPersona["legajo"];
                     per.Telefono = (string)drPersona["telefono"];
                     per.TipoPersona = (Persona.TipoPersonas)drPersona["tipo_persona"];
-                    per.UsuarioPersona.Clave = (byte[])drPersona["clave"];
-                    per.UsuarioPersona.Habilitado = (bool)drPersona["habilitado"];
-                    per.UsuarioPersona.NombreUsuario = (string)drPersona["nombre_usuario"];
-                    per.UsuarioPersona.CambiaClave = (int)drPersona["cambia_clave"];
+                    per.Clave = (byte[])drPersona["clave"];
+                    per.Habilitado = (bool)drPersona["habilitado"];
+                    per.NombreUsuario = (string)drPersona["nombre_usuario"];
+                    per.CambiaClave = (int)drPersona["cambia_clave"];
                 }
 
                 drPersona.Close();
@@ -161,7 +161,7 @@ namespace Data.Database
             {
                 this.OpenConnection();
 
-                SqlCommand com = new SqlCommand("insert into dbo.usuarios (nombre, apellido,email,direccion,fecha_nac,id_plan,legajo,telefono,tipo_persona, nombre_usuario, "
+                SqlCommand com = new SqlCommand("insert into dbo.personas (nombre, apellido,email,direccion,fecha_nac,id_plan,legajo,telefono,tipo_persona, nombre_usuario, "
                     + "clave, habilitado, cambia_clave) values (@nombre, @apellido,@email,@direccion,@fecha_nac,@id_plan,@legajo,@telefono,@tipo_persona, @nombre_usuario, "
                     + "@clave, @habilitado,@cambia_clave) select @@identity", SqlCon);
 
@@ -174,10 +174,10 @@ namespace Data.Database
                 com.Parameters.AddWithValue("@legajo", persona.Legajo);
                 com.Parameters.AddWithValue("@telefono", persona.Telefono);
                 com.Parameters.AddWithValue("@tipo_persona", persona.TipoPersona);
-                com.Parameters.AddWithValue("@nombre_usuario", persona.UsuarioPersona.NombreUsuario);
-                com.Parameters.AddWithValue("@clave", persona.UsuarioPersona.Clave);
-                com.Parameters.AddWithValue("@habilitado", persona.UsuarioPersona.Habilitado);
-                com.Parameters.AddWithValue("@cambia_clave", persona.UsuarioPersona.CambiaClave);
+                com.Parameters.AddWithValue("@nombre_usuario", persona.NombreUsuario);
+                com.Parameters.AddWithValue("@clave", persona.Clave);
+                com.Parameters.AddWithValue("@habilitado", persona.Habilitado);
+                com.Parameters.AddWithValue("@cambia_clave", persona.CambiaClave);
                 persona.ID = decimal.ToInt32((decimal) com.ExecuteScalar());
             }
             catch (Exception e)
@@ -214,10 +214,10 @@ namespace Data.Database
                 updateCom.Parameters.AddWithValue("@legajo", persona.Legajo);
                 updateCom.Parameters.AddWithValue("@telefono", persona.Telefono);
                 updateCom.Parameters.AddWithValue("@tipo_persona", persona.TipoPersona);
-                updateCom.Parameters.AddWithValue("@nombre_usuario", persona.UsuarioPersona.NombreUsuario);
-                updateCom.Parameters.AddWithValue("@clave", persona.UsuarioPersona.Clave);
-                updateCom.Parameters.AddWithValue("@habilitado", persona.UsuarioPersona.Habilitado);
-                updateCom.Parameters.AddWithValue("@cambia_clave", persona.UsuarioPersona.CambiaClave);
+                updateCom.Parameters.AddWithValue("@nombre_usuario", persona.NombreUsuario);
+                updateCom.Parameters.AddWithValue("@clave", persona.Clave);
+                updateCom.Parameters.AddWithValue("@habilitado", persona.Habilitado);
+                updateCom.Parameters.AddWithValue("@cambia_clave", persona.CambiaClave);
                 updateCom.Parameters.AddWithValue("@id", persona.ID);
 
                     
@@ -285,10 +285,10 @@ namespace Data.Database
                     per.Legajo = (int)drPersona["legajo"];
                     per.Telefono = (string)drPersona["telefono"];
                     per.TipoPersona = (Persona.TipoPersonas)drPersona["tipo_persona"];
-                    per.UsuarioPersona.Clave = (byte[])drPersona["clave"];
-                    per.UsuarioPersona.Habilitado = (bool)drPersona["habilitado"];
-                    per.UsuarioPersona.NombreUsuario = (string)drPersona["nombre_usuario"];
-                    per.UsuarioPersona.CambiaClave = (int)drPersona["cambia_clave"];
+                    per.Clave = (byte[])drPersona["clave"];
+                    per.Habilitado = (bool)drPersona["habilitado"];
+                    per.NombreUsuario = (string)drPersona["nombre_usuario"];
+                    per.CambiaClave = (int)drPersona["cambia_clave"];
                 }
 
                 drPersona.Close();

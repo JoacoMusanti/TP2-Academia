@@ -18,7 +18,12 @@ namespace Business.Entities
         public string Nombre { get; set; }
         public string Telefono { get; set; }
         public TipoPersonas TipoPersona { get; set; }
-        public Usuario UsuarioPersona { get; set; }
+
+        // Datos previamente del usuario ahora en persona
+        public string NombreUsuario { get; set; }
+        public byte[] Clave { get; set; }
+        public bool Habilitado { get; set; }
+        public int CambiaClave { get; set; }
         public enum TipoPersonas
         {
             Administrativo,

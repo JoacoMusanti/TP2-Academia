@@ -32,7 +32,7 @@ namespace UI.Desktop
             {
                 Persona per = new PersonaLogic().GetOne(txtUsuario.Text);
 
-                if (per.UsuarioPersona.NombreUsuario == txtUsuario.Text)
+                if (per.NombreUsuario == txtUsuario.Text)
                 {
                     EnviarMail(per.Email, "1234");
                     this.Close();
