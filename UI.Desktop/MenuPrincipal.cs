@@ -46,6 +46,10 @@ namespace UI.Desktop
             com.ShowDialog();
         }
 
-       
+        private void btnAdministrarPlanes_Click(object sender, EventArgs e)
+        {
+            Planes pl = new Planes();
+            pl.ShowDialog();
+        }
     }
 }

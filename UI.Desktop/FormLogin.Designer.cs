@@ -70,7 +70,7 @@
             this.btnIngresar.Location = new System.Drawing.Point(148, 184);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(121, 28);
-            this.btnIngresar.TabIndex = 3;
+            this.btnIngresar.TabIndex = 2;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
@@ -81,7 +81,7 @@
             this.lknOlvidaPass.Location = new System.Drawing.Point(13, 237);
             this.lknOlvidaPass.Name = "lknOlvidaPass";
             this.lknOlvidaPass.Size = new System.Drawing.Size(106, 13);
-            this.lknOlvidaPass.TabIndex = 4;
+            this.lknOlvidaPass.TabIndex = 3;
             this.lknOlvidaPass.TabStop = true;
             this.lknOlvidaPass.Text = "Olvidé mi contraseña";
             this.lknOlvidaPass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkOlvidaPass_LinkClicked);
@@ -91,7 +91,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(116, 93);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(153, 20);
-            this.txtUsuario.TabIndex = 5;
+            this.txtUsuario.TabIndex = 0;
             // 
             // txtPass
             // 
@@ -99,7 +99,7 @@
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(153, 20);
-            this.txtPass.TabIndex = 6;
+            this.txtPass.TabIndex = 1;
             // 
             // FormLogin
             // 

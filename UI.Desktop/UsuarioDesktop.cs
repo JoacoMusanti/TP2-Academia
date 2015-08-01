@@ -181,7 +181,11 @@ namespace UI.Desktop
 
             // no hace falta validar la fecha y el legajo aca ya que la validacion se realiza
             // en el metodo validar
-            PersonaActual.Legajo = int.Parse(txtLegajo.Text);
+            if (txtLegajo.TextLength > 0)
+            {
+                PersonaActual.Legajo = int.Parse(txtLegajo.Text);
+            }
+
             PersonaActual.Nombre = txtNombre.Text;
             PersonaActual.Apellido = txtApellido.Text;
             PersonaActual.NombreUsuario = txtUsuario.Text;
@@ -240,7 +244,16 @@ namespace UI.Desktop
                 msgError += "El campo \"Legajo\" debe ser un entero\n";
                 retorno = false;
             }
-            
+            if (cmbIdPlan.SelectedValue == null)
+            {
+                msgError += "Debe seleccionar un plan para la persona\n";
+                retorno = false;
+            }
+            if (cmbTipoPersona.SelectedValue == null)
+            {
+                msgError += "Debe seleccionar un tipo de persona\n";
+                retorno = false;
+            }
             // las contraseñas se validan solo si estamos en modo Alta, ya que no se pueden modificar en modo Modificacion
             // ni en modo Baja
             if (Modo == ModoForm.Alta)

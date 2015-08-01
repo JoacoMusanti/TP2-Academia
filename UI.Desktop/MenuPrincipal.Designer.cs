@@ -32,6 +32,7 @@
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnEspecialidades = new System.Windows.Forms.Button();
             this.btnComisiones = new System.Windows.Forms.Button();
+            this.btnAdministrarPlanes = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,6 +44,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnUsuarios, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnEspecialidades, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnComisiones, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnAdministrarPlanes, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -81,6 +83,16 @@
             this.btnComisiones.UseVisualStyleBackColor = true;
             this.btnComisiones.Click += new System.EventHandler(this.btnComisiones_Click);
             // 
+            // btnAdministrarPlanes
+            // 
+            this.btnAdministrarPlanes.Location = new System.Drawing.Point(186, 150);
+            this.btnAdministrarPlanes.Name = "btnAdministrarPlanes";
+            this.btnAdministrarPlanes.Size = new System.Drawing.Size(145, 23);
+            this.btnAdministrarPlanes.TabIndex = 3;
+            this.btnAdministrarPlanes.Text = "Administrar planes";
+            this.btnAdministrarPlanes.UseVisualStyleBackColor = true;
+            this.btnAdministrarPlanes.Click += new System.EventHandler(this.btnAdministrarPlanes_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -101,5 +113,6 @@
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnEspecialidades;
         private System.Windows.Forms.Button btnComisiones;
+        private System.Windows.Forms.Button btnAdministrarPlanes;
     }
 }
