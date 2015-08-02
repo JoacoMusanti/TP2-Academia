@@ -47,8 +47,10 @@ namespace UI.Desktop
         protected override void MapearDeDatos()
         {
             txtDescripcion.Text = comisionActual.Descripcion;
+            txtAnioDeEspecialidad.Text = comisionActual.AnioEspecialidad.ToString();
             txtID.Text = comisionActual.ID.ToString();
-
+            cbPlan.Text = "Elija una opcion...";
+            
             if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
             {
                 btnAceptar.Text = "Guardar";
@@ -56,6 +58,7 @@ namespace UI.Desktop
             else if (Modo == ModoForm.Baja)
             {
                 txtID.Enabled = false;
+                txtAnioDeEspecialidad.Enabled = false;
                 txtDescripcion.Enabled = false;
                 btnAceptar.Text = "Eliminar";
             }
@@ -156,6 +159,11 @@ namespace UI.Desktop
             // TODO: esta línea de código carga datos en la tabla 'academiaDataSet.planes' Puede moverla o quitarla según sea necesario.
             planesTableAdapter.Fill(academiaDataSet.planes);
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
