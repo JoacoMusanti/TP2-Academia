@@ -75,7 +75,7 @@ namespace UI.Desktop
 
             if (string.IsNullOrWhiteSpace(txtAnioDeEspecialidad.Text))
             {
-                error += "El campo de \"Año de especialidad\" no puede estar vacio";
+                error += "El campo de \"Año de especialidad\" no puede estar vacio\n";
                 retorno = false;
             }
 
