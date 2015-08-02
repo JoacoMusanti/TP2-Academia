@@ -154,7 +154,7 @@ namespace UI.Desktop
         private void ComisionDesktop_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'academiaDataSet.planes' Puede moverla o quitarla según sea necesario.
-            this.planesTableAdapter.Fill(this.academiaDataSet.planes);
+            planesTableAdapter.Fill(academiaDataSet.planes);
 
         }
     }

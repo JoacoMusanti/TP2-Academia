@@ -108,8 +108,8 @@ namespace UI.Desktop
         protected override void MapearDeDatos() 
         {
             // Se copian los datos del usuario actual en los textboxes
-            this.chkHabilitado.Checked = this.PersonaActual.Habilitado;
-            this.txtUsuario.Text = this.PersonaActual.NombreUsuario;
+            chkHabilitado.Checked = PersonaActual.Habilitado;
+            txtUsuario.Text = PersonaActual.NombreUsuario;
             txtApellido.Text = PersonaActual.Apellido;
             txtNombre.Text = PersonaActual.Nombre;
             txtID.Text = PersonaActual.ID.ToString();
@@ -128,22 +128,22 @@ namespace UI.Desktop
             cmbTipoPersona.SelectedIndex = cmbTipoPersona.FindStringExact(_tipoPersona[(int) PersonaActual.TipoPersona]);
             // Cambiamos el texto del boton aceptar segun corresponda
             // Si el formulario es para eliminar el usuario desactiva los textboxes
-            if (this.Modo == ModoForm.Alta || this.Modo == ModoForm.Modificacion)
+            if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
             {
-                this.btnAceptar.Text = "Guardar";
-                this.txtClave.Enabled = false;
-                this.txtConfirmarClave.Enabled = false;
+                btnAceptar.Text = "Guardar";
+                txtClave.Enabled = false;
+                txtConfirmarClave.Enabled = false;
             }
-            else if (this.Modo == ModoForm.Baja)
+            else if (Modo == ModoForm.Baja)
             {
-                this.txtID.Enabled = false;
-                this.chkHabilitado.Enabled = false;
-                this.txtApellido.Enabled = false;
-                this.txtNombre.Enabled = false;
-                this.txtUsuario.Enabled = false;
-                this.txtEmail.Enabled = false;
-                this.txtClave.Enabled = false;
-                this.txtConfirmarClave.Enabled = false;
+                txtID.Enabled = false;
+                chkHabilitado.Enabled = false;
+                txtApellido.Enabled = false;
+                txtNombre.Enabled = false;
+                txtUsuario.Enabled = false;
+                txtEmail.Enabled = false;
+                txtClave.Enabled = false;
+                txtConfirmarClave.Enabled = false;
                 txtDireccion.Enabled = false;
                 txtLegajo.Enabled = false;
                 txtTelefono.Enabled = false;
@@ -152,7 +152,7 @@ namespace UI.Desktop
                 cmbDia.Enabled = false;
                 cmbIdPlan.Enabled = false;
                 cmbTipoPersona.Enabled = false;
-                this.btnAceptar.Text = "Eliminar";
+                btnAceptar.Text = "Eliminar";
             }
          
         }
@@ -161,16 +161,16 @@ namespace UI.Desktop
         {
             // Si el modo del form es Alta, creamos un nuevo usuario con estado New
             // Si es una modificacion usamos el usuarioactual y cambiamos su estado a modified
-            if (this.Modo == ModoForm.Alta)
+            if (Modo == ModoForm.Alta)
             {
                 Persona per = new Persona();
                 PersonaActual = per;
                 PersonaActual.State = BusinessEntity.States.New;
                 
             }
-            if (this.Modo == ModoForm.Modificacion)
+            if (Modo == ModoForm.Modificacion)
             {
-                PersonaActual.ID = int.Parse(this.txtID.Text);
+                PersonaActual.ID = int.Parse(txtID.Text);
                 PersonaActual.State = BusinessEntity.States.Modified;
             }
             if (Modo == ModoForm.Baja)
@@ -194,10 +194,10 @@ namespace UI.Desktop
             PersonaActual.FechaNacimiento = fechaNac;
             PersonaActual.Direccion = txtDireccion.Text;
             PersonaActual.Telefono = txtTelefono.Text;
-            PersonaActual.Clave = Util.Hash.SHA256ConSal(this.txtClave.Text, null);
+            PersonaActual.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
             PersonaActual.IdPlan = (int)cmbIdPlan.SelectedValue;
             PersonaActual.TipoPersona = (Persona.TipoPersonas)cmbTipoPersona.SelectedValue;
-            PersonaActual.Habilitado = this.chkHabilitado.Checked;
+            PersonaActual.Habilitado = chkHabilitado.Checked;
         }
 
         protected override void GuardarCambios()
@@ -224,17 +224,17 @@ namespace UI.Desktop
             bool retorno = true;
             int temp;
             //if (Regex.Match(this.txtEmail.Text, "[A-Za-z0-9]@[A-Za-z0-9].[A-Za-z]")  )
-            if (this.txtNombre.TextLength == 0)
+            if (txtNombre.TextLength == 0)
             {
                 msgError += "El campo \"Nombre\" no puede estar vacio\n";
                 retorno = false;
             }
-            if (this.txtApellido.TextLength == 0)
+            if (txtApellido.TextLength == 0)
             {
                 msgError += "El campo \"Apellido\" no puede estar vacio\n";
                 retorno = false;
             }
-            if (this.txtUsuario.TextLength == 0)
+            if (txtUsuario.TextLength == 0)
             {
                 msgError += "El campo \"Usuario\" no puede estar vacio\n";
                 retorno = false;
@@ -258,12 +258,12 @@ namespace UI.Desktop
             // ni en modo Baja
             if (Modo == ModoForm.Alta)
             {
-                if (this.txtClave.Text != this.txtConfirmarClave.Text)
+                if (txtClave.Text != txtConfirmarClave.Text)
                 {
                     msgError += "Las claves no coinciden\n";
                     retorno = false;
                 }
-                if (this.txtClave.TextLength < 8)
+                if (txtClave.TextLength < 8)
                 {
                     msgError += "La clave no puede tener menos de 8 caracteres\n";
                     retorno = false;
@@ -280,25 +280,25 @@ namespace UI.Desktop
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (this.Modo == ModoForm.Alta || this.Modo == ModoForm.Modificacion)
+            if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
             {
                 if (Validar() == true)
                 {
                     GuardarCambios();
-                    this.Close();
+                    Close();
                 }
             }
-            else if (this.Modo == ModoForm.Baja)
+            else if (Modo == ModoForm.Baja)
             {
                 GuardarCambios();
-                this.Close();
+                Close();
             }
             
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void cmbAnio_SelectedIndexChanged(object sender, EventArgs e)

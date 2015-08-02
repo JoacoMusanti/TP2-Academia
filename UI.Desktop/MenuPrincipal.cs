@@ -24,7 +24,7 @@ namespace UI.Desktop
             FormLogin appLogin = new FormLogin();
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
-                this.Close();
+                Close();
             }
         }
 

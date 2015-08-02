@@ -22,7 +22,7 @@ namespace Data.Database
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas", SqlCon);
 
@@ -62,7 +62,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
                 
             }
             
@@ -81,7 +81,7 @@ namespace Data.Database
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where id_persona = @id", SqlCon);
                 cmdPersona.Parameters.AddWithValue("@id", ID);
@@ -117,7 +117,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
                 
             }
 
@@ -159,7 +159,7 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand com = new SqlCommand("insert into dbo.personas (nombre, apellido,email,direccion,fecha_nac,id_plan,legajo,telefono,tipo_persona, nombre_usuario, "
                     + "clave, habilitado, cambia_clave) values (@nombre, @apellido,@email,@direccion,@fecha_nac,@id_plan,@legajo,@telefono,@tipo_persona, @nombre_usuario, "
@@ -187,7 +187,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -199,7 +199,7 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
                 
                 SqlCommand updateCom = new SqlCommand("update dbo.personas set "
                     + "nombre = @nombre, apellido = @apellido, email = @email, direccion = @direccion,fecha_nac=@fecha_nac,id_plan=@id_plan,legajo=@legajo, telefono=@telefono,tipo_persona=@tipo_persona,"
@@ -230,7 +230,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
         
@@ -242,15 +242,15 @@ namespace Data.Database
         {
             if (persona.State == BusinessEntity.States.New)
             {
-                this.Insert(persona);
+                Insert(persona);
             }
             else if (persona.State == BusinessEntity.States.Deleted)
             {
-                this.Delete(persona.ID);
+                Delete(persona.ID);
             }
             else if (persona.State == BusinessEntity.States.Modified)
             {
-                this.Update(persona);
+                Update(persona);
             }
             persona.State = BusinessEntity.States.Unmodified;            
         }
@@ -266,7 +266,7 @@ namespace Data.Database
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where nombre_usuario = @nombreusuario", SqlCon);
                 cmdPersona.Parameters.AddWithValue("@nombreusuario", nameuser);
@@ -302,7 +302,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
 
             }
 

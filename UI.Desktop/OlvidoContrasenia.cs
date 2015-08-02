@@ -23,7 +23,7 @@ namespace UI.Desktop
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace UI.Desktop
                 if (per.NombreUsuario == txtUsuario.Text)
                 {
                     EnviarMail(per.Email, "1234");
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)

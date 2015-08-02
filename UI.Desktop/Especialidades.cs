@@ -62,7 +62,7 @@ namespace UI.Desktop
         {
             if (dgvEspecialidades.SelectedRows.Count == 1)
             {
-                int id = ((Business.Entities.Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+                int id = ((Business.Entities.Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
 
                 EspecialidadDesktop formEspecialidadDesktop = new EspecialidadDesktop(id, ApplicationForm.ModoForm.Modificacion);
                 formEspecialidadDesktop.Text = "Editar especialidad";
@@ -75,7 +75,7 @@ namespace UI.Desktop
         {
             if (dgvEspecialidades.SelectedRows.Count == 1)
             {
-                int id = ((Business.Entities.Especialidad)this.dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+                int id = ((Business.Entities.Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
 
                 EspecialidadDesktop formEspecialidadDesktop = new EspecialidadDesktop(id, ApplicationForm.ModoForm.Baja);
                 formEspecialidadDesktop.Text = "Eliminar especialidad";

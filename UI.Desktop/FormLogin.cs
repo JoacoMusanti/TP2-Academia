@@ -26,10 +26,10 @@ namespace UI.Desktop
 
             try
             {
-                UsuarioActual = usr.GetOne(this.txtUsuario.Text);
+                UsuarioActual = usr.GetOne(txtUsuario.Text);
                 if (UsuarioActual.Clave != null && Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text))
                 {
-                    this.DialogResult = DialogResult.OK;
+                    DialogResult = DialogResult.OK;
                 }
                 else
                 {

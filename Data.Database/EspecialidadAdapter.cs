@@ -22,7 +22,7 @@ namespace Data.Database
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand comEspecialidades = new SqlCommand("select * from especialidades", SqlCon);
 
@@ -47,7 +47,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
 
             return especialidades;
@@ -64,7 +64,7 @@ namespace Data.Database
 
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand comEspecialidad = new SqlCommand("select * from especialidades where id_especialidad = @id",
                     SqlCon);
@@ -87,7 +87,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
 
             return esp;
@@ -101,7 +101,7 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand deleteCom = new SqlCommand("delete especialidades where id_especialidad = @id", SqlCon);
 
@@ -116,7 +116,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -128,7 +128,7 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand insertCom =
                     new SqlCommand("insert into especialidades (desc_especialidad) values (@descripcion) " +
@@ -145,7 +145,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -157,7 +157,7 @@ namespace Data.Database
         {
             try
             {
-                this.OpenConnection();
+                OpenConnection();
 
                 SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion where " +
                                                       "id_especialidad = @id", SqlCon);
@@ -174,7 +174,7 @@ namespace Data.Database
             }
             finally
             {
-                this.CloseConnection();
+                CloseConnection();
             }
         }
 
@@ -186,15 +186,15 @@ namespace Data.Database
         {
             if (especialidad.State == BusinessEntity.States.New)
             {
-                this.Insert(especialidad);
+                Insert(especialidad);
             }
             else if (especialidad.State == BusinessEntity.States.Modified)
             {
-                this.Update(especialidad);
+                Update(especialidad);
             }
             else if (especialidad.State == BusinessEntity.States.Deleted)
             {
-                this.Delete(especialidad.ID);
+                Delete(especialidad.ID);
             }
 
             especialidad.State = BusinessEntity.States.Unmodified;

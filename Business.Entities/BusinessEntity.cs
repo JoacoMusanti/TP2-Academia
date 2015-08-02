@@ -33,7 +33,7 @@ namespace Business.Entities
 
         public BusinessEntity()
         {
-            this._state = States.New;
+            _state = States.New;
         }
 
     }

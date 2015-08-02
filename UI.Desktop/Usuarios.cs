@@ -58,7 +58,7 @@ namespace UI.Desktop
             UsuarioDesktop formUsuario = new UsuarioDesktop(ApplicationForm.ModoForm.Alta);
             formUsuario.Text = "Agregar Usuario";
             formUsuario.ShowDialog();
-            this.Listar();
+            Listar();
         }
 
         /// <summary>
@@ -70,14 +70,14 @@ namespace UI.Desktop
         {
             if (dgvUsuarios.SelectedRows.Count == 1)
             {
-                int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Business.Entities.Persona)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
 
                 UsuarioDesktop formUsuario = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Modificacion);
                 formUsuario.Text = "Modificar Usuario";
                 formUsuario.ShowDialog();
             }
 
-            this.Listar();
+            Listar();
         }
 
         /// <summary>
@@ -89,14 +89,14 @@ namespace UI.Desktop
         {
             if (dgvUsuarios.SelectedRows.Count == 1)
             {
-                int ID = ((Business.Entities.Persona)this.dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+                int ID = ((Business.Entities.Persona)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
 
                 UsuarioDesktop formUsuario = new UsuarioDesktop(ID, ApplicationForm.ModoForm.Baja);
                 formUsuario.Text = "Eliminar Usuario";
                 formUsuario.ShowDialog();
             }
 
-            this.Listar();
+            Listar();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
