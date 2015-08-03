@@ -148,7 +148,14 @@ namespace UI.Desktop
             }
             else if (Modo == ModoForm.Baja)
             {
-                GuardarCambios();
+                DialogResult resultado = Notificar("Al eliminar un plan se eliminaran todas las personas "
+                    + "que pertenezcan al plan! \nDesea continuar?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    GuardarCambios();
+                }
+                
                 Close();
             }
         }

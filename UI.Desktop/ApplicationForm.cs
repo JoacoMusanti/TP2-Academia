@@ -66,14 +66,14 @@ namespace UI.Desktop
         /// <param name="mensaje"></param>
         /// <param name="botones"></param>
         /// <param name="icono"></param>
-        public void Notificar (string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
+        public DialogResult Notificar (string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
-            MessageBox.Show(mensaje, titulo, botones, icono);
+            return MessageBox.Show(mensaje, titulo, botones, icono);
         }
 
-        public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
+        public DialogResult Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
         {
-            Notificar(Text, mensaje, botones, icono);
+            return Notificar(Text, mensaje, botones, icono);
         }
 
     }

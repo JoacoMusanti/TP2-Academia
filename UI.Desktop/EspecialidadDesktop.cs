@@ -130,7 +130,13 @@ namespace UI.Desktop
             }
             else if (Modo == ModoForm.Baja)
             {
-                GuardarCambios();
+                DialogResult resultado = Notificar("Al eliminar una especialidad se eliminaran todos los planes "
+                    + "y las personas que pertenezcan a la especialidad! \nDesea continuar?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    GuardarCambios();
+                }
                 Close();
             }
         }
