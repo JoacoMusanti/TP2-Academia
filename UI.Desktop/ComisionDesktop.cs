@@ -50,7 +50,7 @@ namespace UI.Desktop
             txtDescripcion.Text = comisionActual.Descripcion;
             txtAnioDeEspecialidad.Text = comisionActual.AnioEspecialidad.ToString();
             txtID.Text = comisionActual.ID.ToString();
-            //cbPlan.Text = "Elija una opcion...";
+            cbPlan.SelectedValue = comisionActual.IdPlan;
             
             if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
             {
@@ -61,6 +61,7 @@ namespace UI.Desktop
                 txtID.Enabled = false;
                 txtAnioDeEspecialidad.Enabled = false;
                 txtDescripcion.Enabled = false;
+                cbPlan.Enabled = false;
                 btnAceptar.Text = "Eliminar";
             }
         }
@@ -159,7 +160,6 @@ namespace UI.Desktop
         {
             PlanLogic planLogic = new PlanLogic();
             List<Plan> _planes = planLogic.GetAll();
-
             cbPlan.DataSource = _planes;
             cbPlan.ValueMember = "ID";
             cbPlan.DisplayMember = "Descripcion";
