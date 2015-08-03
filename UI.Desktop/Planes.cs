@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business.Entities;
 using Business.Logic;
 
 namespace UI.Desktop
@@ -53,17 +54,36 @@ namespace UI.Desktop
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            PlanDesktop formPlanesDesktop = new PlanDesktop(ApplicationForm.ModoForm.Alta);
+            formPlanesDesktop.Text = "Agregar Plan";
+            formPlanesDesktop.ShowDialog();
+            Listar();
         }
 
         private void tsbEditar_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (dgvPlanes.SelectedRows.Count == 1)
+            {
+                int id = ((Business.Entities.Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+
+                PlanDesktop formPlanDesktop = new PlanDesktop(id, ApplicationForm.ModoForm.Modificacion);
+                formPlanDesktop.Text = "Editar Plan";
+                formPlanDesktop.ShowDialog();
+                Listar();
+            }
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (dgvPlanes.SelectedRows.Count == 1)
+            {
+                int id = ((Business.Entities.Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+
+                PlanDesktop formplanDesktop = new PlanDesktop(id, ApplicationForm.ModoForm.Baja);
+                formplanDesktop.Text = "Eliminar Plan";
+                formplanDesktop.ShowDialog();
+                Listar();
+            }
         }
     }
 }
