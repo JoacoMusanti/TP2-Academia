@@ -281,6 +281,8 @@ namespace UI.Desktop {
             
             private global::System.Data.DataColumn columnid_plan;
             
+            private global::System.Data.DataColumn columndesc_plan;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public planesDataTable() {
@@ -324,6 +326,14 @@ namespace UI.Desktop {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn desc_planColumn {
+                get {
+                    return this.columndesc_plan;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -359,10 +369,11 @@ namespace UI.Desktop {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public planesRow AddplanesRow() {
+            public planesRow AddplanesRow(string desc_plan) {
                 planesRow rowplanesRow = ((planesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null};
+                        null,
+                        desc_plan};
                 rowplanesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowplanesRow);
                 return rowplanesRow;
@@ -393,6 +404,7 @@ namespace UI.Desktop {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnid_plan = base.Columns["id_plan"];
+                this.columndesc_plan = base.Columns["desc_plan"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -400,6 +412,8 @@ namespace UI.Desktop {
             private void InitClass() {
                 this.columnid_plan = new global::System.Data.DataColumn("id_plan", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_plan);
+                this.columndesc_plan = new global::System.Data.DataColumn("desc_plan", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndesc_plan);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid_plan}, true));
                 this.columnid_plan.AutoIncrement = true;
@@ -408,6 +422,7 @@ namespace UI.Desktop {
                 this.columnid_plan.AllowDBNull = false;
                 this.columnid_plan.ReadOnly = true;
                 this.columnid_plan.Unique = true;
+                this.columndesc_plan.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -556,6 +571,17 @@ namespace UI.Desktop {
                 }
                 set {
                     this[this.tableplanes.id_planColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string desc_plan {
+                get {
+                    return ((string)(this[this.tableplanes.desc_planColumn]));
+                }
+                set {
+                    this[this.tableplanes.desc_planColumn] = value;
                 }
             }
         }
@@ -720,12 +746,15 @@ namespace UI.Desktop.AcademiaDataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "planes";
             tableMapping.ColumnMappings.Add("id_plan", "id_plan");
+            tableMapping.ColumnMappings.Add("desc_plan", "desc_plan");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[planes] WHERE (([id_plan] = @Original_id_plan))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[planes] WHERE (([id_plan] = @Original_id_plan) AND ([desc_plan" +
+                "] = @Original_desc_plan))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id_plan", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id_plan", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_desc_plan", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "desc_plan", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -741,7 +770,7 @@ namespace UI.Desktop.AcademiaDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id_plan FROM dbo.planes";
+            this._commandCollection[0].CommandText = "SELECT id_plan,desc_plan FROM dbo.planes";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -802,8 +831,14 @@ namespace UI.Desktop.AcademiaDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id_plan) {
+        public virtual int Delete(int Original_id_plan, string Original_desc_plan) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id_plan));
+            if ((Original_desc_plan == null)) {
+                throw new global::System.ArgumentNullException("Original_desc_plan");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_desc_plan));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

@@ -1,6 +1,7 @@
-﻿namespace UI.Desktop
-{
+﻿namespace UI.Desktop {
+    
+    
+    public partial class AcademiaDataSet {
+    }
 }
-namespace UI.Desktop
-{
-}
+

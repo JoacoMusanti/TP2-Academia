@@ -164,9 +164,8 @@
             // 
             this.cbPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.cbPlan, 2);
-            this.cbPlan.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.planesBindingSource, "id_plan", true));
             this.cbPlan.DataSource = this.planesBindingSource;
-            this.cbPlan.DisplayMember = "id_plan";
+            this.cbPlan.DisplayMember = "desc_plan";
             this.cbPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlan.FormattingEnabled = true;
             this.cbPlan.Location = new System.Drawing.Point(146, 164);
@@ -194,6 +193,7 @@
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // comisionBindingSource
             // 
