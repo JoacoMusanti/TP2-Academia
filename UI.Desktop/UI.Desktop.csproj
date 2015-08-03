@@ -47,15 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcademiaDataSet.cs">
-      <DependentUpon>AcademiaDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AcademiaDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AcademiaDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ApplicationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,17 +162,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="AcademiaDataSet.xsc">
-      <DependentUpon>AcademiaDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="AcademiaDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>AcademiaDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="AcademiaDataSet.xss">
-      <DependentUpon>AcademiaDataSet.xsd</DependentUpon>
-    </None>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>

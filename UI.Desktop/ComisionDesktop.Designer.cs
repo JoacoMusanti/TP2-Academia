@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.txtAnioDeEspecialidad = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
@@ -39,15 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cbPlan = new System.Windows.Forms.ComboBox();
-            this.planesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.academiaDataSet = new UI.Desktop.AcademiaDataSet();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.comisionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.planesTableAdapter = new UI.Desktop.AcademiaDataSetTableAdapters.planesTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.planesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.academiaDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comisionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtAnioDeEspecialidad
@@ -164,8 +156,6 @@
             // 
             this.cbPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.cbPlan, 2);
-            this.cbPlan.DataSource = this.planesBindingSource;
-            this.cbPlan.DisplayMember = "desc_plan";
             this.cbPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlan.FormattingEnabled = true;
             this.cbPlan.Location = new System.Drawing.Point(146, 164);
@@ -173,16 +163,6 @@
             this.cbPlan.Size = new System.Drawing.Size(281, 21);
             this.cbPlan.TabIndex = 9;
             this.cbPlan.ValueMember = "id_plan";
-            // 
-            // planesBindingSource
-            // 
-            this.planesBindingSource.DataMember = "planes";
-            this.planesBindingSource.DataSource = this.academiaDataSet;
-            // 
-            // academiaDataSet
-            // 
-            this.academiaDataSet.DataSetName = "AcademiaDataSet";
-            this.academiaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnCancelar
             // 
@@ -195,14 +175,6 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // comisionBindingSource
-            // 
-            this.comisionBindingSource.DataSource = typeof(Business.Entities.Comision);
-            // 
-            // planesTableAdapter
-            // 
-            this.planesTableAdapter.ClearBeforeFill = true;
-            // 
             // ComisionDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,13 +182,9 @@
             this.ClientSize = new System.Drawing.Size(430, 236);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ComisionDesktop";
-            this.Text = "ComisionDesktop";
-            this.Load += new System.EventHandler(this.ComisionDesktop_Load);
+            this.Text = "ComisionDesktop";          
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.planesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.academiaDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comisionBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,10 +202,6 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.BindingSource comisionBindingSource;
-        private AcademiaDataSet academiaDataSet;
-        private System.Windows.Forms.BindingSource planesBindingSource;
-        private AcademiaDataSetTableAdapters.planesTableAdapter planesTableAdapter;
         private System.Windows.Forms.ComboBox cbPlan;
 
 

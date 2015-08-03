@@ -17,6 +17,7 @@ namespace UI.Desktop
         public ComisionDesktop()
         {
             InitializeComponent();
+            CargarPlanes();
         }
 
         public ComisionDesktop(ModoForm modo) : this()
@@ -49,7 +50,7 @@ namespace UI.Desktop
             txtDescripcion.Text = comisionActual.Descripcion;
             txtAnioDeEspecialidad.Text = comisionActual.AnioEspecialidad.ToString();
             txtID.Text = comisionActual.ID.ToString();
-            cbPlan.Text = "Elija una opcion...";
+            //cbPlan.Text = "Elija una opcion...";
             
             if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
             {
@@ -154,11 +155,14 @@ namespace UI.Desktop
             }
         }
 
-        private void ComisionDesktop_Load(object sender, EventArgs e)
+        private void CargarPlanes()
         {
-            // TODO: esta línea de código carga datos en la tabla 'academiaDataSet.planes' Puede moverla o quitarla según sea necesario.
-            planesTableAdapter.Fill(academiaDataSet.planes);
+            PlanLogic planLogic = new PlanLogic();
+            List<Plan> _planes = planLogic.GetAll();
 
+            cbPlan.DataSource = _planes;
+            cbPlan.ValueMember = "ID";
+            cbPlan.DisplayMember = "Descripcion";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
