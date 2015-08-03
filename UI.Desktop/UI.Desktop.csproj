@@ -104,6 +104,10 @@
     <Compile Include="OlvidoContrasenia.Designer.cs">
       <DependentUpon>OlvidoContrasenia.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlanDesktop.cs" />
+    <Compile Include="PlanDesktop.Designer.cs">
+      <DependentUpon>PlanDesktop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Planes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OlvidoContrasenia.resx">
       <DependentUpon>OlvidoContrasenia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlanDesktop.resx">
+      <DependentUpon>PlanDesktop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Planes.resx">
       <DependentUpon>Planes.cs</DependentUpon>
