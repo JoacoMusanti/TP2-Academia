@@ -14,10 +14,26 @@ namespace UI.Desktop
 {
     public partial class ComisionDesktop : ApplicationForm
     {
+        private List<Plan> _planes;
+
+
         public ComisionDesktop()
         {
             InitializeComponent();
+            PlanLogic planLogic = new PlanLogic();
+            _planes = planLogic.GetAll();
+            CargarEspecialidades();
             CargarPlanes();
+        }
+
+        private void CargarEspecialidades()
+        {
+            EspecialidadLogic especialidadLogic = new EspecialidadLogic();
+            List<Especialidad> _especialidades = especialidadLogic.GetAll();
+
+            cbEspecialidad.DataSource = _especialidades;
+            cbEspecialidad.ValueMember = "ID";
+            cbEspecialidad.DisplayMember = "Descripcion";
         }
 
         public ComisionDesktop(ModoForm modo) : this()
@@ -158,9 +174,9 @@ namespace UI.Desktop
 
         private void CargarPlanes()
         {
-            PlanLogic planLogic = new PlanLogic();
-            List<Plan> _planes = planLogic.GetAll();
-            cbPlan.DataSource = _planes;
+            List<Plan> planesCombo = _planes.FindAll(x => x.IdEspecialidad == (int)cbEspecialidad.SelectedValue);
+
+            cbPlan.DataSource = planesCombo;
             cbPlan.ValueMember = "ID";
             cbPlan.DisplayMember = "Descripcion";
         }
@@ -168,6 +184,11 @@ namespace UI.Desktop
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void cbEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarPlanes();
         }
     }
 }
