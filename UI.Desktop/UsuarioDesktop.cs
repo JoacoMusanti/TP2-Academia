@@ -14,12 +14,33 @@ namespace UI.Desktop
 {
     public partial class UsuarioDesktop : ApplicationForm
     {
+        private List<Especialidad> _especialidades;
+        private Dictionary<int, string> _meses;
+        private Dictionary<int, string> _tipoPersona;
+        private List<Plan> _planes;
+
         public UsuarioDesktop()
         {
             InitializeComponent();
             CargarFechas();
+
+            PlanLogic planLogic = new PlanLogic();
+            _planes = planLogic.GetAll();
+
+            CargarEspecialidades();
             CargarPlanes();
             CargarTiposPersonas();
+        }
+
+        private void CargarEspecialidades()
+        {
+            EspecialidadLogic especialidadLogic = new EspecialidadLogic();
+            _especialidades = especialidadLogic.GetAll();
+
+            cbEspecialidad.ValueMember = "ID";
+            cbEspecialidad.DisplayMember = "Descripcion";
+            cbEspecialidad.DataSource = _especialidades;
+            
         }
 
         private void CargarTiposPersonas()
@@ -35,10 +56,9 @@ namespace UI.Desktop
 
         private void CargarPlanes()
         {
-            PlanLogic planLogic = new PlanLogic();
-            List<Plan> _planes = planLogic.GetAll();
+            List<Plan> planesCombo = _planes.FindAll(x => x.IdEspecialidad == (int)cbEspecialidad.SelectedValue);
 
-            cmbIdPlan.DataSource = _planes;
+            cmbIdPlan.DataSource = planesCombo;
             cmbIdPlan.ValueMember = "ID";
             cmbIdPlan.DisplayMember = "Descripcion";
         }
@@ -48,8 +68,7 @@ namespace UI.Desktop
             Modo = modo;  
         }
 
-        private Dictionary<int, string> _meses;
-        private Dictionary<int, string> _tipoPersona;
+
 
         private void CargarFechas()
         {
@@ -124,6 +143,9 @@ namespace UI.Desktop
             cmbAnio.SelectedIndex = cmbAnio.FindStringExact(PersonaActual.FechaNacimiento.Year.ToString());
             cmbMes.SelectedIndex = cmbMes.FindStringExact(_meses[PersonaActual.FechaNacimiento.Month]);
             cmbDia.SelectedIndex = cmbDia.FindStringExact(PersonaActual.FechaNacimiento.Day.ToString());
+            // buscamos el plan al que pertenece la persona y luego la especialidad que tiene ese plan
+            Plan p = _planes.Find(x => x.ID == PersonaActual.IdPlan);
+            cbEspecialidad.SelectedValue = _especialidades.Find(y => y.ID == p.IdEspecialidad).ID;
             cmbIdPlan.SelectedValue = PersonaActual.IdPlan;
             cmbTipoPersona.SelectedIndex = cmbTipoPersona.FindStringExact(_tipoPersona[(int) PersonaActual.TipoPersona]);
             // Cambiamos el texto del boton aceptar segun corresponda
@@ -332,6 +354,11 @@ namespace UI.Desktop
 
                 cmbDia.DataSource = dias;
             }
+        }
+
+        private void cbEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarPlanes();
         }
     }
 }

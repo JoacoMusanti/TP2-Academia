@@ -15,7 +15,7 @@ namespace UI.Desktop
     public partial class ComisionDesktop : ApplicationForm
     {
         private List<Plan> _planes;
-
+        private List<Especialidad> _especialidades;
 
         public ComisionDesktop()
         {
@@ -29,11 +29,12 @@ namespace UI.Desktop
         private void CargarEspecialidades()
         {
             EspecialidadLogic especialidadLogic = new EspecialidadLogic();
-            List<Especialidad> _especialidades = especialidadLogic.GetAll();
+            _especialidades = especialidadLogic.GetAll();
 
-            cbEspecialidad.DataSource = _especialidades;
             cbEspecialidad.ValueMember = "ID";
             cbEspecialidad.DisplayMember = "Descripcion";
+            cbEspecialidad.DataSource = _especialidades;
+            
         }
 
         public ComisionDesktop(ModoForm modo) : this()
@@ -66,6 +67,9 @@ namespace UI.Desktop
             txtDescripcion.Text = comisionActual.Descripcion;
             txtAnioDeEspecialidad.Text = comisionActual.AnioEspecialidad.ToString();
             txtID.Text = comisionActual.ID.ToString();
+            // buscamos el plan de esta comision y luego buscamos la especialidad que tenga ese plan
+            Plan p = _planes.Find(x => x.ID == comisionActual.IdPlan);
+            cbEspecialidad.SelectedValue = _especialidades.Find(y => y.ID == p.IdEspecialidad).ID;
             cbPlan.SelectedValue = comisionActual.IdPlan;
             
             if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
