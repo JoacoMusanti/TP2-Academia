@@ -116,7 +116,7 @@ namespace UI.Desktop
             string msgError = "";
             bool retorno = true;
                
-            if (txtDescPlan.TextLength == 0)
+            if (string.IsNullOrWhiteSpace(txtDescPlan.Text))
             {
                 msgError += "El campo \"Descripcion\" no puede estar vacio\n";
                 retorno = false;

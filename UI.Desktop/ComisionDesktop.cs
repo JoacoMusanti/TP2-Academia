@@ -82,6 +82,7 @@ namespace UI.Desktop
                 txtAnioDeEspecialidad.Enabled = false;
                 txtDescripcion.Enabled = false;
                 cbPlan.Enabled = false;
+                cbEspecialidad.Enabled = false;
                 btnAceptar.Text = "Eliminar";
             }
         }
@@ -91,6 +92,7 @@ namespace UI.Desktop
         {
             string error = "";
             bool retorno = true;
+            int temp;
 
             if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
@@ -103,7 +105,11 @@ namespace UI.Desktop
                 error += "El campo de \"Año de especialidad\" no puede estar vacio\n";
                 retorno = false;
             }
-
+            if (int.TryParse(txtAnioDeEspecialidad.Text, out temp) == false || (temp > 5 || temp < 1))
+            {
+                error += "El campo \"Año especialidad\" debe contener un numero entero entre 1 y 5";
+                retorno = false;
+            }
             if (cbPlan.SelectedItem == null)
             {
                 error += "Debe seleccionar un plan, el campo no puede estar vacío";

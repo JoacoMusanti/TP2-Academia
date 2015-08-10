@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cmbMes = new System.Windows.Forms.ComboBox();
+            this.cbMes = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,10 +54,10 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
-            this.cmbTipoPersona = new System.Windows.Forms.ComboBox();
-            this.cmbIdPlan = new System.Windows.Forms.ComboBox();
-            this.cmbAnio = new System.Windows.Forms.ComboBox();
-            this.cmbDia = new System.Windows.Forms.ComboBox();
+            this.cbTipoPersona = new System.Windows.Forms.ComboBox();
+            this.cbIdPlan = new System.Windows.Forms.ComboBox();
+            this.cbAnio = new System.Windows.Forms.ComboBox();
+            this.cbDia = new System.Windows.Forms.ComboBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -73,7 +73,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.cmbMes, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.cbMes, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
@@ -98,10 +98,10 @@
             this.tableLayoutPanel1.Controls.Add(this.label13, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.txtTelefono, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.txtDireccion, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.cmbTipoPersona, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.cmbIdPlan, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.cmbAnio, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.cmbDia, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.cbTipoPersona, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.cbIdPlan, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.cbAnio, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.cbDia, 3, 5);
             this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 3, 15);
             this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 2, 15);
             this.tableLayoutPanel1.Controls.Add(this.label14, 0, 9);
@@ -130,14 +130,14 @@
             // 
             // cmbMes
             // 
-            this.cmbMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMes.FormattingEnabled = true;
-            this.cmbMes.Location = new System.Drawing.Point(197, 133);
-            this.cmbMes.Name = "cmbMes";
-            this.cmbMes.Size = new System.Drawing.Size(91, 21);
-            this.cmbMes.TabIndex = 5;
-            this.cmbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
+            this.cbMes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMes.FormattingEnabled = true;
+            this.cbMes.Location = new System.Drawing.Point(197, 133);
+            this.cbMes.Name = "cmbMes";
+            this.cbMes.Size = new System.Drawing.Size(91, 21);
+            this.cbMes.TabIndex = 5;
+            this.cbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -375,46 +375,46 @@
             // 
             // cmbTipoPersona
             // 
-            this.cmbTipoPersona.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.cmbTipoPersona, 3);
-            this.cmbTipoPersona.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoPersona.FormattingEnabled = true;
-            this.cmbTipoPersona.Location = new System.Drawing.Point(100, 212);
-            this.cmbTipoPersona.Name = "cmbTipoPersona";
-            this.cmbTipoPersona.Size = new System.Drawing.Size(287, 21);
-            this.cmbTipoPersona.TabIndex = 9;
+            this.cbTipoPersona.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.cbTipoPersona, 3);
+            this.cbTipoPersona.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoPersona.FormattingEnabled = true;
+            this.cbTipoPersona.Location = new System.Drawing.Point(100, 212);
+            this.cbTipoPersona.Name = "cmbTipoPersona";
+            this.cbTipoPersona.Size = new System.Drawing.Size(287, 21);
+            this.cbTipoPersona.TabIndex = 9;
             // 
             // cmbIdPlan
             // 
-            this.cmbIdPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.cmbIdPlan, 3);
-            this.cmbIdPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbIdPlan.FormattingEnabled = true;
-            this.cmbIdPlan.Location = new System.Drawing.Point(100, 266);
-            this.cmbIdPlan.Name = "cmbIdPlan";
-            this.cmbIdPlan.Size = new System.Drawing.Size(287, 21);
-            this.cmbIdPlan.TabIndex = 10;
+            this.cbIdPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.cbIdPlan, 3);
+            this.cbIdPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbIdPlan.FormattingEnabled = true;
+            this.cbIdPlan.Location = new System.Drawing.Point(100, 266);
+            this.cbIdPlan.Name = "cmbIdPlan";
+            this.cbIdPlan.Size = new System.Drawing.Size(287, 21);
+            this.cbIdPlan.TabIndex = 10;
             // 
             // cmbAnio
             // 
-            this.cmbAnio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAnio.FormattingEnabled = true;
-            this.cmbAnio.Location = new System.Drawing.Point(100, 133);
-            this.cmbAnio.Name = "cmbAnio";
-            this.cmbAnio.Size = new System.Drawing.Size(91, 21);
-            this.cmbAnio.TabIndex = 4;
-            this.cmbAnio.SelectedIndexChanged += new System.EventHandler(this.cmbAnio_SelectedIndexChanged);
+            this.cbAnio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAnio.FormattingEnabled = true;
+            this.cbAnio.Location = new System.Drawing.Point(100, 133);
+            this.cbAnio.Name = "cmbAnio";
+            this.cbAnio.Size = new System.Drawing.Size(91, 21);
+            this.cbAnio.TabIndex = 4;
+            this.cbAnio.SelectedIndexChanged += new System.EventHandler(this.cmbAnio_SelectedIndexChanged);
             // 
             // cmbDia
             // 
-            this.cmbDia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDia.FormattingEnabled = true;
-            this.cmbDia.Location = new System.Drawing.Point(294, 133);
-            this.cmbDia.Name = "cmbDia";
-            this.cmbDia.Size = new System.Drawing.Size(93, 21);
-            this.cmbDia.TabIndex = 6;
+            this.cbDia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbDia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDia.FormattingEnabled = true;
+            this.cbDia.Location = new System.Drawing.Point(294, 133);
+            this.cbDia.Name = "cmbDia";
+            this.cbDia.Size = new System.Drawing.Size(93, 21);
+            this.cbDia.TabIndex = 6;
             // 
             // btnAceptar
             // 
@@ -457,7 +457,7 @@
             this.cbEspecialidad.Location = new System.Drawing.Point(100, 239);
             this.cbEspecialidad.Name = "cbEspecialidad";
             this.cbEspecialidad.Size = new System.Drawing.Size(287, 21);
-            this.cbEspecialidad.TabIndex = 27;
+            this.cbEspecialidad.TabIndex = 15;
             this.cbEspecialidad.SelectedIndexChanged += new System.EventHandler(this.cbEspecialidad_SelectedIndexChanged);
             // 
             // UsuarioDesktop
@@ -503,11 +503,11 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtDireccion;
-        private System.Windows.Forms.ComboBox cmbTipoPersona;
-        private System.Windows.Forms.ComboBox cmbIdPlan;
-        private System.Windows.Forms.ComboBox cmbMes;
-        private System.Windows.Forms.ComboBox cmbAnio;
-        private System.Windows.Forms.ComboBox cmbDia;
+        private System.Windows.Forms.ComboBox cbTipoPersona;
+        private System.Windows.Forms.ComboBox cbIdPlan;
+        private System.Windows.Forms.ComboBox cbMes;
+        private System.Windows.Forms.ComboBox cbAnio;
+        private System.Windows.Forms.ComboBox cbDia;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cbEspecialidad;
     }

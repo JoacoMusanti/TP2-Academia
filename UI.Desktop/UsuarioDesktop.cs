@@ -49,18 +49,18 @@ namespace UI.Desktop
             _tipoPersona.Add(0, "Administrativo");
             _tipoPersona.Add(1, "Docente");
             _tipoPersona.Add(2, "Alumno");
-            cmbTipoPersona.DataSource = new BindingSource(_tipoPersona, null);
-            cmbTipoPersona.DisplayMember = "Value";
-            cmbTipoPersona.ValueMember = "Key";
+            cbTipoPersona.DataSource = new BindingSource(_tipoPersona, null);
+            cbTipoPersona.DisplayMember = "Value";
+            cbTipoPersona.ValueMember = "Key";
         }
 
         private void CargarPlanes()
         {
             List<Plan> planesCombo = _planes.FindAll(x => x.IdEspecialidad == (int)cbEspecialidad.SelectedValue);
 
-            cmbIdPlan.DataSource = planesCombo;
-            cmbIdPlan.ValueMember = "ID";
-            cmbIdPlan.DisplayMember = "Descripcion";
+            cbIdPlan.DataSource = planesCombo;
+            cbIdPlan.ValueMember = "ID";
+            cbIdPlan.DisplayMember = "Descripcion";
         }
 
         public UsuarioDesktop(ModoForm modo):this ()
@@ -98,11 +98,11 @@ namespace UI.Desktop
             _meses.Add(11, "Noviembre");
             _meses.Add(12, "Diciembre");
 
-            cmbAnio.DataSource = anios;
-            cmbMes.DataSource = new BindingSource(_meses, null);
-            cmbMes.DisplayMember = "Value";
-            cmbMes.ValueMember = "Key";
-            cmbDia.DataSource = dias;
+            cbAnio.DataSource = anios;
+            cbMes.DataSource = new BindingSource(_meses, null);
+            cbMes.DisplayMember = "Value";
+            cbMes.ValueMember = "Key";
+            cbDia.DataSource = dias;
         }
 
         public UsuarioDesktop(int ID, ModoForm modo): this()
@@ -140,14 +140,14 @@ namespace UI.Desktop
             // NO CAMBIAR EL ORDEN DE EL SETEO DE LA FECHA
             // LOS DIAS SE ACTUALIZAN SEGUN EL MES Y AÑO ELEGIDOS POR LO CUAL SE DEBE
             // SETEAR ULTIMO
-            cmbAnio.SelectedIndex = cmbAnio.FindStringExact(PersonaActual.FechaNacimiento.Year.ToString());
-            cmbMes.SelectedIndex = cmbMes.FindStringExact(_meses[PersonaActual.FechaNacimiento.Month]);
-            cmbDia.SelectedIndex = cmbDia.FindStringExact(PersonaActual.FechaNacimiento.Day.ToString());
+            cbAnio.SelectedIndex = cbAnio.FindStringExact(PersonaActual.FechaNacimiento.Year.ToString());
+            cbMes.SelectedIndex = cbMes.FindStringExact(_meses[PersonaActual.FechaNacimiento.Month]);
+            cbDia.SelectedIndex = cbDia.FindStringExact(PersonaActual.FechaNacimiento.Day.ToString());
             // buscamos el plan al que pertenece la persona y luego la especialidad que tiene ese plan
             Plan p = _planes.Find(x => x.ID == PersonaActual.IdPlan);
             cbEspecialidad.SelectedValue = _especialidades.Find(y => y.ID == p.IdEspecialidad).ID;
-            cmbIdPlan.SelectedValue = PersonaActual.IdPlan;
-            cmbTipoPersona.SelectedIndex = cmbTipoPersona.FindStringExact(_tipoPersona[(int) PersonaActual.TipoPersona]);
+            cbIdPlan.SelectedValue = PersonaActual.IdPlan;
+            cbTipoPersona.SelectedIndex = cbTipoPersona.FindStringExact(_tipoPersona[(int) PersonaActual.TipoPersona]);
             // Cambiamos el texto del boton aceptar segun corresponda
             // Si el formulario es para eliminar el usuario desactiva los textboxes
             if (Modo == ModoForm.Alta || Modo == ModoForm.Modificacion)
@@ -169,11 +169,12 @@ namespace UI.Desktop
                 txtDireccion.Enabled = false;
                 txtLegajo.Enabled = false;
                 txtTelefono.Enabled = false;
-                cmbAnio.Enabled = false;
-                cmbMes.Enabled = false;
-                cmbDia.Enabled = false;
-                cmbIdPlan.Enabled = false;
-                cmbTipoPersona.Enabled = false;
+                cbAnio.Enabled = false;
+                cbMes.Enabled = false;
+                cbDia.Enabled = false;
+                cbEspecialidad.Enabled = false;
+                cbIdPlan.Enabled = false;
+                cbTipoPersona.Enabled = false;
                 btnAceptar.Text = "Eliminar";
             }
          
@@ -212,13 +213,13 @@ namespace UI.Desktop
             PersonaActual.Apellido = txtApellido.Text;
             PersonaActual.NombreUsuario = txtUsuario.Text;
             PersonaActual.Email = txtEmail.Text;
-            DateTime fechaNac = new DateTime((int)cmbAnio.SelectedItem, cmbMes.SelectedIndex + 1, (int)cmbDia.SelectedItem);
+            DateTime fechaNac = new DateTime((int)cbAnio.SelectedItem, cbMes.SelectedIndex + 1, (int)cbDia.SelectedItem);
             PersonaActual.FechaNacimiento = fechaNac;
             PersonaActual.Direccion = txtDireccion.Text;
             PersonaActual.Telefono = txtTelefono.Text;
             PersonaActual.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
-            PersonaActual.IdPlan = (int)cmbIdPlan.SelectedValue;
-            PersonaActual.TipoPersona = (Persona.TipoPersonas)cmbTipoPersona.SelectedValue;
+            PersonaActual.IdPlan = (int)cbIdPlan.SelectedValue;
+            PersonaActual.TipoPersona = (Persona.TipoPersonas)cbTipoPersona.SelectedValue;
             PersonaActual.Habilitado = chkHabilitado.Checked;
         }
 
@@ -266,12 +267,17 @@ namespace UI.Desktop
                 msgError += "El campo \"Legajo\" debe ser un entero\n";
                 retorno = false;
             }
-            if (cmbIdPlan.SelectedValue == null)
+            if (cbEspecialidad.SelectedValue == null)
+            {
+                msgError += "Debe seleccionar una especialidad para la persona\n";
+                retorno = false;
+            }
+            if (cbIdPlan.SelectedValue == null)
             {
                 msgError += "Debe seleccionar un plan para la persona\n";
                 retorno = false;
             }
-            if (cmbTipoPersona.SelectedValue == null)
+            if (cbTipoPersona.SelectedValue == null)
             {
                 msgError += "Debe seleccionar un tipo de persona\n";
                 retorno = false;
@@ -326,9 +332,9 @@ namespace UI.Desktop
         private void cmbAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<int> dias = new List<int>();
-            if (cmbMes.SelectedIndex >= 0)
+            if (cbMes.SelectedIndex >= 0)
             {
-                int diasEnMesSeleccionado = DateTime.DaysInMonth((int)cmbAnio.SelectedItem, cmbMes.SelectedIndex + 1);
+                int diasEnMesSeleccionado = DateTime.DaysInMonth((int)cbAnio.SelectedItem, cbMes.SelectedIndex + 1);
 
 
                 for (int i = 0; i < diasEnMesSeleccionado; i++)
@@ -336,23 +342,23 @@ namespace UI.Desktop
                     dias.Add(i + 1);
                 }
 
-                cmbDia.DataSource = dias;
+                cbDia.DataSource = dias;
             }
         }
 
         private void cmbMes_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<int> dias = new List<int>();
-            if (cmbAnio.SelectedIndex >= 0)
+            if (cbAnio.SelectedIndex >= 0)
             {
-                int diasEnMesSeleccionado = DateTime.DaysInMonth((int)cmbAnio.SelectedItem, cmbMes.SelectedIndex + 1);
+                int diasEnMesSeleccionado = DateTime.DaysInMonth((int)cbAnio.SelectedItem, cbMes.SelectedIndex + 1);
 
                 for (int i = 0; i < diasEnMesSeleccionado; i++)
                 {
                     dias.Add(i + 1);
                 }
 
-                cmbDia.DataSource = dias;
+                cbDia.DataSource = dias;
             }
         }
 
