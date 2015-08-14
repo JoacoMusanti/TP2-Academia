@@ -313,5 +313,55 @@ namespace Data.Database
 
             return per;
         }
+
+        public Persona GetOneLeg(int legajo)
+        {
+            Persona per = new Persona();
+
+            try
+            {
+                OpenConnection();
+
+                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where legajo = @legajo", SqlCon);
+                cmdPersona.Parameters.AddWithValue("@legajo", legajo);
+
+                SqlDataReader drPersona = cmdPersona.ExecuteReader();
+
+                if (drPersona.Read())
+                {
+                    per.ID = (int)drPersona["id_persona"];
+                    per.Nombre = (string)drPersona["nombre"];
+                    per.Apellido = (string)drPersona["apellido"];
+                    per.Email = (string)drPersona["email"];
+                    per.Direccion = (string)drPersona["direccion"];
+                    per.FechaNacimiento = (DateTime)drPersona["fecha_nac"];
+                    per.IdPlan = (int)drPersona["id_plan"];
+                    per.Legajo = (int)drPersona["legajo"];
+                    per.Telefono = (string)drPersona["telefono"];
+                    per.TipoPersona = (Persona.TipoPersonas)drPersona["tipo_persona"];
+                    per.Clave = (byte[])drPersona["clave"];
+                    per.Habilitado = (bool)drPersona["habilitado"];
+                    per.NombreUsuario = (string)drPersona["nombre_usuario"];
+                    per.CambiaClave = (int)drPersona["cambia_clave"];
+                    per.Baja = (bool)drPersona["baja_logica"];
+                }
+
+                drPersona.Close();
+            }
+            catch (Exception e)
+            {
+                per = null;
+                Util.Logger.Log(e);
+                Exception manejada = new Exception("Error al intentar recuperar la persona de la base de datos", e);
+                throw manejada;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+
+            return per;
+        }
     }
 }

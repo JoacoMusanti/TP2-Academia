@@ -41,6 +41,20 @@ namespace Business.Logic
                 throw;
             }
         }
+        public Persona GetOneLeg(int legajo)
+        {
+            try
+            {
+                return PersonaData.GetOneLeg(legajo);
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
+        
+    
         public List<Persona> GetAll()
         {
             try
@@ -79,5 +93,29 @@ namespace Business.Logic
                 throw;
             }
         }
+
+        static public bool ValidaUsuario(string nombreUsu)
+        {  
+            bool retorno = true;
+            Persona p = new PersonaLogic().GetOne(nombreUsu);
+            if (p.NombreUsuario != null)
+            {
+                retorno = false;
+            }
+            return retorno;
+        }
+        // Este metodo valida que el legajo ya no esté utilizado
+        static public bool ValidaLegajo(int numlegajo)
+        {   
+            bool retorno = true;
+            Persona p = new PersonaLogic().GetOneLeg(numlegajo);
+            if (p.Nombre != null)
+            {
+                retorno = false;
+            }
+            return retorno;
+        }
+
+
     }
 }
