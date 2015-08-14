@@ -148,6 +148,8 @@ namespace UI.Desktop
             }
             else if (Modo == ModoForm.Baja)
             {
+                // TODO: Agregar una columna a las tablas en base de datos para dar de baja los registros
+                // UNDONE: Modificar codigo para que elimine los registros de manera logica
                 DialogResult resultado = Notificar("Al eliminar un plan se eliminaran todas las personas "
                     + "que pertenezcan al plan! \nDesea continuar?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 

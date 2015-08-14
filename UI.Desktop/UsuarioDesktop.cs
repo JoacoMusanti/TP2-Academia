@@ -246,7 +246,7 @@ namespace UI.Desktop
             string msgError = "";
             bool retorno = true;
             int temp;
-            
+            // TODO: Pasar validaciones a la capa logic
 
             //if (Regex.Match(this.txtEmail.Text, "[A-Za-z0-9]@[A-Za-z0-9].[A-Za-z]")  )
             if (txtNombre.TextLength == 0)

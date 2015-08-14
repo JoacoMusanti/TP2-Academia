@@ -27,6 +27,7 @@ namespace UI.Desktop
             try
             {
                 UsuarioActual = usr.GetOne(txtUsuario.Text);
+                // UNDONE: Restringir el acceso a ciertos forms segun el tipo de persona
                 if (UsuarioActual.Clave != null &&
                     Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text) &&
                     UsuarioActual.TipoPersona == Persona.TipoPersonas.Administrativo)
