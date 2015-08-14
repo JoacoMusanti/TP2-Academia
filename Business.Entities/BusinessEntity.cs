@@ -34,7 +34,12 @@ namespace Business.Entities
         public BusinessEntity()
         {
             _state = States.New;
+            Baja = false;
         }
 
+        /// <summary>
+        /// Establece si un objeto esta dado de baja logicamente o no
+        /// </summary>
+        public bool Baja { get; set; }
     }
 }

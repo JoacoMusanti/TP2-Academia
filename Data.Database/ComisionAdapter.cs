@@ -36,6 +36,7 @@ namespace Data.Database
                     com.IdPlan = (int)drComisiones["id_plan"];
                     com.Descripcion = (string)drComisiones["desc_comision"];
                     com.AnioEspecialidad = (int)drComisiones["anio_especialidad"];
+                    com.Baja = (bool)drComisiones["baja_logica"];
 
                     comisiones.Add(com);
                 }
@@ -80,6 +81,7 @@ namespace Data.Database
                     com.IdPlan = (int)drComision["id_plan"];
                     com.Descripcion = (string)drComision["desc_comision"];
                     com.AnioEspecialidad = (int)drComision["anio_especialidad"];
+                    com.Baja = (bool)drComision["baja_logica"];
                 }
 
                 drComision.Close();
@@ -126,12 +128,13 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comInsert = new SqlCommand("insert into comisiones (desc_comision, anio_especialidad, id_plan) " +
-                    " values (@descripcion, @anio, @plan) select @@identity", SqlCon);
+                SqlCommand comInsert = new SqlCommand("insert into comisiones (desc_comision, anio_especialidad, id_plan, baja_logica) " +
+                    " values (@descripcion, @anio, @plan, @baja_logica) select @@identity", SqlCon);
 
                 comInsert.Parameters.AddWithValue("@descripcion", comi.Descripcion);
                 comInsert.Parameters.AddWithValue("@anio", comi.AnioEspecialidad);
                 comInsert.Parameters.AddWithValue("@plan", comi.IdPlan);
+                comInsert.Parameters.AddWithValue("@baja_logica", comi.Baja);
 
                 comi.ID = decimal.ToInt32((decimal)comInsert.ExecuteScalar());
             }
@@ -153,11 +156,12 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand comUpdate = new SqlCommand("update comisiones set desc_comision = @desc, anio_especialidad = @anio, " +
-                    "id_plan = @plan where id_comision = @id", SqlCon);
+                    "id_plan = @plan, baja_logica = @baja_logica where id_comision = @id", SqlCon);
 
                 comUpdate.Parameters.AddWithValue("@desc", comi.Descripcion);
                 comUpdate.Parameters.AddWithValue("@anio", comi.AnioEspecialidad);
                 comUpdate.Parameters.AddWithValue("@plan", comi.IdPlan);
+                comUpdate.Parameters.AddWithValue("@baja_logica", comi.Baja);
                 comUpdate.Parameters.AddWithValue("@id", comi.ID);
 
                 comUpdate.ExecuteNonQuery();
