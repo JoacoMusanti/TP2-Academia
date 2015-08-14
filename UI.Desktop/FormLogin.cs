@@ -27,9 +27,21 @@ namespace UI.Desktop
             try
             {
                 UsuarioActual = usr.GetOne(txtUsuario.Text);
-                if (UsuarioActual.Clave != null && Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text))
+                if (UsuarioActual.Clave != null &&
+                    Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text) &&
+                    UsuarioActual.TipoPersona == Persona.TipoPersonas.Administrativo)
                 {
                     DialogResult = DialogResult.OK;
+                }
+                else if (UsuarioActual.TipoPersona != Persona.TipoPersonas.Administrativo)
+                {
+                    Notificar("Login", "Este usuario no tiene permisos para acceder al sistema", MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                }
+                else if (UsuarioActual.Habilitado == false)
+                {
+                    Notificar("Login", "Este usuario no esta habilitado para usar el sistema", MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
                 }
                 else
                 {

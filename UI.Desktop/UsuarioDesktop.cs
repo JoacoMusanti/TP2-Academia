@@ -246,12 +246,15 @@ namespace UI.Desktop
             string msgError = "";
             bool retorno = true;
             int temp;
+            
+
             //if (Regex.Match(this.txtEmail.Text, "[A-Za-z0-9]@[A-Za-z0-9].[A-Za-z]")  )
             if (txtNombre.TextLength == 0)
             {
                 msgError += "El campo \"Nombre\" no puede estar vacio\n";
                 retorno = false;
             }
+            
             if (txtApellido.TextLength == 0)
             {
                 msgError += "El campo \"Apellido\" no puede estar vacio\n";
@@ -261,6 +264,16 @@ namespace UI.Desktop
             {
                 msgError += "El campo \"Usuario\" no puede estar vacio\n";
                 retorno = false;
+            }
+            else
+            {
+                Persona p = new PersonaLogic().GetOne(txtUsuario.Text);
+
+                if (p.NombreUsuario != null)
+                {
+                    msgError += "El nombre de usuario ya existe\n";
+                    retorno = false;
+                }
             }
             if (txtLegajo.TextLength > 0 && int.TryParse(txtLegajo.Text, out temp) == false)
             {
