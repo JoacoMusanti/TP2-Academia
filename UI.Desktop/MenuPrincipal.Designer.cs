@@ -33,6 +33,7 @@
             this.btnEspecialidades = new System.Windows.Forms.Button();
             this.btnComisiones = new System.Windows.Forms.Button();
             this.btnAdministrarPlanes = new System.Windows.Forms.Button();
+            this.btnMaterias = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,13 +44,15 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.btnUsuarios, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnEspecialidades, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnComisiones, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnAdministrarPlanes, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnComisiones, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnAdministrarPlanes, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnMaterias, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.4966F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.5034F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(366, 294);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -75,7 +78,7 @@
             // 
             // btnComisiones
             // 
-            this.btnComisiones.Location = new System.Drawing.Point(3, 150);
+            this.btnComisiones.Location = new System.Drawing.Point(3, 167);
             this.btnComisiones.Name = "btnComisiones";
             this.btnComisiones.Size = new System.Drawing.Size(145, 23);
             this.btnComisiones.TabIndex = 2;
@@ -85,13 +88,23 @@
             // 
             // btnAdministrarPlanes
             // 
-            this.btnAdministrarPlanes.Location = new System.Drawing.Point(186, 150);
+            this.btnAdministrarPlanes.Location = new System.Drawing.Point(186, 167);
             this.btnAdministrarPlanes.Name = "btnAdministrarPlanes";
             this.btnAdministrarPlanes.Size = new System.Drawing.Size(145, 23);
             this.btnAdministrarPlanes.TabIndex = 3;
             this.btnAdministrarPlanes.Text = "Administrar planes";
             this.btnAdministrarPlanes.UseVisualStyleBackColor = true;
             this.btnAdministrarPlanes.Click += new System.EventHandler(this.btnAdministrarPlanes_Click);
+            // 
+            // btnMaterias
+            // 
+            this.btnMaterias.Location = new System.Drawing.Point(3, 94);
+            this.btnMaterias.Name = "btnMaterias";
+            this.btnMaterias.Size = new System.Drawing.Size(145, 23);
+            this.btnMaterias.TabIndex = 4;
+            this.btnMaterias.Text = "Administrar materias";
+            this.btnMaterias.UseVisualStyleBackColor = true;
+            this.btnMaterias.Click += new System.EventHandler(this.btnMaterias_Click);
             // 
             // MenuPrincipal
             // 
@@ -114,5 +127,6 @@
         private System.Windows.Forms.Button btnEspecialidades;
         private System.Windows.Forms.Button btnComisiones;
         private System.Windows.Forms.Button btnAdministrarPlanes;
+        private System.Windows.Forms.Button btnMaterias;
     }
 }

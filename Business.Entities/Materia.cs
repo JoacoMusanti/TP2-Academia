@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Business.Entities
 {
-    class Materia : BusinessEntity
+    public class Materia : BusinessEntity
     {
         public int IdMateria { get; set; }
         public string Descripcion { get; set; }

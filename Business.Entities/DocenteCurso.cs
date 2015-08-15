@@ -19,7 +19,6 @@ namespace Business.Entities
             Auxiliar,
             Suplente,
             Adscripto
-
         }
     }
 }
