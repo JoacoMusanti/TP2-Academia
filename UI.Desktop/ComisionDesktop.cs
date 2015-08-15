@@ -140,7 +140,8 @@ namespace UI.Desktop
             if (Modo == ModoForm.Baja)
             {
                 comisionActual.ID = int.Parse(txtID.Text);
-                comisionActual.State = BusinessEntity.States.Deleted;
+                comisionActual.State = BusinessEntity.States.Modified;
+                comisionActual.Baja = true;
             }
 
             comisionActual.AnioEspecialidad = int.Parse(txtAnioDeEspecialidad.Text);

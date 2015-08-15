@@ -76,7 +76,8 @@ namespace UI.Desktop
             if (Modo == ModoForm.Baja)
             {
                 EspecialidadActual.ID = int.Parse(txtID.Text);
-                EspecialidadActual.State = BusinessEntity.States.Deleted;
+                EspecialidadActual.State = BusinessEntity.States.Modified;
+                EspecialidadActual.Baja = true;
             }
 
             EspecialidadActual.Descripcion = txtDescripcion.Text;

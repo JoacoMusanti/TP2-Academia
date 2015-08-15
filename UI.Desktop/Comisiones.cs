@@ -31,8 +31,8 @@ namespace UI.Desktop
             {
                 Notificar("Error inesperado", e.Message + "\nIntente la operacion nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
+
         private void Comisiones_Load(object sender, EventArgs e)
         {
             Listar();

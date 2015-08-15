@@ -60,7 +60,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comMaterias = new SqlCommand ("select * from materias where baja_logica=0",SqlCon);
+                SqlCommand comMaterias = new SqlCommand ("select * from materias",SqlCon);
 
                 SqlDataReader drMaterias = comMaterias.ExecuteReader();
 

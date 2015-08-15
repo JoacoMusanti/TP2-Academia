@@ -87,7 +87,8 @@ namespace UI.Desktop
             if (Modo == ModoForm.Baja)
             {
                 planActual.ID = int.Parse(txtIdPlan.Text);
-                planActual.State = BusinessEntity.States.Deleted;
+                planActual.State = BusinessEntity.States.Modified;
+                planActual.Baja = true;
             }
 
             planActual.Descripcion = txtDescPlan.Text;
