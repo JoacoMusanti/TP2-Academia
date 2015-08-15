@@ -58,11 +58,11 @@ namespace Business.Logic
             }
         }
 
-        public void Delete(Materia mat)
+        public void Delete(int id)
         {
             try
             {
-                MateriaData.Delete(mat);
+                MateriaData.Delete(id);
             }
             catch(Exception e)
             {

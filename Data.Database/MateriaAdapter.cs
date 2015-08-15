@@ -107,7 +107,7 @@ namespace Data.Database
 
            if(materia.State == BusinessEntity.States.Deleted)
            {
-               Delete(materia);
+               Delete(materia.ID);
            }
 
             materia.State = BusinessEntity.States.Unmodified;
@@ -167,20 +167,15 @@ namespace Data.Database
             }
         }
 
-        public void Delete(Materia mat)
+        public void Delete(int id)
         {
             try
             {
                 OpenConnection();
 
-                SqlCommand comDelete = new SqlCommand("update materias set desc_materia = @desc_materia,hs_semanales=@hs_semanales,hs_totales=@hs_totales,id_plan= @id_plan,baja_logica = 1 where id_materia = @id_materia", SqlCon);
+                SqlCommand comDelete = new SqlCommand("delete materias where id_materia = @id_materia", SqlCon);
 
-                comDelete.Parameters.AddWithValue("@id_materia",mat.ID);
-                comDelete.Parameters.AddWithValue("@desc_materia", mat.Descripcion);
-                comDelete.Parameters.AddWithValue("@hs_semanales", mat.HorasSemanales);
-                comDelete.Parameters.AddWithValue("@hs_totales", mat.HorasTotales);
-                comDelete.Parameters.AddWithValue("@id_plan", mat.IdPlan);
-
+                comDelete.Parameters.AddWithValue("@id_materia",id);
 
                 comDelete.ExecuteNonQuery();
             }
