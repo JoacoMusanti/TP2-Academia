@@ -98,7 +98,7 @@ namespace Business.Logic
         {  
             bool retorno = true;
             Persona p = new PersonaLogic().GetOne(nombreUsu);
-            if (p.NombreUsuario != null)
+            if (p.NombreUsuario != null && p.Baja == false)
             {
                 retorno = false;
             }
@@ -109,7 +109,7 @@ namespace Business.Logic
         {   
             bool retorno = true;
             Persona p = new PersonaLogic().GetOneLeg(numlegajo);
-            if (p.Nombre != null)
+            if (p.Nombre != null && p.Baja == false)
             {
                 retorno = false;
             }
