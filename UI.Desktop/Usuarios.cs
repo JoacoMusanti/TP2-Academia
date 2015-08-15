@@ -29,7 +29,8 @@ namespace UI.Desktop
 
             try
             {
-                dgvUsuarios.DataSource = ul.GetAll();
+                // el datasource es una lista que contiene todas las personas que no hayan sido dados de baja
+                dgvUsuarios.DataSource = ul.GetAll().FindAll(x => x.Baja == false);
             }
             catch (Exception e)
             {

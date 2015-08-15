@@ -199,7 +199,8 @@ namespace UI.Desktop
             if (Modo == ModoForm.Baja)
             {
                 PersonaActual.ID = int.Parse(txtID.Text);
-                PersonaActual.State = BusinessEntity.States.Deleted;
+                PersonaActual.Baja = true;
+                PersonaActual.State = BusinessEntity.States.Modified;
             }
 
             // no hace falta validar la fecha y el legajo aca ya que la validacion se realiza
@@ -267,13 +268,16 @@ namespace UI.Desktop
             }
             else
             {
-                Persona p = new PersonaLogic().GetOne(txtUsuario.Text);
-
-                if (p.NombreUsuario != null)
+                if (!PersonaLogic.ValidaUsuario(txtUsuario.Text))
                 {
                     msgError += "El nombre de usuario ya existe\n";
                     retorno = false;
                 }
+            }
+            if (!PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
+            {
+                msgError += "El legajo ingresado ya posee usuario\n";
+                retorno = false;
             }
             if (txtLegajo.TextLength > 0 && int.TryParse(txtLegajo.Text, out temp) == false)
             {

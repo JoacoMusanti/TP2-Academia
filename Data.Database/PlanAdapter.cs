@@ -35,7 +35,7 @@ namespace Data.Database
                     pl.ID = (int)drPlanes["id_plan"];
                     pl.Descripcion = (string)drPlanes["desc_plan"];
                     pl.IdEspecialidad = (int)drPlanes["id_especialidad"];
-
+                    pl.Baja = (bool)drPlanes["baja_logica"];
                     planes.Add(pl);
                 }
 
@@ -78,6 +78,7 @@ namespace Data.Database
                     pl.ID = (int) drPlan["id_plan"];
                     pl.Descripcion = (string)drPlan["desc_plan"];
                     pl.IdEspecialidad = (int)drPlan["id_especialidad"];
+                    pl.Baja = (bool)drPlan["baja_logica"];
                 }
 
                 drPlan.Close();
@@ -103,6 +104,7 @@ namespace Data.Database
 
                 SqlCommand comDelete = new SqlCommand("delete planes where id_plan = @id", SqlCon);
 
+                
                 comDelete.Parameters.AddWithValue("@id", id);
 
                 comDelete.ExecuteNonQuery();
@@ -128,11 +130,12 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comInsert = new SqlCommand("insert into planes (desc_plan, id_especialidad) values (@descripcion, @especialidad) " +
+                SqlCommand comInsert = new SqlCommand("insert into planes (desc_plan, id_especialidad, baja_logica) values (@descripcion, @especialidad,@baja_logica) " +
                     "select @@identity", SqlCon);
 
                 comInsert.Parameters.AddWithValue("@descripcion", plan.Descripcion);
                 comInsert.Parameters.AddWithValue("@especialidad", plan.IdEspecialidad);
+                comInsert.Parameters.AddWithValue("@baja_logica", plan.Baja);
                 plan.ID = decimal.ToInt32((decimal) comInsert.ExecuteScalar());
             }
             catch (Exception e)
@@ -152,11 +155,12 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comUpdate = new SqlCommand("update planes set desc_plan = @descripcion, id_especialidad = @especialidad "
+                SqlCommand comUpdate = new SqlCommand("update planes set desc_plan = @descripcion, id_especialidad = @especialidad, baja_logica = @baja_logica "
                     + "where id_plan = @id", SqlCon);
 
                 comUpdate.Parameters.AddWithValue("@descripcion", plan.Descripcion);
                 comUpdate.Parameters.AddWithValue("@especialidad", plan.IdEspecialidad);
+                comUpdate.Parameters.AddWithValue("@baja_logica", plan.Baja);
                 comUpdate.Parameters.AddWithValue("@id", plan.ID);
 
                 comUpdate.ExecuteNonQuery();

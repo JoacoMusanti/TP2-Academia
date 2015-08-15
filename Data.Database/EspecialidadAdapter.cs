@@ -34,6 +34,7 @@ namespace Data.Database
 
                     esp.ID = (int) drEspecialidades["id_especialidad"];
                     esp.Descripcion = (string) drEspecialidades["desc_especialidad"];
+                    esp.Baja = (bool)drEspecialidades["baja_logica"];
 
                     especialidades.Add(esp);
                 }
@@ -76,6 +77,7 @@ namespace Data.Database
                 {
                     esp.ID = (int) drEspecialidad["id_especialidad"];
                     esp.Descripcion = (string) drEspecialidad["desc_especialidad"];
+                    esp.Baja = (bool)drEspecialidad["baja_logica"];
                 }
 
                 drEspecialidad.Close();
@@ -131,10 +133,11 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand insertCom =
-                    new SqlCommand("insert into especialidades (desc_especialidad) values (@descripcion) " +
+                    new SqlCommand("insert into especialidades (desc_especialidad, baja_logica) values (@descripcion, @baja_logica) " +
                                    "select @@identity", SqlCon);
 
                 insertCom.Parameters.AddWithValue("@descripcion", especialidad.Descripcion);
+                insertCom.Parameters.AddWithValue("@baja_logica", especialidad.Baja);
                 especialidad.ID = decimal.ToInt32((decimal) insertCom.ExecuteScalar());
 
             }
@@ -159,11 +162,12 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion where " +
+                SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion, baja_logica = @baja_logica where " +
                                                       "id_especialidad = @id", SqlCon);
 
                 updateCom.Parameters.AddWithValue("@id", especialidad.ID);
                 updateCom.Parameters.AddWithValue("@descripcion", especialidad.Descripcion);
+                updateCom.Parameters.AddWithValue("@baja_logica", especialidad.Baja);
 
                 updateCom.ExecuteNonQuery();
             }
