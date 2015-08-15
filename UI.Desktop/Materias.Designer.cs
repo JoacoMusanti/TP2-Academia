@@ -31,17 +31,17 @@
             this.tscMaterias = new System.Windows.Forms.ToolStripContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvMaterias = new System.Windows.Forms.DataGridView();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHsSemanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHsTotales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIDPlan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.tsMaterias = new System.Windows.Forms.ToolStrip();
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
             this.tsbModificar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHsSemanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHsTotales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIDPlan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tscMaterias.ContentPanel.SuspendLayout();
             this.tscMaterias.TopToolStripPanel.SuspendLayout();
             this.tscMaterias.SuspendLayout();
@@ -98,6 +98,36 @@
             this.dgvMaterias.Size = new System.Drawing.Size(542, 193);
             this.dgvMaterias.TabIndex = 0;
             // 
+            // colID
+            // 
+            this.colID.DataPropertyName = "ID";
+            this.colID.HeaderText = "ID Materia";
+            this.colID.Name = "colID";
+            // 
+            // colDesc
+            // 
+            this.colDesc.DataPropertyName = "Descripcion";
+            this.colDesc.HeaderText = "Descripción";
+            this.colDesc.Name = "colDesc";
+            // 
+            // colHsSemanales
+            // 
+            this.colHsSemanales.DataPropertyName = "HorasSemanales";
+            this.colHsSemanales.HeaderText = "Horas Semanales";
+            this.colHsSemanales.Name = "colHsSemanales";
+            // 
+            // colHsTotales
+            // 
+            this.colHsTotales.DataPropertyName = "HorasTotales";
+            this.colHsTotales.HeaderText = "Horas Totales";
+            this.colHsTotales.Name = "colHsTotales";
+            // 
+            // colIDPlan
+            // 
+            this.colIDPlan.DataPropertyName = "IDPlan";
+            this.colIDPlan.HeaderText = "ID Plan";
+            this.colIDPlan.Name = "colIDPlan";
+            // 
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -108,6 +138,7 @@
             this.btnSalir.TabIndex = 1;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnActualizar
             // 
@@ -118,6 +149,7 @@
             this.btnActualizar.TabIndex = 2;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // tsMaterias
             // 
@@ -128,7 +160,7 @@
             this.tsbEliminar});
             this.tsMaterias.Location = new System.Drawing.Point(3, 0);
             this.tsMaterias.Name = "tsMaterias";
-            this.tsMaterias.Size = new System.Drawing.Size(112, 25);
+            this.tsMaterias.Size = new System.Drawing.Size(81, 25);
             this.tsMaterias.TabIndex = 0;
             this.tsMaterias.Text = "Crear Nueva Materia";
             // 
@@ -163,36 +195,6 @@
             this.tsbEliminar.Text = "toolStripButton3";
             this.tsbEliminar.ToolTipText = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
-            // 
-            // colID
-            // 
-            this.colID.DataPropertyName = "ID";
-            this.colID.HeaderText = "ID Materia";
-            this.colID.Name = "colID";
-            // 
-            // colDesc
-            // 
-            this.colDesc.DataPropertyName = "desc_materia";
-            this.colDesc.HeaderText = "Descripción";
-            this.colDesc.Name = "colDesc";
-            // 
-            // colHsSemanales
-            // 
-            this.colHsSemanales.DataPropertyName = "hs_semanales";
-            this.colHsSemanales.HeaderText = "Horas Semanales";
-            this.colHsSemanales.Name = "colHsSemanales";
-            // 
-            // colHsTotales
-            // 
-            this.colHsTotales.DataPropertyName = "hs_totales";
-            this.colHsTotales.HeaderText = "Horas Totales";
-            this.colHsTotales.Name = "colHsTotales";
-            // 
-            // colIDPlan
-            // 
-            this.colIDPlan.DataPropertyName = "id_plan";
-            this.colIDPlan.HeaderText = "ID Plan";
-            this.colIDPlan.Name = "colIDPlan";
             // 
             // Materias
             // 

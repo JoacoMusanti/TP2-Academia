@@ -23,7 +23,7 @@ namespace Data.Database
 
                 SqlCommand comMateria = new SqlCommand("select * from materias where @id=id_materia",SqlCon);
 
-                comMateria.Parameters.Add("@id", id);
+                comMateria.Parameters.AddWithValue("@id", id);
 
                 SqlDataReader drMaterias = comMateria.ExecuteReader();
 
@@ -34,6 +34,7 @@ namespace Data.Database
                     mat.HorasSemanales = (int)drMaterias["hs_semanales"];
                     mat.HorasTotales = (int)drMaterias["hs_totales"];
                     mat.IdPlan = (int)drMaterias["id_plan"];
+                    mat.Baja = (bool)drMaterias["baja_logica"];
                 }
 
                 drMaterias.Close();
@@ -72,6 +73,7 @@ namespace Data.Database
                     mat.HorasSemanales = (int)drMaterias["hs_semanales"];
                     mat.HorasTotales = (int)drMaterias["hs_totales"];
                     mat.IdPlan = (int)drMaterias["id_plan"];
+                    mat.Baja = (bool)drMaterias["baja_logica"];
 
                     materias.Add(mat);
                 }
@@ -117,13 +119,13 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comInsert = new SqlCommand("Insert into materias (desc_materia,hs_semanales,hs_totales,id_plan) values (@desc_materia,@hs_semanales,@hs_totales,@idPlan) select @@identity",SqlCon);
+                SqlCommand comInsert = new SqlCommand("Insert into materias (desc_materia, hs_semanales, hs_totales, id_plan, baja_logica) values (@desc_materia, @hs_semanales, @hs_totales, @idPlan, @baja_logica) select @@identity", SqlCon);
 
-                comInsert.Parameters.Add("@desc_materia",mat.Descripcion);
-                comInsert.Parameters.Add("@hs_semanales",mat.HorasSemanales);
-                comInsert.Parameters.Add("@hs_totales",mat.HorasTotales);
-                comInsert.Parameters.Add("@id_plan",mat.IdPlan);
-
+                comInsert.Parameters.AddWithValue("@desc_materia",mat.Descripcion);
+                comInsert.Parameters.AddWithValue("@hs_semanales",mat.HorasSemanales);
+                comInsert.Parameters.AddWithValue("@hs_totales",mat.HorasTotales);
+                comInsert.Parameters.AddWithValue("@idPlan",mat.IdPlan);
+                comInsert.Parameters.AddWithValue("@baja_logica", mat.Baja);
                 mat.ID = decimal.ToInt32((decimal)comInsert.ExecuteScalar());
             }
             catch (Exception e)
@@ -143,13 +145,14 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comUpdate = new SqlCommand("update materias set desc_materia = @desc_materia,hs_semanales=@hs_semanales,hs_totales=@hs_totales,id_plan = @id_plan where id_materia=@id_materia",SqlCon);
+                SqlCommand comUpdate = new SqlCommand("update materias set desc_materia = @desc_materia,hs_semanales=@hs_semanales,hs_totales=@hs_totales,id_plan= @id_plan,baja_logica = @baja_logica where id_materia=@id_materia", SqlCon);
 
-                comUpdate.Parameters.Add("@desc_materia",mat.Descripcion);
-                comUpdate.Parameters.Add("@hs_semanales",mat.HorasSemanales);
-                comUpdate.Parameters.Add("@hs_totales",mat.HorasTotales);
-                comUpdate.Parameters.Add("@id_plan",mat.IdPlan);
-                comUpdate.Parameters.Add("@id_materia",mat.ID);
+                comUpdate.Parameters.AddWithValue("@desc_materia",mat.Descripcion);
+                comUpdate.Parameters.AddWithValue("@hs_semanales",mat.HorasSemanales);
+                comUpdate.Parameters.AddWithValue("@hs_totales",mat.HorasTotales);
+                comUpdate.Parameters.AddWithValue("@id_plan",mat.IdPlan);
+                comUpdate.Parameters.AddWithValue("@id_materia",mat.ID);
+                comUpdate.Parameters.AddWithValue("@baja_logica", mat.Baja);
 
                 comUpdate.ExecuteNonQuery();
             }
@@ -170,9 +173,9 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comDelete = new SqlCommand("delete materias where id_materias = @id_materia",SqlCon);
+                SqlCommand comDelete = new SqlCommand("delete materias where id_materia = @id_materia",SqlCon);
 
-                comDelete.Parameters.Add("@id_materias",id);
+                comDelete.Parameters.AddWithValue("@id_materia",id);
 
                 comDelete.ExecuteNonQuery();
             }

@@ -70,5 +70,15 @@ namespace UI.Desktop
                 Listar();
             }
         }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            Listar();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
