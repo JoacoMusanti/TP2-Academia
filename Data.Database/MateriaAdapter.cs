@@ -21,7 +21,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comMateria = new SqlCommand("select * from materias where @id=id_materia",SqlCon);
+                SqlCommand comMateria = new SqlCommand("select * from materias where @id=id_materia and baja_logica=0",SqlCon);
 
                 comMateria.Parameters.AddWithValue("@id", id);
 
@@ -60,7 +60,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comMaterias = new SqlCommand ("select * from materias",SqlCon);
+                SqlCommand comMaterias = new SqlCommand ("select * from materias where baja_logica=0",SqlCon);
 
                 SqlDataReader drMaterias = comMaterias.ExecuteReader();
 
@@ -83,7 +83,7 @@ namespace Data.Database
             catch (Exception e)
             {
                 Util.Logger.Log(e);
-                throw new Exception("Error al intentar recuperar las comisiones de la base de datos", e);
+                throw new Exception("Error al intentar recuperar las materias de la base de datos", e);
             }
             finally
             {
@@ -107,7 +107,7 @@ namespace Data.Database
 
            if(materia.State == BusinessEntity.States.Deleted)
            {
-               Delete(materia.ID);
+               Delete(materia);
            }
 
             materia.State = BusinessEntity.States.Unmodified;
@@ -167,15 +167,20 @@ namespace Data.Database
             }
         }
 
-        public void Delete(int id)
+        public void Delete(Materia mat)
         {
             try
             {
                 OpenConnection();
 
-                SqlCommand comDelete = new SqlCommand("delete materias where id_materia = @id_materia",SqlCon);
+                SqlCommand comDelete = new SqlCommand("update materias set desc_materia = @desc_materia,hs_semanales=@hs_semanales,hs_totales=@hs_totales,id_plan= @id_plan,baja_logica = 1 where id_materia = @id_materia", SqlCon);
 
-                comDelete.Parameters.AddWithValue("@id_materia",id);
+                comDelete.Parameters.AddWithValue("@id_materia",mat.ID);
+                comDelete.Parameters.AddWithValue("@desc_materia", mat.Descripcion);
+                comDelete.Parameters.AddWithValue("@hs_semanales", mat.HorasSemanales);
+                comDelete.Parameters.AddWithValue("@hs_totales", mat.HorasTotales);
+                comDelete.Parameters.AddWithValue("@id_plan", mat.IdPlan);
+
 
                 comDelete.ExecuteNonQuery();
             }
