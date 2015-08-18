@@ -156,6 +156,7 @@
             // 
             this.cbPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.cbPlan, 2);
+            this.cbPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlan.FormattingEnabled = true;
             this.cbPlan.Location = new System.Drawing.Point(108, 176);
             this.cbPlan.Name = "cbPlan";
@@ -214,6 +215,7 @@
             // 
             this.cbEspecialidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.cbEspecialidad, 2);
+            this.cbEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEspecialidad.FormattingEnabled = true;
             this.cbEspecialidad.Location = new System.Drawing.Point(108, 142);
             this.cbEspecialidad.Name = "cbEspecialidad";

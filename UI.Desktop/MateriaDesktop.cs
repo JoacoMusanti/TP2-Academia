@@ -127,6 +127,7 @@ namespace UI.Desktop
         protected override bool Validar()
         {
             string error = "";
+            int temp;
             bool retorno = true;
 
             if(string.IsNullOrWhiteSpace(txtDescMat.Text))
@@ -140,13 +141,23 @@ namespace UI.Desktop
                 error += "El campo \"Horas semanales\" no puede estar vacio\n";
                 retorno = false;
             }
+            else if (int.TryParse(txtHsSemMat.Text, out temp) == false || temp < 0)
+            {
+                error += "El campo \"Horas semanales\" debe ser un entero mayor que 0\n";
+                retorno = false;
+            }
 
             if(string.IsNullOrWhiteSpace(txtHsTotMat.Text))
             {
                 error += "El campo \"Horas totales\" no puede estar vacio\n";
                 retorno = false;
             }
-            
+            else if (int.TryParse(txtHsTotMat.Text, out temp) == false || temp < 0)
+            {
+                error += "El campo \"Horas totales\" debe ser un entero mayor que 0\n";
+                retorno = false;
+            }
+
             if (cbPlan.SelectedItem == null)
             {
                 error += "Debe seleccionar un plan, el campo no puede estar vacío";
