@@ -57,8 +57,7 @@ namespace UI.Desktop
             }
             catch (Exception e)
             {
-                Notificar("Error inesperado", e.Message + "\nIntente realizar la operacion nuevamente",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar(e);
             }
         }
 
@@ -161,8 +160,7 @@ namespace UI.Desktop
             }
             catch (Exception e)
             {
-                Notificar("Error inesperado", e.Message + "\nIntente realizar la operacion nuevamente",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar(e);
             }
         }
 

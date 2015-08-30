@@ -76,5 +76,11 @@ namespace UI.Desktop
             return Notificar(Text, mensaje, botones, icono);
         }
 
+        public DialogResult Notificar(Exception e)
+        {
+            return Notificar("Error inesperado", e.Message + "\nIntente realizar la operacion nuevamente",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }
 }

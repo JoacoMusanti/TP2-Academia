@@ -40,7 +40,7 @@ namespace UI.Desktop
             }
             catch (Exception ex)
             {
-                Notificar("Error inesperado", ex.Message + "\nIntente realizar la operacion nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar(ex);
             }
         }
 

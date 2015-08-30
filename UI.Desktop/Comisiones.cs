@@ -29,7 +29,7 @@ namespace UI.Desktop
             }
             catch(Exception e)
             {
-                Notificar("Error inesperado", e.Message + "\nIntente la operacion nuevamente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Notificar(e);
             }
         }
 
