@@ -271,7 +271,12 @@ namespace UI.Desktop
                     retorno = false;
                 }
             }
-            if (!PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
+            if (txtLegajo.TextLength == 0)
+            {
+                msgError += "El campo \"Legajo\" no puede estar vacio\n";
+                retorno = false;
+            }
+            else if (!PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
             {
                 msgError += "El legajo ingresado ya posee usuario\n";
                 retorno = false;
