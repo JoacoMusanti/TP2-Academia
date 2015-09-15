@@ -265,7 +265,7 @@ namespace UI.Desktop
             }
             else
             {
-                if (!PersonaLogic.ValidaUsuario(txtUsuario.Text))
+                if (Modo == ModoForm.Alta && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
                 {
                     msgError += "El nombre de usuario ya existe\n";
                     retorno = false;
@@ -276,7 +276,7 @@ namespace UI.Desktop
                 msgError += "El campo \"Legajo\" no puede estar vacio\n";
                 retorno = false;
             }
-            else if (!PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
+            else if (Modo == ModoForm.Alta && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
             {
                 msgError += "El legajo ingresado ya posee usuario\n";
                 retorno = false;
