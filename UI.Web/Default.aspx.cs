@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace UI.Web
 {
@@ -11,7 +12,11 @@ namespace UI.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //si se autentica mostramos mensaje y nombre de usuario
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                Response.Write("Bienvenido : " + User.Identity.Name);
+            }
         }
     }
 }
