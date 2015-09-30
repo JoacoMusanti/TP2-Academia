@@ -15,6 +15,7 @@ namespace UI.Web
         private PlanLogic _logicPlan;
         private EspecialidadLogic _logicEspecialidad;
         private Dictionary<int, string> _tipoPersona;
+        private Dictionary<int, string> _meses;
 
         private EspecialidadLogic LogicEspecialidad
         {
@@ -62,6 +63,8 @@ namespace UI.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadGrid();
+            if(!IsPostBack)
+                CargarFechas();
         }
 
         private Persona Entity { get; set; }
@@ -96,6 +99,8 @@ namespace UI.Web
             }
         }
 
+
+
         public enum FormModes
         {
             Alta,
@@ -114,6 +119,46 @@ namespace UI.Web
                 this.ViewState["FormMode"] = value;
             }
         }
+
+        private void CargarFechas()
+        {
+            _meses = new Dictionary<int, string>();
+            List<int> anios = new List<int>(100);
+            List<int> dias = new List<int>(31);
+
+            for (int i = 0; i < 100; i++)
+            {
+                anios.Add(DateTime.Now.Year - i);
+                if (i < 31)
+                {
+                    dias.Add(i + 1);
+                }
+            }
+
+            _meses.Add(1, "Enero");
+            _meses.Add(2, "Febrero");
+            _meses.Add(3, "Marzo");
+            _meses.Add(4, "Abril");
+            _meses.Add(5, "Mayo");
+            _meses.Add(6, "Junio");
+            _meses.Add(7, "Julio");
+            _meses.Add(8, "Agosto");
+            _meses.Add(9, "Septiembre");
+            _meses.Add(10, "Octubre");
+            _meses.Add(11, "Noviembre");
+            _meses.Add(12, "Diciembre");
+
+            ddlAnio.DataSource = anios;
+            ddlAnio.DataBind();
+            ddlMes.DataSource = _meses;          
+            ddlMes.DataValueField = "Key";
+            ddlMes.DataTextField = "Value";
+            ddlMes.DataBind();
+            ddlDia.DataSource = dias;
+            ddlDia.DataBind();
+        }
+
+
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -143,6 +188,11 @@ namespace UI.Web
             txtEmail.Text = Entity.Email;
             chkHabilitado.Checked = Entity.Habilitado;
             txtNombreUsuario.Text = Entity.NombreUsuario;
+
+            ddlAnio.SelectedValue = Entity.FechaNacimiento.Year.ToString();
+            ddlMes.SelectedValue = Entity.FechaNacimiento.Month.ToString();
+            ddlDia.SelectedValue = Entity.FechaNacimiento.Day.ToString();
+
 
             ddlEspecialidad.DataSource = LogicEspecialidad.GetAll().FindAll(x => x.Baja == false);
             ddlEspecialidad.DataValueField = "ID";
@@ -195,6 +245,42 @@ namespace UI.Web
             LoadGrid();
 
             formPanel.Visible = false;
+        }
+
+        protected void ddlAnio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<int> dias = new List<int>();
+            if (ddlMes.SelectedIndex >= 0)
+            {
+                int diasEnMesSeleccionado = DateTime.DaysInMonth(int.Parse(ddlAnio.SelectedItem.Text), ddlMes.SelectedIndex + 1);
+
+
+                for (int i = 0; i < diasEnMesSeleccionado; i++)
+                {
+                    dias.Add(i + 1);
+                }
+
+                ddlDia.DataSource = dias;
+                ddlDia.DataBind();
+            }
+        }
+
+        protected void ddlMes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<int> dias = new List<int>();
+            if (ddlAnio.SelectedIndex >= 0)
+            {
+                int diasEnMesSeleccionado = DateTime.DaysInMonth(int.Parse(ddlAnio.SelectedItem.Text), ddlMes.SelectedIndex + 1);
+
+                for (int i = 0; i < diasEnMesSeleccionado; i++)
+                {
+                    dias.Add(i + 1);
+                }
+
+                ddlDia.DataSource = dias;
+                ddlDia.DataBind();
+
+            }
         }
     }
 }

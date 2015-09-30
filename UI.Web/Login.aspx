@@ -9,9 +9,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    
-    </div>
         <asp:Login ID="loginAcademia" runat="server" BackColor="#FFFF99" LoginButtonText="Iniciar sesión" OnAuthenticate="Login1_Authenticate" PasswordRecoveryText="Recuperar Contraseña" Width="315px">
         </asp:Login>
     </form>

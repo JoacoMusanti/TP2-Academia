@@ -1,10 +1,20 @@
 ﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Theme="" Inherits="UI.Web.Usuarios" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
-<asp:Panel ID="gridPanel" runat="server">
-    <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
-        SelectedRowStyle-BackColor="Black"
-        SelectedRowStyle-ForeColor="White"
-        DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" Width="541px" OnSelectedIndexChanged="gridView_SelectedIndexChanged">
+    <script type="text/javascript">
+        function llenar_anio() {
+            var anios = document.getElementById("ddlAnio");
+            var anioActual = new Date().getFullYear();
+
+            for (var i; i < 2015; i++) {
+                var el = document.createElement("opt");
+                el.textContent = i;
+                anios.appendChild(el);
+            }
+        }
+    </script>
+    <asp:Panel ID="gridPanel" runat="server">
+        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
+        DataKeyNames="ID" CellPadding="4" GridLines="None" Width="541px" OnSelectedIndexChanged="gridView_SelectedIndexChanged" ForeColor="#333333">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -15,19 +25,20 @@
             <asp:CommandField SelectText="Seleccionar" ShowSelectButton="true" />
 
         </Columns>
-        <EditRowStyle BackColor="#999999" />
-        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-    </asp:GridView>
-</asp:Panel>
-<asp:Panel ID="formPanel" Visible="false" runat="server">
+            <EditRowStyle BackColor="#999999" />
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+        </asp:GridView>
+    </asp:Panel>
+
+<asp:Panel ID="formPanel" Visible="true" runat="server">
     <asp:Label ID="lblNombre" runat="server" Text="Nombre: "></asp:Label>
     <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
     <br />
@@ -42,6 +53,13 @@
     <br />
     <asp:Label ID="lblLegajo" runat="server" Text="Legajo: "></asp:Label>
     <asp:TextBox ID="txtLegajo" runat="server"></asp:TextBox>
+    <br />
+    <asp:Label ID="lblDia" runat="server" Text="Dia: : "></asp:Label>
+    <asp:DropDownList ID="ddlDia" runat="server" ></asp:DropDownList>
+    <asp:Label ID="lblMes" runat="server" Text="Mes: "></asp:Label>
+    <asp:DropDownList ID="ddlMes" OnSelectedIndexChanged="ddlMes_SelectedIndexChanged" AutoPostBack="true" runat="server"></asp:DropDownList>
+    <asp:Label ID="lblAnio" runat="server" Text="Año: "></asp:Label>
+    <asp:DropDownList ID="ddlAnio" OnSelectedIndexChanged="ddlAnio_SelectedIndexChanged" AutoPostBack="true" runat="server" ></asp:DropDownList>
     <br />
     <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
     <asp:DropDownList ID="ddlEspecialidad" runat="server"></asp:DropDownList>
