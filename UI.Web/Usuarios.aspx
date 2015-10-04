@@ -1,17 +1,5 @@
 ﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Theme="" Inherits="UI.Web.Usuarios" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
-    <script type="text/javascript">
-        function llenar_anio() {
-            var anios = document.getElementById("ddlAnio");
-            var anioActual = new Date().getFullYear();
-
-            for (var i; i < 2015; i++) {
-                var el = document.createElement("opt");
-                el.textContent = i;
-                anios.appendChild(el);
-            }
-        }
-    </script>
     <asp:Panel ID="gridPanel" runat="server">
         <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
         DataKeyNames="ID" CellPadding="4" GridLines="None" Width="541px" OnSelectedIndexChanged="gridView_SelectedIndexChanged" ForeColor="#333333">
@@ -55,11 +43,11 @@
     <asp:TextBox ID="txtLegajo" runat="server"></asp:TextBox>
     <br />
     <asp:Label ID="lblDia" runat="server" Text="Dia: : "></asp:Label>
-    <asp:DropDownList ID="ddlDia" runat="server" ></asp:DropDownList>
+    <asp:DropDownList ID="ddlDia" runat="server" ClientIDMode="Static"></asp:DropDownList>
     <asp:Label ID="lblMes" runat="server" Text="Mes: "></asp:Label>
-    <asp:DropDownList ID="ddlMes" OnSelectedIndexChanged="ddlMes_SelectedIndexChanged" AutoPostBack="true" runat="server"></asp:DropDownList>
+    <asp:DropDownList ID="ddlMes" runat="server" ClientIDMode="Static"></asp:DropDownList>
     <asp:Label ID="lblAnio" runat="server" Text="Año: "></asp:Label>
-    <asp:DropDownList ID="ddlAnio" OnSelectedIndexChanged="ddlAnio_SelectedIndexChanged" AutoPostBack="true" runat="server" ></asp:DropDownList>
+    <asp:DropDownList ID="ddlAnio" runat="server" ClientIDMode="Static"></asp:DropDownList>
     <br />
     <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
     <asp:DropDownList ID="ddlEspecialidad" runat="server"></asp:DropDownList>

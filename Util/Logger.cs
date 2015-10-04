@@ -10,7 +10,7 @@ namespace Util
 {
     public static class Logger
     {
-        private static string pathArchivo = "log.txt";
+        private static string pathArchivo = "D:/log.txt";
 
         public static void Log(Exception ex)
         {

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business.Entities;
 using Business.Logic;
+using System.Globalization;
 
 namespace UI.Web
 {
@@ -64,7 +65,12 @@ namespace UI.Web
         {
             LoadGrid();
             if(!IsPostBack)
+            {
                 CargarFechas();
+                ddlAnio.Attributes["onchange"] = "onCambiaFecha();";
+                ddlMes.Attributes["onchange"] = "onCambiaFecha();";
+            }
+                
         }
 
         private Persona Entity { get; set; }
@@ -122,43 +128,51 @@ namespace UI.Web
 
         private void CargarFechas()
         {
-            _meses = new Dictionary<int, string>();
-            List<int> anios = new List<int>(100);
-            List<int> dias = new List<int>(31);
+            CargarAnios();
+            CargarMeses();
+            CargarDias();
+        }
 
-            for (int i = 0; i < 100; i++)
+        private void CargarDias()
+        {
+            List<int> dias = new List<int>();
+
+            for (int i = 1; i < 32; i++)
             {
-                anios.Add(DateTime.Now.Year - i);
-                if (i < 31)
-                {
-                    dias.Add(i + 1);
-                }
+                dias.Add(i);
             }
 
-            _meses.Add(1, "Enero");
-            _meses.Add(2, "Febrero");
-            _meses.Add(3, "Marzo");
-            _meses.Add(4, "Abril");
-            _meses.Add(5, "Mayo");
-            _meses.Add(6, "Junio");
-            _meses.Add(7, "Julio");
-            _meses.Add(8, "Agosto");
-            _meses.Add(9, "Septiembre");
-            _meses.Add(10, "Octubre");
-            _meses.Add(11, "Noviembre");
-            _meses.Add(12, "Diciembre");
-
-            ddlAnio.DataSource = anios;
-            ddlAnio.DataBind();
-            ddlMes.DataSource = _meses;          
-            ddlMes.DataValueField = "Key";
-            ddlMes.DataTextField = "Value";
-            ddlMes.DataBind();
             ddlDia.DataSource = dias;
             ddlDia.DataBind();
         }
 
+        private void CargarMeses()
+        {
+            _meses = new Dictionary<int, string>();
 
+            for (int i = 1; i < 13; i++)
+            {
+                _meses.Add(i, CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i));
+            }
+
+            ddlMes.DataSource = _meses;
+            ddlMes.DataValueField = "Key";
+            ddlMes.DataTextField = "Value";
+            ddlMes.DataBind();
+        }
+
+        private void CargarAnios()
+        {
+            List<int> anios = new List<int>(100);
+
+            for (int i = 0; i < 100; i++)
+            {
+                anios.Add(DateTime.Now.Year - i);
+            }
+
+            ddlAnio.DataSource = anios;
+            ddlAnio.DataBind();
+        }
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
