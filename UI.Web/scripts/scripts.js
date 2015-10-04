@@ -1,9 +1,11 @@
-﻿function diasEnMesAnio(mes, anio)
+﻿// Devuelve la cantidad de dias en un mes en un año seleccionados
+function diasEnMesAnio(mes, anio)
 {
     var esBisiesto = (anio % 4 == 0 && anio % 100 != 0) || (anio % 100 == 0 && anio % 400 == 0);
     return [31, (esBisiesto ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][mes - 1];
 }
 
+// Rellena el DropDownList ddlDia con los dias del mes en el año seleccionados
 function onCambiaFecha()
 {
     var dias = document.getElementById("ddlDia");

@@ -188,7 +188,7 @@ namespace UI.Desktop
                 Persona per = new Persona();
                 PersonaActual = per;
                 PersonaActual.State = BusinessEntity.States.New;
-                
+                PersonaActual.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
             }
             if (Modo == ModoForm.Modificacion)
             {
@@ -217,7 +217,6 @@ namespace UI.Desktop
             PersonaActual.FechaNacimiento = fechaNac;
             PersonaActual.Direccion = txtDireccion.Text;
             PersonaActual.Telefono = txtTelefono.Text;
-            PersonaActual.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
             PersonaActual.IdPlan = (int)cbIdPlan.SelectedValue;
             PersonaActual.TipoPersona = (Persona.TipoPersonas)cbTipoPersona.SelectedValue;
             PersonaActual.Habilitado = chkHabilitado.Checked;

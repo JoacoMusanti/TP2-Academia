@@ -26,7 +26,7 @@
         </asp:GridView>
     </asp:Panel>
 
-<asp:Panel ID="formPanel" Visible="true" runat="server">
+<asp:Panel ID="formPanel" Visible="false" runat="server">
     <asp:Label ID="lblNombre" runat="server" Text="Nombre: "></asp:Label>
     <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
     <br />

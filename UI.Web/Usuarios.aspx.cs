@@ -230,8 +230,18 @@ namespace UI.Web
             per.Apellido = txtApellido.Text;
             per.Email = txtEmail.Text;
             per.NombreUsuario = txtNombreUsuario.Text;
-            per.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
+            per.Clave = Entity.Clave;
             per.Habilitado = chkHabilitado.Checked;
+            per.Baja = false;
+            per.Direccion = txtDireccion.Text;
+            per.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue), 
+                int.Parse(ddlMes.SelectedValue), int.Parse(ddlDia.SelectedValue));
+            per.ID = Entity.ID;
+            per.IdPlan = int.Parse(ddlIdPlan.SelectedValue);
+            per.Legajo = int.Parse(txtLegajo.Text);
+            per.CambiaClave = Entity.CambiaClave;
+            per.Telefono = txtTelefono.Text;
+            per.TipoPersona = (Persona.TipoPersonas) ddlTipoPersona.SelectedIndex;
         }
 
         private void SaveEntity(Persona per)
