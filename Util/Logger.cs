@@ -12,17 +12,27 @@ namespace Util
     {
         private static string pathArchivo = "D:/log.txt";
 
+        public static bool LogHabilitado
+        {
+            get;
+            set;
+        }
+
         public static void Log(Exception ex)
         {
-            using (StreamWriter sw = new StreamWriter(pathArchivo, true))
+            if (LogHabilitado)
             {
-                sw.WriteLine("Fecha:       " + DateTime.Today.Date.ToShortDateString());
-                sw.WriteLine("Hora:        " + DateTime.Now.TimeOfDay.ToString());
-                sw.WriteLine("Fuente:      " + ex.Source.ToString());
-                sw.WriteLine("Metodo:      " + ex.TargetSite.ToString());
-                sw.WriteLine("Error:       " + ex.Message);
-                sw.WriteLine("--------------------------------------------------------------------------------");
+                using (StreamWriter sw = new StreamWriter(pathArchivo, true))
+                {
+                    sw.WriteLine("Fecha:       " + DateTime.Today.Date.ToShortDateString());
+                    sw.WriteLine("Hora:        " + DateTime.Now.TimeOfDay.ToString());
+                    sw.WriteLine("Fuente:      " + ex.Source.ToString());
+                    sw.WriteLine("Metodo:      " + ex.TargetSite.ToString());
+                    sw.WriteLine("Error:       " + ex.Message);
+                    sw.WriteLine("--------------------------------------------------------------------------------");
+                }
             }
+            
         }
     }
 }

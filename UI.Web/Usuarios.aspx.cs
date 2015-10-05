@@ -16,7 +16,7 @@ namespace UI.Web
         private PlanLogic _logicPlan;
         private EspecialidadLogic _logicEspecialidad;
         private Dictionary<int, string> _tipoPersona;
-        private Dictionary<int, string> _meses;
+
 
         private EspecialidadLogic LogicEspecialidad
         {
@@ -66,7 +66,10 @@ namespace UI.Web
             LoadGrid();
             if(!IsPostBack)
             {
+                Util.Logger.LogHabilitado = false;
                 CargarFechas();
+                // los dropdown mes y año llaman a la funcion javascript onCambiaFecha()
+                // cuando se dispara el evento onchange (selectedIndexChanged)
                 ddlAnio.Attributes["onchange"] = "onCambiaFecha();";
                 ddlMes.Attributes["onchange"] = "onCambiaFecha();";
             }
@@ -148,14 +151,14 @@ namespace UI.Web
 
         private void CargarMeses()
         {
-            _meses = new Dictionary<int, string>();
+            Dictionary<int,string> meses = new Dictionary<int, string>();
 
             for (int i = 1; i < 13; i++)
             {
-                _meses.Add(i, CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i));
+                meses.Add(i, CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i));
             }
 
-            ddlMes.DataSource = _meses;
+            ddlMes.DataSource = meses;
             ddlMes.DataValueField = "Key";
             ddlMes.DataTextField = "Value";
             ddlMes.DataBind();
