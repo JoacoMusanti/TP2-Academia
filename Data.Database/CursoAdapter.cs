@@ -24,7 +24,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comCurso = new SqlCommand("select * from dbd.cursos", SqlCon);
+                SqlCommand comCurso = new SqlCommand("select * from dbd.cursos where baja_logica = 0", SqlCon);
 
                 SqlDataReader drCursos = comCurso.ExecuteReader();
 
@@ -70,7 +70,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand curCurso = new SqlCommand("select * from dbo.cursos where @id = id_curso", SqlCon);
+                SqlCommand curCurso = new SqlCommand("select * from dbo.cursos where @id = id_curso and baja_logica = 0", SqlCon);
 
                 curCurso.Parameters.AddWithValue("@id", id);
 
@@ -158,7 +158,7 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand curUpdate = new SqlCommand("update dbo.cursos set id_materia = @materia, id_comision = @comision ,anio_calendario = @anio, " +
-                    " cupo = @cupo ,baja_logica = @baja_logica where id_curso = @id", SqlCon);
+                    " cupo = @cupo ,baja_logica = @baja_logica where id_curso = @id and baja_logica = 0", SqlCon);
 
                 curUpdate.Parameters.AddWithValue("@materia", cur.IdMateria);
                 curUpdate.Parameters.AddWithValue("@comision", cur.IdComision);

@@ -60,7 +60,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comMaterias = new SqlCommand ("select * from materias",SqlCon);
+                SqlCommand comMaterias = new SqlCommand("select * from materias where baja_logica = 0", SqlCon);
 
                 SqlDataReader drMaterias = comMaterias.ExecuteReader();
 
@@ -145,7 +145,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comUpdate = new SqlCommand("update materias set desc_materia = @desc_materia,hs_semanales=@hs_semanales,hs_totales=@hs_totales,id_plan= @id_plan,baja_logica = @baja_logica where id_materia=@id_materia", SqlCon);
+                SqlCommand comUpdate = new SqlCommand("update materias set desc_materia = @desc_materia,hs_semanales=@hs_semanales,hs_totales=@hs_totales,id_plan= @id_plan,baja_logica = @baja_logica where id_materia=@id_materia and baja_logica = 0", SqlCon);
 
                 comUpdate.Parameters.AddWithValue("@desc_materia",mat.Descripcion);
                 comUpdate.Parameters.AddWithValue("@hs_semanales",mat.HorasSemanales);

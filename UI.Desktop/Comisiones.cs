@@ -25,7 +25,7 @@ namespace UI.Desktop
             ComisionLogic cl = new ComisionLogic();
             try
             {
-                dgvComisiones.DataSource = cl.GetAll().FindAll(x => x.Baja == false);
+                dgvComisiones.DataSource = cl.GetAll();
             }
             catch(Exception e)
             {

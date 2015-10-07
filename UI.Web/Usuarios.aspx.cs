@@ -15,7 +15,7 @@ namespace UI.Web
         private PersonaLogic _logicPersona;
         private PlanLogic _logicPlan;
         private EspecialidadLogic _logicEspecialidad;
-        private Dictionary<int, string> _tipoPersona;
+        
 
 
         private EspecialidadLogic LogicEspecialidad
@@ -76,7 +76,7 @@ namespace UI.Web
                 
         }
 
-        private Persona Entity { get; set; }
+        private Persona PersonaActual { get; set; }
         private Plan PlanUsuario { get; set; }
         private Especialidad EspecialidadUsuario { get; set; }
 
@@ -180,15 +180,16 @@ namespace UI.Web
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int)gridView.SelectedValue;
+            formPanel.Visible = false;
         }
 
         private void CargarTiposPersonas()
         {
-            _tipoPersona = new Dictionary<int, string>();
-            _tipoPersona.Add(0, "Administrativo");
-            _tipoPersona.Add(1, "Docente");
-            _tipoPersona.Add(2, "Alumno");
-            ddlTipoPersona.DataSource = _tipoPersona;
+            Dictionary<int, string> tipoPersona = new Dictionary<int, string>();
+            tipoPersona.Add(0, "Administrativo");
+            tipoPersona.Add(1, "Docente");
+            tipoPersona.Add(2, "Alumno");
+            ddlTipoPersona.DataSource = tipoPersona;
             ddlTipoPersona.DataTextField = "Value";
             ddlTipoPersona.DataValueField = "Key";
             ddlTipoPersona.DataBind();
@@ -196,35 +197,74 @@ namespace UI.Web
 
         private void LoadForm(int id)
         {
-            Entity = LogicPersona.GetOne(id);
-            PlanUsuario = LogicPlan.GetOne(Entity.IdPlan);
+            if (FormMode == FormModes.Modificacion)
+            {
+                txtClave.Enabled = false;
+                txtRepetirClave.Enabled = false;
+            }
+            if (FormMode == FormModes.Baja)
+            {
+                txtClave.Enabled = false;
+                txtRepetirClave.Enabled = false;
+                txtNombre.Enabled = false;
+                txtApellido.Enabled = false;
+                txtEmail.Enabled = false;
+                chkHabilitado.Enabled = false;
+                txtNombreUsuario.Enabled = false;
+                txtDireccion.Enabled = false;
+                txtLegajo.Enabled = false;
+                txtTelefono.Enabled = false;
+
+                ddlAnio.Enabled = false;
+                ddlMes.Enabled = false;
+                ddlDia.Enabled = false;
+                ddlEspecialidad.Enabled = false;
+                ddlIdPlan.Enabled = false;
+                ddlTipoPersona.Enabled = false;
+            }
+
+            PersonaActual = LogicPersona.GetOne(id);
+            Session["Persona"] = PersonaActual;
+            PlanUsuario = LogicPlan.GetOne(PersonaActual.IdPlan);
             EspecialidadUsuario = LogicEspecialidad.GetOne(PlanUsuario.IdEspecialidad);
 
-            txtNombre.Text = Entity.Nombre;
-            txtApellido.Text = Entity.Apellido;
-            txtEmail.Text = Entity.Email;
-            chkHabilitado.Checked = Entity.Habilitado;
-            txtNombreUsuario.Text = Entity.NombreUsuario;
+            txtNombre.Text = PersonaActual.Nombre;
+            txtApellido.Text = PersonaActual.Apellido;
+            txtEmail.Text = PersonaActual.Email;
+            chkHabilitado.Checked = PersonaActual.Habilitado;
+            txtNombreUsuario.Text = PersonaActual.NombreUsuario;
+            txtDireccion.Text = PersonaActual.Direccion;
+            txtLegajo.Text = PersonaActual.Legajo.ToString();
+            txtTelefono.Text = PersonaActual.Telefono;
 
-            ddlAnio.SelectedValue = Entity.FechaNacimiento.Year.ToString();
-            ddlMes.SelectedValue = Entity.FechaNacimiento.Month.ToString();
-            ddlDia.SelectedValue = Entity.FechaNacimiento.Day.ToString();
+            ddlAnio.SelectedValue = PersonaActual.FechaNacimiento.Year.ToString();
+            ddlMes.SelectedValue = PersonaActual.FechaNacimiento.Month.ToString();
+            ddlDia.SelectedValue = PersonaActual.FechaNacimiento.Day.ToString();
 
 
-            ddlEspecialidad.DataSource = LogicEspecialidad.GetAll().FindAll(x => x.Baja == false);
-            ddlEspecialidad.DataValueField = "ID";
-            ddlEspecialidad.DataTextField = "Descripcion";
-            ddlEspecialidad.DataBind();
+            CargarEspecialidades();
+            CargarPlanes();
+            CargarTiposPersonas();
+
             ddlEspecialidad.SelectedValue = PlanUsuario.IdEspecialidad.ToString();
+            ddlIdPlan.SelectedValue = PersonaActual.IdPlan.ToString();
+            ddlTipoPersona.SelectedIndex = (int)PersonaActual.TipoPersona;
+        }
 
-            ddlIdPlan.DataSource = LogicPlan.GetAll().FindAll(x => x.Baja == false);
+        private void CargarPlanes()
+        {
+            ddlIdPlan.DataSource = LogicPlan.GetAll();
             ddlIdPlan.DataValueField = "ID";
             ddlIdPlan.DataTextField = "Descripcion";
             ddlIdPlan.DataBind();
-            ddlIdPlan.SelectedValue = Entity.IdPlan.ToString();
+        }
 
-            CargarTiposPersonas();
-            ddlTipoPersona.SelectedIndex = (int)Entity.TipoPersona;
+        private void CargarEspecialidades()
+        {
+            ddlEspecialidad.DataSource = LogicEspecialidad.GetAll();
+            ddlEspecialidad.DataValueField = "ID";
+            ddlEspecialidad.DataTextField = "Descripcion";
+            ddlEspecialidad.DataBind();
         }
 
         private void LoadEntity(Persona per)
@@ -233,16 +273,25 @@ namespace UI.Web
             per.Apellido = txtApellido.Text;
             per.Email = txtEmail.Text;
             per.NombreUsuario = txtNombreUsuario.Text;
-            per.Clave = Entity.Clave;
+            per.Clave = PersonaActual.Clave;
             per.Habilitado = chkHabilitado.Checked;
-            per.Baja = false;
+            
+            if (FormMode == FormModes.Baja)
+            {
+                per.Baja = true;
+            }
+            else
+            {
+                per.Baja = false;
+            }
+
             per.Direccion = txtDireccion.Text;
             per.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue), 
                 int.Parse(ddlMes.SelectedValue), int.Parse(ddlDia.SelectedValue));
-            per.ID = Entity.ID;
+            per.ID = PersonaActual.ID;
             per.IdPlan = int.Parse(ddlIdPlan.SelectedValue);
             per.Legajo = int.Parse(txtLegajo.Text);
-            per.CambiaClave = Entity.CambiaClave;
+            per.CambiaClave = PersonaActual.CambiaClave;
             per.Telefono = txtTelefono.Text;
             per.TipoPersona = (Persona.TipoPersonas) ddlTipoPersona.SelectedIndex;
         }
@@ -264,11 +313,22 @@ namespace UI.Web
 
         protected void lnkAceptar_Click(object sender, EventArgs e)
         {
-            Entity = new Persona();
-            Entity.ID = SelectedID;
-            Entity.State = BusinessEntity.States.Modified;
-            LoadEntity(Entity);
-            SaveEntity(Entity);
+            if (FormMode == FormModes.Alta)
+            {
+                PersonaActual = new Persona();
+                PersonaActual.ID = SelectedID;
+                PersonaActual.State = BusinessEntity.States.New;
+            }
+            if (FormMode == FormModes.Modificacion ||FormMode == FormModes.Baja)
+            {
+                PersonaActual = (Persona)Session["Persona"];
+                PersonaActual.ID = SelectedID;
+                PersonaActual.State = BusinessEntity.States.Modified;
+            }
+
+            
+            LoadEntity(PersonaActual);
+            SaveEntity(PersonaActual);
             LoadGrid();
 
             formPanel.Visible = false;
@@ -308,6 +368,25 @@ namespace UI.Web
                 ddlDia.DataBind();
 
             }
+        }
+
+        protected void lnkEliminar_Click(object sender, EventArgs e)
+        {
+            if (IsEntitySelected)
+            {
+                formPanel.Visible = true;
+                FormMode = FormModes.Baja;
+                LoadForm(SelectedID);
+            }
+        }
+
+        protected void lnkNuevo_Click(object sender, EventArgs e)
+        {
+            formPanel.Visible = true;
+            FormMode = FormModes.Alta;
+            CargarTiposPersonas();
+            CargarPlanes();
+            CargarEspecialidades();
         }
     }
 }

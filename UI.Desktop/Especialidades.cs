@@ -27,7 +27,7 @@ namespace UI.Desktop
 
             try
             {
-                dgvEspecialidades.DataSource = el.GetAll().FindAll(x => x.Baja == false);
+                dgvEspecialidades.DataSource = el.GetAll();
             }
             catch (Exception e)
             {

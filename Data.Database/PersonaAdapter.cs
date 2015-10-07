@@ -24,7 +24,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas", SqlCon);
+                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where baja_logica = 0", SqlCon);
 
                 SqlDataReader drPersona = cmdPersona.ExecuteReader();
 
@@ -84,7 +84,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where id_persona = @id", SqlCon);
+                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where id_persona = @id and baja_logica = 0", SqlCon);
                 cmdPersona.Parameters.AddWithValue("@id", ID);
 
                 SqlDataReader drPersona = cmdPersona.ExecuteReader();
@@ -207,7 +207,7 @@ namespace Data.Database
                 SqlCommand updateCom = new SqlCommand("update dbo.personas set "
                     + "nombre = @nombre, apellido = @apellido, email = @email, direccion = @direccion,fecha_nac=@fecha_nac,id_plan=@id_plan,legajo=@legajo, telefono=@telefono,tipo_persona=@tipo_persona,"
                     + "nombre_usuario=@nombre_usuario, clave=@clave, habilitado=@habilitado, cambia_clave=@cambia_clave, baja_logica=@baja_logica where "
-                    + "id_persona = @id", SqlCon);
+                    + "id_persona = @id and baja_logica = 0", SqlCon);
                 updateCom.Parameters.AddWithValue("@nombre", persona.Nombre);
                 updateCom.Parameters.AddWithValue("@apellido", persona.Apellido);
                 updateCom.Parameters.AddWithValue("@email", persona.Email);

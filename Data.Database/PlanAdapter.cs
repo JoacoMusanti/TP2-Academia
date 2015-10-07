@@ -24,7 +24,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comPlanes = new SqlCommand("select * from planes", SqlCon);
+                SqlCommand comPlanes = new SqlCommand("select * from planes where baja_logica = 0", SqlCon);
 
                 SqlDataReader drPlanes = comPlanes.ExecuteReader();
 
@@ -67,7 +67,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comPlan = new SqlCommand("select * from planes where id_plan = @id", SqlCon);
+                SqlCommand comPlan = new SqlCommand("select * from planes where id_plan = @id and baja_logica = 0", SqlCon);
 
                 comPlan.Parameters.AddWithValue("@id", id);
 
@@ -156,7 +156,7 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand comUpdate = new SqlCommand("update planes set desc_plan = @descripcion, id_especialidad = @especialidad, baja_logica = @baja_logica "
-                    + "where id_plan = @id", SqlCon);
+                    + "where id_plan = @id and baja_logica = 0", SqlCon);
 
                 comUpdate.Parameters.AddWithValue("@descripcion", plan.Descripcion);
                 comUpdate.Parameters.AddWithValue("@especialidad", plan.IdEspecialidad);

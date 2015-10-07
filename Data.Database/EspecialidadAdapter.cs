@@ -24,7 +24,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comEspecialidades = new SqlCommand("select * from especialidades", SqlCon);
+                SqlCommand comEspecialidades = new SqlCommand("select * from especialidades where baja_logica = 0", SqlCon);
 
                 SqlDataReader drEspecialidades = comEspecialidades.ExecuteReader();
 
@@ -67,7 +67,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comEspecialidad = new SqlCommand("select * from especialidades where id_especialidad = @id",
+                SqlCommand comEspecialidad = new SqlCommand("select * from especialidades where id_especialidad = @id and baja_logica = 0",
                     SqlCon);
                 comEspecialidad.Parameters.AddWithValue("@id", id);
 
@@ -163,7 +163,7 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand updateCom = new SqlCommand("update especialidades set desc_especialidad = @descripcion, baja_logica = @baja_logica where " +
-                                                      "id_especialidad = @id", SqlCon);
+                                                      "id_especialidad = @id and baja_logica = 0", SqlCon);
 
                 updateCom.Parameters.AddWithValue("@id", especialidad.ID);
                 updateCom.Parameters.AddWithValue("@descripcion", especialidad.Descripcion);

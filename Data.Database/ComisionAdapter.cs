@@ -24,7 +24,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comComisiones = new SqlCommand("select * from comisiones", SqlCon);
+                SqlCommand comComisiones = new SqlCommand("select * from comisiones where baja_logica = 0", SqlCon);
 
                 SqlDataReader drComisiones = comComisiones.ExecuteReader();
 
@@ -69,7 +69,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comComision = new SqlCommand("select * from comisiones where @id = id_comision", SqlCon);
+                SqlCommand comComision = new SqlCommand("select * from comisiones where @id = id_comision and baja_logica = 0", SqlCon);
 
                 comComision.Parameters.AddWithValue("@id", id);
 
@@ -156,7 +156,7 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand comUpdate = new SqlCommand("update comisiones set desc_comision = @desc, anio_especialidad = @anio, " +
-                    "id_plan = @plan, baja_logica = @baja_logica where id_comision = @id", SqlCon);
+                    "id_plan = @plan, baja_logica = @baja_logica where id_comision = @id and baja_logica = 0", SqlCon);
 
                 comUpdate.Parameters.AddWithValue("@desc", comi.Descripcion);
                 comUpdate.Parameters.AddWithValue("@anio", comi.AnioEspecialidad);

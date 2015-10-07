@@ -31,7 +31,7 @@ namespace UI.Desktop
             MateriaLogic matLogic = new MateriaLogic();
             try
             {
-                dgvMaterias.DataSource = matLogic.GetAll().FindAll(x => x.Baja == false);
+                dgvMaterias.DataSource = matLogic.GetAll();
             }
             catch(Exception e)
             {

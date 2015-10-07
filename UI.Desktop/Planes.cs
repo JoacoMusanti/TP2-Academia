@@ -27,7 +27,7 @@ namespace UI.Desktop
 
             try
             {
-                dgvPlanes.DataSource = pl.GetAll().FindAll(x => x.Baja == false);
+                dgvPlanes.DataSource = pl.GetAll();
             }
             catch (Exception e)
             {
