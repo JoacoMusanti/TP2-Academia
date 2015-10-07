@@ -195,6 +195,27 @@ namespace UI.Web
             ddlTipoPersona.DataBind();
         }
 
+        private void LimpiarForm()
+        {
+            txtClave.Enabled = true;
+            txtRepetirClave.Enabled = true;
+            txtNombre.Enabled = true;
+            txtApellido.Enabled = true;
+            txtEmail.Enabled = true;
+            chkHabilitado.Enabled = true;
+            txtNombreUsuario.Enabled = true;
+            txtDireccion.Enabled = true;
+            txtLegajo.Enabled = true;
+            txtTelefono.Enabled = true;
+
+            ddlAnio.Enabled = true;
+            ddlMes.Enabled = true;
+            ddlDia.Enabled = true;
+            ddlEspecialidad.Enabled = true;
+            ddlIdPlan.Enabled = true;
+            ddlTipoPersona.Enabled = true;
+        }
+
         private void LoadForm(int id)
         {
             if (FormMode == FormModes.Modificacion)
@@ -273,9 +294,18 @@ namespace UI.Web
             per.Apellido = txtApellido.Text;
             per.Email = txtEmail.Text;
             per.NombreUsuario = txtNombreUsuario.Text;
-            per.Clave = PersonaActual.Clave;
+            
             per.Habilitado = chkHabilitado.Checked;
             
+            if (FormMode == FormModes.Modificacion)
+            {
+                per.Clave = PersonaActual.Clave;
+            }
+            else
+            {
+                per.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
+            }
+
             if (FormMode == FormModes.Baja)
             {
                 per.Baja = true;
@@ -330,7 +360,7 @@ namespace UI.Web
             LoadEntity(PersonaActual);
             SaveEntity(PersonaActual);
             LoadGrid();
-
+            SelectedID = 0;
             formPanel.Visible = false;
         }
 
@@ -387,6 +417,7 @@ namespace UI.Web
             CargarTiposPersonas();
             CargarPlanes();
             CargarEspecialidades();
+            LimpiarForm();
         }
     }
 }
