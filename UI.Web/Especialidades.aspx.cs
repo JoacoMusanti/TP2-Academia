@@ -75,7 +75,7 @@ namespace UI.Web
         {
             get
             {
-                return (SelectedID != 0);
+                return (SelectedID != -1);
             }
         }
 

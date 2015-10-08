@@ -51,7 +51,8 @@ namespace UI.Web
 
             if (!Page.IsPostBack)
             {
-
+                lnkAceptar.Enabled = false;
+                gridPlanes.EnablePersistedSelection = false;
             }
         }
 
@@ -180,6 +181,7 @@ namespace UI.Web
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
+            lnkAceptar.Enabled = true;
             FormMode = FormModes.Alta;
             planesPanel.Visible = true;
             CargarEspecialidades();
@@ -194,6 +196,7 @@ namespace UI.Web
         {
             if (HaySeleccion())
             {
+                lnkAceptar.Enabled = true;
                 FormMode = FormModes.Modificacion;
                 
                 planesPanel.Visible = true;
@@ -205,6 +208,7 @@ namespace UI.Web
         {
             if (HaySeleccion())
             {
+                lnkAceptar.Enabled = true;
                 FormMode = FormModes.Baja;
                 
                 planesPanel.Visible = true;
@@ -214,11 +218,23 @@ namespace UI.Web
 
         protected void lnkAceptar_Click(object sender, EventArgs e)
         {
-            CargarPlan();
-            GuardarPlan(PlanActual);
-            CargarGridPlanes();
-            SelectedIDPlan = 0;
+            if (lnkAceptar.Enabled)
+            {
+                CargarPlan();
+                GuardarPlan(PlanActual);
+                CargarGridPlanes();
+                SelectedIDPlan = -1;
+                planesPanel.Visible = false;
+                lnkAceptar.Enabled = false;
+            }
+                
+        }
+
+        protected void lnkCancelar_Click(object sender, EventArgs e)
+        {
             planesPanel.Visible = false;
+            SelectedIDPlan = -1;
+            
         }
     }
 }
