@@ -113,6 +113,11 @@ namespace UI.Web
             ddlEspecialidades.DataBind();
         }
 
+        private bool HaySeleccion()
+        {
+            return (SelectedIDPlan != 0);
+        }
+
         void CargarForm(int id)
         {
             if (FormMode == FormModes.Baja)
@@ -175,11 +180,14 @@ namespace UI.Web
             CargarEspecialidades();
             txtDescripcion.Enabled = true;
             ddlEspecialidades.Enabled = true;
+
+            txtDescripcion.Text = "";
+            ddlEspecialidades.SelectedIndex = 0;
         }
 
         protected void lnkEditar_Click(object sender, EventArgs e)
         {
-            if (SelectedIDPlan != -1)
+            if (HaySeleccion())
             {
                 FormMode = FormModes.Modificacion;
                 
@@ -190,7 +198,7 @@ namespace UI.Web
 
         protected void lnkEliminar_Click(object sender, EventArgs e)
         {
-            if (SelectedIDPlan != -1)
+            if (HaySeleccion())
             {
                 FormMode = FormModes.Baja;
                 
@@ -204,6 +212,7 @@ namespace UI.Web
             CargarPlan();
             GuardarPlan(PlanActual);
             CargarGridPlanes();
+            SelectedIDPlan = 0;
             planesPanel.Visible = false;
         }
     }

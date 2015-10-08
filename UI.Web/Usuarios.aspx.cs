@@ -222,6 +222,21 @@ namespace UI.Web
             {
                 txtClave.Enabled = false;
                 txtRepetirClave.Enabled = false;
+                txtNombre.Enabled = true;
+                txtApellido.Enabled = true;
+                txtEmail.Enabled = true;
+                chkHabilitado.Enabled = true;
+                txtNombreUsuario.Enabled = true;
+                txtDireccion.Enabled = true;
+                txtLegajo.Enabled = true;
+                txtTelefono.Enabled = true;
+
+                ddlAnio.Enabled = true;
+                ddlMes.Enabled = true;
+                ddlDia.Enabled = true;
+                ddlEspecialidad.Enabled = true;
+                ddlIdPlan.Enabled = true;
+                ddlTipoPersona.Enabled = true;
             }
             if (FormMode == FormModes.Baja)
             {
@@ -356,10 +371,12 @@ namespace UI.Web
                 PersonaActual.State = BusinessEntity.States.Modified;
             }
 
-            
+            // Se cargan los datos del form en PersonaActual y luego se persisten en base de datos
             LoadEntity(PersonaActual);
             SaveEntity(PersonaActual);
             LoadGrid();
+            // LoadGrid no dispara SelectedIndexChanged de la gridview por lo que cambiamos el
+            // selected ID manualmente
             SelectedID = 0;
             formPanel.Visible = false;
         }
