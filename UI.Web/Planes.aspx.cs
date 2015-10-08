@@ -57,7 +57,12 @@ namespace UI.Web
 
         private void CargarGridPlanes()
         {
-            gridPlanes.DataSource = LogicPlan.GetAll();
+            var planes = LogicPlan.GetAll();
+            var especialidades = LogicEspecialidad.GetAll();
+            // se reemplaza cada plan en planes con un objeto anonimo de la forma {ID, Descripcion, DEspecialidad}
+            // donde ID es la id del plan, Descripcion es la descripcion del plan y DEspecialidad es la descripcion de la especialidad del plan
+            gridPlanes.DataSource = planes.Select(plan => new { ID = plan.ID, Descripcion = plan.Descripcion, DEspecialidad = especialidades.Find(esp => plan.IdEspecialidad == esp.ID).Descripcion });
+            
             gridPlanes.DataBind();
         }
 
