@@ -8,6 +8,7 @@
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+                <asp:BoundField DataField="DEspecialidad" HeaderText="Especialidad" />
                 <asp:CommandField SelectText="Seleccionar" ShowSelectButton="True" />
             </Columns>
             <EditRowStyle BackColor="#999999" />
