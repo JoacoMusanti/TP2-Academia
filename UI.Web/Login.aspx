@@ -9,7 +9,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:Login ID="loginAcademia" runat="server" BackColor="#FFFF99" LoginButtonText="Iniciar sesión" OnAuthenticate="Login1_Authenticate" PasswordRecoveryText="Recuperar Contraseña" Width="315px">
+        <asp:Login ID="loginAcademia" style="vertical-align: middle; text-align: center; width: 400px; margin-left: auto; margin-right:auto;" runat="server" BackColor="#F7F7DE" LoginButtonText="Iniciar sesión" OnAuthenticate="Login1_Authenticate" PasswordRecoveryText="Recuperar Contraseña" Width="400px" BorderColor="#CCCC99" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="10pt">
+            <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
         </asp:Login>
     </form>
 </body>
