@@ -12,16 +12,16 @@
             <tr>
                 <td style="width: 265px">&nbsp;</td>
                 <td>
-                    <asp:HyperLink ID="HyperLink2" runat="server">Administrar Especialidades</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Especialidades.aspx">Administrar Especialidades</asp:HyperLink>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td style="width: 265px">&nbsp;</td>
-                <td>
+                <td style="width: 265px; height: 23px;"></td>
+                <td style="height: 23px">
                     <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Planes.aspx">Administrar Planes y Materias</asp:HyperLink>
                     &nbsp;</td>
-                <td>&nbsp;</td>
+                <td style="height: 23px"></td>
             </tr>
             <tr>
                 <td style="width: 265px">&nbsp;</td>

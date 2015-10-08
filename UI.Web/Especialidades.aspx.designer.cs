@@ -10,79 +10,61 @@
 namespace UI.Web {
     
     
-    public partial class PlanesMaterias {
+    public partial class Especialidades {
         
         /// <summary>
-        /// Control gridPlanesPanel.
+        /// Control gridPanelEspecialidades.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel gridPlanesPanel;
+        protected global::System.Web.UI.WebControls.Panel gridPanelEspecialidades;
         
         /// <summary>
-        /// Control gridPlanes.
+        /// Control gridEspecialidades.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridPlanes;
+        protected global::System.Web.UI.WebControls.GridView gridEspecialidades;
         
         /// <summary>
-        /// Control planesPanel.
+        /// Control EspecialidadesPanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel planesPanel;
+        protected global::System.Web.UI.WebControls.Panel EspecialidadesPanel;
         
         /// <summary>
-        /// Control lblDescripcion.
+        /// Control lblDescEsp.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcion;
+        protected global::System.Web.UI.WebControls.Label lblDescEsp;
         
         /// <summary>
-        /// Control txtDescripcion.
+        /// Control txtDescEsp.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtDescEsp;
         
         /// <summary>
-        /// Control lblEspecialidad.
+        /// Control gridEspecialidadesActionPanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEspecialidad;
-        
-        /// <summary>
-        /// Control ddlEspecialidades.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEspecialidades;
-        
-        /// <summary>
-        /// Control gridPlanesActionPanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel gridPlanesActionPanel;
+        protected global::System.Web.UI.WebControls.Panel gridEspecialidadesActionPanel;
         
         /// <summary>
         /// Control lnkNuevo.
@@ -112,30 +94,30 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.LinkButton lnkEliminar;
         
         /// <summary>
-        /// Control formActionPanel.
+        /// Control formEspecialidadesActionPanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel formActionPanel;
+        protected global::System.Web.UI.WebControls.Panel formEspecialidadesActionPanel;
         
         /// <summary>
-        /// Control lnkAceptar.
+        /// Control btnAceptar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAceptar;
+        protected global::System.Web.UI.WebControls.LinkButton btnAceptar;
         
         /// <summary>
-        /// Control lnkCancelar.
+        /// Control btCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkCancelar;
+        protected global::System.Web.UI.WebControls.LinkButton btCancelar;
     }
 }
