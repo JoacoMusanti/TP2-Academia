@@ -26,7 +26,7 @@
             <tr>
                 <td style="width: 265px">&nbsp;</td>
                 <td>
-                    <asp:HyperLink ID="HyperLink4" runat="server">Administrar Comisiones</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Comisiones.aspx">Administrar Comisiones</asp:HyperLink>
                 </td>
                 <td>&nbsp;</td>
             </tr>

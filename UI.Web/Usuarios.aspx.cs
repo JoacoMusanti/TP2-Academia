@@ -91,7 +91,7 @@ namespace UI.Web
                 }
                 else
                 {
-                    return 0;
+                    return -1;
                 }
             }
             set
@@ -104,7 +104,7 @@ namespace UI.Web
         {
             get
             {
-                return (SelectedID != 0);
+                return (SelectedID != -1);
             }
         }
 
@@ -436,5 +436,6 @@ namespace UI.Web
             CargarEspecialidades();
             LimpiarForm();
         }
+
     }
 }
