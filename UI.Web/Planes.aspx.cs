@@ -51,6 +51,7 @@ namespace UI.Web
 
             if (!Page.IsPostBack)
             {
+                SelectedIDPlan = -1;
                 lnkAceptar.Enabled = false;
                 gridPlanes.EnablePersistedSelection = false;
             }
@@ -121,7 +122,7 @@ namespace UI.Web
 
         private bool HaySeleccion()
         {
-            return (SelectedIDPlan != 0);
+            return (SelectedIDPlan != -1);
         }
 
         void CargarForm(int id)
