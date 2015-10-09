@@ -20,7 +20,7 @@
         <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Comisiones.aspx">Administrar Comisiones</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink5" runat="server">Administrar Cursos</asp:HyperLink>
+        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Cursos.aspx">Administrar Cursos</asp:HyperLink>
         <br />
         
     </asp:Panel>
