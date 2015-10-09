@@ -7,7 +7,6 @@ namespace Business.Entities
 {
     public class Materia : BusinessEntity
     {
-        public int IdMateria { get; set; }
         public string Descripcion { get; set; }
         public int HorasSemanales { get; set; }
         public int HorasTotales { get; set; }
