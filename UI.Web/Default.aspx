@@ -19,9 +19,16 @@
             <tr>
                 <td style="width: 265px; height: 23px;"></td>
                 <td style="height: 23px">
-                    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Planes.aspx">Administrar Planes y Materias</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Planes.aspx">Administrar Planes</asp:HyperLink>
                     &nbsp;</td>
                 <td style="height: 23px"></td>
+            </tr>
+            <tr>
+                <td style="width: 265px; height: 23px;">&nbsp;</td>
+                <td style="height: 23px">
+                    <asp:HyperLink ID="HyperLink6" runat="server">Administrar Materias</asp:HyperLink>
+                </td>
+                <td style="height: 23px">&nbsp;</td>
             </tr>
             <tr>
                 <td style="width: 265px">&nbsp;</td>

@@ -60,6 +60,9 @@
   <ItemGroup>
     <Content Include="Comisiones.aspx" />
     <Content Include="Especialidades.aspx" />
+    <Content Include="Estilos\Estilos.css" />
+    <Content Include="Imagenes\texcal-liso_gris-t12.jpg" />
+    <Content Include="Imagenes\utn.gif" />
     <Content Include="Login.aspx" />
     <Content Include="Planes.aspx" />
     <Content Include="scripts\scripts.js" />
