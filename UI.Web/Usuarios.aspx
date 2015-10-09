@@ -50,10 +50,10 @@
     <asp:DropDownList ID="ddlAnio" runat="server" ClientIDMode="Static"></asp:DropDownList>
     <br />
     <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
-    <asp:DropDownList ID="ddlEspecialidad" runat="server" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+    <asp:DropDownList ID="ddlEspecialidad" runat="server" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
     <br />
     <asp:Label ID="lblIdPlan" runat="server" Text="Plan: "></asp:Label>
-    <asp:DropDownList ID="ddlIdPlan" runat="server" OnSelectedIndexChanged="ddlIdPlan_SelectedIndexChanged"></asp:DropDownList>
+    <asp:DropDownList ID="ddlIdPlan" runat="server"></asp:DropDownList>
     <br />
      <asp:Label ID="lblTipoPersona" runat="server" Text="Tipo Persona: "></asp:Label>
     <asp:DropDownList ID="ddlTipoPersona" runat="server"></asp:DropDownList>

@@ -15,7 +15,7 @@ namespace UI.Web
         private PersonaLogic _logicPersona;
         private PlanLogic _logicPlan;
         private EspecialidadLogic _logicEspecialidad;
-        
+
 
 
         private EspecialidadLogic LogicEspecialidad
@@ -64,7 +64,7 @@ namespace UI.Web
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadGrid();
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 Util.Logger.LogHabilitado = false;
                 CargarFechas();
@@ -73,7 +73,7 @@ namespace UI.Web
                 ddlAnio.Attributes["onchange"] = "onCambiaFecha();";
                 ddlMes.Attributes["onchange"] = "onCambiaFecha();";
             }
-                
+
         }
 
         private Persona PersonaActual { get; set; }
@@ -151,7 +151,7 @@ namespace UI.Web
 
         private void CargarMeses()
         {
-            Dictionary<int,string> meses = new Dictionary<int, string>();
+            Dictionary<int, string> meses = new Dictionary<int, string>();
 
             for (int i = 1; i < 13; i++)
             {
@@ -309,9 +309,9 @@ namespace UI.Web
             per.Apellido = txtApellido.Text;
             per.Email = txtEmail.Text;
             per.NombreUsuario = txtNombreUsuario.Text;
-            
+
             per.Habilitado = chkHabilitado.Checked;
-            
+
             if (FormMode == FormModes.Modificacion)
             {
                 per.Clave = PersonaActual.Clave;
@@ -331,14 +331,14 @@ namespace UI.Web
             }
 
             per.Direccion = txtDireccion.Text;
-            per.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue), 
+            per.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue),
                 int.Parse(ddlMes.SelectedValue), int.Parse(ddlDia.SelectedValue));
             per.ID = PersonaActual.ID;
             per.IdPlan = int.Parse(ddlIdPlan.SelectedValue);
             per.Legajo = int.Parse(txtLegajo.Text);
             per.CambiaClave = PersonaActual.CambiaClave;
             per.Telefono = txtTelefono.Text;
-            per.TipoPersona = (Persona.TipoPersonas) ddlTipoPersona.SelectedIndex;
+            per.TipoPersona = (Persona.TipoPersonas)ddlTipoPersona.SelectedIndex;
         }
 
         private void SaveEntity(Persona per)
@@ -364,7 +364,7 @@ namespace UI.Web
                 PersonaActual.ID = SelectedID;
                 PersonaActual.State = BusinessEntity.States.New;
             }
-            if (FormMode == FormModes.Modificacion ||FormMode == FormModes.Baja)
+            if (FormMode == FormModes.Modificacion || FormMode == FormModes.Baja)
             {
                 PersonaActual = (Persona)Session["Persona"];
                 PersonaActual.ID = SelectedID;
@@ -381,42 +381,12 @@ namespace UI.Web
             formPanel.Visible = false;
         }
 
-        protected void ddlAnio_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<int> dias = new List<int>();
-            if (ddlMes.SelectedIndex >= 0)
-            {
-                int diasEnMesSeleccionado = DateTime.DaysInMonth(int.Parse(ddlAnio.SelectedItem.Text), ddlMes.SelectedIndex + 1);
-
-
-                for (int i = 0; i < diasEnMesSeleccionado; i++)
-                {
-                    dias.Add(i + 1);
-                }
-
-                ddlDia.DataSource = dias;
-                ddlDia.DataBind();
-            }
+            ddlIdPlan.DataSource = LogicPlan.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidad.SelectedValue));
+            ddlIdPlan.DataBind();
         }
-
-        protected void ddlMes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            List<int> dias = new List<int>();
-            if (ddlAnio.SelectedIndex >= 0)
-            {
-                int diasEnMesSeleccionado = DateTime.DaysInMonth(int.Parse(ddlAnio.SelectedItem.Text), ddlMes.SelectedIndex + 1);
-
-                for (int i = 0; i < diasEnMesSeleccionado; i++)
-                {
-                    dias.Add(i + 1);
-                }
-
-                ddlDia.DataSource = dias;
-                ddlDia.DataBind();
-
-            }
-        }
-
+        
         protected void lnkEliminar_Click(object sender, EventArgs e)
         {
             if (IsEntitySelected)
