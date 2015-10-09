@@ -1,4 +1,10 @@
 ﻿body {
         background-image:url('/Imagenes/texcal-liso_gris-t12.jpg');
 }
+ .panelCss
+{
+ background:white;   
+ vertical-align: middle;
+ border:2px solid blue;
+}
 

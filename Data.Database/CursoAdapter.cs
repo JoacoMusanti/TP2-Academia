@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace Data.Database
 {
-    class CursoAdapter : Adapter
+    public class CursoAdapter : Adapter
     {
         protected SqlDataAdapter _daCursos;
 
@@ -24,7 +24,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comCurso = new SqlCommand("select * from dbd.cursos where baja_logica = 0", SqlCon);
+                SqlCommand comCurso = new SqlCommand("select * from dbo.cursos where baja_logica = 0", SqlCon);
 
                 SqlDataReader drCursos = comCurso.ExecuteReader();
 
@@ -106,11 +106,11 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand curDelete = new SqlCommand("delete dbo.cursos where id_curso = @id", SqlCon);
+                SqlCommand comDelete = new SqlCommand("delete dbo.cursos where id_curso = @id", SqlCon);
 
-                curDelete.Parameters.AddWithValue("@id", id);
+                comDelete.Parameters.AddWithValue("@id", id);
 
-                curDelete.ExecuteNonQuery();
+                comDelete.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -165,6 +165,8 @@ namespace Data.Database
                 curUpdate.Parameters.AddWithValue("@anio", cur.AnioCalendario);
                 curUpdate.Parameters.AddWithValue("@cupo", cur.Cupo);
                 curUpdate.Parameters.AddWithValue("@baja_logica", cur.Baja);
+                curUpdate.Parameters.AddWithValue("@id", cur.ID);
+
                 curUpdate.ExecuteNonQuery();
             }
             catch (Exception e)
