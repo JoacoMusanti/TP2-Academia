@@ -15,8 +15,9 @@ namespace UI.Web
             //si se autentica mostramos mensaje y nombre de usuario
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                Response.Write("Bienvenido : " + User.Identity.Name);
+                Panel1.GroupingText = User.Identity.Name;
             }
+            
         }
     }
 }
