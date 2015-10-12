@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Materias.aspx.cs" Inherits="UI.Web.Materias" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <asp:Panel ID="gridMateriasPanel" runat="server">
-        <asp:GridView ID="gridMaterias" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="gridMaterias" runat="server" DataKeyNames="ID" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gridMaterias_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
@@ -23,7 +23,7 @@
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
     </asp:Panel>
-    <asp:Panel ID="materiasPanel" runat="server">
+    <asp:Panel ID="materiasPanel" runat="server" Visible="false">
         <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion: "></asp:Label>
         <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
         <br />
@@ -34,14 +34,20 @@
         <asp:TextBox ID="txtHorasTotales" runat="server"></asp:TextBox>
         <br />
         <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
-        <asp:DropDownList ID="ddlEspecialidad" runat="server" AutoPostBack="true">
+        <asp:DropDownList ID="ddlEspecialidad" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged">
         </asp:DropDownList>
         <br />
         <asp:Label ID="lblPlan" runat="server" Text="Plan: "></asp:Label>
         <asp:DropDownList ID="ddlPlan" runat="server" AutoPostBack="true">
         </asp:DropDownList>
     </asp:Panel>
-    <asp:Panel ID="gridMateriasActionPanel" runat="server"></asp:Panel>
-    <asp:Panel ID="formActionPanel" runat="server">
+    <asp:Panel ID="gridMateriasActionPanel" runat="server">
+        <asp:LinkButton ID="lnkNuevo" runat="server" OnClick="lnkNuevo_Click">Nuevo</asp:LinkButton>
+        <asp:LinkButton ID="lnkEditar" runat="server" OnClick="lnkEditar_Click">Editar</asp:LinkButton>
+        <asp:LinkButton ID="lnkEliminar" runat="server" OnClick="lnkEliminar_Click">Eliminar</asp:LinkButton>
+    </asp:Panel>
+    <asp:Panel ID="formActionPanel" runat="server" Visible="false">
+        <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
+        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click">Cancelar</asp:LinkButton>
     </asp:Panel>
 </asp:Content>

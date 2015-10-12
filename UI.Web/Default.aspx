@@ -14,7 +14,7 @@
         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Planes.aspx">Administrar Planes</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink6" runat="server">Administrar Materias</asp:HyperLink>
+        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Materias.aspx">Administrar Materias</asp:HyperLink>
         <br />
         <br />
         <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Comisiones.aspx">Administrar Comisiones</asp:HyperLink>

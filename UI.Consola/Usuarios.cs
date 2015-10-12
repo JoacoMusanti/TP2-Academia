@@ -70,13 +70,13 @@ namespace UI.Consola
         public void ListadoGeneral()
         {
             Console.Clear();
-            foreach (Usuario usr in UsuarioNegocio.GetAll() )
+            foreach (Persona usr in UsuarioNegocio.GetAll() )
             {
                 MostrarDatos(usr);
             }
         }
 
-        public void MostrarDatos( Usuario usr)
+        public void MostrarDatos(Persona usr)
         {
 
             Console.WriteLine("Usuario: {0}", usr.ID);
@@ -84,7 +84,7 @@ namespace UI.Consola
             Console.WriteLine("\t\tApellido: {0}", usr.Apellido);
             Console.WriteLine("\t\tNombre de Usuario: {0}", usr.NombreUsuario);
             Console.WriteLine("\t\tClave: {0}", usr.Clave);
-            Console.WriteLine("\t\tEmail: {0}", usr.EMail);
+            Console.WriteLine("\t\tEmail: {0}", usr.Email);
             Console.WriteLine("\t\tHabilitado: {0}", usr.Habilitado);
             // \t dentro de un string representa un TAB
             Console.WriteLine();
@@ -121,7 +121,7 @@ namespace UI.Consola
                 Console.Clear();
                 Console.Write("Ingrese ID del usuario: ");
                 int id = int.Parse(Console.ReadLine());
-                Business.Entities.Usuario usuario = UsuarioNegocio.GetOne(id);
+                Business.Entities.Persona usuario = UsuarioNegocio.GetOne(id);
                 Console.Write("Ingrese nombre: ");
                 usuario.Nombre = Console.ReadLine();
                 Console.Write("\nIngrese apellido: ");
@@ -131,7 +131,7 @@ namespace UI.Consola
                 Console.Write("\nIngrese clave: ");
                 //usuario.Clave = Console.ReadLine();
                 Console.Write("\nIngrese email: ");
-                usuario.EMail = Console.ReadLine();
+                usuario.Email = Console.ReadLine();
                 Console.Write("\nIngrese habilitacion de usuario (1-Si/otro-No): ");
                 usuario.Habilitado = (Console.ReadLine() == "1");
                 usuario.State = BusinessEntity.States.Modified;
@@ -157,7 +157,7 @@ namespace UI.Consola
 
         public void Agregar()
         {
-            Business.Entities.Usuario usuario= new Business.Entities.Usuario();
+            Business.Entities.Persona usuario = new Business.Entities.Persona();
             Console.Clear();
             Console.Write("Ingrese Nombre: ");
             usuario.Nombre = Console.ReadLine();
@@ -168,7 +168,7 @@ namespace UI.Consola
             Console.Write("\nIngrese clave: ");
             //usuario.Clave = Console.ReadLine();
             Console.Write("\nIngrese email: ");
-            usuario.EMail = Console.ReadLine();
+            usuario.Email = Console.ReadLine();
             Console.Write("\nIngrese habilitacion de usuario (1-Si/otro-No): ");
             usuario.Habilitado = (Console.ReadLine() == "1");
             usuario.State = BusinessEntity.States.New;

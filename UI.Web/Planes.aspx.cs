@@ -51,46 +51,45 @@ namespace UI.Web
 
             if (!Page.IsPostBack)
             {
-                SelectedIDPlan = -1;
-                lnkAceptar.Enabled = false;
-                gridPlanes.EnablePersistedSelection = false;
+                SelectedID = -1;
             }
         }
 
         private void CargarGridPlanes()
         {
             var planes = LogicPlan.GetAll();
-            var especialidades = LogicEspecialidad.GetAll();
             // se reemplaza cada plan en planes con un objeto anonimo de la forma {ID, Descripcion, DEspecialidad}
             // donde ID es la id del plan, Descripcion es la descripcion del plan y DEspecialidad es la descripcion de la especialidad del plan
-            gridPlanes.DataSource = planes.Select(plan => new { ID = plan.ID, Descripcion = plan.Descripcion, DEspecialidad = especialidades.Find(esp => plan.IdEspecialidad == esp.ID).Descripcion });
+            gridPlanes.DataSource = planes.Select(plan => new { ID = plan.ID, Descripcion = plan.Descripcion, DEspecialidad = LogicEspecialidad.GetOne(plan.IdEspecialidad).Descripcion });
             
             gridPlanes.DataBind();
         }
 
-        private int SelectedIDPlan
+        private int? SelectedID
         {
             get
             {
-                if (ViewState["SelectedIDPlan"] == null)
+                if (ViewState["SelectedID"] == null)
                 {
                     return -1;
                 }
                 else
                 {
-                    return (int)ViewState["SelectedIDPlan"];
+                    return (int)ViewState["SelectedID"];
                 }
             }
             set
             {
-                ViewState["SelectedIDPlan"] = value;
+                ViewState["SelectedID"] = value;
             }
         }
 
         protected void gridPlanes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedIDPlan = (int)gridPlanes.SelectedValue;
+            SelectedID = (int?)gridPlanes.SelectedValue;
             planesPanel.Visible = false;
+            formActionPanel.Visible = false;
+            gridPlanesActionPanel.Visible = true;
         }
 
         enum FormModes
@@ -122,7 +121,7 @@ namespace UI.Web
 
         private bool HaySeleccion()
         {
-            return (SelectedIDPlan != -1);
+            return (SelectedID != -1);
         }
 
         void CargarForm(int id)
@@ -158,10 +157,9 @@ namespace UI.Web
             if (FormMode == FormModes.Baja ||FormMode == FormModes.Modificacion)
             {
                 PlanActual = (Plan)Session["Plan"];
-                PlanActual.ID = SelectedIDPlan;
                 PlanActual.State = BusinessEntity.States.Modified;
-                
             }
+
             if (FormMode == FormModes.Baja)
             {
                 PlanActual.Baja = true;
@@ -182,9 +180,11 @@ namespace UI.Web
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
-            lnkAceptar.Enabled = true;
             FormMode = FormModes.Alta;
             planesPanel.Visible = true;
+            formActionPanel.Visible = true;
+            gridPlanesActionPanel.Visible = false;
+
             CargarEspecialidades();
             txtDescripcion.Enabled = true;
             ddlEspecialidades.Enabled = true;
@@ -197,11 +197,12 @@ namespace UI.Web
         {
             if (HaySeleccion())
             {
-                lnkAceptar.Enabled = true;
                 FormMode = FormModes.Modificacion;
-                
                 planesPanel.Visible = true;
-                CargarForm(SelectedIDPlan);
+                formActionPanel.Visible = true;
+                gridPlanesActionPanel.Visible = false;
+
+                CargarForm(SelectedID.Value);
             }
         }
 
@@ -209,32 +210,37 @@ namespace UI.Web
         {
             if (HaySeleccion())
             {
-                lnkAceptar.Enabled = true;
+                planesPanel.Visible = true;
+                formActionPanel.Visible = true;
+                gridPlanesActionPanel.Visible = false;
                 FormMode = FormModes.Baja;
                 
-                planesPanel.Visible = true;
-                CargarForm(SelectedIDPlan);
+                CargarForm(SelectedID.Value);
             }
         }
 
         protected void lnkAceptar_Click(object sender, EventArgs e)
         {
-            if (lnkAceptar.Enabled)
-            {
-                CargarPlan();
-                GuardarPlan(PlanActual);
-                CargarGridPlanes();
-                SelectedIDPlan = -1;
-                planesPanel.Visible = false;
-                lnkAceptar.Enabled = false;
-            }
+            CargarPlan();
+            GuardarPlan(PlanActual);
+            CargarGridPlanes();
+            formActionPanel.Visible = false;
+            planesPanel.Visible = false;
+            gridPlanesActionPanel.Visible = true;
                 
+
+            gridPlanes.SelectedIndex = -1;
+            gridPlanes_SelectedIndexChanged(null, null);
         }
 
         protected void lnkCancelar_Click(object sender, EventArgs e)
         {
             planesPanel.Visible = false;
-            SelectedIDPlan = -1;
+            formActionPanel.Visible = false;
+            gridPlanesActionPanel.Visible = true;
+
+            gridPlanes.SelectedIndex = -1;
+            gridPlanes_SelectedIndexChanged(null, null);
             
         }
     }
