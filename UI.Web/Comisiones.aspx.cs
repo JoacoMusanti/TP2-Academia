@@ -179,6 +179,7 @@ namespace UI.Web
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
+            gridActionPanel.Visible = false;
             formActionPanel.Visible = true;
             FormMode = FormModes.Alta;
             panelFormComisiones.Visible = true;
@@ -193,6 +194,7 @@ namespace UI.Web
 
         protected void lnkEditar_Click(object sender, EventArgs e)
         {
+            gridActionPanel.Visible = false;
             formActionPanel.Visible = true;
             if(IsEntitySelected)
             {
@@ -204,6 +206,7 @@ namespace UI.Web
 
         protected void lnkBorrar_Click(object sender, EventArgs e)
         {
+            gridActionPanel.Visible = false;
             formActionPanel.Visible = true;
             if (IsEntitySelected)
             {
@@ -253,12 +256,14 @@ namespace UI.Web
             SelectedID = 0;
             panelFormComisiones.Visible = false;
             formActionPanel.Visible = false;
+            gridActionPanel.Visible = true;
         }
 
         protected void lnkCancelar_Click(object sender, EventArgs e)
         {
             panelFormComisiones.Visible = false;
             formActionPanel.Visible = false;
+            gridActionPanel.Visible = true;
         }
     }
 }

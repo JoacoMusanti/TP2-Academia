@@ -20,6 +20,9 @@
                 height: 144px;
             }
         </style>
+
+        <link rel="icon" type="image/png" href="/Imagenes/LogoIconoUTN.png" />
+
     </head>
     <body>
         <form id="bodyForm" runat="server">

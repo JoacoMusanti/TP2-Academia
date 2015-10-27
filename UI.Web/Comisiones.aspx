@@ -29,7 +29,7 @@
         </asp:GridView>
     </asp:Panel>
 
-    <asp:Panel ID="panelFormComisiones" runat="server" Visible="false" Height="21px">
+    <asp:Panel ID="panelFormComisiones" runat="server" Visible="false">
         <asp:Label ID="lblDescCom" runat="server" Text="Descripción"></asp:Label>
         <asp:TextBox ID="txtDescCom" runat="server"></asp:TextBox>
         <br />

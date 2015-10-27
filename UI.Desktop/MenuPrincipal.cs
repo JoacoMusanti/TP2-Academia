@@ -28,34 +28,35 @@ namespace UI.Desktop
             }
         }
 
-        private void btnUsuarios_Click(object sender, EventArgs e)
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Usuarios usr = new Usuarios();
             usr.ShowDialog();
         }
 
-        private void btnEspecialidades_Click(object sender, EventArgs e)
+        private void especialidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Especialidades esp = new Especialidades();
             esp.ShowDialog();
         }
 
-        private void btnComisiones_Click(object sender, EventArgs e)
+        private void materiasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Materias mat = new Materias();
+            mat.ShowDialog();
+        }
+
+        private void comisionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Comisiones com = new Comisiones();
             com.ShowDialog();
         }
 
-        private void btnAdministrarPlanes_Click(object sender, EventArgs e)
+        private void planesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Planes pl = new Planes();
             pl.ShowDialog();
-        }
-
-        private void btnMaterias_Click(object sender, EventArgs e)
-        {
-            Materias mat = new Materias();
-            mat.ShowDialog();
         }
     }
 }
