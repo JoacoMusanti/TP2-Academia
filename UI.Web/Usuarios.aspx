@@ -29,18 +29,24 @@
 <asp:Panel ID="formPanel" Visible="false" runat="server">
     <asp:Label ID="lblNombre" runat="server" Text="Nombre: "></asp:Label>
     <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombre" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblApellido" runat="server" Text="Apellido: "></asp:Label>
     <asp:TextBox ID="txtApellido" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre0" runat="server" ControlToValidate="txtApellido" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblEmail" runat="server" Text="Email: "></asp:Label>
     <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre1" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblDireccion" runat="server" Text="Direccion: "></asp:Label>
     <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre2" runat="server" ControlToValidate="txtDireccion" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblLegajo" runat="server" Text="Legajo: "></asp:Label>
     <asp:TextBox ID="txtLegajo" runat="server"></asp:TextBox>
+    <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtLegajo" Display="Dynamic" EnableTheming="True" ErrorMessage="Debe ser un numero entero" ForeColor="#FF3300" MaximumValue="999999" MinimumValue="0" Type="Integer"></asp:RangeValidator>
+    <asp:RequiredFieldValidator ID="rfvNombre3" runat="server" ControlToValidate="txtLegajo" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblDia" runat="server" Text="Dia: : "></asp:Label>
     <asp:DropDownList ID="ddlDia" runat="server" ClientIDMode="Static"></asp:DropDownList>
@@ -60,18 +66,23 @@
     <br />
     <asp:Label ID="lblTelefono" runat="server" Text="Telefono: "></asp:Label>
     <asp:TextBox ID="txtTelefono" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre4" runat="server" ControlToValidate="txtTelefono" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblHabilitado" runat="server" Text="Habilitado: "></asp:Label>
     <asp:CheckBox ID="chkHabilitado" runat="server"></asp:CheckBox>
     <br />
     <asp:Label ID="lblNombreUsuario" runat="server" Text="Usuario: "></asp:Label>
     <asp:TextBox ID="txtNombreUsuario" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre5" runat="server" ControlToValidate="txtNombreUsuario" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblClave" runat="server" Text="Clave: "></asp:Label>
     <asp:TextBox ID="txtClave" TextMode="Password" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre6" runat="server" ControlToValidate="txtClave" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblRepetirClave" runat="server" Text="Repetir Clave: "></asp:Label>
     <asp:TextBox ID="txtRepetirClave" TextMode="Password" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvNombre7" runat="server" ControlToValidate="txtRepetirClave" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="txtClave" ControlToValidate="txtRepetirClave" ErrorMessage="Las claves no coinciden" ForeColor="#FF3300"></asp:CompareValidator>
     <br />
 </asp:Panel>
 <asp:Panel ID="gridActionsPanel" runat="server">

@@ -29,6 +29,7 @@ namespace UI.Web
                     Util.Hash.VerificarHash(UsuarioActual.Clave, loginAcademia.Password) && 
                     UsuarioActual.Habilitado == true)
                 {
+                    Session["RolSesion"] = UsuarioActual.TipoPersona;
                     FormsAuthentication.RedirectFromLoginPage(loginAcademia.UserName, loginAcademia.RememberMeSet);
                 }
                 else 

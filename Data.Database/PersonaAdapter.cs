@@ -272,7 +272,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where nombre_usuario = @nombreusuario", SqlCon);
+                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where nombre_usuario = @nombreusuario and baja_logica = 0", SqlCon);
                 cmdPersona.Parameters.AddWithValue("@nombreusuario", nameuser);
 
                 SqlDataReader drPersona = cmdPersona.ExecuteReader();
@@ -322,7 +322,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where legajo = @legajo", SqlCon);
+                SqlCommand cmdPersona = new SqlCommand("select * from dbo.personas where legajo = @legajo and baja_logica = 0", SqlCon);
                 cmdPersona.Parameters.AddWithValue("@legajo", legajo);
 
                 SqlDataReader drPersona = cmdPersona.ExecuteReader();

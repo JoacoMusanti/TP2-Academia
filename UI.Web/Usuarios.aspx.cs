@@ -63,15 +63,22 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadGrid();
-            if (!IsPostBack)
+            if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
             {
-                Util.Logger.LogHabilitado = false;
-                CargarFechas();
-                // los dropdown mes y año llaman a la funcion javascript onCambiaFecha()
-                // cuando se dispara el evento onchange (selectedIndexChanged)
-                ddlAnio.Attributes["onchange"] = "onCambiaFecha();";
-                ddlMes.Attributes["onchange"] = "onCambiaFecha();";
+                LoadGrid();
+                if (!IsPostBack)
+                {
+                    Util.Logger.LogHabilitado = false;
+                    CargarFechas();
+                    // los dropdown mes y año llaman a la funcion javascript onCambiaFecha()
+                    // cuando se dispara el evento onchange (selectedIndexChanged)
+                    ddlAnio.Attributes["onchange"] = "onCambiaFecha();";
+                    ddlMes.Attributes["onchange"] = "onCambiaFecha();";
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Default.aspx?mensaje=" + Server.UrlEncode("No tenes permisos para acceder a ese recurso"));
             }
 
         }

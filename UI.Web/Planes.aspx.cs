@@ -46,13 +46,21 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarGridPlanes();
+            if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
+            {
+                CargarGridPlanes();
             
 
-            if (!Page.IsPostBack)
-            {
-                SelectedID = -1;
+                if (!Page.IsPostBack)
+                {
+                    SelectedID = -1;
+                }
             }
+            else
+            {
+                Response.Redirect("~/Default.aspx?mensaje=" + Server.UrlEncode("No tenes permisos para acceder a ese recurso"));
+            }
+            
         }
 
         private void CargarGridPlanes()

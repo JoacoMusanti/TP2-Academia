@@ -15,6 +15,10 @@ namespace UI.Desktop
     public partial class FormLogin : ApplicationForm
     {
         private Persona UsuarioActual { get; set; }
+        public Persona.TipoPersonas Rol 
+        {
+            get { return UsuarioActual.TipoPersona; } 
+        }
         public FormLogin()
         {
             InitializeComponent();
@@ -29,17 +33,11 @@ namespace UI.Desktop
                 UsuarioActual = usr.GetOne(txtUsuario.Text);
                 // UNDONE: Restringir el acceso a ciertos forms segun el tipo de persona
                 if (UsuarioActual.Clave != null &&
-                    Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text) &&
-                    UsuarioActual.TipoPersona == Persona.TipoPersonas.Administrativo)
+                    Util.Hash.VerificarHash(UsuarioActual.Clave, txtPass.Text))
                 {
                     DialogResult = DialogResult.OK;
                 }
-                else if (UsuarioActual.TipoPersona != Persona.TipoPersonas.Administrativo)
-                {
-                    Notificar("Login", "Este usuario no tiene permisos para acceder al sistema", MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation);
-                }
-                else if (UsuarioActual.Habilitado == false)
+                else if (UsuarioActual.Clave != null && UsuarioActual.Habilitado == false)
                 {
                     Notificar("Login", "Este usuario no esta habilitado para usar el sistema", MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation);

@@ -4,25 +4,30 @@
         <tr>
             <td style="width: 394px; height: 7px;"></td>
             <td style="height: 7px">
-    <asp:Panel ID="Panel1" runat="server" CssClass="panelCss" Height="230px" Width="209px" BorderStyle="None">
-        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Usuarios.aspx">Administrar Usuarios</asp:HyperLink>
+    <asp:Panel ID="menuPanel" runat="server" CssClass="panelCss" BorderStyle="None" Width="204px">
+        <asp:HyperLink ID="hlkUsuarios" runat="server" NavigateUrl="~/Usuarios.aspx">Administrar Usuarios</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Especialidades.aspx">Administrar Especialidades</asp:HyperLink>
+        <asp:HyperLink ID="hlkEspecialidades" runat="server" NavigateUrl="~/Especialidades.aspx">Administrar Especialidades</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Planes.aspx">Administrar Planes</asp:HyperLink>
+        <asp:HyperLink ID="hlkPlanes" runat="server" NavigateUrl="~/Planes.aspx">Administrar Planes</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Materias.aspx">Administrar Materias</asp:HyperLink>
+        <asp:HyperLink ID="hlkMaterias" runat="server" NavigateUrl="~/Materias.aspx">Administrar Materias</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Comisiones.aspx">Administrar Comisiones</asp:HyperLink>
+        <asp:HyperLink ID="hlkComisiones" runat="server" NavigateUrl="~/Comisiones.aspx">Administrar Comisiones</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Cursos.aspx">Administrar Cursos</asp:HyperLink>
+        <asp:HyperLink ID="hlkCursos" runat="server" NavigateUrl="~/Cursos.aspx">Administrar Cursos</asp:HyperLink>
         <br />
-        
+        <br />
+        <asp:HyperLink ID="hlkInscripcionCurso" runat="server" >Inscribirse a Cursos</asp:HyperLink>
+        <br />
+        <br />
+        <asp:HyperLink ID="hlkCargarNotas" runat="server" >Cargar Notas</asp:HyperLink>
+        <br />
     </asp:Panel>
             </td>
             <td style="height: 7px"></td>

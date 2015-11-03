@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Cursos.aspx.cs" Theme="" Inherits="UI.Web.Cursos" %>
 <asp:Content ID="Content4" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
-<asp:Panel ID="gridPanel" runat="server">
+    <asp:Panel ID="gridPanel" runat="server">
         <table style="width:100%;">
             <tr>
                 <td class="auto-style1" style="width: 263px">&nbsp;</td>
@@ -60,9 +60,9 @@
                         <asp:LinkButton ID="lnkEliminar" runat="server" OnClick="lnkEliminar_Click">Eliminar</asp:LinkButton>
                         <asp:LinkButton ID="lnkNuevo" runat="server" OnClick="lnkNuevo_Click">Nuevo</asp:LinkButton>
                     </asp:Panel>
-                    <asp:Panel ID="formActionsPanel" runat="server">
+                    <asp:Panel ID="formActionsPanel" runat="server" Visible="false">
                         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
-                        <asp:LinkButton ID="lnkCancelar" runat="server">Cancelar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click">Cancelar</asp:LinkButton>
                     </asp:Panel>
                 </td>
                 <td>&nbsp;</td>

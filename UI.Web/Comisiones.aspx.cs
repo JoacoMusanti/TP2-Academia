@@ -50,7 +50,15 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Load_Grid();
+            if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
+            {
+                Load_Grid();
+            }
+            else
+            {
+                Response.Redirect("~/Default.aspx?mensaje=" + Server.UrlEncode("No tenes permisos para acceder a ese recurso"));
+            }
+            
         }
 
         private void Load_Grid()

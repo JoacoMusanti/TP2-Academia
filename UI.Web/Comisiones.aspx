@@ -32,9 +32,12 @@
     <asp:Panel ID="panelFormComisiones" runat="server" Visible="false">
         <asp:Label ID="lblDescCom" runat="server" Text="Descripción"></asp:Label>
         <asp:TextBox ID="txtDescCom" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtDescCom" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
         <br />
         <asp:Label ID="lblAnioEspecialidad" runat="server" Text="Año de especialidad"></asp:Label>
         <asp:TextBox ID="txtAnioEsp" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Debe ser un año" ForeColor="#FF3300" MaximumValue="2050" MinimumValue="2010" Type="Integer"></asp:RangeValidator>
         <br />
         <asp:Label ID="lblEspCom" runat="server" Text="Especialidad"></asp:Label>
         <asp:DropDownList ID="ddlEspecialidades" runat="server"></asp:DropDownList>
