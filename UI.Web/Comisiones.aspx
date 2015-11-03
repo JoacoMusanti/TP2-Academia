@@ -37,7 +37,7 @@
         <asp:Label ID="lblAnioEspecialidad" runat="server" Text="Año de especialidad"></asp:Label>
         <asp:TextBox ID="txtAnioEsp" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Debe ser un año" ForeColor="#FF3300" MaximumValue="2050" MinimumValue="2010" Type="Integer"></asp:RangeValidator>
+        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Debe ser un año entre 2010 y 2050" ForeColor="#FF3300" MaximumValue="2050" MinimumValue="2010" Type="Integer"></asp:RangeValidator>
         <br />
         <asp:Label ID="lblEspCom" runat="server" Text="Especialidad"></asp:Label>
         <asp:DropDownList ID="ddlEspecialidades" runat="server"></asp:DropDownList>
@@ -56,7 +56,7 @@
 
     <asp:Panel ID="formActionPanel" runat="server" Visible="false">
         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
-        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click">Cancelar</asp:LinkButton>
+        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
 
     </asp:Panel>
 

@@ -26,12 +26,17 @@
     <asp:Panel ID="materiasPanel" runat="server" Visible="false">
         <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion: "></asp:Label>
         <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtDescripcion" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
         <br />
         <asp:Label ID="lblHS" runat="server" Text="Horas semanales: "></asp:Label>
         <asp:TextBox ID="txtHorasSemanales" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtHorasSemanales" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtHorasSemanales" Display="Dynamic" ErrorMessage="Debe ser un entero mayor a 0" ForeColor="#FF3300" MaximumValue="999999" MinimumValue="1"></asp:RangeValidator>
         <br />
         <asp:Label ID="lblHT" runat="server" Text="Horas totales: "></asp:Label>
         <asp:TextBox ID="txtHorasTotales" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtHorasTotales" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+        <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="txtHorasTotales" Display="Dynamic" ErrorMessage="Debe ser un entero mayor a 0" ForeColor="#FF3300" MaximumValue="9999999" MinimumValue="1"></asp:RangeValidator>
         <br />
         <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
         <asp:DropDownList ID="ddlEspecialidad" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged">
@@ -48,6 +53,6 @@
     </asp:Panel>
     <asp:Panel ID="formActionPanel" runat="server" Visible="false">
         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
-        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click">Cancelar</asp:LinkButton>
+        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
     </asp:Panel>
 </asp:Content>

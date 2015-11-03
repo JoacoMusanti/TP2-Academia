@@ -27,6 +27,7 @@
     <asp:Panel ID="planesPanel" runat="server" Visible="false">
         <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion: "></asp:Label>
         <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtDescripcion" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
         <br />
         <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
         <asp:DropDownList ID="ddlEspecialidades" runat="server">
@@ -40,7 +41,7 @@
     </asp:Panel>
     <asp:Panel ID="formActionPanel" runat="server" Visible="false">
         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
-        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click">Cancelar</asp:LinkButton>
+        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
 
     </asp:Panel>
 </asp:Content>

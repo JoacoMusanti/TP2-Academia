@@ -31,13 +31,13 @@ namespace UI.Desktop
         {
             // mostramos el form de login, si los datos de login son correctos continua la ejecucion
             // si no, se vuelve a mostrar el form de login
-            FormLogin appLogin = new FormLogin();
+          /*  FormLogin appLogin = new FormLogin();
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
-                
+               
                 Close();
-            }
-            Rol = appLogin.Rol;
+            }*/
+            Rol = Persona.TipoPersonas.Administrativo;
         }
 
 
@@ -107,7 +107,7 @@ namespace UI.Desktop
             {
                 Planes pl = new Planes();
                 pl.ShowDialog();
-            }
+            } 
             
         }
     }

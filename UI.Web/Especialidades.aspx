@@ -25,6 +25,7 @@
     <asp:Panel ID="EspecialidadesPanel" runat="server" Visible="false">
             <asp:Label ID="lblDescEsp" runat="server" Text="Descripción"></asp:Label>
             <asp:TextBox ID="txtDescEsp" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtDescEsp" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     </asp:Panel>
 
     <asp:Panel ID="gridEspecialidadesActionPanel" runat="server">
@@ -35,7 +36,7 @@
 
     <asp:Panel ID="formEspecialidadesActionPanel" runat="server" Visible="false">
         <asp:LinkButton ID="btnAceptar" runat="server" OnClick="btnAceptar_Click">Aceptar</asp:LinkButton>
-        <asp:LinkButton ID="btCancelar" runat="server" OnClick="btCancelar_Click">Cancelar</asp:LinkButton>
+        <asp:LinkButton ID="btCancelar" runat="server" OnClick="btCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
 
 
     </asp:Panel>

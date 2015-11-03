@@ -382,13 +382,13 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtClave;
         
         /// <summary>
-        /// Control rfvNombre6.
+        /// Control rfvClave.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombre6;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvClave;
         
         /// <summary>
         /// Control lblRepetirClave.
@@ -409,22 +409,22 @@ namespace UI.Web {
         protected global::System.Web.UI.WebControls.TextBox txtRepetirClave;
         
         /// <summary>
-        /// Control rfvNombre7.
+        /// Control rfvRepiteClave.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombre7;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvRepiteClave;
         
         /// <summary>
-        /// Control CompareValidator1.
+        /// Control cvCoinciden.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        protected global::System.Web.UI.WebControls.CompareValidator cvCoinciden;
         
         /// <summary>
         /// Control gridActionsPanel.

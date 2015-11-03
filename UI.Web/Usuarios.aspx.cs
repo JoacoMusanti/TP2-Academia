@@ -88,13 +88,13 @@ namespace UI.Web
         private Especialidad EspecialidadUsuario { get; set; }
 
 
-        private int SelectedID
+        private int? SelectedID
         {
             get
             {
                 if (ViewState["SelectedID"] != null)
                 {
-                    return (int)ViewState["SelectedID"];
+                    return (int?)ViewState["SelectedID"];
                 }
                 else
                 {
@@ -111,7 +111,7 @@ namespace UI.Web
         {
             get
             {
-                return (SelectedID != -1);
+                return (SelectedID.Value != -1);
             }
         }
 
@@ -186,8 +186,11 @@ namespace UI.Web
 
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedID = (int)gridView.SelectedValue;
+            SelectedID = (int?)gridView.SelectedValue;
+            
             formPanel.Visible = false;
+            formActionsPanel.Visible = false;
+            gridActionsPanel.Visible = true;
         }
 
         private void CargarTiposPersonas()
@@ -225,26 +228,10 @@ namespace UI.Web
 
         private void LoadForm(int id)
         {
-            if (FormMode == FormModes.Modificacion)
-            {
-                txtClave.Enabled = false;
-                txtRepetirClave.Enabled = false;
-                txtNombre.Enabled = true;
-                txtApellido.Enabled = true;
-                txtEmail.Enabled = true;
-                chkHabilitado.Enabled = true;
-                txtNombreUsuario.Enabled = true;
-                txtDireccion.Enabled = true;
-                txtLegajo.Enabled = true;
-                txtTelefono.Enabled = true;
+            CargarTiposPersonas();
+            CargarPlanes();
+            CargarEspecialidades();
 
-                ddlAnio.Enabled = true;
-                ddlMes.Enabled = true;
-                ddlDia.Enabled = true;
-                ddlEspecialidad.Enabled = true;
-                ddlIdPlan.Enabled = true;
-                ddlTipoPersona.Enabled = true;
-            }
             if (FormMode == FormModes.Baja)
             {
                 txtClave.Enabled = false;
@@ -265,33 +252,63 @@ namespace UI.Web
                 ddlIdPlan.Enabled = false;
                 ddlTipoPersona.Enabled = false;
             }
+            else
+            {
+                txtClave.Enabled = false;
+                txtRepetirClave.Enabled = false;
+                txtNombre.Enabled = true;
+                txtApellido.Enabled = true;
+                txtEmail.Enabled = true;
+                chkHabilitado.Enabled = true;
+                txtNombreUsuario.Enabled = true;
+                txtDireccion.Enabled = true;
+                txtLegajo.Enabled = true;
+                txtTelefono.Enabled = true;
 
-            PersonaActual = LogicPersona.GetOne(id);
-            Session["Persona"] = PersonaActual;
-            PlanUsuario = LogicPlan.GetOne(PersonaActual.IdPlan);
-            EspecialidadUsuario = LogicEspecialidad.GetOne(PlanUsuario.IdEspecialidad);
+                ddlAnio.Enabled = true;
+                ddlMes.Enabled = true;
+                ddlDia.Enabled = true;
+                ddlEspecialidad.Enabled = true;
+                ddlIdPlan.Enabled = true;
+                ddlTipoPersona.Enabled = true;
 
-            txtNombre.Text = PersonaActual.Nombre;
-            txtApellido.Text = PersonaActual.Apellido;
-            txtEmail.Text = PersonaActual.Email;
-            chkHabilitado.Checked = PersonaActual.Habilitado;
-            txtNombreUsuario.Text = PersonaActual.NombreUsuario;
-            txtDireccion.Text = PersonaActual.Direccion;
-            txtLegajo.Text = PersonaActual.Legajo.ToString();
-            txtTelefono.Text = PersonaActual.Telefono;
+                cvCoinciden.Enabled = true;
+                rfvClave.Enabled = true;
+                rfvRepiteClave.Enabled = true;
 
-            ddlAnio.SelectedValue = PersonaActual.FechaNacimiento.Year.ToString();
-            ddlMes.SelectedValue = PersonaActual.FechaNacimiento.Month.ToString();
-            ddlDia.SelectedValue = PersonaActual.FechaNacimiento.Day.ToString();
+                LimpiarForm();
+            }
+            if (FormMode != FormModes.Alta)
+            {
+                txtClave.Enabled = false;
+                txtRepetirClave.Enabled = false;
 
+                cvCoinciden.Enabled = false;
+                rfvClave.Enabled = false;
+                rfvRepiteClave.Enabled = false;
 
-            CargarEspecialidades();
-            CargarPlanes();
-            CargarTiposPersonas();
+                PersonaActual = LogicPersona.GetOne(id);
+                Session["Persona"] = PersonaActual;
+                PlanUsuario = LogicPlan.GetOne(PersonaActual.IdPlan);
+                EspecialidadUsuario = LogicEspecialidad.GetOne(PlanUsuario.IdEspecialidad);
 
-            ddlEspecialidad.SelectedValue = PlanUsuario.IdEspecialidad.ToString();
-            ddlIdPlan.SelectedValue = PersonaActual.IdPlan.ToString();
-            ddlTipoPersona.SelectedIndex = (int)PersonaActual.TipoPersona;
+                txtNombre.Text = PersonaActual.Nombre;
+                txtApellido.Text = PersonaActual.Apellido;
+                txtEmail.Text = PersonaActual.Email;
+                chkHabilitado.Checked = PersonaActual.Habilitado;
+                txtNombreUsuario.Text = PersonaActual.NombreUsuario;
+                txtDireccion.Text = PersonaActual.Direccion;
+                txtLegajo.Text = PersonaActual.Legajo.ToString();
+                txtTelefono.Text = PersonaActual.Telefono;
+
+                ddlAnio.SelectedValue = PersonaActual.FechaNacimiento.Year.ToString();
+                ddlMes.SelectedValue = PersonaActual.FechaNacimiento.Month.ToString();
+                ddlDia.SelectedValue = PersonaActual.FechaNacimiento.Day.ToString();
+
+                ddlEspecialidad.SelectedValue = PlanUsuario.IdEspecialidad.ToString();
+                ddlIdPlan.SelectedValue = PersonaActual.IdPlan.ToString();
+                ddlTipoPersona.SelectedIndex = (int)PersonaActual.TipoPersona;
+            }
         }
 
         private void CargarPlanes()
@@ -310,42 +327,46 @@ namespace UI.Web
             ddlEspecialidad.DataBind();
         }
 
-        private void LoadEntity(Persona per)
+        private void LoadEntity()
         {
-            per.Nombre = txtNombre.Text;
-            per.Apellido = txtApellido.Text;
-            per.Email = txtEmail.Text;
-            per.NombreUsuario = txtNombreUsuario.Text;
-
-            per.Habilitado = chkHabilitado.Checked;
-
-            if (FormMode == FormModes.Modificacion)
+            if (FormMode == FormModes.Alta)
             {
-                per.Clave = PersonaActual.Clave;
+                PersonaActual = new Persona();
+                PersonaActual.ID = SelectedID.Value;
+                PersonaActual.State = BusinessEntity.States.New;
             }
-            else
+            if (FormMode == FormModes.Modificacion || FormMode == FormModes.Baja)
             {
-                per.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
+                PersonaActual = (Persona)Session["Persona"];
+                PersonaActual.State = BusinessEntity.States.Modified;
+                if (FormMode == FormModes.Baja)
+                {
+                    PersonaActual.Baja = true;
+                }
+                else
+                {
+                    PersonaActual.Baja = false;
+                }
+            }
+            if (FormMode == FormModes.Alta)
+            {
+                PersonaActual.Clave = Util.Hash.SHA256ConSal(txtClave.Text, null);
             }
 
-            if (FormMode == FormModes.Baja)
-            {
-                per.Baja = true;
-            }
-            else
-            {
-                per.Baja = false;
-            }
+            PersonaActual.Nombre = txtNombre.Text;
+            PersonaActual.Apellido = txtApellido.Text;
+            PersonaActual.Email = txtEmail.Text;
+            PersonaActual.NombreUsuario = txtNombreUsuario.Text;
+            PersonaActual.Habilitado = chkHabilitado.Checked;
 
-            per.Direccion = txtDireccion.Text;
-            per.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue),
+            PersonaActual.Direccion = txtDireccion.Text;
+            PersonaActual.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue),
                 int.Parse(ddlMes.SelectedValue), int.Parse(ddlDia.SelectedValue));
-            per.ID = PersonaActual.ID;
-            per.IdPlan = int.Parse(ddlIdPlan.SelectedValue);
-            per.Legajo = int.Parse(txtLegajo.Text);
-            per.CambiaClave = PersonaActual.CambiaClave;
-            per.Telefono = txtTelefono.Text;
-            per.TipoPersona = (Persona.TipoPersonas)ddlTipoPersona.SelectedIndex;
+            PersonaActual.IdPlan = int.Parse(ddlIdPlan.SelectedValue);
+            PersonaActual.Legajo = int.Parse(txtLegajo.Text);
+            PersonaActual.CambiaClave = PersonaActual.CambiaClave;
+            PersonaActual.Telefono = txtTelefono.Text;
+            PersonaActual.TipoPersona = (Persona.TipoPersonas)ddlTipoPersona.SelectedIndex;
         }
 
         private void SaveEntity(Persona per)
@@ -358,34 +379,27 @@ namespace UI.Web
             if (IsEntitySelected)
             {
                 formPanel.Visible = true;
+                formActionsPanel.Visible = true;
+                gridActionsPanel.Visible = false;
                 FormMode = FormModes.Modificacion;
-                LoadForm(SelectedID);
+                LoadForm(SelectedID.Value);
             }
         }
 
         protected void lnkAceptar_Click(object sender, EventArgs e)
         {
-            if (FormMode == FormModes.Alta)
-            {
-                PersonaActual = new Persona();
-                PersonaActual.ID = SelectedID;
-                PersonaActual.State = BusinessEntity.States.New;
-            }
-            if (FormMode == FormModes.Modificacion || FormMode == FormModes.Baja)
-            {
-                PersonaActual = (Persona)Session["Persona"];
-                PersonaActual.ID = SelectedID;
-                PersonaActual.State = BusinessEntity.States.Modified;
-            }
+            formPanel.Visible = false;
+            formActionsPanel.Visible = false;
+            gridActionsPanel.Visible = true;
 
             // Se cargan los datos del form en PersonaActual y luego se persisten en base de datos
-            LoadEntity(PersonaActual);
+            LoadEntity();
             SaveEntity(PersonaActual);
             LoadGrid();
             // LoadGrid no dispara SelectedIndexChanged de la gridview por lo que cambiamos el
             // selected ID manualmente
-            SelectedID = 0;
-            formPanel.Visible = false;
+            gridView.SelectedIndex = -1;
+            gridView_SelectedIndexChanged(null, null);
         }
 
         protected void ddlEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
@@ -399,19 +413,34 @@ namespace UI.Web
             if (IsEntitySelected)
             {
                 formPanel.Visible = true;
+                formActionsPanel.Visible = true;
+                gridActionsPanel.Visible = false;
+
                 FormMode = FormModes.Baja;
-                LoadForm(SelectedID);
+                LoadForm(SelectedID.Value);
             }
         }
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
-            formPanel.Visible = true;
             FormMode = FormModes.Alta;
-            CargarTiposPersonas();
-            CargarPlanes();
-            CargarEspecialidades();
-            LimpiarForm();
+
+            formPanel.Visible = true;
+            formActionsPanel.Visible = true;
+            gridActionsPanel.Visible = false;
+
+            LoadForm(SelectedID.Value);
+            
+        }
+
+        protected void lnkCancelar_Click(object sender, EventArgs e)
+        {
+            formPanel.Visible = false;
+            formActionsPanel.Visible = false;
+            gridActionsPanel.Visible = false;
+
+            gridView.SelectedIndex = -1;
+            gridView_SelectedIndexChanged(null, null);
         }
 
     }
