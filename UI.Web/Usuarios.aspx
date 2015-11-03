@@ -38,6 +38,7 @@
     <asp:Label ID="lblEmail" runat="server" Text="Email: "></asp:Label>
     <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvNombre1" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Debe ingresar un mail válido" ForeColor="#FF3300" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
     <br />
     <asp:Label ID="lblDireccion" runat="server" Text="Direccion: "></asp:Label>
     <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
@@ -54,15 +55,21 @@
     <asp:DropDownList ID="ddlMes" runat="server" ClientIDMode="Static"></asp:DropDownList>
     <asp:Label ID="lblAnio" runat="server" Text="Año: "></asp:Label>
     <asp:DropDownList ID="ddlAnio" runat="server" ClientIDMode="Static"></asp:DropDownList>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlDia" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlMes" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlAnio" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
     <asp:DropDownList ID="ddlEspecialidad" runat="server" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlEspecialidad" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblIdPlan" runat="server" Text="Plan: "></asp:Label>
     <asp:DropDownList ID="ddlIdPlan" runat="server"></asp:DropDownList>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="ddlIdPlan" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
      <asp:Label ID="lblTipoPersona" runat="server" Text="Tipo Persona: "></asp:Label>
     <asp:DropDownList ID="ddlTipoPersona" runat="server"></asp:DropDownList>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="ddlTipoPersona" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblTelefono" runat="server" Text="Telefono: "></asp:Label>
     <asp:TextBox ID="txtTelefono" runat="server"></asp:TextBox>
@@ -70,6 +77,7 @@
     <br />
     <asp:Label ID="lblHabilitado" runat="server" Text="Habilitado: "></asp:Label>
     <asp:CheckBox ID="chkHabilitado" runat="server"></asp:CheckBox>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="chkHabilitado" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblNombreUsuario" runat="server" Text="Usuario: "></asp:Label>
     <asp:TextBox ID="txtNombreUsuario" runat="server"></asp:TextBox>

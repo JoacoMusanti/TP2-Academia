@@ -33,6 +33,8 @@
         <asp:DropDownList ID="ddlEspecialidades" runat="server">
         </asp:DropDownList>
 
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlEspecialidades" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+
     </asp:Panel>
     <asp:Panel ID="gridPlanesActionPanel" runat="server">
         <asp:LinkButton ID="lnkNuevo" runat="server" OnClick="lnkNuevo_Click">Nuevo</asp:LinkButton>

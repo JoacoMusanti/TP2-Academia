@@ -41,18 +41,22 @@
                         <asp:Label ID="lblMateria" runat="server" Text="Materia: "></asp:Label>
                         <asp:DropDownList ID="ddlMaterias" runat="server" >
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlMaterias" Display="Dynamic" ErrorMessage="La materia es requerida" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="lblComision" runat="server" Text="Comision: "></asp:Label>
                         <asp:DropDownList ID="ddlComisiones" runat="server" >
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlComisiones" Display="Dynamic" ErrorMessage="La comision es requerida" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="lblAnioCalendario" runat="server" Text="Año Calendario: "></asp:Label>
                         <asp:DropDownList ID="ddlAnioCalendario" runat="server" ClientIDMode="Static">
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlAnioCalendario" Display="Dynamic" ErrorMessage="El año es requerido" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="lblCupo" runat="server" Text="Cupo: "></asp:Label>
                         <asp:DropDownList ID="ddlCupo" runat="server">
                         </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlCupo" Display="Dynamic" ErrorMessage="El cupo es requerido" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
                     </asp:Panel>
                     <asp:Panel ID="gridActionsPanel" runat="server">
@@ -62,7 +66,7 @@
                     </asp:Panel>
                     <asp:Panel ID="formActionsPanel" runat="server" Visible="false">
                         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
-                        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click">Cancelar</asp:LinkButton>
+                        <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
                     </asp:Panel>
                 </td>
                 <td>&nbsp;</td>

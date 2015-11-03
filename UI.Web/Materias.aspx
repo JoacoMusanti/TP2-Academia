@@ -41,10 +41,12 @@
         <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
         <asp:DropDownList ID="ddlEspecialidad" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged">
         </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlEspecialidad" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
         <br />
         <asp:Label ID="lblPlan" runat="server" Text="Plan: "></asp:Label>
         <asp:DropDownList ID="ddlPlan" runat="server" AutoPostBack="true">
         </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="ddlPlan" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     </asp:Panel>
     <asp:Panel ID="gridMateriasActionPanel" runat="server">
         <asp:LinkButton ID="lnkNuevo" runat="server" OnClick="lnkNuevo_Click">Nuevo</asp:LinkButton>

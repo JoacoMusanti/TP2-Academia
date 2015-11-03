@@ -37,13 +37,16 @@
         <asp:Label ID="lblAnioEspecialidad" runat="server" Text="Año de especialidad"></asp:Label>
         <asp:TextBox ID="txtAnioEsp" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Debe ser un año entre 2010 y 2050" ForeColor="#FF3300" MaximumValue="2050" MinimumValue="2010" Type="Integer"></asp:RangeValidator>
+        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Debe ser un año entre 1 y 5" ForeColor="#FF3300" MaximumValue="5" MinimumValue="1" Type="Integer"></asp:RangeValidator>
         <br />
         <asp:Label ID="lblEspCom" runat="server" Text="Especialidad"></asp:Label>
         <asp:DropDownList ID="ddlEspecialidades" runat="server"></asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlEspecialidades" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
         <br />
         <asp:Label ID="lblPlanCom" runat="server" Text="Plan"></asp:Label>
         <asp:DropDownList ID="ddlPlanes" runat="server"></asp:DropDownList>
+        
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlPlanes" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
         
     </asp:Panel>
 
