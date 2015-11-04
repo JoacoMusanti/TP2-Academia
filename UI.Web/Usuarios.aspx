@@ -77,7 +77,6 @@
     <br />
     <asp:Label ID="lblHabilitado" runat="server" Text="Habilitado: "></asp:Label>
     <asp:CheckBox ID="chkHabilitado" runat="server"></asp:CheckBox>
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="chkHabilitado" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
     <asp:Label ID="lblNombreUsuario" runat="server" Text="Usuario: "></asp:Label>
     <asp:TextBox ID="txtNombreUsuario" runat="server"></asp:TextBox>

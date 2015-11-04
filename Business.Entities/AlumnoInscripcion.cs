@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Business.Entities
 {
-    class AlumnoInscripcion : BusinessEntity
+    public class AlumnoInscripcion : BusinessEntity
     {
         public int Nota {get; set;} 
         public int IdCurso {get; set;}
