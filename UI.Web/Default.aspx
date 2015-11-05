@@ -23,7 +23,7 @@
         <asp:HyperLink ID="hlkCursos" runat="server" NavigateUrl="~/Cursos.aspx">Administrar Cursos</asp:HyperLink>
         <br />
         <br />
-        <asp:HyperLink ID="hlkInscripcionCurso" runat="server" NavigateUrl="~/AlumnoInscripcion.aspx" >Inscribirse a Cursos</asp:HyperLink>
+        <asp:HyperLink ID="hlkInscripcionCurso" runat="server" NavigateUrl="~/AlumnoInscripciones.aspx" >Inscribirse a Cursos</asp:HyperLink>
         <br />
         <br />
         <asp:HyperLink ID="hlkCargarNotas" runat="server" >Cargar Notas</asp:HyperLink>

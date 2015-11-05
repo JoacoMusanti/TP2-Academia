@@ -29,5 +29,45 @@ namespace Business.Logic
                 throw;
             }
         }
+
+        public AlumnoInscripcion GetOne(int id)
+        {
+            try
+            {
+                return InscripcionData.GetOne(id);
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
+
+        public void Save(AlumnoInscripcion alumIns)
+        {
+            try
+            {
+                InscripcionData.Save(alumIns);
+            }
+
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                InscripcionData.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
     }
 }

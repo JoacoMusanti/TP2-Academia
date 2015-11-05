@@ -58,7 +58,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AlumnoInscripcion.aspx" />
+    <Content Include="AlumnoInscripciones.aspx" />
     <Content Include="Comisiones.aspx" />
     <Content Include="Cursos.aspx" />
     <Content Include="Especialidades.aspx" />
@@ -89,12 +89,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlumnoInscripcion.aspx.cs">
-      <DependentUpon>AlumnoInscripcion.aspx</DependentUpon>
+    <Compile Include="AlumnoInscripciones.aspx.cs">
+      <DependentUpon>AlumnoInscripciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AlumnoInscripcion.aspx.designer.cs">
-      <DependentUpon>AlumnoInscripcion.aspx</DependentUpon>
+    <Compile Include="AlumnoInscripciones.aspx.designer.cs">
+      <DependentUpon>AlumnoInscripciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Comisiones.aspx.cs">
       <DependentUpon>Comisiones.aspx</DependentUpon>

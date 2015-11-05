@@ -100,6 +100,46 @@ namespace Data.Database
             return cur;
         }
 
+        public Curso GetOne(int mate, int comi)
+        {
+            Curso cur = new Curso();
+
+            try
+            {
+                OpenConnection();
+
+                SqlCommand curCurso = new SqlCommand("select * from dbo.cursos where @mate = id_materia and @comi = id_comision and baja_logica = 0", SqlCon);
+
+                curCurso.Parameters.AddWithValue("@mate", mate);
+                curCurso.Parameters.AddWithValue("@comi", comi);
+
+                SqlDataReader drCurso = curCurso.ExecuteReader();
+
+                if (drCurso.Read())
+                {
+                    cur.ID = (int)drCurso["id_curso"];
+                    cur.IdMateria = (int)drCurso["id_materia"];
+                    cur.IdComision = (int)drCurso["id_comision"];
+                    cur.Cupo = (int)drCurso["cupo"];
+                    cur.AnioCalendario = (int)drCurso["anio_calendario"];
+                    cur.Baja = (bool)drCurso["baja_logica"];
+
+                    drCurso.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw new Exception("Error al intentar recuperar el curso de la base de datos", e);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return cur;
+        }
+
         public void Delete(int id)
         {
             try

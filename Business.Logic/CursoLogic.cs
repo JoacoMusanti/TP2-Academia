@@ -28,6 +28,19 @@ namespace Business.Logic
             }
         }
 
+        public Curso GetOne(int mate, int comi)
+        {
+            try
+            {
+                return CursoData.GetOne(mate,comi);
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
+
         public List<Curso> GetAll()
         {
              try
