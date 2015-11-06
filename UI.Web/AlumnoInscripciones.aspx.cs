@@ -149,14 +149,29 @@ namespace UI.Web
 
         private void CargarMaterias()
         {
-            ddlMaterias.DataSource = LogicMateria.GetAll();
+            List<Curso> cursos = new List<Curso>();
+            List<Materia> materias = new List<Materia>();
+            
+            cursos = LogicCurso.GetAll();
+
+            foreach (Curso cur in cursos)
+            {
+                Materia mate = new Materia();
+                mate = LogicMateria.GetOne(cur.IdMateria);
+
+                materias.Add(mate);
+            }
+
+            ddlMaterias.DataSource = materias;
             ddlMaterias.DataValueField = "ID";
             ddlMaterias.DataTextField = "Descripcion";
             ddlMaterias.DataBind();
-        }
+
+         }
 
         private void CargarComisiones()
-        {
+        {   
+            //Como seleccionar comisiones correspondiente a una meteria en un curso ????
             ddlComisiones.DataSource = LogicComision.GetAll();
             ddlComisiones.DataValueField = "ID";
             ddlComisiones.DataTextField = "Descripcion";
@@ -176,22 +191,13 @@ namespace UI.Web
             {
                 inscripcionActual.State = BusinessEntity.States.Modified;
                 inscripcionActual.ID = SelectedIDInscripcion.Value;
-
-                if (FormMode == FormModes.Baja)
-                {
-                    inscripcionActual.Baja = true;
-                }
-                else
-                {
-                    inscripcionActual.Baja = false;
-                }
+                inscripcionActual.Baja = true;             
             }
 
             inscripcionActual.IdAlumno = Convert.ToInt32(Session["IdAlumno"]);
             inscripcionActual.IdCurso =(LogicCurso.GetOne(int.Parse(ddlMaterias.SelectedValue),int.Parse(ddlComisiones.SelectedValue))).IdCurso;
             inscripcionActual.Condicion = "Inscripto";
-                       
-       }
+        }
 
         private void CargarForm(int id)
         {
@@ -205,19 +211,16 @@ namespace UI.Web
             }
             else
             {
-
                 ddlMaterias.Enabled = true;
                 ddlComisiones.Enabled = true;
-                                
+                           
             }
 
             if (FormMode != FormModes.Alta)
             {
                 inscripcionActual = InscripcionLogic.GetOne(id);
-
-                
-                //ddlPlan.SelectedValue = MateriaActual.IdPlan.ToString();
-                //ddlEspecialidad.SelectedValue = LogicEspecialidad.GetAll().Find(esp => esp.ID == LogicPlan.GetOne(MateriaActual.IdPlan).IdEspecialidad).ID.ToString();
+                ddlMaterias.SelectedValue = LogicCurso.GetOne(inscripcionActual.IdCurso).IdMateria.ToString();
+                ddlComisiones.SelectedValue = LogicCurso.GetOne(inscripcionActual.IdCurso).IdComision.ToString();                                
             }
         }
 
@@ -228,22 +231,51 @@ namespace UI.Web
 
         protected void lnkCancelar_Click(object sender, EventArgs e)
         {
+            formPanelInscripcion.Visible = false;
+            gridActionsPanel.Visible = true;
+            formActionsPanel.Visible = false;
+
+            gdvAlumno_Incripcion.SelectedIndex = -1;
+            gdvCursos_SelectedIndexChanged(null, null);
 
         }
 
         protected void lnkAceptar_Click(object sender, EventArgs e)
         {
+            formPanelInscripcion.Visible = false;
+            formActionsPanel.Visible = false;
+            gridActionsPanel.Visible = true;
+
+            CargarInscripcion();
+            GuardarInscripcion(inscripcionActual);
+            CargarGridInscripciones();
+
+            gdvAlumno_Incripcion.SelectedIndex = -1;
+            gdvCursos_SelectedIndexChanged(null, null);
 
         }
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
+            FormMode = FormModes.Alta;
+            formPanelInscripcion.Visible = true;
+            formActionsPanel.Visible = true;
+            gridActionsPanel.Visible = false;
 
+            CargarForm(SelectedIDInscripcion.Value);
         }
 
         protected void lnkEliminar_Click(object sender, EventArgs e)
         {
+            if (HaySeleccion())
+            {
+                FormMode = FormModes.Baja;
+                formPanelInscripcion.Visible = true;
+                formActionsPanel.Visible = true;
+                gridActionsPanel.Visible = false;
 
+                CargarForm(SelectedIDInscripcion.Value);
+            }
         }
     }
 }
