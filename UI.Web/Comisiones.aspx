@@ -40,7 +40,7 @@
         <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtAnioEsp" Display="Dynamic" ErrorMessage="Debe ser un año entre 1 y 5" ForeColor="#FF3300" MaximumValue="5" MinimumValue="1" Type="Integer"></asp:RangeValidator>
         <br />
         <asp:Label ID="lblEspCom" runat="server" Text="Especialidad"></asp:Label>
-        <asp:DropDownList ID="ddlEspecialidades" runat="server"></asp:DropDownList>
+        <asp:DropDownList ID="ddlEspecialidades" runat="server" OnSelectedIndexChanged="ddlEspecialidades_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlEspecialidades" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
         <br />
         <asp:Label ID="lblPlanCom" runat="server" Text="Plan"></asp:Label>

@@ -14,8 +14,6 @@ namespace UI.Web
         private ComisionLogic _logicComision;
         private EspecialidadLogic _logicEspecialidades;
         private PlanLogic _logicPlanes;
-        private List<Plan> _planes;
-        private List<Especialidad> _especialidades;
 
         private Comision ComisionActual { get; set; }
 
@@ -52,7 +50,7 @@ namespace UI.Web
         {
             if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
             {
-                Load_Grid();
+                CargarGrilla();
             }
             else
             {
@@ -61,13 +59,13 @@ namespace UI.Web
             
         }
 
-        private void Load_Grid()
+        private void CargarGrilla()
         {
             gridComisiones.DataSource = LogicComision.GetAll();
             gridComisiones.DataBind();
         }
 
-        private int SelectedID
+        private int? SelectedID
         {
             get
             {
@@ -96,7 +94,10 @@ namespace UI.Web
 
         protected void gridComisiones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedID = (int)gridComisiones.SelectedValue;
+            SelectedID = (int?)gridComisiones.SelectedValue;
+            panelFormComisiones.Visible = false;
+            formActionPanel.Visible = false;
+            gridActionPanel.Visible = true;
         }
 
 
@@ -121,8 +122,7 @@ namespace UI.Web
 
         private void CargarEspecialidades()
         {
-            _especialidades = LogicEspecialidades.GetAll();
-            ddlEspecialidades.DataSource = _especialidades;
+            ddlEspecialidades.DataSource = LogicEspecialidades.GetAll();
             ddlEspecialidades.DataValueField = "ID";
             ddlEspecialidades.DataTextField = "Descripcion";         
             ddlEspecialidades.DataBind();
@@ -131,11 +131,12 @@ namespace UI.Web
 
         private void CargarPlanes()
         {
-            _planes = LogicPlanes.GetAll();
-            ddlPlanes.DataSource = _planes;
+            ddlPlanes.DataSource = LogicPlanes.GetAll();
             ddlPlanes.DataValueField = "ID";
             ddlPlanes.DataTextField = "Descripcion";
             ddlPlanes.DataBind();
+
+            ddlEspecialidades_SelectedIndexChanged(null, null);
         }
 
         //private void CargarPlanes()
@@ -154,98 +155,107 @@ namespace UI.Web
         //    ddlEspecialidades.DataBind();
         //}
 
-        private void Load_Form(int id)
+        private void CargarForm(int id)
         {
-            if(FormMode == FormModes.Modificacion)
-            {
-                txtAnioEsp.Enabled = true;
-                txtDescCom.Enabled = true;
-                ddlEspecialidades.Enabled = true;
-                ddlPlanes.Enabled = true;
-            }
-            if(FormMode == FormModes.Baja)
+            CargarEspecialidades();
+            CargarPlanes();
+
+            if (FormMode == FormModes.Baja)
             {
                 txtAnioEsp.Enabled = false;
                 txtDescCom.Enabled = false;
                 ddlEspecialidades.Enabled = false;
                 ddlPlanes.Enabled = false;
             }
+            else
+            {
+                txtAnioEsp.Enabled = true;
+                txtDescCom.Enabled = true;
+                ddlEspecialidades.Enabled = true;
+                ddlPlanes.Enabled = true;
 
-            
-            CargarEspecialidades();
-            CargarPlanes();
-            ComisionActual = LogicComision.GetOne(id);
-            Session["Comision"] = ComisionActual;
-            txtAnioEsp.Text = ComisionActual.AnioEspecialidad.ToString();
-            txtDescCom.Text = ComisionActual.Descripcion;
-            ddlPlanes.SelectedValue = ComisionActual.IdPlan.ToString();
-            Plan p = _planes.Find(x => x.ID == ComisionActual.IdPlan);
-            ddlEspecialidades.SelectedValue = _especialidades.Find(y => y.ID == p.IdEspecialidad).ID.ToString(); ;
+                txtAnioEsp.Text = "";
+                txtDescCom.Text = "";
+            }
             
 
+            if (FormMode != FormModes.Alta)
+            {
+                ComisionActual = LogicComision.GetOne(id);
+
+                txtAnioEsp.Text = ComisionActual.AnioEspecialidad.ToString();
+                txtDescCom.Text = ComisionActual.Descripcion;
+
+                Plan p = LogicPlanes.GetOne(ComisionActual.IdPlan);
+                ddlEspecialidades.SelectedValue = LogicEspecialidades.GetOne(p.IdEspecialidad).ID.ToString();
+
+                ddlEspecialidades_SelectedIndexChanged(null, null);
+                ddlPlanes.SelectedValue = ComisionActual.IdPlan.ToString();
+                
+                
+            }
         }
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
-            gridActionPanel.Visible = false;
-            formActionPanel.Visible = true;
             FormMode = FormModes.Alta;
             panelFormComisiones.Visible = true;
-            CargarEspecialidades();
-            CargarPlanes();
-            txtAnioEsp.Enabled = true;
-            txtDescCom.Enabled = true;
-            txtDescCom.Text = "";
-            ddlEspecialidades.SelectedIndex = 0;
-            ddlPlanes.SelectedIndex = 0;
+            formActionPanel.Visible = true;
+            gridActionPanel.Visible = false;
+
+            CargarForm(SelectedID.Value);
         }
 
         protected void lnkEditar_Click(object sender, EventArgs e)
         {
-            gridActionPanel.Visible = false;
-            formActionPanel.Visible = true;
             if(IsEntitySelected)
             {
                 FormMode = FormModes.Modificacion;
                 panelFormComisiones.Visible = true;
-                Load_Form(SelectedID);
+                formActionPanel.Visible = true;
+                gridActionPanel.Visible = false;
+
+                CargarForm(SelectedID.Value);
             }
         }
 
         protected void lnkBorrar_Click(object sender, EventArgs e)
         {
-            gridActionPanel.Visible = false;
-            formActionPanel.Visible = true;
             if (IsEntitySelected)
             {
                 FormMode = FormModes.Baja;
                 panelFormComisiones.Visible = true;
-                Load_Form(SelectedID);
+                formActionPanel.Visible = true;
+                gridActionPanel.Visible = false;
+
+                CargarForm(SelectedID.Value);
             }
         }
 
         private void CargarComision()
         {
+            ComisionActual = new Comision();
+
             if (FormMode == FormModes.Alta)
             {
-                ComisionActual = new Comision();
+                ComisionActual.Baja = false;
                 ComisionActual.State = BusinessEntity.States.New;
             }
             if (FormMode == FormModes.Baja || FormMode == FormModes.Modificacion)
             {
-                ComisionActual = (Comision)Session["Comision"];
-                ComisionActual.ID = SelectedID;
+                ComisionActual.ID = SelectedID.Value;
                 ComisionActual.State = BusinessEntity.States.Modified;
 
+                if (FormMode == FormModes.Baja)
+                {
+                    ComisionActual.Baja = true;
+                }
+                else
+                {
+                    ComisionActual.Baja = false;
+                }
             }
-            if (FormMode == FormModes.Baja)
-            {
-                ComisionActual.Baja = true;
-            }
-            else
-            {
-                ComisionActual.Baja = false;
-            }
+            
 
             ComisionActual.AnioEspecialidad = Convert.ToInt32(txtAnioEsp.Text);
             ComisionActual.Descripcion = txtDescCom.Text;
@@ -256,15 +266,19 @@ namespace UI.Web
         {
             LogicComision.Save(com);
         }
+
         protected void lnkAceptar_Click(object sender, EventArgs e)
         {
-            CargarComision();
-            GuardarComision(ComisionActual);
-            Load_Grid();
-            SelectedID = 0;
             panelFormComisiones.Visible = false;
             formActionPanel.Visible = false;
             gridActionPanel.Visible = true;
+
+            CargarComision();
+            GuardarComision(ComisionActual);
+            CargarGrilla();
+
+            gridComisiones.SelectedIndex = -1;
+            gridComisiones_SelectedIndexChanged(null, null);
         }
 
         protected void lnkCancelar_Click(object sender, EventArgs e)
@@ -272,6 +286,15 @@ namespace UI.Web
             panelFormComisiones.Visible = false;
             formActionPanel.Visible = false;
             gridActionPanel.Visible = true;
+
+            gridComisiones.SelectedIndex = -1;
+            gridComisiones_SelectedIndexChanged(null, null);
+        }
+
+        protected void ddlEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlPlanes.DataSource = LogicPlanes.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidades.SelectedValue));
+            ddlPlanes.DataBind();
         }
     }
 }

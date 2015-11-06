@@ -112,6 +112,8 @@ namespace UI.Web
             ddlPlan.DataValueField = "ID";
             ddlPlan.DataTextField = "Descripcion";
             ddlPlan.DataBind();
+
+            ddlEspecialidad_SelectedIndexChanged(null, null);
         }
 
         private void CargarEspecialidades()
@@ -210,8 +212,10 @@ namespace UI.Web
                 txtHorasSemanales.Text = MateriaActual.HorasSemanales.ToString();
                 txtHorasTotales.Text = MateriaActual.HorasTotales.ToString();
 
-                ddlPlan.SelectedValue = MateriaActual.IdPlan.ToString();
                 ddlEspecialidad.SelectedValue = LogicEspecialidad.GetAll().Find(esp => esp.ID == LogicPlan.GetOne(MateriaActual.IdPlan).IdEspecialidad).ID.ToString();
+                ddlEspecialidad_SelectedIndexChanged(null, null);
+
+                ddlPlan.SelectedValue = MateriaActual.IdPlan.ToString();
             }
         }
 
