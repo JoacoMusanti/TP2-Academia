@@ -119,7 +119,7 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand comInsert = new SqlCommand("insert into dbo.alumnos_inscripciones (id_alumno,id_curso,condicion,baja_logica) " +
-                    " values (@id_alumno,@id_curso, @condicion,@baja_logica) select @@identity", SqlCon);
+                    "values(@id_alumno,@id_curso, @condicion,@baja_logica)select @@identity", SqlCon);
 
                 comInsert.Parameters.AddWithValue("@id_alumno", aluIns.IdAlumno);
                 comInsert.Parameters.AddWithValue("@id_curso", aluIns.IdCurso);
