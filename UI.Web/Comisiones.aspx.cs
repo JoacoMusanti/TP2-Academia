@@ -14,9 +14,22 @@ namespace UI.Web
         private ComisionLogic _logicComision;
         private EspecialidadLogic _logicEspecialidades;
         private PlanLogic _logicPlanes;
+        private CursoLogic _cursologic;  
 
         private Comision ComisionActual { get; set; }
 
+        private CursoLogic LogicCurso
+        {
+            get
+            {
+                if (_cursologic == null)
+                {
+                    _cursologic = new CursoLogic();
+                }
+
+                return _cursologic;
+            }
+        }
         public EspecialidadLogic LogicEspecialidades
         {
             get
@@ -210,12 +223,25 @@ namespace UI.Web
         {
             if(IsEntitySelected)
             {
-                FormMode = FormModes.Modificacion;
-                panelFormComisiones.Visible = true;
-                formActionPanel.Visible = true;
-                gridActionPanel.Visible = false;
+                // Verificamos que la comision seleccionada no este referenciada por ningun curso
+                // si lo esta, no permitimos la edicion de la materia
+                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdComision == SelectedID).ToList();
 
-                CargarForm(SelectedID.Value);
+                if (cursos.Count == 0)
+                {
+                    FormMode = FormModes.Modificacion;
+                    panelFormComisiones.Visible = true;
+                    formActionPanel.Visible = true;
+                    gridActionPanel.Visible = false;
+
+                    CargarForm(SelectedID.Value);
+                }
+                else
+                {
+                    lnkCancelar_Click(null, null);
+                    Response.Write("No se puede editar la comision seleccionada porque la comision esta referenciada por un curso");
+                }
+                
             }
         }
 
@@ -223,12 +249,25 @@ namespace UI.Web
         {
             if (IsEntitySelected)
             {
-                FormMode = FormModes.Baja;
-                panelFormComisiones.Visible = true;
-                formActionPanel.Visible = true;
-                gridActionPanel.Visible = false;
+                // Verificamos que la comision seleccionada no este referenciada por ningun curso
+                // si lo esta, no permitimos la eliminacion de la materia
+                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdComision == SelectedID).ToList();
 
-                CargarForm(SelectedID.Value);
+                if (cursos.Count == 0)
+                {
+                    FormMode = FormModes.Baja;
+                    panelFormComisiones.Visible = true;
+                    formActionPanel.Visible = true;
+                    gridActionPanel.Visible = false;
+
+                    CargarForm(SelectedID.Value);
+                }
+                else
+                {
+                    lnkCancelar_Click(null, null);
+                    Response.Write("No se puede eliminar la comision seleccionada porque la comision esta referenciada por un curso");
+                }
+                
             }
         }
 

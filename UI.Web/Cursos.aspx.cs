@@ -280,16 +280,16 @@ namespace UI.Web
 
         protected void lnkAceptar_Click(object sender, EventArgs e)
         {
-                formPanelCurso.Visible = false;
-                formActionsPanel.Visible = false;
-                gridActionsPanel.Visible = true;
+            formPanelCurso.Visible = false;
+            formActionsPanel.Visible = false;
+            gridActionsPanel.Visible = true;
 
-                CargarCurso();
-                GuardarCurso(CursoActual);
-                CargarGridCursos();
+            CargarCurso();
+            GuardarCurso(CursoActual);
+            CargarGridCursos();
 
-                gdvCursos.SelectedIndex = -1;
-                gdvCursos_SelectedIndexChanged(null, null);            
+            gdvCursos.SelectedIndex = -1;
+            gdvCursos_SelectedIndexChanged(null, null);            
         }
 
         protected void lnkCancelar_Click(object sender, EventArgs e)
@@ -301,6 +301,21 @@ namespace UI.Web
             gdvCursos.SelectedIndex = -1;
             gdvCursos_SelectedIndexChanged(null, null); 
         }
-              
+
+        protected void ddlMaterias_SelectedIndexChanged(object sender, EventArgs e)
+        { 
+            int idplan = LogicMateria.GetOne(int.Parse(ddlMaterias.SelectedValue)).IdPlan;
+            ddlComisiones.DataSource = LogicComision.GetAll().Where(comi => comi.IdPlan == idplan);
+
+            ddlComisiones.DataBind();
+        }
+
+        protected void ddlComisiones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idplan = LogicComision.GetOne(int.Parse(ddlComisiones.SelectedValue)).IdPlan;
+            ddlMaterias.DataSource = LogicMateria.GetAll().Where(mat => mat.IdPlan == idplan);
+
+            ddlMaterias.DataBind();
+        }
     }
 }
