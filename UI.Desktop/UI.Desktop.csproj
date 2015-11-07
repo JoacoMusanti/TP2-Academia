@@ -250,6 +250,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\LogoIconoUTN.png" />
+    <Content Include="Resources\pantalla inicio.jpg" />
+    <Content Include="Resources\utn.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
