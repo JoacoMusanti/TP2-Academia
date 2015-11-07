@@ -23,10 +23,12 @@ namespace UI.Web
         {
             PersonaLogic usr = new PersonaLogic();
 
+            try
+            {
                 UsuarioActual = usr.GetOne(loginAcademia.UserName);
                 // UNDONE: Restringir el acceso a ciertos forms segun el tipo de persona
                 if (UsuarioActual.Clave != null &&
-                    Util.Hash.VerificarHash(UsuarioActual.Clave, loginAcademia.Password) && 
+                    Util.Hash.VerificarHash(UsuarioActual.Clave, loginAcademia.Password) &&
                     UsuarioActual.Habilitado == true)
                 {
                     Session["RolSesion"] = UsuarioActual.TipoPersona;
@@ -34,11 +36,11 @@ namespace UI.Web
                     Session["IdPlan"] = UsuarioActual.IdPlan;
                     FormsAuthentication.RedirectFromLoginPage(loginAcademia.UserName, loginAcademia.RememberMeSet);
                 }
-                else 
+                else
                 {
                     if (UsuarioActual.Habilitado == false)
                     {
-                        Response.Write("El usuario " +User.Identity.Name+" no esta habilitado a usar el sistema.");
+                        Response.Write("El usuario " + User.Identity.Name + " no esta habilitado a usar el sistema.");
                     }
                     else
                     {
@@ -46,5 +48,10 @@ namespace UI.Web
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError();", true);
+            }
         }
     }
+}

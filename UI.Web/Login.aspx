@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
