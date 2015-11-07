@@ -143,7 +143,9 @@ namespace UI.Web
 
         private void CargarGridCursos()
         {
-            var cursos = LogicCurso.GetAll();
+            // Usamos solo los cursos del plan en el que esta inscripto el alumno
+            var idPlan = Session["IdPlan"];
+            var cursos = LogicCurso.GetAll().Where(curso => LogicMateria.GetOne(curso.IdMateria).IdPlan == (int)idPlan);
 
             gdvInscripcionesCurso.DataSource = cursos.Select(cur => new
             {   

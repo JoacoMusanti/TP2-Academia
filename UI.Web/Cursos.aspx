@@ -44,7 +44,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlMaterias" Display="Dynamic" ErrorMessage="La materia es requerida" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="lblComision" runat="server" Text="Comision: "></asp:Label>
-                        <asp:DropDownList ID="ddlComisiones" runat="server" OnSelectedIndexChanged="ddlComisiones_SelectedIndexChanged" AutoPostBack="true">
+                        <asp:DropDownList ID="ddlComisiones" runat="server">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlComisiones" Display="Dynamic" ErrorMessage="La comision es requerida" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
@@ -67,6 +67,9 @@
                     <asp:Panel ID="formActionsPanel" runat="server" Visible="false">
                         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
                         <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
+                    </asp:Panel>
+                    <asp:Panel ID="reportePanel" runat="server" Visible="true">
+                            <asp:LinkButton ID="lnkReporte" runat="server" OnClick="lnkReporte_Click">Crear reporte</asp:LinkButton>
                     </asp:Panel>
                 </td>
                 <td>&nbsp;</td>

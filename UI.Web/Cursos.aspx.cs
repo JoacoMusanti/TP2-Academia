@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business.Entities;
 using Business.Logic;
-
+using GrapeCity.ActiveReports.Export.Pdf.Section;
 
 namespace UI.Web
 {
@@ -134,15 +134,10 @@ namespace UI.Web
             ddlMaterias.DataValueField = "ID";
             ddlMaterias.DataTextField = "Descripcion";
             ddlMaterias.DataBind();
+
+            ddlMaterias_SelectedIndexChanged(null, null);
         }
 
-        private void CargarComisiones()
-        {
-            ddlComisiones.DataSource = LogicComision.GetAll();
-            ddlComisiones.DataValueField = "ID";
-            ddlComisiones.DataTextField = "Descripcion";
-            ddlComisiones.DataBind();
-        }
         private void CargarAnios()
         {
             List<int> anios = new List<int>(5);
@@ -176,8 +171,8 @@ namespace UI.Web
 
         void CargarForm(int id)
         {
+            // No hace falta cargar comisiones ya que estas se cargan en selectedindexchanged de materias
             CargarMaterias();
-            CargarComisiones();
             CargarAnios();
             CargarCupos();
 
@@ -200,7 +195,7 @@ namespace UI.Web
                 CursoActual = LogicCurso.GetOne(id);
                                                
                 ddlMaterias.SelectedValue = CursoActual.IdMateria.ToString();
-
+                ddlMaterias_SelectedIndexChanged(null, null);
                 ddlComisiones.SelectedValue = CursoActual.IdComision.ToString();
                 ddlAnioCalendario.SelectedValue = CursoActual.AnioCalendario.ToString();
                 ddlCupo.SelectedValue = CursoActual.Cupo.ToString();
@@ -307,15 +302,41 @@ namespace UI.Web
             int idplan = LogicMateria.GetOne(int.Parse(ddlMaterias.SelectedValue)).IdPlan;
             ddlComisiones.DataSource = LogicComision.GetAll().Where(comi => comi.IdPlan == idplan);
 
+            ddlComisiones.DataValueField = "ID";
+            ddlComisiones.DataTextField = "Descripcion";
+
             ddlComisiones.DataBind();
         }
 
-        protected void ddlComisiones_SelectedIndexChanged(object sender, EventArgs e)
+        protected void lnkReporte_Click(object sender, EventArgs e)
         {
-            int idplan = LogicComision.GetOne(int.Parse(ddlComisiones.SelectedValue)).IdPlan;
-            ddlMaterias.DataSource = LogicMateria.GetAll().Where(mat => mat.IdPlan == idplan);
+            CursosReport rpt = new CursosReport(LogicCurso.GetAll());
 
-            ddlMaterias.DataBind();
+                rpt.Run(false);
+            // Specify the appropriate viewer.
+            // If the report has been exported in a different format, the content-type will 
+            // need to be changed as noted in the following table:
+            //    ExportType  ContentType
+            //    PDF       "application/pdf"  (needs to be in lowercase)
+            //    RTF       "application/rtf"
+            //    TIFF      "image/tiff"       (will open in separate viewer instead of browser)
+            //    HTML      "message/rfc822"   (only applies to compressed HTML pages that includes images)
+            //    Excel     "application/vnd.ms-excel"
+            //    Excel     "application/excel" (either of these types should work) 
+            //    Text      "text/plain"  
+            Response.ContentType = "application/pdf";
+            Response.Clear();
+            Response.AddHeader("content-disposition", "inline;filename=MyPDF.PDF");
+            // Create the PDF export object.
+            PdfExport pdf = new PdfExport();
+            // Create a new memory stream that will hold the pdf output
+            System.IO.MemoryStream memStream = new System.IO.MemoryStream();
+            // Export the report to PDF.
+            pdf.Export(rpt.Document, memStream);
+            // Write the PDF stream to the output stream.
+            Response.BinaryWrite(memStream.ToArray());
+            // Send all buffered content to the client
+            Response.End();
         }
     }
 }

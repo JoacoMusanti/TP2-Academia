@@ -125,6 +125,12 @@
     <Compile Include="Cursos.aspx.designer.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CursosReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CursosReport.Designer.cs">
+      <DependentUpon>CursosReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,10 +170,6 @@
       <DependentUpon>Planes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportPlanes.cs" />
-    <Compile Include="ReportPlanes.Designer.cs">
-      <DependentUpon>ReportPlanes.cs</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -202,10 +204,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="licenses.licx" />
-    <EmbeddedResource Include="ReportPlanes.resx">
-      <DependentUpon>ReportPlanes.cs</DependentUpon>
+    <EmbeddedResource Include="CursosReport.resx">
+      <DependentUpon>CursosReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

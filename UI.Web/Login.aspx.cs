@@ -31,6 +31,7 @@ namespace UI.Web
                 {
                     Session["RolSesion"] = UsuarioActual.TipoPersona;
                     Session["IdAlumno"] = UsuarioActual.ID;
+                    Session["IdPlan"] = UsuarioActual.IdPlan;
                     FormsAuthentication.RedirectFromLoginPage(loginAcademia.UserName, loginAcademia.RememberMeSet);
                 }
                 else 
