@@ -69,18 +69,28 @@ namespace UI.Web
 
         private void CargarGridMaterias()
         {
-            var materias = LogicMateria.GetAll();
+            try
+            {
+                var materias = LogicMateria.GetAll();
 
-            // se reemplaza cada plan en planes con un objeto anonimo de la forma {ID, Descripcion, DEspecialidad}
-            // donde ID es la id del plan, Descripcion es la descripcion del plan y DEspecialidad es la descripcion de la especialidad del plan
-            gridMaterias.DataSource = materias.Select(mat => new { ID = mat.ID,
-                                                                   Descripcion = mat.Descripcion,
-                                                                   HorasSemanales = mat.HorasSemanales,
-                                                                   HorasTotales = mat.HorasTotales,
-                                                                   DPlan = LogicPlan.GetOne(mat.IdPlan).Descripcion,
-                                                                   DEspecialidad = LogicEspecialidad.GetOne(LogicPlan.GetOne(mat.IdPlan).IdEspecialidad).Descripcion });
+                // se reemplaza cada plan en planes con un objeto anonimo de la forma {ID, Descripcion, DEspecialidad}
+                // donde ID es la id del plan, Descripcion es la descripcion del plan y DEspecialidad es la descripcion de la especialidad del plan
+                gridMaterias.DataSource = materias.Select(mat => new
+                {
+                    ID = mat.ID,
+                    Descripcion = mat.Descripcion,
+                    HorasSemanales = mat.HorasSemanales,
+                    HorasTotales = mat.HorasTotales,
+                    DPlan = LogicPlan.GetOne(mat.IdPlan).Descripcion,
+                    DEspecialidad = LogicEspecialidad.GetOne(LogicPlan.GetOne(mat.IdPlan).IdEspecialidad).Descripcion
+                });
 
-            gridMaterias.DataBind();
+                gridMaterias.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -121,20 +131,34 @@ namespace UI.Web
         }
         private void CargarPlanes()
         {
-            ddlPlan.DataSource = LogicPlan.GetAll();
-            ddlPlan.DataValueField = "ID";
-            ddlPlan.DataTextField = "Descripcion";
-            ddlPlan.DataBind();
+            try
+            {
+                ddlPlan.DataSource = LogicPlan.GetAll();
+                ddlPlan.DataValueField = "ID";
+                ddlPlan.DataTextField = "Descripcion";
+                ddlPlan.DataBind();
 
-            ddlEspecialidad_SelectedIndexChanged(null, null);
+                ddlEspecialidad_SelectedIndexChanged(null, null);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private void CargarEspecialidades()
         {
-            ddlEspecialidad.DataSource = LogicEspecialidad.GetAll();
-            ddlEspecialidad.DataValueField = "ID";
-            ddlEspecialidad.DataTextField = "Descripcion";
-            ddlEspecialidad.DataBind();
+            try
+            {
+                ddlEspecialidad.DataSource = LogicEspecialidad.GetAll();
+                ddlEspecialidad.DataValueField = "ID";
+                ddlEspecialidad.DataTextField = "Descripcion";
+                ddlEspecialidad.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         enum FormModes
@@ -188,7 +212,14 @@ namespace UI.Web
 
         private void GuardarMateria(Materia mat)
         {
-            LogicMateria.Save(mat);
+            try
+            {
+                LogicMateria.Save(mat);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private void CargarForm(int id)
@@ -219,16 +250,23 @@ namespace UI.Web
 
             if (FormMode != FormModes.Alta)
             {
-                MateriaActual = LogicMateria.GetOne(id);
+                try
+                {
+                    MateriaActual = LogicMateria.GetOne(id);
 
-                txtDescripcion.Text = MateriaActual.Descripcion;
-                txtHorasSemanales.Text = MateriaActual.HorasSemanales.ToString();
-                txtHorasTotales.Text = MateriaActual.HorasTotales.ToString();
+                    txtDescripcion.Text = MateriaActual.Descripcion;
+                    txtHorasSemanales.Text = MateriaActual.HorasSemanales.ToString();
+                    txtHorasTotales.Text = MateriaActual.HorasTotales.ToString();
 
-                ddlEspecialidad.SelectedValue = LogicEspecialidad.GetAll().Find(esp => esp.ID == LogicPlan.GetOne(MateriaActual.IdPlan).IdEspecialidad).ID.ToString();
-                ddlEspecialidad_SelectedIndexChanged(null, null);
+                    ddlEspecialidad.SelectedValue = LogicEspecialidad.GetAll().Find(esp => esp.ID == LogicPlan.GetOne(MateriaActual.IdPlan).IdEspecialidad).ID.ToString();
+                    ddlEspecialidad_SelectedIndexChanged(null, null);
 
-                ddlPlan.SelectedValue = MateriaActual.IdPlan.ToString();
+                    ddlPlan.SelectedValue = MateriaActual.IdPlan.ToString();
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+                }
             }
         }
 
@@ -248,21 +286,28 @@ namespace UI.Web
             {
                 // Verificamos que la materia seleccionada no este referenciada por ningun curso
                 // si lo esta, no permitimos la edicion de la materia
-                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdMateria == SelectedID).ToList();
-
-                if (cursos.Count == 0)
+                try
                 {
-                    FormMode = FormModes.Modificacion;
-                    materiasPanel.Visible = true;
-                    formActionPanel.Visible = true;
-                    gridMateriasActionPanel.Visible = false;
+                    List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdMateria == SelectedID).ToList();
 
-                    CargarForm(SelectedID.Value);
+                    if (cursos.Count == 0)
+                    {
+                        FormMode = FormModes.Modificacion;
+                        materiasPanel.Visible = true;
+                        formActionPanel.Visible = true;
+                        gridMateriasActionPanel.Visible = false;
+
+                        CargarForm(SelectedID.Value);
+                    }
+                    else
+                    {
+                        lnkCancelar_Click(null, null);
+                        Response.Write("No se puede modificar la materia seleccionada porque la materia esta referenciada por un curso");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    lnkCancelar_Click(null, null);
-                    Response.Write("No se puede modificar la materia seleccionada porque la materia esta referenciada por un curso");
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
                 }
             }
         }
@@ -273,23 +318,30 @@ namespace UI.Web
             {
                 // Verificamos que la materia seleccionada no este referenciada por ningun curso
                 // si lo esta, no permitimos la eliminacion de la materia
-                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdMateria == SelectedID).ToList();
-
-                if (cursos.Count == 0)
+                try
                 {
-                    FormMode = FormModes.Baja;
-                    materiasPanel.Visible = true;
-                    formActionPanel.Visible = true;
-                    gridMateriasActionPanel.Visible = false;
+                    List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdMateria == SelectedID).ToList();
 
-                    CargarForm(SelectedID.Value);
+                    if (cursos.Count == 0)
+                    {
+                        FormMode = FormModes.Baja;
+                        materiasPanel.Visible = true;
+                        formActionPanel.Visible = true;
+                        gridMateriasActionPanel.Visible = false;
+
+                        CargarForm(SelectedID.Value);
+                    }
+                    else
+                    {
+                        lnkCancelar_Click(null, null);
+                        Response.Write("No se puede eliminar la materia seleccionada porque la materia esta referenciada por un curso");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    lnkCancelar_Click(null, null);
-                    Response.Write("No se puede eliminar la materia seleccionada porque la materia esta referenciada por un curso");
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
                 }
-                
+
             }
         }
 
@@ -327,8 +379,15 @@ namespace UI.Web
 
         protected void ddlEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlPlan.DataSource = LogicPlan.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidad.SelectedValue));
-            ddlPlan.DataBind();
+            try
+            {
+                ddlPlan.DataSource = LogicPlan.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidad.SelectedValue));
+                ddlPlan.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
     }
 }

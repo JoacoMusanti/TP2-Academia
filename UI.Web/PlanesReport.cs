@@ -26,14 +26,22 @@ namespace UI.Web
         }
 
         private void PlanesReport_ReportStart(object sender, EventArgs e)
-        {    
-            var LogicPlan = new PlanLogic();
-            var LogicEspecialidad = new EspecialidadLogic();
+        {
+            try
+            {
+                var LogicPlan = new PlanLogic();
+                var LogicEspecialidad = new EspecialidadLogic();
 
-            DataSource = _planes.Select(plan => new {
-                Carrera = LogicEspecialidad.GetOne(LogicPlan.GetOne(plan.ID).IdEspecialidad).Descripcion,
-                Descripcion = plan.Descripcion,
-            }).ToList();
+                DataSource = _planes.Select(plan => new
+                {
+                    Carrera = LogicEspecialidad.GetOne(LogicPlan.GetOne(plan.ID).IdEspecialidad).Descripcion,
+                    Descripcion = plan.Descripcion,
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

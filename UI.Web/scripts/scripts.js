@@ -1,5 +1,5 @@
-﻿function mensajeError() {
-    alert("asd2");
+﻿function mensajeError(msg) {
+    alert(msg);
 }
 
 // Devuelve la cantidad de dias en un mes en un año seleccionados

@@ -72,13 +72,23 @@ namespace UI.Web
 
         private void CargarGridCursos()
         {
-            var cursos = LogicCurso.GetAll();
-            gdvCursos.DataSource = cursos.Select(curso => new { ID = curso.ID,
-                                                                AnioCalendario = curso.AnioCalendario,
-                                                                Cupo = curso.Cupo,
-                                                                Materia = LogicMateria.GetOne(curso.IdMateria).Descripcion,
-                                                                Comision = LogicComision.GetOne(curso.IdComision).Descripcion });
-            gdvCursos.DataBind();
+            try
+            {
+                var cursos = LogicCurso.GetAll();
+                gdvCursos.DataSource = cursos.Select(curso => new
+                {
+                    ID = curso.ID,
+                    AnioCalendario = curso.AnioCalendario,
+                    Cupo = curso.Cupo,
+                    Materia = LogicMateria.GetOne(curso.IdMateria).Descripcion,
+                    Comision = LogicComision.GetOne(curso.IdComision).Descripcion
+                });
+                gdvCursos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private int? SelectedIDCurso
@@ -130,12 +140,19 @@ namespace UI.Web
 
         private void CargarMaterias()
         {
-            ddlMaterias.DataSource = LogicMateria.GetAll();
-            ddlMaterias.DataValueField = "ID";
-            ddlMaterias.DataTextField = "Descripcion";
-            ddlMaterias.DataBind();
+            try
+            {
+                ddlMaterias.DataSource = LogicMateria.GetAll();
+                ddlMaterias.DataValueField = "ID";
+                ddlMaterias.DataTextField = "Descripcion";
+                ddlMaterias.DataBind();
 
-            ddlMaterias_SelectedIndexChanged(null, null);
+                ddlMaterias_SelectedIndexChanged(null, null);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private void CargarAnios()
@@ -298,45 +315,59 @@ namespace UI.Web
         }
 
         protected void ddlMaterias_SelectedIndexChanged(object sender, EventArgs e)
-        { 
-            int idplan = LogicMateria.GetOne(int.Parse(ddlMaterias.SelectedValue)).IdPlan;
-            ddlComisiones.DataSource = LogicComision.GetAll().Where(comi => comi.IdPlan == idplan);
+        {
+            try
+            {
+                int idplan = LogicMateria.GetOne(int.Parse(ddlMaterias.SelectedValue)).IdPlan;
+                ddlComisiones.DataSource = LogicComision.GetAll().Where(comi => comi.IdPlan == idplan);
 
-            ddlComisiones.DataValueField = "ID";
-            ddlComisiones.DataTextField = "Descripcion";
+                ddlComisiones.DataValueField = "ID";
+                ddlComisiones.DataTextField = "Descripcion";
 
-            ddlComisiones.DataBind();
+                ddlComisiones.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         protected void lnkReporte_Click(object sender, EventArgs e)
         {
-            CursosReport rpt = new CursosReport(LogicCurso.GetAll());
+            try
+            {
+                CursosReport rpt = new CursosReport(LogicCurso.GetAll());
 
                 rpt.Run(false);
-            // Specify the appropriate viewer.
-            // If the report has been exported in a different format, the content-type will 
-            // need to be changed as noted in the following table:
-            //    ExportType  ContentType
-            //    PDF       "application/pdf"  (needs to be in lowercase)
-            //    RTF       "application/rtf"
-            //    TIFF      "image/tiff"       (will open in separate viewer instead of browser)
-            //    HTML      "message/rfc822"   (only applies to compressed HTML pages that includes images)
-            //    Excel     "application/vnd.ms-excel"
-            //    Excel     "application/excel" (either of these types should work) 
-            //    Text      "text/plain"  
-            Response.ContentType = "application/pdf";
-            Response.Clear();
-            Response.AddHeader("content-disposition", "inline;filename=MyPDF.PDF");
-            // Create the PDF export object.
-            PdfExport pdf = new PdfExport();
-            // Create a new memory stream that will hold the pdf output
-            System.IO.MemoryStream memStream = new System.IO.MemoryStream();
-            // Export the report to PDF.
-            pdf.Export(rpt.Document, memStream);
-            // Write the PDF stream to the output stream.
-            Response.BinaryWrite(memStream.ToArray());
-            // Send all buffered content to the client
-            Response.End();
+                // Specify the appropriate viewer.
+                // If the report has been exported in a different format, the content-type will 
+                // need to be changed as noted in the following table:
+                //    ExportType  ContentType
+                //    PDF       "application/pdf"  (needs to be in lowercase)
+                //    RTF       "application/rtf"
+                //    TIFF      "image/tiff"       (will open in separate viewer instead of browser)
+                //    HTML      "message/rfc822"   (only applies to compressed HTML pages that includes images)
+                //    Excel     "application/vnd.ms-excel"
+                //    Excel     "application/excel" (either of these types should work) 
+                //    Text      "text/plain"  
+                Response.ContentType = "application/pdf";
+                Response.Clear();
+                Response.AddHeader("content-disposition", "inline;filename=MyPDF.PDF");
+                // Create the PDF export object.
+                PdfExport pdf = new PdfExport();
+                // Create a new memory stream that will hold the pdf output
+                System.IO.MemoryStream memStream = new System.IO.MemoryStream();
+                // Export the report to PDF.
+                pdf.Export(rpt.Document, memStream);
+                // Write the PDF stream to the output stream.
+                Response.BinaryWrite(memStream.ToArray());
+                // Send all buffered content to the client
+                Response.End();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
     }
 }

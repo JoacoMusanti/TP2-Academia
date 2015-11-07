@@ -74,8 +74,15 @@ namespace UI.Web
 
         private void CargarGrilla()
         {
-            gridComisiones.DataSource = LogicComision.GetAll();
-            gridComisiones.DataBind();
+            try
+            {
+                gridComisiones.DataSource = LogicComision.GetAll();
+                gridComisiones.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private int? SelectedID
@@ -135,21 +142,35 @@ namespace UI.Web
 
         private void CargarEspecialidades()
         {
-            ddlEspecialidades.DataSource = LogicEspecialidades.GetAll();
-            ddlEspecialidades.DataValueField = "ID";
-            ddlEspecialidades.DataTextField = "Descripcion";         
-            ddlEspecialidades.DataBind();
+            try
+            {
+                ddlEspecialidades.DataSource = LogicEspecialidades.GetAll();
+                ddlEspecialidades.DataValueField = "ID";
+                ddlEspecialidades.DataTextField = "Descripcion";
+                ddlEspecialidades.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
 
         }
 
         private void CargarPlanes()
         {
-            ddlPlanes.DataSource = LogicPlanes.GetAll();
-            ddlPlanes.DataValueField = "ID";
-            ddlPlanes.DataTextField = "Descripcion";
-            ddlPlanes.DataBind();
+            try
+            {
+                ddlPlanes.DataSource = LogicPlanes.GetAll();
+                ddlPlanes.DataValueField = "ID";
+                ddlPlanes.DataTextField = "Descripcion";
+                ddlPlanes.DataBind();
 
-            ddlEspecialidades_SelectedIndexChanged(null, null);
+                ddlEspecialidades_SelectedIndexChanged(null, null);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         //private void CargarPlanes()
@@ -194,18 +215,25 @@ namespace UI.Web
 
             if (FormMode != FormModes.Alta)
             {
-                ComisionActual = LogicComision.GetOne(id);
+                try
+                {
+                    ComisionActual = LogicComision.GetOne(id);
 
-                txtAnioEsp.Text = ComisionActual.AnioEspecialidad.ToString();
-                txtDescCom.Text = ComisionActual.Descripcion;
+                    txtAnioEsp.Text = ComisionActual.AnioEspecialidad.ToString();
+                    txtDescCom.Text = ComisionActual.Descripcion;
 
-                Plan p = LogicPlanes.GetOne(ComisionActual.IdPlan);
-                ddlEspecialidades.SelectedValue = LogicEspecialidades.GetOne(p.IdEspecialidad).ID.ToString();
+                    Plan p = LogicPlanes.GetOne(ComisionActual.IdPlan);
+                    ddlEspecialidades.SelectedValue = LogicEspecialidades.GetOne(p.IdEspecialidad).ID.ToString();
 
-                ddlEspecialidades_SelectedIndexChanged(null, null);
-                ddlPlanes.SelectedValue = ComisionActual.IdPlan.ToString();
-                
-                
+                    ddlEspecialidades_SelectedIndexChanged(null, null);
+                    ddlPlanes.SelectedValue = ComisionActual.IdPlan.ToString();
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+                }
+
+
             }
         }
 
@@ -223,25 +251,32 @@ namespace UI.Web
         {
             if(IsEntitySelected)
             {
-                // Verificamos que la comision seleccionada no este referenciada por ningun curso
-                // si lo esta, no permitimos la edicion de la materia
-                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdComision == SelectedID).ToList();
-
-                if (cursos.Count == 0)
+                try
                 {
-                    FormMode = FormModes.Modificacion;
-                    panelFormComisiones.Visible = true;
-                    formActionPanel.Visible = true;
-                    gridActionPanel.Visible = false;
+                    // Verificamos que la comision seleccionada no este referenciada por ningun curso
+                    // si lo esta, no permitimos la edicion de la materia
+                    List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdComision == SelectedID).ToList();
 
-                    CargarForm(SelectedID.Value);
+                    if (cursos.Count == 0)
+                    {
+                        FormMode = FormModes.Modificacion;
+                        panelFormComisiones.Visible = true;
+                        formActionPanel.Visible = true;
+                        gridActionPanel.Visible = false;
+
+                        CargarForm(SelectedID.Value);
+                    }
+                    else
+                    {
+                        lnkCancelar_Click(null, null);
+                        Response.Write("No se puede editar la comision seleccionada porque la comision esta referenciada por un curso");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    lnkCancelar_Click(null, null);
-                    Response.Write("No se puede editar la comision seleccionada porque la comision esta referenciada por un curso");
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
                 }
-                
+
             }
         }
 
@@ -249,25 +284,32 @@ namespace UI.Web
         {
             if (IsEntitySelected)
             {
-                // Verificamos que la comision seleccionada no este referenciada por ningun curso
-                // si lo esta, no permitimos la eliminacion de la materia
-                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdComision == SelectedID).ToList();
-
-                if (cursos.Count == 0)
+                try
                 {
-                    FormMode = FormModes.Baja;
-                    panelFormComisiones.Visible = true;
-                    formActionPanel.Visible = true;
-                    gridActionPanel.Visible = false;
+                    // Verificamos que la comision seleccionada no este referenciada por ningun curso
+                    // si lo esta, no permitimos la eliminacion de la materia
+                    List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdComision == SelectedID).ToList();
 
-                    CargarForm(SelectedID.Value);
+                    if (cursos.Count == 0)
+                    {
+                        FormMode = FormModes.Baja;
+                        panelFormComisiones.Visible = true;
+                        formActionPanel.Visible = true;
+                        gridActionPanel.Visible = false;
+
+                        CargarForm(SelectedID.Value);
+                    }
+                    else
+                    {
+                        lnkCancelar_Click(null, null);
+                        Response.Write("No se puede eliminar la comision seleccionada porque la comision esta referenciada por un curso");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    lnkCancelar_Click(null, null);
-                    Response.Write("No se puede eliminar la comision seleccionada porque la comision esta referenciada por un curso");
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
                 }
-                
+
             }
         }
 
@@ -332,8 +374,15 @@ namespace UI.Web
 
         protected void ddlEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlPlanes.DataSource = LogicPlanes.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidades.SelectedValue));
-            ddlPlanes.DataBind();
+            try
+            {
+                ddlPlanes.DataSource = LogicPlanes.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidades.SelectedValue));
+                ddlPlanes.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
     }
 }

@@ -57,8 +57,15 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            gridView.DataSource = LogicPersona.GetAll();
-            gridView.DataBind();
+            try
+            {
+                gridView.DataSource = LogicPersona.GetAll();
+                gridView.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -229,7 +236,6 @@ namespace UI.Web
         private void LoadForm(int id)
         {
             CargarTiposPersonas();
-            CargarPlanes();
             CargarEspecialidades();
 
             if (FormMode == FormModes.Baja)
@@ -280,51 +286,59 @@ namespace UI.Web
             }
             if (FormMode != FormModes.Alta)
             {
-                txtClave.Enabled = false;
-                txtRepetirClave.Enabled = false;
+                try
+                {
+                    txtClave.Enabled = false;
+                    txtRepetirClave.Enabled = false;
 
-                cvCoinciden.Enabled = false;
-                rfvClave.Enabled = false;
-                rfvRepiteClave.Enabled = false;
+                    cvCoinciden.Enabled = false;
+                    rfvClave.Enabled = false;
+                    rfvRepiteClave.Enabled = false;
 
-                PersonaActual = LogicPersona.GetOne(id);
-                Session["Persona"] = PersonaActual;
-                PlanUsuario = LogicPlan.GetOne(PersonaActual.IdPlan);
-                EspecialidadUsuario = LogicEspecialidad.GetOne(PlanUsuario.IdEspecialidad);
+                    PersonaActual = LogicPersona.GetOne(id);
+                    Session["Persona"] = PersonaActual;
+                    PlanUsuario = LogicPlan.GetOne(PersonaActual.IdPlan);
+                    EspecialidadUsuario = LogicEspecialidad.GetOne(PlanUsuario.IdEspecialidad);
 
-                txtNombre.Text = PersonaActual.Nombre;
-                txtApellido.Text = PersonaActual.Apellido;
-                txtEmail.Text = PersonaActual.Email;
-                chkHabilitado.Checked = PersonaActual.Habilitado;
-                txtNombreUsuario.Text = PersonaActual.NombreUsuario;
-                txtDireccion.Text = PersonaActual.Direccion;
-                txtLegajo.Text = PersonaActual.Legajo.ToString();
-                txtTelefono.Text = PersonaActual.Telefono;
+                    txtNombre.Text = PersonaActual.Nombre;
+                    txtApellido.Text = PersonaActual.Apellido;
+                    txtEmail.Text = PersonaActual.Email;
+                    chkHabilitado.Checked = PersonaActual.Habilitado;
+                    txtNombreUsuario.Text = PersonaActual.NombreUsuario;
+                    txtDireccion.Text = PersonaActual.Direccion;
+                    txtLegajo.Text = PersonaActual.Legajo.ToString();
+                    txtTelefono.Text = PersonaActual.Telefono;
 
-                ddlAnio.SelectedValue = PersonaActual.FechaNacimiento.Year.ToString();
-                ddlMes.SelectedValue = PersonaActual.FechaNacimiento.Month.ToString();
-                ddlDia.SelectedValue = PersonaActual.FechaNacimiento.Day.ToString();
+                    ddlAnio.SelectedValue = PersonaActual.FechaNacimiento.Year.ToString();
+                    ddlMes.SelectedValue = PersonaActual.FechaNacimiento.Month.ToString();
+                    ddlDia.SelectedValue = PersonaActual.FechaNacimiento.Day.ToString();
 
-                ddlEspecialidad.SelectedValue = PlanUsuario.IdEspecialidad.ToString();
-                ddlIdPlan.SelectedValue = PersonaActual.IdPlan.ToString();
-                ddlTipoPersona.SelectedIndex = (int)PersonaActual.TipoPersona;
+                    ddlEspecialidad.SelectedValue = PlanUsuario.IdEspecialidad.ToString();
+                    ddlIdPlan.SelectedValue = PersonaActual.IdPlan.ToString();
+                    ddlTipoPersona.SelectedIndex = (int)PersonaActual.TipoPersona;
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+                }
             }
-        }
-
-        private void CargarPlanes()
-        {
-            ddlIdPlan.DataSource = LogicPlan.GetAll();
-            ddlIdPlan.DataValueField = "ID";
-            ddlIdPlan.DataTextField = "Descripcion";
-            ddlIdPlan.DataBind();
         }
 
         private void CargarEspecialidades()
         {
-            ddlEspecialidad.DataSource = LogicEspecialidad.GetAll();
-            ddlEspecialidad.DataValueField = "ID";
-            ddlEspecialidad.DataTextField = "Descripcion";
-            ddlEspecialidad.DataBind();
+            try
+            {
+                ddlEspecialidad.DataSource = LogicEspecialidad.GetAll();
+                ddlEspecialidad.DataValueField = "ID";
+                ddlEspecialidad.DataTextField = "Descripcion";
+                ddlEspecialidad.DataBind();
+
+                ddlEspecialidad_SelectedIndexChanged(null, null);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private void LoadEntity()
@@ -371,7 +385,14 @@ namespace UI.Web
 
         private void SaveEntity(Persona per)
         {
-            LogicPersona.Save(per);
+            try
+            {
+                LogicPersona.Save(per);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         protected void lnkEditar_Click(object sender, EventArgs e)
@@ -404,8 +425,17 @@ namespace UI.Web
 
         protected void ddlEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlIdPlan.DataSource = LogicPlan.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidad.SelectedValue));
-            ddlIdPlan.DataBind();
+            try
+            {
+                ddlIdPlan.DataValueField = "ID";
+                ddlIdPlan.DataTextField = "Descripcion";
+                ddlIdPlan.DataSource = LogicPlan.GetAll().Where(plan => plan.IdEspecialidad == int.Parse(ddlEspecialidad.SelectedValue));
+                ddlIdPlan.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
         
         protected void lnkEliminar_Click(object sender, EventArgs e)

@@ -50,7 +50,7 @@ namespace UI.Web
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError();", true);
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('"+ex.Message+"');", true);
             }
         }
     }

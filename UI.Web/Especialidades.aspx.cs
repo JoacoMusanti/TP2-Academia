@@ -40,8 +40,15 @@ namespace UI.Web
 
         private void LoadGrid()
         {
-            gridEspecialidades.DataSource = LogicEspecialidad.GetAll();
-            gridEspecialidades.DataBind();
+            try
+            {
+                gridEspecialidades.DataSource = LogicEspecialidad.GetAll();
+                gridEspecialidades.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         public enum FormModes
@@ -102,9 +109,16 @@ namespace UI.Web
                 txtDescEsp.Enabled = false;
             }
 
-            EspActual = LogicEspecialidad.GetOne(id);
-            Session["Especialidad"] = EspActual;
-            txtDescEsp.Text = EspActual.Descripcion;
+            try
+            {
+                EspActual = LogicEspecialidad.GetOne(id);
+                Session["Especialidad"] = EspActual;
+                txtDescEsp.Text = EspActual.Descripcion;
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         protected void lnkEditar_Click(object sender, EventArgs e)
@@ -143,7 +157,14 @@ namespace UI.Web
 
         void GuardarEspecialidad(Especialidad esp)
         {
-            LogicEspecialidad.Save(esp);
+            try
+            {
+                LogicEspecialidad.Save(esp);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private void CargarEspecialidad()
@@ -177,7 +198,7 @@ namespace UI.Web
             CargarEspecialidad();
             GuardarEspecialidad(EspActual);
             LoadGrid();
-            SelectedID = 0;
+            SelectedID = -1;
             EspecialidadesPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = false;
             gridEspecialidadesActionPanel.Visible = true;

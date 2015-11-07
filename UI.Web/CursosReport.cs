@@ -27,18 +27,26 @@ namespace UI.Web
 
         private void CursosReport_ReportStart(object sender, EventArgs e)
         {
-            var LogicMateria = new MateriaLogic();
-            var LogicComision = new ComisionLogic();
-            var LogicPlan = new PlanLogic();
-            var LogicEspecialidad = new EspecialidadLogic();
+            try
+            {
+                var LogicMateria = new MateriaLogic();
+                var LogicComision = new ComisionLogic();
+                var LogicPlan = new PlanLogic();
+                var LogicEspecialidad = new EspecialidadLogic();
 
-            DataSource = _cursos.Select(curso => new {
-                Carrera = LogicEspecialidad.GetOne(LogicPlan.GetOne(LogicMateria.GetOne(curso.IdMateria).IdPlan).IdEspecialidad).Descripcion,
-                Anio = curso.AnioCalendario,
-                Cupo = curso.Cupo,
-                Materia = LogicMateria.GetOne(curso.IdMateria).Descripcion,
-                Comision = LogicComision.GetOne(curso.IdComision).Descripcion
-            }).ToList();
+                DataSource = _cursos.Select(curso => new
+                {
+                    Carrera = LogicEspecialidad.GetOne(LogicPlan.GetOne(LogicMateria.GetOne(curso.IdMateria).IdPlan).IdEspecialidad).Descripcion,
+                    Anio = curso.AnioCalendario,
+                    Cupo = curso.Cupo,
+                    Materia = LogicMateria.GetOne(curso.IdMateria).Descripcion,
+                    Comision = LogicComision.GetOne(curso.IdComision).Descripcion
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

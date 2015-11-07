@@ -82,14 +82,23 @@ namespace UI.Web
       
         private void CargarGridInscripciones()
         {
-            var inscripciones = InscripcionLogic.GetAll(Convert.ToInt32( Session["IdAlumno"]));
-            
-            gdvAlumno_Incripcion.DataSource = inscripciones.Select(ins => new { ID = ins.ID ,
-                                                                                MAteria = (LogicMateria.GetOne((LogicCurso.GetOne(ins.IdCurso).IdMateria))).Descripcion,
-                                                                                COmision = (LogicComision.GetOne((LogicCurso.GetOne(ins.IdCurso).IdComision))).Descripcion,
-                                                                                Condicion = ins.Condicion,
-                                                                              });
-            gdvAlumno_Incripcion.DataBind();
+            try
+            {
+                var inscripciones = InscripcionLogic.GetAll(Convert.ToInt32(Session["IdAlumno"]));
+
+                gdvAlumno_Incripcion.DataSource = inscripciones.Select(ins => new
+                {
+                    ID = ins.ID,
+                    MAteria = (LogicMateria.GetOne((LogicCurso.GetOne(ins.IdCurso).IdMateria))).Descripcion,
+                    COmision = (LogicComision.GetOne((LogicCurso.GetOne(ins.IdCurso).IdComision))).Descripcion,
+                    Condicion = ins.Condicion,
+                });
+                gdvAlumno_Incripcion.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private int? SelectedIDInscripcion
@@ -143,18 +152,25 @@ namespace UI.Web
 
         private void CargarGridCursos()
         {
-            // Usamos solo los cursos del plan en el que esta inscripto el alumno
-            var idPlan = Session["IdPlan"];
-            var cursos = LogicCurso.GetAll().Where(curso => LogicMateria.GetOne(curso.IdMateria).IdPlan == (int)idPlan);
+            try
+            {
+                // Usamos solo los cursos del plan en el que esta inscripto el alumno
+                var idPlan = Session["IdPlan"];
+                var cursos = LogicCurso.GetAll().Where(curso => LogicMateria.GetOne(curso.IdMateria).IdPlan == (int)idPlan);
 
-            gdvInscripcionesCurso.DataSource = cursos.Select(cur => new
-            {   
-                ID = cur.ID,
-                IdCurso = cur.ID,
-                MAte = (LogicMateria.GetOne((cur.IdMateria))).Descripcion,
-                COmi = (LogicComision.GetOne((cur.IdComision))).Descripcion,
-            });
-            gdvInscripcionesCurso.DataBind();
+                gdvInscripcionesCurso.DataSource = cursos.Select(cur => new
+                {
+                    ID = cur.ID,
+                    IdCurso = cur.ID,
+                    MAte = (LogicMateria.GetOne((cur.IdMateria))).Descripcion,
+                    COmi = (LogicComision.GetOne((cur.IdComision))).Descripcion,
+                });
+                gdvInscripcionesCurso.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         private void CargarInscripcion()
@@ -181,7 +197,14 @@ namespace UI.Web
 
         private void GuardarInscripcion(AlumnoInscripcion alumIns)
         {
-            InscripcionLogic.Save(alumIns);
+            try
+            {
+                InscripcionLogic.Save(alumIns);
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
 
         protected void lnkCancelar_Click(object sender, EventArgs e)
