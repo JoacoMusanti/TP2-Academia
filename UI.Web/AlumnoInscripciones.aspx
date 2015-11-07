@@ -48,6 +48,8 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
+        <asp:Label ID="lblNoMateria" runat="server" ForeColor="#FF3300" Text="NO SE PUEDE INSCRIBIR A NINGUNA MATERIA" Visible="False"></asp:Label>
+        <br />
         </asp:Panel>
                     <asp:Panel ID="gridActionsPanel" runat="server">
                         <asp:LinkButton ID="lnkEliminar" runat="server" OnClick="lnkEliminar_Click">Eliminar Inscripcion</asp:LinkButton>

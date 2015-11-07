@@ -36,23 +36,16 @@
             this.materiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comisionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.personasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.especialidadesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.materiasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.planesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmMenuPrincipal,
-            this.reporteToolStripMenuItem});
+            this.tsmMenuPrincipal});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(390, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(500, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -71,92 +64,51 @@
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // especialidadesToolStripMenuItem
             // 
             this.especialidadesToolStripMenuItem.Name = "especialidadesToolStripMenuItem";
-            this.especialidadesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.especialidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.especialidadesToolStripMenuItem.Text = "Especialidades";
             this.especialidadesToolStripMenuItem.Click += new System.EventHandler(this.especialidadesToolStripMenuItem_Click);
             // 
             // materiasToolStripMenuItem
             // 
             this.materiasToolStripMenuItem.Name = "materiasToolStripMenuItem";
-            this.materiasToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.materiasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.materiasToolStripMenuItem.Text = "Materias";
             this.materiasToolStripMenuItem.Click += new System.EventHandler(this.materiasToolStripMenuItem_Click);
             // 
             // comisionesToolStripMenuItem
             // 
             this.comisionesToolStripMenuItem.Name = "comisionesToolStripMenuItem";
-            this.comisionesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.comisionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.comisionesToolStripMenuItem.Text = "Comisiones";
             this.comisionesToolStripMenuItem.Click += new System.EventHandler(this.comisionesToolStripMenuItem_Click);
             // 
             // planesToolStripMenuItem
             // 
             this.planesToolStripMenuItem.Name = "planesToolStripMenuItem";
-            this.planesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.planesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.planesToolStripMenuItem.Text = "Planes";
             this.planesToolStripMenuItem.Click += new System.EventHandler(this.planesToolStripMenuItem_Click);
-            // 
-            // reporteToolStripMenuItem
-            // 
-            this.reporteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.personasToolStripMenuItem,
-            this.comisionToolStripMenuItem,
-            this.especialidadesToolStripMenuItem1,
-            this.materiasToolStripMenuItem1,
-            this.planesToolStripMenuItem1});
-            this.reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
-            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.reporteToolStripMenuItem.Text = "Reporte";
-            // 
-            // personasToolStripMenuItem
-            // 
-            this.personasToolStripMenuItem.Name = "personasToolStripMenuItem";
-            this.personasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.personasToolStripMenuItem.Text = "Personas";
-            // 
-            // comisionToolStripMenuItem
-            // 
-            this.comisionToolStripMenuItem.Name = "comisionToolStripMenuItem";
-            this.comisionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.comisionToolStripMenuItem.Text = "Comisiones";
-            // 
-            // especialidadesToolStripMenuItem1
-            // 
-            this.especialidadesToolStripMenuItem1.Name = "especialidadesToolStripMenuItem1";
-            this.especialidadesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.especialidadesToolStripMenuItem1.Text = "Especialidades";
-            // 
-            // materiasToolStripMenuItem1
-            // 
-            this.materiasToolStripMenuItem1.Name = "materiasToolStripMenuItem1";
-            this.materiasToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.materiasToolStripMenuItem1.Text = "Materias";
-            // 
-            // planesToolStripMenuItem1
-            // 
-            this.planesToolStripMenuItem1.Name = "planesToolStripMenuItem1";
-            this.planesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.planesToolStripMenuItem1.Text = "Planes";
             // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::UI.Desktop.Properties.Resources.pantalla_inicio;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(390, 318);
+            this.ClientSize = new System.Drawing.Size(500, 318);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MenuPrincipal";
-            this.Text = "MenuPrincipal";
+            this.Text = "Menu Principal - Sistema de gestón";
             this.Load += new System.EventHandler(this.MenuPrincipal_OnLoad);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -173,11 +125,5 @@
         private System.Windows.Forms.ToolStripMenuItem materiasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comisionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem planesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reporteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem personasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem comisionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem especialidadesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem materiasToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem planesToolStripMenuItem1;
     }
 }

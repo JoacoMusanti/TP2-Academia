@@ -158,6 +158,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ApplicationForm.resx">
+      <DependentUpon>ApplicationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComisionDesktop.resx">
       <DependentUpon>ComisionDesktop.cs</DependentUpon>
     </EmbeddedResource>
@@ -249,7 +252,9 @@
     <None Include="Resources\lapiz.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\utn icono.ico" />
     <Content Include="Resources\LogoIconoUTN.png" />
+    <Content Include="Resources\pantalla inicio.jpg" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
