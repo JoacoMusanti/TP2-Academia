@@ -1,4 +1,8 @@
-﻿// Devuelve la cantidad de dias en un mes en un año seleccionados
+﻿function mensajeError() {
+    alert("asd2");
+}
+
+// Devuelve la cantidad de dias en un mes en un año seleccionados
 function diasEnMesAnio(mes, anio)
 {
     var esBisiesto = (anio % 4 == 0 && anio % 100 != 0) || (anio % 100 == 0 && anio % 400 == 0);
@@ -28,3 +32,4 @@ function onCambiaFecha()
         dias.add(option, 0);
     }
 }
+
