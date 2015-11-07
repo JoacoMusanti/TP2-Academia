@@ -155,6 +155,7 @@ namespace UI.Web
 
             cursos = cursos.Where(c => !(materiasInscriptas.Contains(c.IdMateria)));
             
+            
 
             gdvInscripcionesCurso.DataSource = cursos.Select(cur => new
             {   
@@ -163,6 +164,15 @@ namespace UI.Web
                 MAte = (LogicMateria.GetOne((cur.IdMateria))).Descripcion,
                 COmi = (LogicComision.GetOne((cur.IdComision))).Descripcion,
             });
+
+            if (cursos.Count() == 0)
+            {
+                lblNoMateria.Visible = true;
+                lnkAceptar.Visible = false;
+            }
+            else
+                lnkAceptar.Visible = true;
+
             gdvInscripcionesCurso.DataBind();
         }
 
@@ -198,7 +208,7 @@ namespace UI.Web
             formPanelInscripcion.Visible = false;
             gridActionsPanel.Visible = true;
             formActionsPanel.Visible = false;
-
+            lblNoMateria.Visible = false;
             gdvAlumno_Incripcion.SelectedIndex = -1;
             gdvIncripcion_SelectedIndexChanged(null, null);
 
