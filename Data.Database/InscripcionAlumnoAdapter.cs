@@ -20,17 +20,17 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comInscripciones = new SqlCommand("select * from dbo.alumnos_inscripciones where id_alumno = @id and baja_logica = 0",SqlCon);
+                SqlCommand comInscripciones = new SqlCommand("select * from dbo.alumnos_inscripciones where id_alumno=@id and baja_logica = 0",SqlCon);
                 comInscripciones.Parameters.AddWithValue("@id",id);
                 SqlDataReader drInscripcionesAlumno = comInscripciones.ExecuteReader();
 
                 while(drInscripcionesAlumno.Read())
                 {
                     AlumnoInscripcion ins = new AlumnoInscripcion();
+
                     ins.ID = (int)drInscripcionesAlumno["id_inscripcion"];
                     ins.IdAlumno = (int)drInscripcionesAlumno["id_alumno"];
                     ins.IdCurso = (int)drInscripcionesAlumno["id_curso"];
-                    ins.Nota = (int)drInscripcionesAlumno["nota"];
                     ins.Condicion= (string)drInscripcionesAlumno["condicion"];
                     ins.Baja = (bool)drInscripcionesAlumno["baja_logica"];
 
@@ -69,7 +69,6 @@ namespace Data.Database
                     ins.ID = (int)drInscripcionesAlumno["id_inscripcion"];
                     ins.IdAlumno = (int)drInscripcionesAlumno["id_alumno"];
                     ins.IdCurso = (int)drInscripcionesAlumno["id_curso"];
-                    ins.Nota = (int)drInscripcionesAlumno["nota"];
                     ins.Condicion = (string)drInscripcionesAlumno["condicion"];
                     ins.Baja = (bool)drInscripcionesAlumno["baja_logica"];
                 }
@@ -95,7 +94,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comDelete = new SqlCommand("delete dbo.alumnos_inscripciones where @id = id_inscripcion", SqlCon);
+                SqlCommand comDelete = new SqlCommand("delete dbo.alumnos_inscripciones where id_inscripcion = @id", SqlCon);
 
                 comDelete.Parameters.AddWithValue("@id", id);
 
@@ -104,7 +103,33 @@ namespace Data.Database
             catch (Exception e)
             {
                 Util.Logger.Log(e);
-                throw new Exception("Error al intentar eliminar la comision", e);
+                throw new Exception("Error al intentar eliminar la inscripcion", e);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public void Update(AlumnoInscripcion aluIns)
+        {
+            try
+            {
+                OpenConnection();
+
+                SqlCommand comUpdate = new SqlCommand("update dbo.alumnos_inscripciones set id_alumno = @id_alumno,id_curso=@id_curso, condicion=@condicion,baja_logica = @baja_logica where id_inscripcion = @id_inscripcion and baja_logica = 0", SqlCon);
+
+                comUpdate.Parameters.AddWithValue("@id_inscripcion",aluIns.ID);
+                comUpdate.Parameters.AddWithValue("@id_alumno", aluIns.IdAlumno);
+                comUpdate.Parameters.AddWithValue("@id_curso", aluIns.IdCurso);
+                comUpdate.Parameters.AddWithValue("@condicion", aluIns.Condicion);
+                comUpdate.Parameters.AddWithValue("@baja_logica", aluIns.Baja);
+
+                comUpdate.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw new Exception("Error al intentar modificar los datos de la inscripcion", e);
             }
             finally
             {
@@ -119,7 +144,7 @@ namespace Data.Database
                 OpenConnection();
 
                 SqlCommand comInsert = new SqlCommand("insert into dbo.alumnos_inscripciones (id_alumno,id_curso,condicion,baja_logica) " +
-                    "values(@id_alumno,@id_curso, @condicion,@baja_logica)select @@identity", SqlCon);
+                    "values (@id_alumno,@id_curso, @condicion,@baja_logica)select @@identity", SqlCon);
 
                 comInsert.Parameters.AddWithValue("@id_alumno", aluIns.IdAlumno);
                 comInsert.Parameters.AddWithValue("@id_curso", aluIns.IdCurso);
@@ -145,6 +170,10 @@ namespace Data.Database
             if (inscripcion.State == BusinessEntity.States.New)
             {
                 Insert(inscripcion);
+            }
+            if (inscripcion.State == BusinessEntity.States.Modified)
+            {
+                Update(inscripcion);
             }
 
             else if (inscripcion.State == BusinessEntity.States.Deleted)

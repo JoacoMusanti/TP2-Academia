@@ -2,7 +2,7 @@
 
 <asp:Content ID="Inscripciones" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <asp:Panel ID="gridPanelInscripciones" runat="server">
-        <asp:GridView ID="gdvAlumno_Incripcion" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" Width="400
+        <asp:GridView ID="gdvAlumno_Incripcion" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gdvIncripcion_SelectedIndexChanged" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" Width="400
             px" HeaderStyle-HorizontalAlign ="Left">
          <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
@@ -25,14 +25,29 @@
         </asp:GridView>
    </asp:Panel>
     <asp:Panel ID="formPanelInscripcion" runat="server" Visible="false" style="margin-bottom: 71px">
-        <asp:Label ID="Label1" runat="server" Text="Materia"></asp:Label>
-        <asp:DropDownList ID="ddlMaterias" runat="server">
-        </asp:DropDownList>
         <br />
-        <asp:Label ID="Label2" runat="server" Text="Comision"></asp:Label>               
-        <asp:DropDownList ID="ddlComisiones" runat="server">
-        </asp:DropDownList>
-        
+        <br />
+        <asp:GridView ID="gdvInscripcionesCurso" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" Width="400
+            px" HeaderStyle-HorizontalAlign ="Left">
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+             <Columns>
+                 <asp:BoundField DataField="IdCurso" HeaderText="Curso" />
+                 <asp:BoundField DataField="MAte" HeaderText="Materia" />
+                 <asp:BoundField DataField="COmi" HeaderText="Comision" />
+                 <asp:CommandField SelectText="Seleccionar" ShowSelectButton="true" />
+              </Columns>
+
+            <EditRowStyle BackColor="#999999" />
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+        </asp:GridView>
         </asp:Panel>
                     <asp:Panel ID="gridActionsPanel" runat="server">
                         <asp:LinkButton ID="lnkEliminar" runat="server" OnClick="lnkEliminar_Click">Eliminar Inscripcion</asp:LinkButton>
@@ -42,9 +57,4 @@
                         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
                         <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
                     </asp:Panel>
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
-    </asp:Panel>     
 </asp:Content>
