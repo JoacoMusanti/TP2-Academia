@@ -260,6 +260,17 @@ namespace UI.Web
             }
             else
             {
+                txtClave.Text = "";
+                txtRepetirClave.Text = "";
+                txtNombre.Text = "";
+                txtApellido.Text = "";
+                txtEmail.Text = "";
+                chkHabilitado.Text = "";
+                txtNombreUsuario.Text = "";
+                txtDireccion.Text = "";
+                txtLegajo.Text = "";
+                txtTelefono.Text = "";
+
                 txtClave.Enabled = false;
                 txtRepetirClave.Enabled = false;
                 txtNombre.Enabled = true;
