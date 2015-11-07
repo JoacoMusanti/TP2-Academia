@@ -66,13 +66,13 @@ namespace UI.Web
 
         private Especialidad EspActual { get; set; }
 
-        private int SelectedID
+        private int? SelectedID
         {
             get
             {
                 if (ViewState["SelectedID"] != null)
                 {
-                    return (int)ViewState["SelectedID"];
+                    return (int?)ViewState["SelectedID"];
                 }
                 else
                 {
@@ -95,63 +95,77 @@ namespace UI.Web
 
         protected void gridEspecialidades_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedID = (int)gridEspecialidades.SelectedValue;
+            SelectedID = (int?)gridEspecialidades.SelectedValue;
+
+            EspecialidadesPanel.Visible = false;
+            formEspecialidadesActionPanel.Visible = false;
+            gridEspecialidadesActionPanel.Visible = true;
         }
 
         private void LoadForm(int id)
         {
-            if(FormMode == FormModes.Modificacion)
-            {
-                txtDescEsp.Enabled = true;  
-            }
             if(FormMode == FormModes.Baja)
             {
                 txtDescEsp.Enabled = false;
             }
-
-            try
+            else
             {
-                EspActual = LogicEspecialidad.GetOne(id);
-                Session["Especialidad"] = EspActual;
-                txtDescEsp.Text = EspActual.Descripcion;
+                txtDescEsp.Enabled = true;
+                txtDescEsp.Text = "";
             }
-            catch (Exception ex)
+
+
+            if (FormMode != FormModes.Alta)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+                try
+                {
+                    EspActual = LogicEspecialidad.GetOne(id);
+                    txtDescEsp.Text = EspActual.Descripcion;
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+                } 
             }
         }
 
         protected void lnkEditar_Click(object sender, EventArgs e)
         {
-            gridEspecialidadesActionPanel.Visible = false;
-            formEspecialidadesActionPanel.Visible = true;
+            
             if (IsEntitySelected)
             {
                 FormMode = FormModes.Modificacion;
+
+                gridEspecialidadesActionPanel.Visible = false;
+                formEspecialidadesActionPanel.Visible = true;
                 EspecialidadesPanel.Visible = true;
-                LoadForm(SelectedID);
+
+                LoadForm(SelectedID.Value);
             }
         }
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
+            FormMode = FormModes.Alta;
             gridEspecialidadesActionPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = true;
-            FormMode = FormModes.Alta;
             EspecialidadesPanel.Visible = true;
-            txtDescEsp.Enabled = true;
-            txtDescEsp.Text = "";
+
+            LoadForm(SelectedID.Value);
+            
         }
 
         protected void lnkEliminar_Click(object sender, EventArgs e)
         {
-            gridEspecialidadesActionPanel.Visible = false;
-            formEspecialidadesActionPanel.Visible = true;
             if (IsEntitySelected)
             {
                 FormMode = FormModes.Baja;
+
                 EspecialidadesPanel.Visible = true;
-                LoadForm(SelectedID);
+                gridEspecialidadesActionPanel.Visible = false;
+                formEspecialidadesActionPanel.Visible = true;
+
+                LoadForm(SelectedID.Value);
             }
         }
 
@@ -177,7 +191,7 @@ namespace UI.Web
             if (FormMode == FormModes.Baja || FormMode == FormModes.Modificacion)
             {
                 EspActual = (Especialidad)Session["Especialidad"];
-                EspActual.ID = SelectedID;
+                EspActual.ID = SelectedID.Value;
                 EspActual.State = BusinessEntity.States.Modified;
 
             }
@@ -195,13 +209,16 @@ namespace UI.Web
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            CargarEspecialidad();
-            GuardarEspecialidad(EspActual);
-            LoadGrid();
-            SelectedID = -1;
             EspecialidadesPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = false;
             gridEspecialidadesActionPanel.Visible = true;
+
+            CargarEspecialidad();
+            GuardarEspecialidad(EspActual);
+            LoadGrid();
+
+            gridEspecialidades.SelectedIndex = -1;
+            gridEspecialidades_SelectedIndexChanged(null, null);            
         }
 
         protected void btCancelar_Click(object sender, EventArgs e)
@@ -209,6 +226,9 @@ namespace UI.Web
             EspecialidadesPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = false;
             gridEspecialidadesActionPanel.Visible = true;
+
+            gridEspecialidades.SelectedIndex = -1;
+            gridEspecialidades_SelectedIndexChanged(null, null);
         }
     }
 }
