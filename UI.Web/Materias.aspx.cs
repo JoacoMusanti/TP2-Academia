@@ -14,9 +14,22 @@ namespace UI.Web
         private PlanLogic _planLogic;
         private EspecialidadLogic _especialidadLogic;
         private MateriaLogic _materiaLogic;
+        private CursoLogic _cursologic;
 
         private Materia MateriaActual { get; set; }
 
+        private CursoLogic LogicCurso
+        {
+            get
+            {
+                if (_cursologic == null)
+                {
+                    _cursologic = new CursoLogic();
+                }
+
+                return _cursologic;
+            }
+        }
         private PlanLogic LogicPlan
         {
             get
@@ -233,12 +246,24 @@ namespace UI.Web
         {
             if (HaySeleccion())
             {
-                FormMode = FormModes.Modificacion;
-                materiasPanel.Visible = true;
-                formActionPanel.Visible = true;
-                gridMateriasActionPanel.Visible = false;
+                // Verificamos que la materia seleccionada no este referenciada por ningun curso
+                // si lo esta, no permitimos la edicion de la materia
+                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdMateria == SelectedID).ToList();
 
-                CargarForm(SelectedID.Value); 
+                if (cursos.Count == 0)
+                {
+                    FormMode = FormModes.Modificacion;
+                    materiasPanel.Visible = true;
+                    formActionPanel.Visible = true;
+                    gridMateriasActionPanel.Visible = false;
+
+                    CargarForm(SelectedID.Value);
+                }
+                else
+                {
+                    lnkCancelar_Click(null, null);
+                    Response.Write("No se puede modificar la materia seleccionada porque la materia esta referenciada por un curso");
+                }
             }
         }
 
@@ -246,12 +271,25 @@ namespace UI.Web
         {
             if (HaySeleccion())
             {
-                FormMode = FormModes.Baja;
-                materiasPanel.Visible = true;
-                formActionPanel.Visible = true;
-                gridMateriasActionPanel.Visible = false;
+                // Verificamos que la materia seleccionada no este referenciada por ningun curso
+                // si lo esta, no permitimos la eliminacion de la materia
+                List<Curso> cursos = LogicCurso.GetAll().Where(curso => curso.IdMateria == SelectedID).ToList();
 
-                CargarForm(SelectedID.Value); 
+                if (cursos.Count == 0)
+                {
+                    FormMode = FormModes.Baja;
+                    materiasPanel.Visible = true;
+                    formActionPanel.Visible = true;
+                    gridMateriasActionPanel.Visible = false;
+
+                    CargarForm(SelectedID.Value);
+                }
+                else
+                {
+                    lnkCancelar_Click(null, null);
+                    Response.Write("No se puede eliminar la materia seleccionada porque la materia esta referenciada por un curso");
+                }
+                
             }
         }
 

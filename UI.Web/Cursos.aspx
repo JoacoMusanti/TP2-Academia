@@ -39,12 +39,12 @@
                 <td style="width: 536px">
                     <asp:Panel ID="formPanelCurso" runat="server" Visible="false">
                         <asp:Label ID="lblMateria" runat="server" Text="Materia: "></asp:Label>
-                        <asp:DropDownList ID="ddlMaterias" runat="server" >
+                        <asp:DropDownList ID="ddlMaterias" runat="server" OnSelectedIndexChanged="ddlMaterias_SelectedIndexChanged" AutoPostBack="true">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlMaterias" Display="Dynamic" ErrorMessage="La materia es requerida" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="lblComision" runat="server" Text="Comision: "></asp:Label>
-                        <asp:DropDownList ID="ddlComisiones" runat="server" >
+                        <asp:DropDownList ID="ddlComisiones" runat="server" OnSelectedIndexChanged="ddlComisiones_SelectedIndexChanged" AutoPostBack="true">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlComisiones" Display="Dynamic" ErrorMessage="La comision es requerida" ForeColor="Red"></asp:RequiredFieldValidator>
                         <br />
