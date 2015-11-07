@@ -109,6 +109,7 @@ namespace UI.Web
 
         protected void lnkEditar_Click(object sender, EventArgs e)
         {
+            gridEspecialidadesActionPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = true;
             if (IsEntitySelected)
             {
@@ -120,6 +121,7 @@ namespace UI.Web
 
         protected void lnkNuevo_Click(object sender, EventArgs e)
         {
+            gridEspecialidadesActionPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = true;
             FormMode = FormModes.Alta;
             EspecialidadesPanel.Visible = true;
@@ -129,6 +131,7 @@ namespace UI.Web
 
         protected void lnkEliminar_Click(object sender, EventArgs e)
         {
+            gridEspecialidadesActionPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = true;
             if (IsEntitySelected)
             {
@@ -177,12 +180,14 @@ namespace UI.Web
             SelectedID = 0;
             EspecialidadesPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = false;
+            gridEspecialidadesActionPanel.Visible = true;
         }
 
         protected void btCancelar_Click(object sender, EventArgs e)
         {
             EspecialidadesPanel.Visible = false;
             formEspecialidadesActionPanel.Visible = false;
+            gridEspecialidadesActionPanel.Visible = true;
         }
     }
 }
