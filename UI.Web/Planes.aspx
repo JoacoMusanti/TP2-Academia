@@ -44,6 +44,10 @@
     <asp:Panel ID="formActionPanel" runat="server" Visible="false">
         <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
         <asp:LinkButton ID="lnkCancelar" runat="server" OnClick="lnkCancelar_Click" CausesValidation="False">Cancelar</asp:LinkButton>
-
     </asp:Panel>
+    <asp:Panel ID="reportePanel" runat="server"  Visible="true">
+
+            <asp:LinkButton ID="lnkReporte" runat="server" OnClick="lnkReporte_Click">Crear reporte</asp:LinkButton>
+
+        </asp:Panel>
 </asp:Content>
