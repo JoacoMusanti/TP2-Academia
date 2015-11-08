@@ -13,6 +13,7 @@ namespace UI.Web
         protected void Application_Start(object sender, EventArgs e)
         {
             ValidationSettings.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
+            
         }
     }
 }

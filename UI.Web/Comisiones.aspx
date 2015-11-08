@@ -53,7 +53,7 @@
     <asp:Panel ID="gridActionPanel" runat="server">
         <asp:LinkButton ID="lnkNuevo" runat="server" OnClick="lnkNuevo_Click">Nuevo</asp:LinkButton>
         <asp:LinkButton ID="lnkEditar" runat="server" OnClick="lnkEditar_Click">Editar</asp:LinkButton>
-        <asp:LinkButton ID="lnkBorrar" runat="server" OnClick="lnkBorrar_Click">Borrar</asp:LinkButton>
+        <asp:LinkButton ID="lnkBorrar" runat="server" OnClick="lnkBorrar_Click">Eliminar</asp:LinkButton>
 
     </asp:Panel>
 

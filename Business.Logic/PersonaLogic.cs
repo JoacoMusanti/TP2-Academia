@@ -94,6 +94,11 @@ namespace Business.Logic
             }
         }
 
+        /// <summary>
+        /// Devuelve verdadero si el nombre de usuario esta utilizado
+        /// </summary>
+        /// <param name="nombreUsu"></param>
+        /// <returns></returns>
         static public bool ValidaUsuario(string nombreUsu)
         {  
             bool retorno = true;
@@ -104,7 +109,12 @@ namespace Business.Logic
             }
             return retorno;
         }
-        // Este metodo valida que el legajo ya no esté utilizado
+        
+        /// <summary>
+        /// Devuelve verdadero si el numero de legajo esta utilizado
+        /// </summary>
+        /// <param name="numlegajo"></param>
+        /// <returns></returns>
         static public bool ValidaLegajo(int numlegajo)
         {   
             bool retorno = true;

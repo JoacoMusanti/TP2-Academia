@@ -398,7 +398,33 @@ namespace UI.Web
         {
             try
             {
-                LogicPersona.Save(per);
+                string error = "";
+
+                if (FormMode == FormModes.Alta)
+                {
+                    if (PersonaLogic.ValidaUsuario(per.NombreUsuario))
+                    {
+                        if (PersonaLogic.ValidaLegajo(per.Legajo))
+                        {
+                            LogicPersona.Save(per);
+                        }
+                        else
+                        {
+                            error += "El numero de legajo ya esta utilizado<br\\>";
+                        }
+                        
+                    }
+                    else
+                    {
+                        error += "El nombre de usuario ya esta utilizado<br\\>";
+                    }
+
+                    Response.Write(error);
+                }
+                else
+                {
+                    LogicPersona.Save(per);
+                }
             }
             catch (Exception ex)
             {
@@ -484,5 +510,9 @@ namespace UI.Web
             gridView_SelectedIndexChanged(null, null);
         }
 
+        protected void cvValidadorLongitudClave_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            args.IsValid = (args.Value.Length >= 8);
+        }
     }
 }
