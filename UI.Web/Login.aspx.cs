@@ -30,7 +30,7 @@ namespace UI.Web
                 if (UsuarioActual.Clave != null &&
                     Util.Hash.VerificarHash(UsuarioActual.Clave, loginAcademia.Password) &&
                     UsuarioActual.Habilitado == true)
-                {
+                { 
                     Session["RolSesion"] = UsuarioActual.TipoPersona;
                     Session["IdAlumno"] = UsuarioActual.ID;
                     Session["IdPlan"] = UsuarioActual.IdPlan;

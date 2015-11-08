@@ -89,12 +89,13 @@ namespace UI.Web
                 gdvAlumno_Incripcion.DataSource = inscripciones.Select(ins => new
                 {
                     ID = ins.ID,
-                                                                                MAteria = (LogicMateria.GetOne((LogicCurso.GetOne(ins.IdCurso).IdMateria))).Descripcion,
-                                                                                COmision = (LogicComision.GetOne((LogicCurso.GetOne(ins.IdCurso).IdComision))).Descripcion,
-                                                                                Condicion = ins.Condicion,
-                                                                              });
+                    MAteria = (LogicMateria.GetOne((LogicCurso.GetOne(ins.IdCurso).IdMateria))).Descripcion,
+                    COmision = (LogicComision.GetOne((LogicCurso.GetOne(ins.IdCurso).IdComision))).Descripcion,
+                    Condicion = ins.Condicion,
+                });
+
             gdvAlumno_Incripcion.DataBind();
-        }
+            }
             catch (Exception ex)
             {
                 Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
@@ -120,7 +121,7 @@ namespace UI.Web
             }
         }
 
-         private bool HaySeleccion()
+        private bool HaySeleccion()
         {
             return(SelectedIDInscripcion != -1);
         }
@@ -132,7 +133,7 @@ namespace UI.Web
             formActionsPanel.Visible = false;
             gridActionsPanel.Visible = true;
         }
-         enum FormModes
+        enum FormModes
         {
             Alta,
             Baja,
@@ -154,38 +155,38 @@ namespace UI.Web
         {
             try
             {
-            // Usamos solo los cursos del plan en el que esta inscripto el alumno
+                // Usamos solo los cursos del plan en el que esta inscripto el alumno
 
-            var inscripciones = InscripcionLogic.GetAll(Convert.ToInt32(Session["IdAlumno"]));
-            List<int> materiasInscriptas;
-            materiasInscriptas = inscripciones.Select(ins => LogicMateria.GetOne((LogicCurso.GetOne(ins.IdCurso).IdMateria)).ID).ToList();
+                var inscripciones = InscripcionLogic.GetAll(Convert.ToInt32(Session["IdAlumno"]));
+                List<int> materiasInscriptas;
+                materiasInscriptas = inscripciones.Select(ins => LogicMateria.GetOne((LogicCurso.GetOne(ins.IdCurso).IdMateria)).ID).ToList();
 
-            var idPlan = Session["IdPlan"];
+                var idPlan = Session["IdPlan"];
 
-            var cursos = LogicCurso.GetAll().Where(curso => LogicMateria.GetOne(curso.IdMateria).IdPlan == (int)idPlan);
+                var cursos = LogicCurso.GetAll().Where(curso => LogicMateria.GetOne(curso.IdMateria).IdPlan == (int)idPlan);
 
-            cursos = cursos.Where(c => !(materiasInscriptas.Contains(c.IdMateria)));
+                cursos = cursos.Where(c => !(materiasInscriptas.Contains(c.IdMateria)));
             
             
 
-            gdvInscripcionesCurso.DataSource = cursos.Select(cur => new
-            {   
-                ID = cur.ID,
-                IdCurso = cur.ID,
-                MAte = (LogicMateria.GetOne((cur.IdMateria))).Descripcion,
-                COmi = (LogicComision.GetOne((cur.IdComision))).Descripcion,
-            });
+                gdvInscripcionesCurso.DataSource = cursos.Select(cur => new
+                {   
+                    ID = cur.ID,
+                    IdCurso = cur.ID,
+                    MAte = (LogicMateria.GetOne((cur.IdMateria))).Descripcion,
+                    COmi = (LogicComision.GetOne((cur.IdComision))).Descripcion,
+                });
 
-            if (cursos.Count() == 0)
-            {
-                lblNoMateria.Visible = true;
-                lnkAceptar.Visible = false;
+                if (cursos.Count() == 0)
+                {
+                    lblNoMateria.Visible = true;
+                    lnkAceptar.Visible = false;
+                }
+                else
+                    lnkAceptar.Visible = true;
+
+                gdvInscripcionesCurso.DataBind();
             }
-            else
-                lnkAceptar.Visible = true;
-
-            gdvInscripcionesCurso.DataBind();
-        }
             catch (Exception ex)
             {
                 Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
@@ -218,8 +219,8 @@ namespace UI.Web
         {
             try
             {
-            InscripcionLogic.Save(alumIns);
-        }
+                InscripcionLogic.Save(alumIns);
+            }
             catch (Exception ex)
             {
                 Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);

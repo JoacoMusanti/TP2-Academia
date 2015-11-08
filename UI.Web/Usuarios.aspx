@@ -85,17 +85,18 @@
     <asp:Label ID="lblClave" runat="server" Text="Clave: "></asp:Label>
     <asp:TextBox ID="txtClave" TextMode="Password" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvClave" runat="server" ControlToValidate="txtClave" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+    <asp:CustomValidator ID="cvValidadorLongitudClave" runat="server" ControlToValidate="txtClave" Display="Dynamic" ErrorMessage="La clave debe constar de como minimo 8 caracteres" ForeColor="#FF3300" OnServerValidate="cvValidadorLongitudClave_ServerValidate"></asp:CustomValidator>
     <br />
     <asp:Label ID="lblRepetirClave" runat="server" Text="Repetir Clave: "></asp:Label>
-    <asp:TextBox ID="txtRepetirClave" TextMode="Password" runat="server"></asp:TextBox>
+    <asp:TextBox ID="txtRepetirClave" runat="server" TextMode="Password"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvRepiteClave" runat="server" ControlToValidate="txtRepetirClave" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <asp:CompareValidator ID="cvCoinciden" runat="server" ControlToCompare="txtClave" ControlToValidate="txtRepetirClave" ErrorMessage="Las claves no coinciden" ForeColor="#FF3300"></asp:CompareValidator>
     <br />
 </asp:Panel>
 <asp:Panel ID="gridActionsPanel" runat="server">
+    <asp:LinkButton ID="lnkNuevo" runat="server" OnClick="lnkNuevo_Click">Nuevo</asp:LinkButton>
     <asp:LinkButton ID="lnkEditar" runat="server" OnClick="lnkEditar_Click">Editar</asp:LinkButton>
     <asp:LinkButton ID="lnkEliminar" runat="server" OnClick="lnkEliminar_Click">Eliminar</asp:LinkButton>
-    <asp:LinkButton ID="lnkNuevo" runat="server" OnClick="lnkNuevo_Click">Nuevo</asp:LinkButton>
 </asp:Panel>
 <asp:Panel ID="formActionsPanel" runat="server" Visible="false">
     <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
