@@ -29,7 +29,19 @@ namespace Business.Logic
                 throw;
             }
         }
+        public List<AlumnoInscripcion> GetAllCur(int id)
+        {
+            try
+            {
+                return InscripcionData.GetAllCur(id);
+            }
 
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
         public AlumnoInscripcion GetOne(int id)
         {
             try
@@ -42,6 +54,8 @@ namespace Business.Logic
                 throw;
             }
         }
+
+       
 
         public void Save(AlumnoInscripcion alumIns)
         {

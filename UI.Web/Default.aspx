@@ -5,7 +5,7 @@
             <td style="width: 394px; height: 7px;"></td>
             <td style="height: 7px">
     <asp:Panel ID="menuPanel" runat="server" CssClass="panelCss" BorderStyle="None" Width="204px">
-        <asp:HyperLink ID="hlkCargarNotas" runat="server">Cargar Notas</asp:HyperLink>
+        <asp:HyperLink ID="hlkCargarNotas" runat="server" NavigateUrl="~/subirNotas.aspx">Cargar Notas</asp:HyperLink>
         <asp:HyperLink ID="hlkInscripcionCurso" runat="server" NavigateUrl="~/AlumnoInscripciones.aspx">Inscribirse a Cursos</asp:HyperLink>
         <asp:HyperLink ID="hlkUsuarios" runat="server" NavigateUrl="~/Usuarios.aspx">Administrar Usuarios</asp:HyperLink>
         <br />

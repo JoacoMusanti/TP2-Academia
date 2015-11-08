@@ -50,6 +50,44 @@ namespace Data.Database
             return inscripciones;
          }
 
+        public List<AlumnoInscripcion> GetAllCur(int id)
+        {
+            List<AlumnoInscripcion> inscripciones = new List<AlumnoInscripcion>();
+
+            try
+            {
+                OpenConnection();
+
+                SqlCommand comInscripciones = new SqlCommand("select * from dbo.alumnos_inscripciones where id_curso=@id and baja_logica = 0", SqlCon);
+                comInscripciones.Parameters.AddWithValue("@id", id);
+                SqlDataReader drInscripcionesAlumno = comInscripciones.ExecuteReader();
+
+                while (drInscripcionesAlumno.Read())
+                {
+                    AlumnoInscripcion ins = new AlumnoInscripcion();
+
+                    ins.ID = (int)drInscripcionesAlumno["id_inscripcion"];
+                    ins.IdAlumno = (int)drInscripcionesAlumno["id_alumno"];
+                    ins.IdCurso = (int)drInscripcionesAlumno["id_curso"];
+                    ins.Condicion = (string)drInscripcionesAlumno["condicion"];
+                    ins.Baja = (bool)drInscripcionesAlumno["baja_logica"];
+
+                    inscripciones.Add(ins);
+                }
+                drInscripcionesAlumno.Close();
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw new Exception("Error al intentar recuperar las inscripciones de la base de datos", e);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+            return inscripciones;
+        }
+
         public AlumnoInscripcion GetOne(int id)
         {
             AlumnoInscripcion ins = new AlumnoInscripcion();
@@ -116,12 +154,13 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comUpdate = new SqlCommand("update dbo.alumnos_inscripciones set id_alumno = @id_alumno,id_curso=@id_curso, condicion=@condicion,baja_logica = @baja_logica where id_inscripcion = @id_inscripcion and baja_logica = 0", SqlCon);
+                SqlCommand comUpdate = new SqlCommand("update dbo.alumnos_inscripciones set id_alumno = @id_alumno,id_curso=@id_curso,nota=@nota, condicion=@condicion,baja_logica = @baja_logica where id_inscripcion = @id_inscripcion and baja_logica = 0", SqlCon);
 
                 comUpdate.Parameters.AddWithValue("@id_inscripcion",aluIns.ID);
                 comUpdate.Parameters.AddWithValue("@id_alumno", aluIns.IdAlumno);
                 comUpdate.Parameters.AddWithValue("@id_curso", aluIns.IdCurso);
                 comUpdate.Parameters.AddWithValue("@condicion", aluIns.Condicion);
+                comUpdate.Parameters.AddWithValue("@nota", aluIns.Nota);
                 comUpdate.Parameters.AddWithValue("@baja_logica", aluIns.Baja);
 
                 comUpdate.ExecuteNonQuery();
