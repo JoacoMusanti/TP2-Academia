@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Business.Entities;
 using Business.Logic;
 using System.Globalization;
+using System.Runtime.Serialization.Json;
+using System.IO;
 
 namespace UI.Web
 {
@@ -513,6 +515,55 @@ namespace UI.Web
         protected void cvValidadorLongitudClave_ServerValidate(object source, ServerValidateEventArgs args)
         {
             args.IsValid = (args.Value.Length >= 8);
+        }
+
+        protected void lnkSerializar_Click(object sender, EventArgs e)
+        {
+            if (IsEntitySelected)
+            {
+                try
+                {
+                    Persona p = LogicPersona.GetOne(SelectedID.Value);
+
+                    if (p.TipoPersona == Persona.TipoPersonas.Alumno)
+                    {
+                        DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Persona));
+                        using (FileStream archivo = new FileStream(@"C:\Users\joako\alumno.json", FileMode.Create))
+                        {
+                            ser.WriteObject(archivo, p);
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("Solo se pueden serializar alumnos");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+                }
+                
+            }
+            
+        }
+
+        protected void lnkDeserializar_Click(object sender, EventArgs e)
+        {   
+            try
+            {
+                using (FileStream archivo = new FileStream(@"C:\Users\joako\alumno.json", FileMode.Open))
+                {
+                    DataContractJsonSerializer serializadorJSON = new DataContractJsonSerializer(typeof(Persona));
+                    Persona p = (Persona)serializadorJSON.ReadObject(archivo);
+                    p.State = BusinessEntity.States.New;
+                    FormMode = FormModes.Alta;
+                    SaveEntity(p);
+                }
+            }
+            catch (Exception ex)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
+            }
         }
     }
 }

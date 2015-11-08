@@ -102,5 +102,9 @@
     <asp:LinkButton ID="lnkAceptar" runat="server" OnClick="lnkAceptar_Click">Aceptar</asp:LinkButton>
     <asp:LinkButton ID="lnkCancelar" runat="server" CausesValidation="False" OnClick="lnkCancelar_Click">Cancelar</asp:LinkButton>
 </asp:Panel>
+<asp:Panel ID="serializarPanel" runat="server">
+    <asp:LinkButton ID="lnkSerializar" runat="server" OnClick="lnkSerializar_Click">Serializar Alumno</asp:LinkButton>
+    <asp:LinkButton ID="lnkDeserializar" runat="server" OnClick="lnkDeserializar_Click">Deserializar Alumno</asp:LinkButton>
+</asp:Panel>
 </asp:Content>
 
