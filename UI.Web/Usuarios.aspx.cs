@@ -402,7 +402,7 @@ namespace UI.Web
             {
                 string error = "";
 
-                if (FormMode == FormModes.Alta)
+                if (FormMode == FormModes.Alta ||FormMode == FormModes.Modificacion)
                 {
                     if (PersonaLogic.ValidaUsuario(per.NombreUsuario))
                     {

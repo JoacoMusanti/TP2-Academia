@@ -95,7 +95,7 @@ namespace Business.Logic
         }
 
         /// <summary>
-        /// Devuelve verdadero si el nombre de usuario esta utilizado
+        /// Devuelve falso si el nombre de usuario esta utilizado
         /// </summary>
         /// <param name="nombreUsu"></param>
         /// <returns></returns>
@@ -111,7 +111,7 @@ namespace Business.Logic
         }
         
         /// <summary>
-        /// Devuelve verdadero si el numero de legajo esta utilizado
+        /// Devuelve falso si el numero de legajo esta utilizado
         /// </summary>
         /// <param name="numlegajo"></param>
         /// <returns></returns>
