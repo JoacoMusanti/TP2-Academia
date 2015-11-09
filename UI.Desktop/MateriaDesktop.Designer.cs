@@ -221,6 +221,7 @@
             this.cbEspecialidad.Name = "cbEspecialidad";
             this.cbEspecialidad.Size = new System.Drawing.Size(207, 21);
             this.cbEspecialidad.TabIndex = 13;
+            this.cbEspecialidad.SelectedIndexChanged += new System.EventHandler(this.cbEspecialidad_SelectedIndexChanged);
             // 
             // MateriaDesktop
             // 

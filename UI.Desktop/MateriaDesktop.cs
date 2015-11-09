@@ -210,6 +210,10 @@ namespace UI.Desktop
                     Close();
                 }
         }
-        
+
+        private void cbEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarPlanes();
+        }
     }
 }
