@@ -93,6 +93,7 @@ namespace UI.Web
         }
 
         private Persona PersonaActual { get; set; }
+        private Persona PersonaLog { get; set; }
         private Plan PlanUsuario { get; set; }
         private Especialidad EspecialidadUsuario { get; set; }
 
@@ -416,31 +417,32 @@ namespace UI.Web
                         validacion = false;
                     }
                 }
-                if (FormMode == FormModes.Modificacion && per.Legajo != PersonaActual.Legajo)
+                if (FormMode == FormModes.Modificacion)
                 {
-                    if (!PersonaLogic.ValidaLegajo(per.Legajo))
+                    PersonaLog = LogicPersona.GetOne(Convert.ToInt32(Session["IdAlumno"]));
+                    if (per.Legajo != PersonaLog.Legajo)
                     {
-                        error += "Numero de legajo en uso <br\\>";
-                        validacion = false;
-                    }
-                }
-                if (FormMode == FormModes.Modificacion && per.NombreUsuario != PersonaActual.NombreUsuario)
-                {
-                    if (!PersonaLogic.ValidaUsuario(per.NombreUsuario))
-                    {
-                        error += "Nombre de usuario en uso <br\\>";
-                        validacion = false;
-                    }
-                }
+                        if (!PersonaLogic.ValidaLegajo(per.Legajo))
+                        {
+                            error += "Numero de legajo en uso <br\\>";
+                            validacion = false;
+                        }
 
-                
-                if (validacion == true)
-                {
-                    LogicPersona.Save(per);
-                }
-                else
-                {
-                    Response.Write(error);
+                        if (!PersonaLogic.ValidaUsuario(per.NombreUsuario))
+                        {
+                            error += "Nombre de usuario en uso <br\\>";
+                            validacion = false;
+                        }
+                    }
+
+                    if (validacion == true)
+                    {
+                        LogicPersona.Save(per);
+                    }
+                    else
+                    {
+                        Response.Write(error);
+                    }
                 }
             }
             catch (Exception ex)
