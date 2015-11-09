@@ -401,31 +401,46 @@ namespace UI.Web
             try
             {
                 string error = "";
+                bool validacion = true;
 
-                if (FormMode == FormModes.Alta ||FormMode == FormModes.Modificacion)
+                if (FormMode == FormModes.Alta)
                 {
-                    if (PersonaLogic.ValidaUsuario(per.NombreUsuario))
+                    if (!PersonaLogic.ValidaLegajo(per.Legajo))
                     {
-                        if (PersonaLogic.ValidaLegajo(per.Legajo))
-                        {
-                            LogicPersona.Save(per);
-                        }
-                        else
-                        {
-                            error += "El numero de legajo ya esta utilizado<br\\>";
-                        }
-                        
+                        error += "Numero de legajo en uso <br\\>";
+                        validacion = false;
                     }
-                    else
+                    if (!PersonaLogic.ValidaUsuario(per.NombreUsuario))
                     {
-                        error += "El nombre de usuario ya esta utilizado<br\\>";
+                        error += "Nombre de usuario en uso <br\\>";
+                        validacion = false;
                     }
+                }
+                if (FormMode == FormModes.Modificacion && per.Legajo != PersonaActual.Legajo)
+                {
+                    if (!PersonaLogic.ValidaLegajo(per.Legajo))
+                    {
+                        error += "Numero de legajo en uso <br\\>";
+                        validacion = false;
+                    }
+                }
+                if (FormMode == FormModes.Modificacion && per.NombreUsuario != PersonaActual.NombreUsuario)
+                {
+                    if (!PersonaLogic.ValidaUsuario(per.NombreUsuario))
+                    {
+                        error += "Nombre de usuario en uso <br\\>";
+                        validacion = false;
+                    }
+                }
 
-                    Response.Write(error);
+                
+                if (validacion == true)
+                {
+                    LogicPersona.Save(per);
                 }
                 else
                 {
-                    LogicPersona.Save(per);
+                    Response.Write(error);
                 }
             }
             catch (Exception ex)
