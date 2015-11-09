@@ -417,23 +417,25 @@ namespace UI.Web
                         validacion = false;
                     }
                 }
+
                 if (FormMode == FormModes.Modificacion)
                 {
                     PersonaLog = LogicPersona.GetOne(Convert.ToInt32(Session["IdAlumno"]));
-                    if (per.Legajo != PersonaLog.Legajo)
+                    if (per.ID != PersonaLog.ID)
                     {
-                        if (!PersonaLogic.ValidaLegajo(per.Legajo))
+                        if (!PersonaLogic.ValidaLegajo(per))
                         {
                             error += "Numero de legajo en uso <br\\>";
                             validacion = false;
                         }
 
-                        if (!PersonaLogic.ValidaUsuario(per.NombreUsuario))
+                        if (!PersonaLogic.ValidaUsuario(per))
                         {
                             error += "Nombre de usuario en uso <br\\>";
                             validacion = false;
                         }
                     }
+                }
 
                     if (validacion == true)
                     {
@@ -443,7 +445,7 @@ namespace UI.Web
                     {
                         Response.Write(error);
                     }
-                }
+                
             }
             catch (Exception ex)
             {

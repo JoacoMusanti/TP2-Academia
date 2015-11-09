@@ -109,14 +109,41 @@ namespace Business.Logic
             }
             return retorno;
         }
-        
+
+        static public bool ValidaUsuario(Persona per)
+        {
+            bool retorno = true;
+            Persona p = new PersonaLogic().GetOne(per.NombreUsuario);
+            if (p.NombreUsuario != null && p.Baja == false)
+            {
+                if (per.ID != p.ID)
+                {
+                    retorno = false;
+                }
+            }
+            return retorno;
+        }
         /// <summary>
         /// Devuelve falso si el numero de legajo esta utilizado
         /// </summary>
         /// <param name="numlegajo"></param>
         /// <returns></returns>
-        static public bool ValidaLegajo(int numlegajo)
+        static public bool ValidaLegajo(Persona per)
         {   
+            bool retorno = true;
+            Persona p = new PersonaLogic().GetOneLeg(per.Legajo);
+            if (p.Nombre != null && p.Baja == false)
+            {
+                if (per.ID != p.ID)
+                {
+                    retorno = false;
+                }
+            }
+            return retorno;
+        }
+
+        static public bool ValidaLegajo(int numlegajo)
+        {
             bool retorno = true;
             Persona p = new PersonaLogic().GetOneLeg(numlegajo);
             if (p.Nombre != null && p.Baja == false)
@@ -125,7 +152,6 @@ namespace Business.Logic
             }
             return retorno;
         }
-
 
     }
 }
