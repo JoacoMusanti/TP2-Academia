@@ -26,7 +26,8 @@ namespace Data.Database
 
                 SqlCommand comCurso = new SqlCommand("select * from dbo.cursos cur" +
                                                      " inner join dbo.comisiones com on cur.id_comision = com.id_comision"+
-                                                    " where cur.baja_logica = 0 and com.baja_logica = 0 ", SqlCon);
+                                                     " inner join dbo.materias mat on cur.id_materia = mat.id_materia"+
+                                                     " where cur.baja_logica = 0 and com.baja_logica = 0 and mat.baja_logica = 0", SqlCon);
 
                 SqlDataReader drCursos = comCurso.ExecuteReader();
 
