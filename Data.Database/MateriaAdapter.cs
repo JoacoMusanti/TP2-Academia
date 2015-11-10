@@ -21,7 +21,7 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comMateria = new SqlCommand("select * from materias where @id=id_materia and baja_logica=0",SqlCon);
+                SqlCommand comMateria = new SqlCommand("select * from materias where @id=id_materia and baja_logica=0", SqlCon);
 
                 comMateria.Parameters.AddWithValue("@id", id);
 
@@ -60,7 +60,10 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comMaterias = new SqlCommand("select * from materias where baja_logica = 0", SqlCon);
+                SqlCommand comMaterias = new SqlCommand("select * from materias mat"+
+                                                       " inner join dbo.planes p on p.id_plan = mat.id_plan" +
+                                                       " inner join dbo.especialidades esp on p.id_especialidad = esp.id_especialidad" +
+                                                       " where mat.baja_logica = 0 and p.baja_logica= 0 and esp.baja_logica= 0", SqlCon);
 
                 SqlDataReader drMaterias = comMaterias.ExecuteReader();
 
@@ -81,7 +84,7 @@ namespace Data.Database
                 drMaterias.Close();
             }
             catch (Exception e)
-            {
+             {
                 Util.Logger.Log(e);
                 throw new Exception("Error al intentar recuperar las materias de la base de datos", e);
             }
