@@ -343,12 +343,14 @@ namespace UI.Web
         {
             try
             {
-                string validacion=_logicPersona.Save(per);
-                if (validacion.Length > 1)               
-                    Response.Write(validacion);
+                //string validacion=_logicPersona.Save(per);
+                _logicPersona.Save(per);
+                //if (validacion.Length > 1)               
+                //    Response.Write(validacion);
             }
             catch (Exception ex)
             {
+                Response.Write("El legajo y/o el nombre de usuario ya está/n en uso");
                 Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
             }
         }

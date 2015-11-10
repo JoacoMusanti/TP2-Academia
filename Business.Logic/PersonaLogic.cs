@@ -68,23 +68,23 @@ namespace Business.Logic
             }
         }
 
-        public string Save(Persona persona)
+        public void Save(Persona persona)
         {
             try {
 
-                string error = "";
+               // string error = "";
                 bool validacion = true;
 
                 if (persona.State == BusinessEntity.States.New || persona.State == BusinessEntity.States.Modified)
                 {
                     if (!ValidaLegajo(persona))
                     {
-                        error += "Numero de legajo en uso \n";
+                    //    error += "Numero de legajo en uso \n";
                         validacion = false;
                     }
                     if (!ValidaUsuario(persona))
                     {
-                        error += "Nombre de usuario en uso";
+                      //  error += "Nombre de usuario en uso";
                         validacion = false;
                     }
                 }
@@ -93,11 +93,14 @@ namespace Business.Logic
                 {
                     PersonaData.Save(persona);
                 }
+                else
+                    throw new Exception();
 
-                return error;
+                //return error;
             }
             catch (Exception e)
             {
+                
                 Util.Logger.Log(e);
                 throw;
             }

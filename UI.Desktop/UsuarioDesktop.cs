@@ -228,18 +228,14 @@ namespace UI.Desktop
             MapearADatos();
 
             PersonaLogic usr = new PersonaLogic();
-            string val="";
-
+            
             try
-            {
-        
-              val = usr.Save(PersonaActual);
-                if (val.Length > 0)
-                    throw new Exception();
+            {      
+              usr.Save(PersonaActual);          
             }
             catch (Exception e)
             {
-                Notificar("Error",val,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Notificar("Error","Legajo y/o nombre de usuario ya está/n en uso",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
