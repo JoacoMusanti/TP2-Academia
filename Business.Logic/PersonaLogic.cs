@@ -68,14 +68,14 @@ namespace Business.Logic
             }
         }
 
-        public string Save(Persona persona,BusinessEntity.States state)
+        public string Save(Persona persona)
         {
             try {
 
                 string error = "";
                 bool validacion = true;
 
-                if (state == BusinessEntity.States.New || state == BusinessEntity.States.Modified)
+                if (persona.State == BusinessEntity.States.New || persona.State == BusinessEntity.States.Modified)
                 {
                     if (!ValidaLegajo(persona))
                     {
@@ -103,18 +103,18 @@ namespace Business.Logic
             }
         }
 
-        public void Save(Persona persona)
-        {
-            try
-            {
-                PersonaData.Save(persona);
-            }
-            catch (Exception e)
-            {
-                Util.Logger.Log(e);
-                throw;
-            }
-        }
+        //public void Save(Persona persona)
+        //{
+        //    try
+        //    {
+        //        PersonaData.Save(persona);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Util.Logger.Log(e);
+        //        throw;
+        //    }
+        //}
 
         public void Delete(int ID)
         {

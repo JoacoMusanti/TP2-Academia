@@ -232,18 +232,14 @@ namespace UI.Desktop
 
             try
             {
-                if (PersonaActual.State == BusinessEntity.States.New || PersonaActual.State == BusinessEntity.States.Modified)
-                {
-                    val = usr.Save(PersonaActual, PersonaActual.State);
-                    if (val.Length > 0)
-                        Notificar("Error", val, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                    usr.Save(PersonaActual);
+        
+              val = usr.Save(PersonaActual);
+                if (val.Length > 0)
+                    throw new Exception();
             }
             catch (Exception e)
             {
-                Notificar(e);
+                Notificar("Error",val,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 

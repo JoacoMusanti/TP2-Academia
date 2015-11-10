@@ -88,10 +88,6 @@ namespace UI.Web
 
         public bool Enabled
         {
-            get
-            {
-                return Enabled;
-            }
             set
             {
                 ddlAnio.Enabled = value;

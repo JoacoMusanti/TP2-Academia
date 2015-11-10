@@ -343,7 +343,7 @@ namespace UI.Web
         {
             try
             {
-                string validacion=_logicPersona.Save(per,per.State);
+                string validacion=_logicPersona.Save(per);
                 if (validacion.Length > 1)               
                     Response.Write(validacion);
             }
