@@ -94,7 +94,9 @@ namespace Business.Logic
                     PersonaData.Save(persona);
                 }
                 else
-                    throw new Exception();
+                {
+                    throw new Exception("Legajo y/o nombre de usuario ya está/n en uso");
+                }
 
                 //return error;
             }
@@ -135,19 +137,8 @@ namespace Business.Logic
         /// <summary>
         /// Devuelve falso si el nombre de usuario esta utilizado
         /// </summary>
-        /// <param name="nombreUsu"></param>
+        /// <param name="per"></param>
         /// <returns></returns>
-        static public bool ValidaUsuario(string nombreUsu)
-        {
-            bool retorno = true;
-            Persona p = new PersonaLogic().GetOne(nombreUsu);
-            if (p.NombreUsuario != null && p.Baja == false)
-            {
-                retorno = false;
-            }
-            return retorno;
-        }
-
         static public bool ValidaUsuario(Persona per)
         {
             bool retorno = true;
@@ -167,7 +158,7 @@ namespace Business.Logic
         /// <param name="numlegajo"></param>
         /// <returns></returns>
         static public bool ValidaLegajo(Persona per)
-        {   
+        {
             bool retorno = true;
             Persona p = new PersonaLogic().GetOneLeg(per.Legajo);
             if (p.Nombre != null && p.Baja == false)
@@ -176,17 +167,6 @@ namespace Business.Logic
                 {
                     retorno = false;
                 }
-            }
-            return retorno;
-        }
-
-        static public bool ValidaLegajo(int numlegajo)
-        {
-            bool retorno = true;
-            Persona p = new PersonaLogic().GetOneLeg(numlegajo);
-            if (p.Nombre != null && p.Baja == false)
-            {
-                retorno = false;
             }
             return retorno;
         }

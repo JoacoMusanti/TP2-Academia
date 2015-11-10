@@ -231,12 +231,15 @@ namespace UI.Desktop
             
             try
             {      
-              usr.Save(PersonaActual);          
+                usr.Save(PersonaActual);
+                Close();
             }
             catch (Exception e)
             {
-                Notificar("Error","Legajo y/o nombre de usuario ya está/n en uso",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Notificar("Error",e.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+
+            
         }
 
         protected override bool Validar() 
@@ -348,13 +351,11 @@ namespace UI.Desktop
                 if (Validar() == true)
                 {
                     GuardarCambios();
-                    Close();
                 }
             }
             else if (Modo == ModoForm.Baja)
             {
                 GuardarCambios();
-                Close();
             }
             
         }

@@ -350,7 +350,7 @@ namespace UI.Web
             }
             catch (Exception ex)
             {
-                Response.Write("El legajo y/o el nombre de usuario ya está/n en uso");
+
                 Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
             }
         }
