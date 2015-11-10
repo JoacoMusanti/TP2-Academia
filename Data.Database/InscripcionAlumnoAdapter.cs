@@ -58,7 +58,12 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comInscripciones = new SqlCommand("select * from dbo.alumnos_inscripciones where id_curso=@id and baja_logica = 0", SqlCon);
+                SqlCommand comInscripciones = new SqlCommand("select * from dbo.alumnos_inscripciones alu_ins" +
+                                                              " inner join dbo.personas per on per.id_persona = alu_ins.id_alumno" +
+                                                              " inner join dbo.cursos cur on cur.id_curso = alu_ins.id_curso" +
+                                                              " where alu_ins.id_curso=@id and alu_ins.baja_logica = 0 and cur.baja_logica = 0"+
+                                                              " and per.baja_logica = 0", SqlCon);
+
                 comInscripciones.Parameters.AddWithValue("@id", id);
                 SqlDataReader drInscripcionesAlumno = comInscripciones.ExecuteReader();
 

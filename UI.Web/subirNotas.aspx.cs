@@ -202,10 +202,11 @@ namespace UI.Web
                 cursos = cursos.Where(c => !(materiasInscriptas.Contains(c.IdMateria))); */
 
                 gdvInscripcionesCurso.DataSource = inscripciones.Select(ins => new
-                {
-                    ID = ins.ID,
-                    ALumno = PersonaLogic.GetOne(ins.IdAlumno).Apellido
-                });
+                {         
+                     ID = ins.ID,
+                      ALumno = PersonaLogic.GetOne(ins.IdAlumno).Apellido      
+                } );
+
 
                 if (inscripciones.Count() == 0)
                 {
