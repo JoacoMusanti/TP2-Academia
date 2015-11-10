@@ -29,13 +29,14 @@ namespace UI.Desktop
 
         private void MenuPrincipal_OnLoad(object sender, EventArgs e)
         {
-            
-         FormLogin appLogin = new FormLogin();
+
+            FormLogin appLogin = new FormLogin();
             if (appLogin.ShowDialog() != DialogResult.OK)
             {
-               
+
                 Close();
             }
+
             Rol = appLogin.Rol;
         }
 

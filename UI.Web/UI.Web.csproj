@@ -79,6 +79,7 @@
     <Content Include="Cursos.aspx" />
     <Content Include="Especialidades.aspx" />
     <Content Include="Estilos\Estilos.css" />
+    <Content Include="FechaControl.ascx" />
     <Content Include="Imagenes\texcal-liso_gris-t12.jpg" />
     <Content Include="Imagenes\utn.gif" />
     <Content Include="Login.aspx" />
@@ -126,6 +127,13 @@
     </Compile>
     <Compile Include="Cursos.aspx.designer.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FechaControl.ascx.cs">
+      <DependentUpon>FechaControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FechaControl.ascx.designer.cs">
+      <DependentUpon>FechaControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Reportes\CursosReport.cs">
       <SubType>Component</SubType>

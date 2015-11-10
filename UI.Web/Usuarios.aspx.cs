@@ -78,11 +78,7 @@ namespace UI.Web
                 if (!IsPostBack)
                 {
                     Util.Logger.LogHabilitado = false;
-                    CargarFechas();
-                    // los dropdown mes y año llaman a la funcion javascript onCambiaFecha()
-                    // cuando se dispara el evento onchange (selectedIndexChanged)
-                    ddlAnio.Attributes["onchange"] = "onCambiaFecha();";
-                    ddlMes.Attributes["onchange"] = "onCambiaFecha();";
+                    
                 }
             }
             else
@@ -93,6 +89,7 @@ namespace UI.Web
         }
 
         private Persona PersonaActual { get; set; }
+        private Persona PersonaLog { get; set; }
         private Plan PlanUsuario { get; set; }
         private Especialidad EspecialidadUsuario { get; set; }
 
@@ -145,54 +142,6 @@ namespace UI.Web
             }
         }
 
-        private void CargarFechas()
-        {
-            CargarAnios();
-            CargarMeses();
-            CargarDias();
-        }
-
-        private void CargarDias()
-        {
-            List<int> dias = new List<int>();
-
-            for (int i = 1; i < 32; i++)
-            {
-                dias.Add(i);
-            }
-
-            ddlDia.DataSource = dias;
-            ddlDia.DataBind();
-        }
-
-        private void CargarMeses()
-        {
-            Dictionary<int, string> meses = new Dictionary<int, string>();
-
-            for (int i = 1; i < 13; i++)
-            {
-                meses.Add(i, CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i));
-            }
-
-            ddlMes.DataSource = meses;
-            ddlMes.DataValueField = "Key";
-            ddlMes.DataTextField = "Value";
-            ddlMes.DataBind();
-        }
-
-        private void CargarAnios()
-        {
-            List<int> anios = new List<int>(100);
-
-            for (int i = 0; i < 100; i++)
-            {
-                anios.Add(DateTime.Now.Year - i);
-            }
-
-            ddlAnio.DataSource = anios;
-            ddlAnio.DataBind();
-        }
-
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int?)gridView.SelectedValue;
@@ -227,9 +176,7 @@ namespace UI.Web
             txtLegajo.Enabled = true;
             txtTelefono.Enabled = true;
 
-            ddlAnio.Enabled = true;
-            ddlMes.Enabled = true;
-            ddlDia.Enabled = true;
+            FechaControl.Enabled = true;
             ddlEspecialidad.Enabled = true;
             ddlIdPlan.Enabled = true;
             ddlTipoPersona.Enabled = true;
@@ -253,9 +200,7 @@ namespace UI.Web
                 txtLegajo.Enabled = false;
                 txtTelefono.Enabled = false;
 
-                ddlAnio.Enabled = false;
-                ddlMes.Enabled = false;
-                ddlDia.Enabled = false;
+                FechaControl.Enabled = false;
                 ddlEspecialidad.Enabled = false;
                 ddlIdPlan.Enabled = false;
                 ddlTipoPersona.Enabled = false;
@@ -284,9 +229,7 @@ namespace UI.Web
                 txtLegajo.Enabled = true;
                 txtTelefono.Enabled = true;
 
-                ddlAnio.Enabled = true;
-                ddlMes.Enabled = true;
-                ddlDia.Enabled = true;
+                FechaControl.Enabled = true;
                 ddlEspecialidad.Enabled = true;
                 ddlIdPlan.Enabled = true;
                 ddlTipoPersona.Enabled = true;
@@ -322,9 +265,10 @@ namespace UI.Web
                     txtLegajo.Text = PersonaActual.Legajo.ToString();
                     txtTelefono.Text = PersonaActual.Telefono;
 
-                    ddlAnio.SelectedValue = PersonaActual.FechaNacimiento.Year.ToString();
-                    ddlMes.SelectedValue = PersonaActual.FechaNacimiento.Month.ToString();
-                    ddlDia.SelectedValue = PersonaActual.FechaNacimiento.Day.ToString();
+
+                    FechaControl.SeleccionarFecha(PersonaActual.FechaNacimiento.Day.ToString(),
+                                                  PersonaActual.FechaNacimiento.Month.ToString(),
+                                                  PersonaActual.FechaNacimiento.Year.ToString());
 
                     ddlEspecialidad.SelectedValue = PlanUsuario.IdEspecialidad.ToString();
                     ddlIdPlan.SelectedValue = PersonaActual.IdPlan.ToString();
@@ -387,8 +331,7 @@ namespace UI.Web
             PersonaActual.Habilitado = chkHabilitado.Checked;
 
             PersonaActual.Direccion = txtDireccion.Text;
-            PersonaActual.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue),
-                int.Parse(ddlMes.SelectedValue), int.Parse(ddlDia.SelectedValue));
+            PersonaActual.FechaNacimiento = FechaControl.ObtenerFecha();
             PersonaActual.IdPlan = int.Parse(ddlIdPlan.SelectedValue);
             PersonaActual.Legajo = int.Parse(txtLegajo.Text);
             PersonaActual.CambiaClave = PersonaActual.CambiaClave;
@@ -416,32 +359,35 @@ namespace UI.Web
                         validacion = false;
                     }
                 }
-                if (FormMode == FormModes.Modificacion && per.Legajo != PersonaActual.Legajo)
+
+                if (FormMode == FormModes.Modificacion)
                 {
-                    if (!PersonaLogic.ValidaLegajo(per.Legajo))
+                    PersonaLog = LogicPersona.GetOne(Convert.ToInt32(Session["IdAlumno"]));
+                    if (per.ID != PersonaLog.ID)
                     {
-                        error += "Numero de legajo en uso <br\\>";
-                        validacion = false;
-                    }
-                }
-                if (FormMode == FormModes.Modificacion && per.NombreUsuario != PersonaActual.NombreUsuario)
-                {
-                    if (!PersonaLogic.ValidaUsuario(per.NombreUsuario))
-                    {
-                        error += "Nombre de usuario en uso <br\\>";
-                        validacion = false;
+                        if (!PersonaLogic.ValidaLegajo(per))
+                        {
+                            error += "Numero de legajo en uso <br\\>";
+                            validacion = false;
+                        }
+
+                        if (!PersonaLogic.ValidaUsuario(per))
+                        {
+                            error += "Nombre de usuario en uso <br\\>";
+                            validacion = false;
+                        }
                     }
                 }
 
+                    if (validacion == true)
+                    {
+                        LogicPersona.Save(per);
+                    }
+                    else
+                    {
+                        Response.Write(error);
+                    }
                 
-                if (validacion == true)
-                {
-                    LogicPersona.Save(per);
-                }
-                else
-                {
-                    Response.Write(error);
-                }
             }
             catch (Exception ex)
             {
@@ -543,7 +489,7 @@ namespace UI.Web
                     if (p.TipoPersona == Persona.TipoPersonas.Alumno)
                     {
                         DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Persona));
-                        using (FileStream archivo = new FileStream(@"C:\Users\joako\alumno.json", FileMode.Create))
+                        using (FileStream archivo = new FileStream(@"C:\Users\LENI-ALUMNO\Downloads\alumno.json", FileMode.Create))
                         {
                             ser.WriteObject(archivo, p);
                         }
@@ -566,7 +512,7 @@ namespace UI.Web
         {   
             try
             {
-                using (FileStream archivo = new FileStream(@"C:\Users\joako\alumno.json", FileMode.Open))
+                using (FileStream archivo = new FileStream(@"C:\Users\LENI-ALUMNO\Downloads\alumno.json", FileMode.Open))
                 {
                     DataContractJsonSerializer serializadorJSON = new DataContractJsonSerializer(typeof(Persona));
                     Persona p = (Persona)serializadorJSON.ReadObject(archivo);
