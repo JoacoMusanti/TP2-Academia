@@ -10,7 +10,7 @@
     <title></title>
     <link href="Estilos/Estilos.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-        .auto-style1 {
+        /*.auto-style1 {
             height: 179px;
         }
         .auto-style2 {
@@ -26,7 +26,7 @@
         }
         .auto-style5 {
             width: 529px;
-        }
+        }*/
     </style>
     
     <link rel="icon" type="image/png" href="/Imagenes/LogoIconoUTN.png" />

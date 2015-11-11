@@ -8,3 +8,21 @@
  border:5px solid blue;
 }
 
+
+ .auto-style1 {
+            height: 179px;
+        }
+  .auto-style2 {
+            height: 179px;
+            width: 235px;
+        }
+        .auto-style3 {
+            width: 235px;
+        }
+        .auto-style4 {
+            height: 179px;
+            width: 529px;
+        }
+        .auto-style5 {
+            width: 529px;
+        }
