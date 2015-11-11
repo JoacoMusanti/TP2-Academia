@@ -68,6 +68,41 @@ namespace Business.Logic
             }
         }
 
+        public string Save(Persona persona,BusinessEntity.States state)
+        {
+            try {
+
+                string error = "";
+                bool validacion = true;
+
+                if (state == BusinessEntity.States.New || state == BusinessEntity.States.Modified)
+                {
+                    if (!ValidaLegajo(persona))
+                    {
+                        error += "Numero de legajo en uso \n";
+                        validacion = false;
+                    }
+                    if (!ValidaUsuario(persona))
+                    {
+                        error += "Nombre de usuario en uso";
+                        validacion = false;
+                    }
+                }
+
+                if (validacion == true)
+                {
+                    PersonaData.Save(persona);
+                }
+
+                return error;
+            }
+            catch (Exception e)
+            {
+                Util.Logger.Log(e);
+                throw;
+            }
+        }
+
         public void Save(Persona persona)
         {
             try
@@ -100,7 +135,7 @@ namespace Business.Logic
         /// <param name="nombreUsu"></param>
         /// <returns></returns>
         static public bool ValidaUsuario(string nombreUsu)
-        {  
+        {
             bool retorno = true;
             Persona p = new PersonaLogic().GetOne(nombreUsu);
             if (p.NombreUsuario != null && p.Baja == false)

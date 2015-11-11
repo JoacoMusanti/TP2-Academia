@@ -343,51 +343,9 @@ namespace UI.Web
         {
             try
             {
-                string error = "";
-                bool validacion = true;
-
-                if (FormMode == FormModes.Alta)
-                {
-                    if (!PersonaLogic.ValidaLegajo(per.Legajo))
-                    {
-                        error += "Numero de legajo en uso <br\\>";
-                        validacion = false;
-                    }
-                    if (!PersonaLogic.ValidaUsuario(per.NombreUsuario))
-                    {
-                        error += "Nombre de usuario en uso <br\\>";
-                        validacion = false;
-                    }
-                }
-
-                if (FormMode == FormModes.Modificacion)
-                {
-                    PersonaLog = LogicPersona.GetOne(Convert.ToInt32(Session["IdAlumno"]));
-                    if (per.ID != PersonaLog.ID)
-                    {
-                        if (!PersonaLogic.ValidaLegajo(per))
-                        {
-                            error += "Numero de legajo en uso <br\\>";
-                            validacion = false;
-                        }
-
-                        if (!PersonaLogic.ValidaUsuario(per))
-                        {
-                            error += "Nombre de usuario en uso <br\\>";
-                            validacion = false;
-                        }
-                    }
-                }
-
-                    if (validacion == true)
-                    {
-                        LogicPersona.Save(per);
-                    }
-                    else
-                    {
-                        Response.Write(error);
-                    }
-                
+                string validacion=_logicPersona.Save(per,per.State);
+                if (validacion.Length > 1)               
+                    Response.Write(validacion);
             }
             catch (Exception ex)
             {

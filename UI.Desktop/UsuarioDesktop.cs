@@ -228,10 +228,18 @@ namespace UI.Desktop
             MapearADatos();
 
             PersonaLogic usr = new PersonaLogic();
+            string val="";
 
             try
             {
-                usr.Save(PersonaActual);
+                if (PersonaActual.State == BusinessEntity.States.New || PersonaActual.State == BusinessEntity.States.Modified)
+                {
+                    val = usr.Save(PersonaActual, PersonaActual.State);
+                    if (val.Length > 0)
+                        Notificar("Error", val, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    usr.Save(PersonaActual);
             }
             catch (Exception e)
             {
@@ -266,37 +274,37 @@ namespace UI.Desktop
                 msgError += "El campo \"Usuario\" no puede estar vacio\n";
                 retorno = false;
             }
-            else
-            {
-                if (Modo == ModoForm.Alta && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
-                {
-                    msgError += "El nombre de usuario ya existe\n";
-                    retorno = false;
-                }
-                if (Modo == ModoForm.Modificacion && txtUsuario.Text != PersonaActual.NombreUsuario && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
-                {
-                    msgError += "El nombre de usuario ya existe\n";
-                    retorno = false;
-                }
-            }
+            //else
+            //{
+            //    if (Modo == ModoForm.Alta && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
+            //    {
+            //        msgError += "El nombre de usuario ya existe\n";
+            //        retorno = false;
+            //    }
+            //    if (Modo == ModoForm.Modificacion && txtUsuario.Text != PersonaActual.NombreUsuario && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
+            //    {
+            //        msgError += "El nombre de usuario ya existe\n";
+            //        retorno = false;
+            //    }
+            //}
             if (txtLegajo.TextLength == 0)
             {
                 msgError += "El campo \"Legajo\" no puede estar vacio\n";
                 retorno = false;
             }
-            else
-            {
-                if (Modo == ModoForm.Alta && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
-                {
-                    msgError += "El legajo ingresado ya posee usuario\n";
-                    retorno = false;
-                }
-                if (Modo == ModoForm.Modificacion && txtLegajo.Text != PersonaActual.Legajo.ToString() && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
-                {
-                    msgError += "El legajo ingresado ya posee usuario\n";
-                    retorno = false;
-                }
-            }
+            //else
+            //{
+            //    if (Modo == ModoForm.Alta && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
+            //    {
+            //        msgError += "El legajo ingresado ya posee usuario\n";
+            //        retorno = false;
+            //    }
+            //    if (Modo == ModoForm.Modificacion && txtLegajo.Text != PersonaActual.Legajo.ToString() && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
+            //    {
+            //        msgError += "El legajo ingresado ya posee usuario\n";
+            //        retorno = false;
+            //    }
+            //}
             if (txtLegajo.TextLength > 0 && int.TryParse(txtLegajo.Text, out temp) == false)
             {
                 msgError += "El campo \"Legajo\" debe ser un entero\n";
