@@ -2,7 +2,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="bodyContentPlaceHolder">
     <asp:Panel ID="gridPlanesPanel" runat="server">
-        <asp:GridView ID="gridPlanes" runat="server" AutoGenerateColumns="False"
+        <asp:GridView ID="gridPlanes" runat="server" AutoGenerateColumns="False" SkinID="Professional"
         DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gridPlanes_SelectedIndexChanged">
 
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />

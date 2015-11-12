@@ -87,6 +87,7 @@
     <Content Include="Planes.aspx" />
     <Content Include="scripts\scripts.js" />
     <Content Include="Site.Master" />
+    <Content Include="App_Themes\GridViewTheme\GridView.skin" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

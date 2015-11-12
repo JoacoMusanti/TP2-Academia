@@ -72,19 +72,16 @@ namespace Business.Logic
         {
             try {
 
-               // string error = "";
                 bool validacion = true;
 
                 if (persona.State == BusinessEntity.States.New || persona.State == BusinessEntity.States.Modified)
                 {
                     if (!ValidaLegajo(persona))
                     {
-                    //    error += "Numero de legajo en uso \n";
                         validacion = false;
                     }
                     if (!ValidaUsuario(persona))
                     {
-                      //  error += "Nombre de usuario en uso";
                         validacion = false;
                     }
                 }
@@ -98,7 +95,6 @@ namespace Business.Logic
                     throw new Exception("Legajo y/o nombre de usuario ya está/n en uso");
                 }
 
-                //return error;
             }
             catch (Exception e)
             {
@@ -108,18 +104,6 @@ namespace Business.Logic
             }
         }
 
-        //public void Save(Persona persona)
-        //{
-        //    try
-        //    {
-        //        PersonaData.Save(persona);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Util.Logger.Log(e);
-        //        throw;
-        //    }
-        //}
 
         public void Delete(int ID)
         {

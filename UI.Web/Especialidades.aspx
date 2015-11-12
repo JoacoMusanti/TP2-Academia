@@ -3,7 +3,7 @@
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="bodyContentPlaceHolder">
 
     <asp:Panel ID="gridPanelEspecialidades" runat="server">
-        <asp:GridView ID="gridEspecialidades" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gridEspecialidades_SelectedIndexChanged">
+        <asp:GridView ID="gridEspecialidades" runat="server"  SkinID="Professional" AutoGenerateColumns="False" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gridEspecialidades_SelectedIndexChanged">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />

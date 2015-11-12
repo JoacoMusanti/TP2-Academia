@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master"CodeBehind="subirNotas.aspx.cs" Inherits="UI.Web.subirNotas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
  <asp:Panel ID="gridPanelDocenteCursos" runat="server">
-    <asp:GridView ID="GridViewDocenteCurso" runat="server" DataKeyNames="ID" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewDocenteCurso_SelectedIndexChanged">
+    <asp:GridView ID="GridViewDocenteCurso" runat="server" DataKeyNames="ID" SkinID="Professional" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridViewDocenteCurso_SelectedIndexChanged">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
           
         <Columns>

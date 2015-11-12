@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Cursos.aspx.cs" Theme="" Inherits="UI.Web.Cursos" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Cursos.aspx.cs" Inherits="UI.Web.Cursos" %>
 <asp:Content ID="Content4" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <asp:Panel ID="gridPanel" runat="server">
-        <table style="width:100%;">
+       <%-- <table style="width:100%;">
             <tr>
                 <td class="auto-style1" style="width: 263px">&nbsp;</td>
-                <td style="width: 536px">
-                    <asp:GridView ID="gdvCursos" runat="server" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gdvCursos_SelectedIndexChanged" Width="506px"
+                <td style="width: 536px">--%>
+                    <asp:GridView ID="gdvCursos" runat="server" SkinID="Professional" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ID" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gdvCursos_SelectedIndexChanged" Width="506px"
                         HeaderStyle-HorizontalAlign ="Left">
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                         <Columns>
@@ -26,7 +26,7 @@
                         <SortedDescendingCellStyle BackColor="#FFFDF8" />
                         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                     </asp:GridView>
-                </td>
+          <%--      </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td class="auto-style1" style="width: 263px">&nbsp;</td>
-                <td style="width: 536px">
+                <td style="width: 536px">--%>
                     <asp:Panel ID="formPanelCurso" runat="server" Visible="false">
                         <asp:Label ID="lblMateria" runat="server" Text="Materia: "></asp:Label>
                         <asp:DropDownList ID="ddlMaterias" runat="server" OnSelectedIndexChanged="ddlMaterias_SelectedIndexChanged" AutoPostBack="true">

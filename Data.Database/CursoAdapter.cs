@@ -237,7 +237,6 @@ namespace Data.Database
             {
                 Delete(curso.ID);
             }
-
             curso.State = BusinessEntity.States.Unmodified;
         }
 

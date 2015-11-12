@@ -1,10 +1,10 @@
-﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Theme="" Inherits="UI.Web.Usuarios" %>
+﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile ="~/Site.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" StyleSheetTheme="GridViewTheme" Inherits="UI.Web.Usuarios" %>
 
 <%@ Register Src="~/FechaControl.ascx" TagPrefix="uc1" TagName="FechaControl" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <asp:Panel ID="gridPanel" runat="server">
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
+        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False" SkinID="Professional"
         DataKeyNames="ID" CellPadding="4" GridLines="None" Width="541px" OnSelectedIndexChanged="gridView_SelectedIndexChanged" ForeColor="#333333">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
