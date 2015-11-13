@@ -30,11 +30,26 @@ namespace UI.Desktop
         {
             try
             {
-                Persona per = new PersonaLogic().GetOne(txtUsuario.Text);
+                PersonaLogic perLogic = new PersonaLogic();
 
+                Persona per = perLogic.GetOne(txtUsuario.Text);
+                per.State = BusinessEntity.States.Modified;
                 if (per.NombreUsuario == txtUsuario.Text)
                 {
-                    EnviarMail(per.Email, "1234");
+                    Random randomPass = new Random();
+                    string posibles = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+                    int longitud = posibles.Length;
+                    char letra;
+                    string nuevacadena = "";
+                    for (int i = 0; i < 9; i++)
+                    {
+                        letra = posibles[randomPass.Next(longitud)];
+                        nuevacadena += letra.ToString();
+                    }
+                    EnviarMail(per.Email, nuevacadena);
+                    MessageBox.Show("Correo enviado correctamente");
+                    per.Clave = Util.Hash.SHA256ConSal(nuevacadena, null);
+                    perLogic.Save(per);
                     Close();
                 }
             }
@@ -46,15 +61,16 @@ namespace UI.Desktop
 
         private void EnviarMail(string mail, string cuerpo)
         {
-            // CODIGO DE PRUEBA
             string de = "aplicaciontp2@gmail.com";
-            string asunto = "Mensaje de prueba recuperacion de contraseña";
-            MailMessage mensaje = new MailMessage(de, mail, asunto, cuerpo);
-            SmtpClient cliente = new SmtpClient("smtp.gmail.com", 25);
-            cliente.Credentials = new NetworkCredential(de, "zaq12wsxCDE3");
+            string asunto = "Mensaje de recuperacion de contraseña";
+            MailMessage mensaje = new MailMessage(de, mail, asunto, "Su nueva contraseña es: \n\n" + cuerpo);
+            SmtpClient cliente = new SmtpClient("smtp.gmail.com");
+            cliente.Port = Convert.ToInt32("587");
             cliente.EnableSsl = true;
+            cliente.UseDefaultCredentials = false;
+            cliente.DeliveryMethod = SmtpDeliveryMethod.Network;
+            cliente.Credentials = new NetworkCredential(de, "zaq12wsxCDE3");
             cliente.Send(mensaje);
-
             mensaje.Dispose();
             cliente.Dispose();
         }

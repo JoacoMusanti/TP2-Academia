@@ -1,28 +1,9 @@
 ﻿body {
-        background-image:url('/Imagenes/texcal-liso_gris-t12.jpg');
-}
- .panelCss
-{
- background:white;   
- vertical-align: middle;
- border:5px solid blue;
+    background-image: url('/Imagenes/texcal-liso_gris-t12.jpg');
 }
 
-
- .auto-style1 {
-            height: 179px;
-        }
-  .auto-style2 {
-            height: 179px;
-            width: 235px;
-        }
-        .auto-style3 {
-            width: 235px;
-        }
-        .auto-style4 {
-            height: 179px;
-            width: 529px;
-        }
-        .auto-style5 {
-            width: 529px;
-        }
+.panelCss {
+    background: white;
+    vertical-align: middle;
+    border: 5px solid blue;
+}

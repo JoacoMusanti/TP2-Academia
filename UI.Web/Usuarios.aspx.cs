@@ -449,7 +449,7 @@ namespace UI.Web
                     if (p.TipoPersona == Persona.TipoPersonas.Alumno)
                     {
                         DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Persona));
-                        using (FileStream archivo = new FileStream(@"C:\Users\LENI-ALUMNO\Downloads\alumno.json", FileMode.Create))
+                        using (FileStream archivo = new FileStream(@"C:\Users\ANDRES\Desktop\alumno.json", FileMode.Create))
                         {
                             ser.WriteObject(archivo, p);
                         }
@@ -460,7 +460,7 @@ namespace UI.Web
                     }
                 }
                 catch (Exception ex)
-                {
+                {        
                     Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
                 }
                 
@@ -472,7 +472,7 @@ namespace UI.Web
         {   
             try
             {
-                using (FileStream archivo = new FileStream(@"C:\Users\LENI-ALUMNO\Downloads\alumno.json", FileMode.Open))
+                using (FileStream archivo = new FileStream(@"C:\alumno.json", FileMode.Open))
                 {
                     DataContractJsonSerializer serializadorJSON = new DataContractJsonSerializer(typeof(Persona));
                     Persona p = (Persona)serializadorJSON.ReadObject(archivo);
