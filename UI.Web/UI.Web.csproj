@@ -84,6 +84,7 @@
     <Content Include="Imagenes\utn.gif" />
     <Content Include="Login.aspx" />
     <Content Include="Materias.aspx" />
+    <Content Include="OlvidoContrasenia.aspx" />
     <Content Include="Planes.aspx" />
     <Content Include="scripts\scripts.js" />
     <Content Include="Site.Master" />
@@ -135,6 +136,13 @@
     </Compile>
     <Compile Include="FechaControl.ascx.designer.cs">
       <DependentUpon>FechaControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OlvidoContrasenia.aspx.cs">
+      <DependentUpon>OlvidoContrasenia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OlvidoContrasenia.aspx.designer.cs">
+      <DependentUpon>OlvidoContrasenia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reportes\CursosReport.cs">
       <SubType>Component</SubType>
