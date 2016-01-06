@@ -1,0 +1,26 @@
+﻿@model Business.Entities.Plan
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    
+    @Html.LabelFor(model => model.ID, new { @class = "float-left" })
+    @Html.TextBoxFor(model => model.ID, new { disabled = true })
+    <br/>
+    @Html.Label("Especialidad", new { @class = "float-left" })
+    @Html.TextBox("txtEspecialidad", (string)ViewBag.Especialidad, new { disabled = true })
+    <br />
+    @Html.LabelFor(model => model.Descripcion, new { @class = "float-left" })
+    @Html.TextBoxFor(model => model.Descripcion)
+    <br/>
+    <input type="submit" value="Guardar"/>
+}
+
+

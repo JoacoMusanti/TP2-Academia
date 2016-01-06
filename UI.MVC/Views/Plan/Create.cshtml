@@ -1,0 +1,24 @@
+﻿@model UI.MVC.ViewModels.PlanEspecialidadesViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Crear Plan</h2>
+
+@Html.Hidden("hdnController", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.Label("Especialidad", new { @class = "float-left" })
+    @Html.DropDownListFor(m => m.SelectedEspecialidad, new SelectList(Model.Especialidades, "ID", "Descripcion"))
+    <br/>
+    @Html.LabelFor(model => model.PlanData.Descripcion, new { @class = "float-left" })
+    @Html.TextBoxFor(model => model.PlanData.Descripcion)
+    <br />
+    <input type="submit" value="Aceptar"/>
+}
+

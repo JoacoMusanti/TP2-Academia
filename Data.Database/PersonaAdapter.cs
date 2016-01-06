@@ -78,7 +78,7 @@ namespace Data.Database
         /// <returns></returns>
         public Persona GetOne(int ID)
         {
-            Persona per = new Persona();
+            Persona per = null;
 
             try
             {
@@ -91,6 +91,7 @@ namespace Data.Database
 
                 if (drPersona.Read())
                 {
+                    per = new Persona();
                     per.ID = (int)drPersona["id_persona"];
                     per.Nombre = (string)drPersona["nombre"];
                     per.Apellido = (string)drPersona["apellido"];
@@ -263,10 +264,11 @@ namespace Data.Database
         /// Devuelve el usuario que tenga el nombre de la persona indicada
         /// </summary>
         /// <param name="ID"></param>
+        /// <param name="nameuser"></param>
         /// <returns></returns>
         public Persona GetOne(string nameuser)
         {
-            Persona per = new Persona();
+            Persona per = null;
 
             try
             {
@@ -279,6 +281,7 @@ namespace Data.Database
 
                 if (drPersona.Read())
                 {
+                    per = new Persona();
                     per.ID = (int)drPersona["id_persona"];
                     per.Nombre = (string)drPersona["nombre"];
                     per.Apellido = (string)drPersona["apellido"];
@@ -316,7 +319,7 @@ namespace Data.Database
 
         public Persona GetOneLeg(int legajo)
         {
-            Persona per = new Persona();
+            Persona per = null;
 
             try
             {
@@ -329,6 +332,7 @@ namespace Data.Database
 
                 if (drPersona.Read())
                 {
+                    per = new Persona();
                     per.ID = (int)drPersona["id_persona"];
                     per.Nombre = (string)drPersona["nombre"];
                     per.Apellido = (string)drPersona["apellido"];

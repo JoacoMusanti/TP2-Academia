@@ -1,0 +1,40 @@
+﻿@model List<Business.Entities.Especialidad>
+
+@{
+    ViewBag.Title = "Especialidad";
+}
+
+<h2>Especialidades</h2>
+
+@Html.Hidden("hdnController", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())
+
+<table class="table">
+    <tr>
+        <th>Descripción</th>
+        <th>Seleccionar</th>
+    </tr>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var espe in Model)
+        {
+            <tr>
+                <td>@espe.Descripcion</td>
+                <td><input id="@espe.ID" type="radio" name="selected"/></td>
+            </tr>
+        }
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Nuevo", "Create", null, new { name = "lnkCreate" })
+    @Html.ActionLink("Editar", "Edit", new { id = (int)ViewBag.SelectedID }, new { name = "lnkEdit" })
+    @Html.ActionLink("Eliminar", "Delete", new { id = (int)ViewBag.SelectedID }, new { name = "lnkDelete" })
+</div>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/scripts.js"></script>

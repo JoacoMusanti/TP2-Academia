@@ -1,0 +1,147 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background: #C7DDF5;
+}
+
+
+#header {
+    background: #FF9800; 
+    margin: 0;
+    overflow: hidden;
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+#header a {
+    float: left;
+
+}
+
+#header img {
+    float: left;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    width: 128px;
+}
+
+#header h1 {
+    float: left;
+    width: 700px;
+    text-align: left;
+    font-family: 'Century Gothic', Tahoma, Arial, sans-serif;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+#header hr {
+    border-color: #F57C00;
+    border-width: 15px;
+    margin-top: 128px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#nav-bar {
+    padding-top: 10px;
+    float: left;
+}
+
+#nav-bar ul, #nav-bar ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#nav-bar ul li {
+    background-color: #FF9800;
+    border-bottom: solid 1px white;
+    width: 150px;
+    cursor: pointer;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#nav-bar ul li:hover {
+    background-color: #212121;
+    position: relative;
+}
+
+#nav-bar ul li a {
+    padding: 5px 10px;
+    color: black;
+    display: inline-block;
+    text-decoration: none;
+    width: 200px;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#nav-bar ul li:hover > a {
+    color: white;
+}
+
+#nav-bar ul li ul {
+    position: absolute;
+    display: none;
+}
+
+#nav-bar ul li:hover ul {
+    left: 150px;
+    top: 0;
+    display: block;
+}
+
+#main-panel {
+    padding-top: 10px;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+#main-panel h2 {
+    margin: 0;
+}
+
+#footer {
+    clear: both;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.float-left {
+    padding-right: 10px;
+    display: inline-block;
+    width: 15%;
+    text-align: right;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #F57C00;
+    color: white;
+}

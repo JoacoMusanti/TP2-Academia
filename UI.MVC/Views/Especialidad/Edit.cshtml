@@ -1,0 +1,29 @@
+﻿@model Business.Entities.Especialidad
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.LabelFor(model => model.ID, new { @class = "float-left" })
+    @Html.TextBoxFor(model => model.ID, new { disabled = true })
+    <br/>
+    @Html.LabelFor(model => model.Descripcion, new { @class = "float-left" })
+    @Html.TextBoxFor(model => model.Descripcion)
+    <br/>
+    <input type="submit" value="Guardar" />
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head class="page-header">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Academia</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div id="header">
+        <a href="/Home/Index">
+            <img src="../../Resources/UTN.ico" id="utn-logo">
+        </a>
+        <h1>Universidad Tecnologica Nacional - Facultad Regional Rosario</h1>
+        <hr />
+    </div>
+
+    <div id="nav-bar">
+        <ul>
+            <li>@Html.ActionLink("INICIO", "Index", "Home")</li>
+            <li>
+                @Html.ActionLink("ADMINISTRAR", "")
+                <ul>
+                    <li>@Html.ActionLink("ESPECIALIDADES", "Index", "Especialidad")</li>
+                    <li>@Html.ActionLink("PLANES", "Index", "Plan")</li>
+                </ul>
+            </li>
+        </ul>
+    </div> 
+
+    <div id="main-panel" class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <div id="footer">
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Academia</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

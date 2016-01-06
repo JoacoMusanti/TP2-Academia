@@ -1,0 +1,32 @@
+﻿@model UI.MVC.ViewModels.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+@using (Html.BeginForm())
+{ 
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "Usuario o contraseña incorrectos")
+
+    <label class="float-left">Usuario: </label>
+    @Html.TextBoxFor(model => model.User)
+    @Html.ValidationMessageFor(model => model.User)
+    <br/>
+    <label class="float-left">Contraseña: </label>
+    @Html.PasswordFor(model => model.Password)
+    @Html.ValidationMessageFor(model => model.Password)
+    <br/>
+    <input type="submit" value="Ingresar"/>
+}
+</body>
+</html>

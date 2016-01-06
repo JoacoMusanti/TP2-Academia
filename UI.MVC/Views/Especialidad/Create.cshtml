@@ -1,0 +1,18 @@
+﻿@model Business.Entities.Especialidad
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+<h2>Crear especialidad</h2>
+
+
+@using (Html.BeginForm())
+{ 
+    @Html.AntiForgeryToken()
+    
+    @Html.LabelFor(model => model.Descripcion, new {@class = "float-left"})
+    @Html.TextBoxFor(model => model.Descripcion)
+    <br/>
+    <input type="submit" value="Aceptar" />
+}

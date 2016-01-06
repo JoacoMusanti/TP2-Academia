@@ -1,0 +1,21 @@
+﻿@model Business.Entities.Especialidad
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>Eliminar</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.LabelFor(model => model.ID, new { @class = "float-left"})
+    @Html.TextBoxFor(model => model.ID, new { disabled = true })
+    <br/>
+    @Html.LabelFor(model => model.Descripcion, new { @class = "float-left" })
+    @Html.TextBoxFor(model => model.Descripcion, new { disabled = true })
+    <br/>
+    <input type="submit" value="Guardar" />
+}

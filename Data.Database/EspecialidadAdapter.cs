@@ -61,7 +61,7 @@ namespace Data.Database
         /// <returns></returns>
         public Especialidad GetOne(int id)
         {
-            Especialidad esp = new Especialidad();
+            Especialidad esp = null;
 
             try
             {
@@ -75,6 +75,7 @@ namespace Data.Database
 
                 if (drEspecialidad.Read())
                 {
+                    esp = new Especialidad();
                     esp.ID = (int) drEspecialidad["id_especialidad"];
                     esp.Descripcion = (string) drEspecialidad["desc_especialidad"];
                     esp.Baja = (bool)drEspecialidad["baja_logica"];

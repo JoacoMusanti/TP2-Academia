@@ -21,7 +21,16 @@ namespace Business.Logic
         {
             try
             {
-                return EspecialidadData.GetOne(id);
+                var espe = EspecialidadData.GetOne(id);
+
+                if (espe != null)
+                {
+                    return espe;
+                }
+                else
+                {
+                    throw new Exception("Error al recuperar la especialidad de la base de datos");
+                }
             }
             catch (Exception e)
             {
