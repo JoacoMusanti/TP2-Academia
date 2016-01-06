@@ -70,16 +70,40 @@ namespace Business.Logic
 
         public void Save(Persona persona)
         {
-            try
-            {
-                PersonaData.Save(persona);
+            try {
+
+                bool validacion = true;
+
+                if (persona.State == BusinessEntity.States.New || persona.State == BusinessEntity.States.Modified)
+                {
+                    if (!ValidaLegajo(persona))
+                    {
+                        validacion = false;
+                    }
+                    if (!ValidaUsuario(persona))
+                    {
+                        validacion = false;
+                    }
+                }
+
+                if (validacion == true)
+                {
+                    PersonaData.Save(persona);
+                }
+                else
+                {
+                    throw new Exception("Legajo y/o nombre de usuario ya está/n en uso");
+                }
+
             }
             catch (Exception e)
             {
+                
                 Util.Logger.Log(e);
                 throw;
             }
         }
+
 
         public void Delete(int ID)
         {
@@ -95,37 +119,41 @@ namespace Business.Logic
         }
 
         /// <summary>
-        /// Devuelve verdadero si el nombre de usuario esta utilizado
+        /// Devuelve falso si el nombre de usuario esta utilizado
         /// </summary>
-        /// <param name="nombreUsu"></param>
+        /// <param name="per"></param>
         /// <returns></returns>
-        static public bool ValidaUsuario(string nombreUsu)
-        {  
+        static public bool ValidaUsuario(Persona per)
+        {
             bool retorno = true;
-            Persona p = new PersonaLogic().GetOne(nombreUsu);
+            Persona p = new PersonaLogic().GetOne(per.NombreUsuario);
             if (p.NombreUsuario != null && p.Baja == false)
             {
-                retorno = false;
+                if (per.ID != p.ID)
+                {
+                    retorno = false;
+                }
             }
             return retorno;
         }
-        
         /// <summary>
-        /// Devuelve verdadero si el numero de legajo esta utilizado
+        /// Devuelve falso si el numero de legajo esta utilizado
         /// </summary>
         /// <param name="numlegajo"></param>
         /// <returns></returns>
-        static public bool ValidaLegajo(int numlegajo)
-        {   
+        static public bool ValidaLegajo(Persona per)
+        {
             bool retorno = true;
-            Persona p = new PersonaLogic().GetOneLeg(numlegajo);
+            Persona p = new PersonaLogic().GetOneLeg(per.Legajo);
             if (p.Nombre != null && p.Baja == false)
             {
-                retorno = false;
+                if (per.ID != p.ID)
+                {
+                    retorno = false;
+                }
             }
             return retorno;
         }
-
 
     }
 }

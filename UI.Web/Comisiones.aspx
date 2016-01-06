@@ -2,7 +2,7 @@
 <asp:Content ID="content4" runat="server" ContentPlaceHolderID="bodyContentPlaceHolder">
 
     <asp:Panel ID="panelGridComisiones" runat="server">
-        <asp:GridView ID="gridComisiones" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gridComisiones_SelectedIndexChanged">
+        <asp:GridView ID="gridComisiones" runat="server" SkinID="Professional" AutoGenerateColumns="False" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gridComisiones_SelectedIndexChanged">
 
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
 

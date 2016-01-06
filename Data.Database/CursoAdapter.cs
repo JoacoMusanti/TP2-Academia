@@ -24,7 +24,10 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comCurso = new SqlCommand("select * from dbo.cursos where baja_logica = 0", SqlCon);
+                SqlCommand comCurso = new SqlCommand("select * from dbo.cursos cur" +
+                                                     " inner join dbo.comisiones com on cur.id_comision = com.id_comision"+
+                                                     " inner join dbo.materias mat on cur.id_materia = mat.id_materia"+
+                                                     " where cur.baja_logica = 0 and com.baja_logica = 0 and mat.baja_logica = 0", SqlCon);
 
                 SqlDataReader drCursos = comCurso.ExecuteReader();
 
@@ -234,7 +237,6 @@ namespace Data.Database
             {
                 Delete(curso.ID);
             }
-
             curso.State = BusinessEntity.States.Unmodified;
         }
 

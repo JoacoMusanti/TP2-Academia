@@ -1,32 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Business.Entities;
-using Business.Logic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Net.Mail;
 using System.Net;
+using Business.Logic;
+using Business.Entities;
 
-namespace UI.Desktop
+namespace UI.Web
 {
-    public partial class OlvidoContrasenia : ApplicationForm
+    public partial class OlvidoContrasenia : System.Web.UI.Page
     {
-        public OlvidoContrasenia()
+        protected void Page_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        protected void lnkCancelar_Click(object sender, EventArgs e)
         {
-            Close();
+            Response.Redirect(@"~/Login.aspx");
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        protected void lnkEnviar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -47,18 +43,17 @@ namespace UI.Desktop
                         nuevacadena += letra.ToString();
                     }
                     EnviarMail(per.Email, nuevacadena);
-                    MessageBox.Show("Correo enviado correctamente");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(),"Scripts","<script>alert('Correo enviado correctamente');</script>");
                     per.Clave = Util.Hash.SHA256ConSal(nuevacadena, null);
                     perLogic.Save(per);
-                    Close();
+                    Response.Redirect(@"~/Login.aspx");
                 }
             }
             catch (Exception ex)
             {
-                Notificar(ex);
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
             }
         }
-
         private void EnviarMail(string mail, string cuerpo)
         {
             string de = "aplicaciontp2@gmail.com";

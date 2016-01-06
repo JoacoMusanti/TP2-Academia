@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business.Logic;
 using Business.Entities;
+using System.Text.RegularExpressions;
 
 namespace UI.Desktop
 {
@@ -227,15 +228,18 @@ namespace UI.Desktop
             MapearADatos();
 
             PersonaLogic usr = new PersonaLogic();
-
+            
             try
-            {
+            {      
                 usr.Save(PersonaActual);
+                Close();
             }
             catch (Exception e)
             {
-                Notificar(e);
+                Notificar("Error",e.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+
+            
         }
 
         protected override bool Validar() 
@@ -243,9 +247,12 @@ namespace UI.Desktop
             string msgError = "";
             bool retorno = true;
             int temp;
-            // TODO: Pasar validaciones a la capa logic
-
-            //if (Regex.Match(this.txtEmail.Text, "[A-Za-z0-9]@[A-Za-z0-9].[A-Za-z]")  )
+            
+            if (!Regex.IsMatch(this.txtEmail.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase))
+            {
+                msgError += "Debe ingresar un email valido\n";
+                retorno = false;
+            }
             if (txtNombre.TextLength == 0)
             {
                 msgError += "El campo \"Nombre\" no puede estar vacio\n";
@@ -262,24 +269,37 @@ namespace UI.Desktop
                 msgError += "El campo \"Usuario\" no puede estar vacio\n";
                 retorno = false;
             }
-            else
-            {
-                if (Modo == ModoForm.Alta && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
-                {
-                    msgError += "El nombre de usuario ya existe\n";
-                    retorno = false;
-                }
-            }
+            //else
+            //{
+            //    if (Modo == ModoForm.Alta && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
+            //    {
+            //        msgError += "El nombre de usuario ya existe\n";
+            //        retorno = false;
+            //    }
+            //    if (Modo == ModoForm.Modificacion && txtUsuario.Text != PersonaActual.NombreUsuario && !PersonaLogic.ValidaUsuario(txtUsuario.Text))
+            //    {
+            //        msgError += "El nombre de usuario ya existe\n";
+            //        retorno = false;
+            //    }
+            //}
             if (txtLegajo.TextLength == 0)
             {
                 msgError += "El campo \"Legajo\" no puede estar vacio\n";
                 retorno = false;
             }
-            else if (Modo == ModoForm.Alta && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
-            {
-                msgError += "El legajo ingresado ya posee usuario\n";
-                retorno = false;
-            }
+            //else
+            //{
+            //    if (Modo == ModoForm.Alta && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
+            //    {
+            //        msgError += "El legajo ingresado ya posee usuario\n";
+            //        retorno = false;
+            //    }
+            //    if (Modo == ModoForm.Modificacion && txtLegajo.Text != PersonaActual.Legajo.ToString() && !PersonaLogic.ValidaLegajo(int.Parse(txtLegajo.Text)))
+            //    {
+            //        msgError += "El legajo ingresado ya posee usuario\n";
+            //        retorno = false;
+            //    }
+            //}
             if (txtLegajo.TextLength > 0 && int.TryParse(txtLegajo.Text, out temp) == false)
             {
                 msgError += "El campo \"Legajo\" debe ser un entero\n";
@@ -331,13 +351,11 @@ namespace UI.Desktop
                 if (Validar() == true)
                 {
                     GuardarCambios();
-                    Close();
                 }
             }
             else if (Modo == ModoForm.Baja)
             {
                 GuardarCambios();
-                Close();
             }
             
         }

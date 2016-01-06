@@ -95,15 +95,23 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
+            try
             {
-                CargarGridMaterias();
+                if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
+                {
+                    CargarGridMaterias();
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx?mensaje=" + Server.UrlEncode("No tenes permisos para acceder a ese recurso"));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Response.Redirect("~/Default.aspx?mensaje=" + Server.UrlEncode("No tenes permisos para acceder a ese recurso"));
+                Response.Redirect(@"~/Login.aspx");
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
             }
-            
+
         }
 
         private int? SelectedID

@@ -79,13 +79,16 @@
     <Content Include="Cursos.aspx" />
     <Content Include="Especialidades.aspx" />
     <Content Include="Estilos\Estilos.css" />
+    <Content Include="FechaControl.ascx" />
     <Content Include="Imagenes\texcal-liso_gris-t12.jpg" />
     <Content Include="Imagenes\utn.gif" />
     <Content Include="Login.aspx" />
     <Content Include="Materias.aspx" />
+    <Content Include="OlvidoContrasenia.aspx" />
     <Content Include="Planes.aspx" />
     <Content Include="scripts\scripts.js" />
     <Content Include="Site.Master" />
+    <Content Include="App_Themes\GridViewTheme\GridView.skin" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -126,6 +129,20 @@
     </Compile>
     <Compile Include="Cursos.aspx.designer.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FechaControl.ascx.cs">
+      <DependentUpon>FechaControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FechaControl.ascx.designer.cs">
+      <DependentUpon>FechaControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OlvidoContrasenia.aspx.cs">
+      <DependentUpon>OlvidoContrasenia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OlvidoContrasenia.aspx.designer.cs">
+      <DependentUpon>OlvidoContrasenia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reportes\CursosReport.cs">
       <SubType>Component</SubType>

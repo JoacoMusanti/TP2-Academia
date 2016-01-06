@@ -24,7 +24,9 @@ namespace Data.Database
             {
                 OpenConnection();
 
-                SqlCommand comPlanes = new SqlCommand("select * from planes where baja_logica = 0", SqlCon);
+                SqlCommand comPlanes = new SqlCommand("select * from planes p"+ 
+                                                      " inner join dbo.especialidades esp on esp.id_especialidad = p.id_especialidad "+
+                                                      "  where p.baja_logica = 0 and esp.baja_logica = 0", SqlCon);
 
                 SqlDataReader drPlanes = comPlanes.ExecuteReader();
 

@@ -72,27 +72,31 @@ namespace UI.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
-            {
-                LoadGrid();
-                if (!IsPostBack)
+            try {
+                if ((Persona.TipoPersonas)Session["RolSesion"] == Persona.TipoPersonas.Administrativo)
                 {
-                    Util.Logger.LogHabilitado = false;
-                    CargarFechas();
-                    // los dropdown mes y año llaman a la funcion javascript onCambiaFecha()
-                    // cuando se dispara el evento onchange (selectedIndexChanged)
-                    ddlAnio.Attributes["onchange"] = "onCambiaFecha();";
-                    ddlMes.Attributes["onchange"] = "onCambiaFecha();";
+                    LoadGrid();
+                    if (!IsPostBack)
+                    {
+                        Util.Logger.LogHabilitado = false;
+
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx?mensaje=" + Server.UrlEncode("No tenes permisos para acceder a ese recurso"));
                 }
             }
-            else
+            catch(Exception ex)
             {
-                Response.Redirect("~/Default.aspx?mensaje=" + Server.UrlEncode("No tenes permisos para acceder a ese recurso"));
+                Response.Redirect(@"~/Login.aspx");
+                Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
             }
 
         }
 
         private Persona PersonaActual { get; set; }
+        private Persona PersonaLog { get; set; }
         private Plan PlanUsuario { get; set; }
         private Especialidad EspecialidadUsuario { get; set; }
 
@@ -145,54 +149,6 @@ namespace UI.Web
             }
         }
 
-        private void CargarFechas()
-        {
-            CargarAnios();
-            CargarMeses();
-            CargarDias();
-        }
-
-        private void CargarDias()
-        {
-            List<int> dias = new List<int>();
-
-            for (int i = 1; i < 32; i++)
-            {
-                dias.Add(i);
-            }
-
-            ddlDia.DataSource = dias;
-            ddlDia.DataBind();
-        }
-
-        private void CargarMeses()
-        {
-            Dictionary<int, string> meses = new Dictionary<int, string>();
-
-            for (int i = 1; i < 13; i++)
-            {
-                meses.Add(i, CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i));
-            }
-
-            ddlMes.DataSource = meses;
-            ddlMes.DataValueField = "Key";
-            ddlMes.DataTextField = "Value";
-            ddlMes.DataBind();
-        }
-
-        private void CargarAnios()
-        {
-            List<int> anios = new List<int>(100);
-
-            for (int i = 0; i < 100; i++)
-            {
-                anios.Add(DateTime.Now.Year - i);
-            }
-
-            ddlAnio.DataSource = anios;
-            ddlAnio.DataBind();
-        }
-
         protected void gridView_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedID = (int?)gridView.SelectedValue;
@@ -227,9 +183,7 @@ namespace UI.Web
             txtLegajo.Enabled = true;
             txtTelefono.Enabled = true;
 
-            ddlAnio.Enabled = true;
-            ddlMes.Enabled = true;
-            ddlDia.Enabled = true;
+            FechaControl.Enabled = true;
             ddlEspecialidad.Enabled = true;
             ddlIdPlan.Enabled = true;
             ddlTipoPersona.Enabled = true;
@@ -253,9 +207,7 @@ namespace UI.Web
                 txtLegajo.Enabled = false;
                 txtTelefono.Enabled = false;
 
-                ddlAnio.Enabled = false;
-                ddlMes.Enabled = false;
-                ddlDia.Enabled = false;
+                FechaControl.Enabled = false;
                 ddlEspecialidad.Enabled = false;
                 ddlIdPlan.Enabled = false;
                 ddlTipoPersona.Enabled = false;
@@ -284,9 +236,7 @@ namespace UI.Web
                 txtLegajo.Enabled = true;
                 txtTelefono.Enabled = true;
 
-                ddlAnio.Enabled = true;
-                ddlMes.Enabled = true;
-                ddlDia.Enabled = true;
+                FechaControl.Enabled = true;
                 ddlEspecialidad.Enabled = true;
                 ddlIdPlan.Enabled = true;
                 ddlTipoPersona.Enabled = true;
@@ -322,9 +272,10 @@ namespace UI.Web
                     txtLegajo.Text = PersonaActual.Legajo.ToString();
                     txtTelefono.Text = PersonaActual.Telefono;
 
-                    ddlAnio.SelectedValue = PersonaActual.FechaNacimiento.Year.ToString();
-                    ddlMes.SelectedValue = PersonaActual.FechaNacimiento.Month.ToString();
-                    ddlDia.SelectedValue = PersonaActual.FechaNacimiento.Day.ToString();
+
+                    FechaControl.SeleccionarFecha(PersonaActual.FechaNacimiento.Day.ToString(),
+                                                  PersonaActual.FechaNacimiento.Month.ToString(),
+                                                  PersonaActual.FechaNacimiento.Year.ToString());
 
                     ddlEspecialidad.SelectedValue = PlanUsuario.IdEspecialidad.ToString();
                     ddlIdPlan.SelectedValue = PersonaActual.IdPlan.ToString();
@@ -387,8 +338,7 @@ namespace UI.Web
             PersonaActual.Habilitado = chkHabilitado.Checked;
 
             PersonaActual.Direccion = txtDireccion.Text;
-            PersonaActual.FechaNacimiento = new DateTime(int.Parse(ddlAnio.SelectedValue),
-                int.Parse(ddlMes.SelectedValue), int.Parse(ddlDia.SelectedValue));
+            PersonaActual.FechaNacimiento = FechaControl.ObtenerFecha();
             PersonaActual.IdPlan = int.Parse(ddlIdPlan.SelectedValue);
             PersonaActual.Legajo = int.Parse(txtLegajo.Text);
             PersonaActual.CambiaClave = PersonaActual.CambiaClave;
@@ -400,36 +350,14 @@ namespace UI.Web
         {
             try
             {
-                string error = "";
-
-                if (FormMode == FormModes.Alta)
-                {
-                    if (PersonaLogic.ValidaUsuario(per.NombreUsuario))
-                    {
-                        if (PersonaLogic.ValidaLegajo(per.Legajo))
-                        {
-                            LogicPersona.Save(per);
-                        }
-                        else
-                        {
-                            error += "El numero de legajo ya esta utilizado<br\\>";
-                        }
-                        
-                    }
-                    else
-                    {
-                        error += "El nombre de usuario ya esta utilizado<br\\>";
-                    }
-
-                    Response.Write(error);
-                }
-                else
-                {
-                    LogicPersona.Save(per);
-                }
+                //string validacion=_logicPersona.Save(per);
+                _logicPersona.Save(per);
+                //if (validacion.Length > 1)               
+                //    Response.Write(validacion);
             }
             catch (Exception ex)
             {
+
                 Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
             }
         }
@@ -528,7 +456,7 @@ namespace UI.Web
                     if (p.TipoPersona == Persona.TipoPersonas.Alumno)
                     {
                         DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Persona));
-                        using (FileStream archivo = new FileStream(@"C:\Users\joako\alumno.json", FileMode.Create))
+                        using (FileStream archivo = new FileStream(@"C:\Users\ANDRES\Desktop\alumno.json", FileMode.Create))
                         {
                             ser.WriteObject(archivo, p);
                         }
@@ -539,7 +467,7 @@ namespace UI.Web
                     }
                 }
                 catch (Exception ex)
-                {
+                {        
                     Page.ClientScript.RegisterStartupScript(GetType(), "mensajeError", "mensajeError('" + ex.Message + "');", true);
                 }
                 
@@ -551,7 +479,7 @@ namespace UI.Web
         {   
             try
             {
-                using (FileStream archivo = new FileStream(@"C:\Users\joako\alumno.json", FileMode.Open))
+                using (FileStream archivo = new FileStream(@"C:\alumno.json", FileMode.Open))
                 {
                     DataContractJsonSerializer serializadorJSON = new DataContractJsonSerializer(typeof(Persona));
                     Persona p = (Persona)serializadorJSON.ReadObject(archivo);

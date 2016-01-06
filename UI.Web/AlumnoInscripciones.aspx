@@ -2,7 +2,7 @@
 
 <asp:Content ID="Inscripciones" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <asp:Panel ID="gridPanelInscripciones" runat="server">
-        <asp:GridView ID="gdvAlumno_Incripcion" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gdvIncripcion_SelectedIndexChanged" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" Width="400
+        <asp:GridView ID="gdvAlumno_Incripcion" runat="server" SkinID="Professional" AutoGenerateColumns="False" OnSelectedIndexChanged="gdvIncripcion_SelectedIndexChanged" DataKeyNames="ID" CellPadding="4" ForeColor="#333333" GridLines="None" Width="400
             px" HeaderStyle-HorizontalAlign ="Left">
          <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>

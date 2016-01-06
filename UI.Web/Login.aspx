@@ -11,21 +11,32 @@
     <link href="Estilos/Estilos.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .auto-style1 {
-            height: 179px;
+            height: 176px;
         }
         .auto-style2 {
-            height: 179px;
+            height: 176px;
             width: 235px;
         }
         .auto-style3 {
             width: 235px;
         }
         .auto-style4 {
-            height: 179px;
-            width: 529px;
+            height: 176px;
+            width: 514px;
         }
         .auto-style5 {
-            width: 529px;
+            width: 514px;
+        }
+        .auto-style6 {
+            width: 235px;
+            height: 140px;
+        }
+        .auto-style7 {
+            width: 514px;
+            height: 140px;
+        }
+        .auto-style8 {
+            height: 140px;
         }
     </style>
     
@@ -49,13 +60,13 @@
                 <td class="auto-style1"></td>
             </tr>
             <tr>
-                <td class="auto-style3">&nbsp;</td>
-                <td class="auto-style5">
-        <asp:Login ID="loginAcademia" style="vertical-align: middle; text-align: center; width: 400px; margin-left: auto; margin-right:auto;" runat="server" BackColor="#F7F7DE" LoginButtonText="Iniciar sesión" OnAuthenticate="Login1_Authenticate" PasswordRecoveryText="Recuperar Contraseña" Width="400px" BorderColor="#CCCC99" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="10pt">
+                <td class="auto-style6"></td>
+                <td class="auto-style7">
+        <asp:Login ID="loginAcademia" style="vertical-align: middle; text-align: center; width: 400px; margin-left: auto; margin-right:auto;" runat="server" BackColor="#F7F7DE" LoginButtonText="Iniciar sesión" OnAuthenticate="Login1_Authenticate" PasswordRecoveryText="Olvidó su contraseña?" Width="400px" BorderColor="#CCCC99" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="10pt" PasswordRecoveryUrl="~/OlvidoContrasenia.aspx">
             <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
         </asp:Login>
                 </td>
-                <td>&nbsp;</td>
+                <td class="auto-style8"></td>
             </tr>
             <tr>
                 <td class="auto-style3">&nbsp;</td>

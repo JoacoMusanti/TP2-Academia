@@ -1,7 +1,10 @@
-﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Theme="" Inherits="UI.Web.Usuarios" %>
+﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile ="~/Site.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" StyleSheetTheme="GridViewTheme" Inherits="UI.Web.Usuarios" %>
+
+<%@ Register Src="~/FechaControl.ascx" TagPrefix="uc1" TagName="FechaControl" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
     <asp:Panel ID="gridPanel" runat="server">
-        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False"
+        <asp:GridView ID="gridView" runat="server" AutoGenerateColumns="False" SkinID="Professional"
         DataKeyNames="ID" CellPadding="4" GridLines="None" Width="541px" OnSelectedIndexChanged="gridView_SelectedIndexChanged" ForeColor="#333333">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
@@ -49,15 +52,7 @@
     <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtLegajo" Display="Dynamic" EnableTheming="True" ErrorMessage="Debe ser un numero entero" ForeColor="#FF3300" MaximumValue="999999" MinimumValue="0" Type="Integer"></asp:RangeValidator>
     <asp:RequiredFieldValidator ID="rfvNombre3" runat="server" ControlToValidate="txtLegajo" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
     <br />
-    <asp:Label ID="lblDia" runat="server" Text="Dia: : "></asp:Label>
-    <asp:DropDownList ID="ddlDia" runat="server" ClientIDMode="Static"></asp:DropDownList>
-    <asp:Label ID="lblMes" runat="server" Text="Mes: "></asp:Label>
-    <asp:DropDownList ID="ddlMes" runat="server" ClientIDMode="Static"></asp:DropDownList>
-    <asp:Label ID="lblAnio" runat="server" Text="Año: "></asp:Label>
-    <asp:DropDownList ID="ddlAnio" runat="server" ClientIDMode="Static"></asp:DropDownList>
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlDia" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlMes" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlAnio" Display="Dynamic" ErrorMessage="Este campo es requerido" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+    <uc1:FechaControl runat="server" id="FechaControl" />
     <br />
     <asp:Label ID="lblEspecialidad" runat="server" Text="Especialidad: "></asp:Label>
     <asp:DropDownList ID="ddlEspecialidad" runat="server" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
